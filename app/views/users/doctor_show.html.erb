@@ -1,0 +1,9 @@
+<h1>Doctor Page</h1>
+
+<ul>
+<% current_user.patients.each do |patient| %>
+  <li><%= patient.email %></li>
+<% end %>
+</ul>
+
+<a href="<%= new_user_url %>">Add New Patient</a>

@@ -1,0 +1,15 @@
+<h4>create Partial</h4>
+<form action="<%= users_url %>" method="post">
+  <%= auth_token %>
+
+  <label>Email
+    <input type="text" name="user[email]" value="">
+  </label>
+
+  <br>
+  <label>Password
+    <input type="password" name="user[password]" value="">
+  </label>
+
+  <input type="submit" value="Create <%= (current_user.is_doctor) ? 'Patient' : 'User' %>">
+</form>
