@@ -3,13 +3,14 @@
 # Table name: reminders
 #
 #  id         :integer          not null, primary key
-#  day        :string(255)      not null
+#  day        :integer          not null
 #  time       :time             not null
 #  title      :string(255)      not null
 #  rem_type   :string(255)      not null
 #  input      :integer
 #  patient_id :integer          not null
 #  complete   :boolean          default(FALSE), not null
+#  due        :boolean          default(TRUE), not null
 #  note       :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -39,6 +40,15 @@ class Reminder < ActiveRecord::Base
     inverse_of: :reminders
   )
 
+  has_many(
+    :reminder_events,
+    class_name: "ReminderEvent",
+    foreign_key: :reminder_id,
+    primary_key: :id
+  )
+
+
+  # Returns true if the reminder's time is passed in the current day
   def is_due?
     self.time = self.time.change(year: Time.now.year, month: Time.now.month, day: Time.now.day)
     ((Time.now.wday == self.day) && (Time.zone.now > self.time))

@@ -35,6 +35,12 @@ class User < ActiveRecord::Base
     primary_key: :id
   )
 
+  has_one(
+    :practice,
+    through: :doctor,
+    source: :practice
+  )
+
   has_many(
     :reminders,
     class_name: "Reminder",
@@ -43,11 +49,9 @@ class User < ActiveRecord::Base
     inverse_of: :patient
   )
 
-  has_one(
-    :practice,
-    through: :doctor,
-    source: :practice
-  )
+
+
+  has_many()
 
   #### Doctor Associations ####
   has_many(
@@ -64,6 +68,10 @@ class User < ActiveRecord::Base
     primary_key: :id,
     inverse_of: :doctors
   )
+
+  def due_reminders
+    self.reminders.select
+  end
 
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)
