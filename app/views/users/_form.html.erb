@@ -1,4 +1,4 @@
-<h4>create Partial</h4>
+<h4>New <%= (current_user.is_doctor) ? 'Patient' : 'Doctor User' %></h4>
 <form action="<%= users_url %>" method="post">
   <%= auth_token %>
 

@@ -1,27 +1,43 @@
 class RemindersController < ApplicationController
 
   def index
-    @user = user.find(params[:user_id])
+    @user = User.find(params[:user_id])
     @reminders = @user.reminders
   end
 
   def new
-    @reminder = Reminder.new
+    @user = User.find(params[:user_id])
+    @reminder = @user.reminders.build# Reminder.new
   end
 
   def create
-    @reminder = Reminder.new(params[:reminder])
-    @reminder.patient_id = current_user.id
+    @user = User.find(params[:user_id])
 
-    if @reminder.save
-      redirect_to user_reminders(current_user)
+    unless params[:days].nil?
+      params[:days].each do |day|
+        params[:times].each do |time|
+          next if time == ""
+          rem = @user.reminders.build(params[:reminder])
+          rem.day = day
+          rem.time = time
+        end
+      end
+    end
+
+    if @user.save && params[:days]
+      redirect_to user_reminders_url(@user)
     else
-      flash.now[:errors] = @reminder.errors.full_messages
+      flash.now[:errors] = @user.reminders.map(&:errors).map(&:full_messages)
+      render :new
     end
   end
 
   def complete
+    @user = User.find(params[:user_id])
     @reminder = Reminder.find(params[:id])
+    @reminder.complete = true
+
+    redirect_to user_reminders_url(@user)
   end
 
   # def destroy

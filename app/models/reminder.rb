@@ -18,7 +18,7 @@
 class Reminder < ActiveRecord::Base
   attr_accessible :day, :time, :title, :rem_type, :patient_id, :note
 
-  validates :day, presence: true, inclusion: { in: %w(m t w th f s su), message: "%{value} is not a valid day" }
+  validates :day, presence: true, inclusion: { in: 0...7, message: "%{value} is not a valid day" }
   validates :rem_type, inclusion: { in: %w(appointment medication treatment input), message: "Invalid type" }
   validates :time, :title, :patient_id, presence: true
 
@@ -29,4 +29,9 @@ class Reminder < ActiveRecord::Base
     primary_key: :id,
     inverse_of: :reminders
   )
+
+  def is_due?
+    self.time = self.time.change(year: Time.now.year, month: Time.now.month, day: Time.now.day)
+    ((Time.now.wday == self.day) && (Time.zone.now > self.time))
+  end
 end

@@ -38,11 +38,11 @@ user.save
 
   3.times do |j|
       Reminder.create({
-        day: "m",
+        day: j,
         time: "2014-1-5 12:30:00",
         title: "Alert title #{j}",
         rem_type: "input",
-        patient_id: j
+        patient_id: i
       })
   end
 end

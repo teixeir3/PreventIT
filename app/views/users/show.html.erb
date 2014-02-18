@@ -1,3 +1,4 @@
 <h1>User Show</h1>
+<%= @user.email %> <br>
 
-<%= link_to "Add New Reminder", new_user_reminder_url %>
+<%= link_to "Reminders", user_reminders_url(@user) %>

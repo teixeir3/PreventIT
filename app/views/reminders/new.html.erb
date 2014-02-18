@@ -1,0 +1,95 @@
+<h2>New Reminder:</h2>
+
+<form action="<%= user_reminders_url(@user) %>" method="POST">
+
+  <%= auth_token %>
+
+  <label>
+    Title:
+    <input
+      type="text"
+      name="reminder[title]"
+      value="">
+  </label><br>
+
+  Day(s):
+  <label>Su
+    <input
+      type="checkbox"
+      name="days[]"
+      value="0">
+  </label>
+  <label>M
+    <input
+      type="checkbox"
+      name="days[]"
+      value="1">
+  </label>
+  <label>T
+    <input
+      type="checkbox"
+      name="days[]"
+      value="2">
+  </label>
+  <label>W
+    <input
+      type="checkbox"
+      name="days[]"
+      value="3">
+  </label>
+  <label>Th
+    <input
+      type="checkbox"
+      name="days[]"
+      value="4">
+  </label>
+  <label>F
+    <input
+      type="checkbox"
+      name="days[]"
+      value="5">
+  </label>
+  <label>S
+    <input
+      type="checkbox"
+      name="days[]"
+      value="6">
+  </label>
+  <br>
+
+  <label>
+    Time(1):
+    <input
+      type="time"
+      name="times[]"
+      value="">
+  </label><br>
+  <label>
+    Time(2):
+    <input
+      type="time"
+      name="times[]"
+      value="">
+  </label><br>
+  <label>
+    Time(3):
+    <input
+      type="time"
+      name="times[]"
+      value="">
+  </label><br>
+
+  <label>
+    Type:
+    <select name="reminder[rem_type]">
+      <option value="appointment">Appointment</option>
+      <option value="medication">Medication</option>
+      <option value="treatment">Treatment</option>
+      <option value="input">Data Input</option>
+    </select>
+  </label>
+
+  <br><br>
+
+  <input type="submit" value="Add Reminder">
+</form>

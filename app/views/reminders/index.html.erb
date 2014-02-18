@@ -1,0 +1,8 @@
+<h2>Reminders:</h2>
+<ul>
+  <% @reminders.each do |reminder| %>
+    <li><%=  "#{reminder.title} :  #{reminder.time.to_formatted_s(:time)}" %>  </li>
+  <% end %>
+</ul>
+
+<%= link_to "Add New Reminder", new_user_reminder_url(@user) %>

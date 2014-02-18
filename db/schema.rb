@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20140218000241) do
   end
 
   create_table "reminders", :force => true do |t|
-    t.string   "day",                           :null => false
+    t.integer  "day",                           :null => false
     t.time     "time",                          :null => false
     t.string   "title",                         :null => false
     t.string   "rem_type",                      :null => false
