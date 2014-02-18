@@ -3,8 +3,7 @@
 # Table name: reminders
 #
 #  id         :integer          not null, primary key
-#  day        :integer          not null
-#  time       :time             not null
+#  datetime   :datetime         not null
 #  title      :string(255)      not null
 #  rem_type   :string(255)      not null
 #  input      :integer

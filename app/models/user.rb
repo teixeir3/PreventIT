@@ -49,10 +49,6 @@ class User < ActiveRecord::Base
     inverse_of: :patient
   )
 
-
-
-  has_many()
-
   #### Doctor Associations ####
   has_many(
     :patients,

@@ -3,8 +3,7 @@
 # Table name: reminders
 #
 #  id         :integer          not null, primary key
-#  day        :integer          not null
-#  time       :time             not null
+#  datetime   :datetime         not null
 #  title      :string(255)      not null
 #  rem_type   :string(255)      not null
 #  input      :integer
@@ -26,11 +25,11 @@ class Reminder < ActiveRecord::Base
       "Friday",
       "Saturday"]
 
-  attr_accessible :day, :time, :title, :rem_type, :patient_id, :note
+  attr_accessible :datetime, :title, :rem_type, :patient_id, :note
 
-  validates :day, presence: true, inclusion: { in: 0...7, message: "%{value} is not a valid day" }
+  validates :datetime, presence: true
   validates :rem_type, inclusion: { in: %w(appointment medication treatment input), message: "Invalid type" }
-  validates :time, :title, :patient_id, presence: true
+  validates :title, :patient_id, presence: true
 
   belongs_to(
     :patient,
@@ -50,9 +49,11 @@ class Reminder < ActiveRecord::Base
 
   # Returns true if the reminder's time is passed in the current day
   def is_due?
-    self.time = self.time.change(year: Time.now.year, month: Time.now.month, day: Time.now.day)
-    ((Time.now.wday == self.day) && (Time.zone.now > self.time))
+    # self.time = self.time.change(year: Time.now.year, month: Time.now.month, day: Time.now.day)
+#     ((Time.now.wday == self.day) && (Time.zone.now > self.time))
+    self.datetime.past?
   end
+
 
   def day_str
     DAY_STRINGS[self.day]

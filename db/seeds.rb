@@ -36,14 +36,14 @@ user = User.new({
 user.doctor = doug
 user.save
 
-  3.times do |j|
-      Reminder.create({
-        day: j,
-        time: "2014-1-5 12:30:00",
-        title: "Alert title #{j}",
-        rem_type: "input",
-        patient_id: i
-      })
-  end
+  # 3.times do |j|
+#       Reminder.create({
+#         date: "2014-2-14 12:30:00",
+#         time: "2014-2-14 12:30:00",
+#         title: "Alert title #{j}",
+#         rem_type: "input",
+#         patient_id: i
+#       })
+#   end
 end
 

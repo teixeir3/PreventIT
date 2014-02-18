@@ -14,12 +14,36 @@ class RemindersController < ApplicationController
     @user = User.find(params[:user_id])
 
     unless params[:days].nil?
-      params[:days].each do |day|
-        params[:times].each do |time|
-          next if time == ""
+      params[:times].each do |time|
+        next if time == ""
+
+        params[:days].each do |day|
           rem = @user.reminders.build(params[:reminder])
-          rem.day = day
-          rem.time = time
+          day = day.to_i
+          new_date_time = Time.now
+          hour = time.split(":")[0].to_i
+
+          if (hour - 5 < 0)
+            hour += (24 - 5)
+          else
+            hour -= 5
+          end
+
+          min = time.split(":")[1]
+          new_date_time = new_date_time.change(hour: hour, min: min)
+
+          if (day.to_i > new_date_time.wday)
+            diff = day - new_date_time.wday
+          else
+            diff = 7 - day
+          end
+
+          rem.datetime = new_date_time.advance(days: diff)
+
+          30.times do |x|
+            new_rem = @user.reminders.build(params[:reminder])
+            new_rem.datetime = rem.datetime.advance(days: 7)
+          end
         end
       end
     end
