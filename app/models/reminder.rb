@@ -16,6 +16,15 @@
 #
 
 class Reminder < ActiveRecord::Base
+  DAY_STRINGS =
+    ["Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"]
+
   attr_accessible :day, :time, :title, :rem_type, :patient_id, :note
 
   validates :day, presence: true, inclusion: { in: 0...7, message: "%{value} is not a valid day" }
@@ -33,5 +42,9 @@ class Reminder < ActiveRecord::Base
   def is_due?
     self.time = self.time.change(year: Time.now.year, month: Time.now.month, day: Time.now.day)
     ((Time.now.wday == self.day) && (Time.zone.now > self.time))
+  end
+
+  def day_str
+    DAY_STRINGS[self.day]
   end
 end
