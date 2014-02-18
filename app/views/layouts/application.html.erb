@@ -7,8 +7,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <h1>PreventIT</h1><img src="../../../lib/assets/preventIT_final/preventIT_100x50.jpg" width="100" height="50" alt="PreventIT 100x50">
-  <%= flash[:errors].join('<br>').html_safe if flash[:errors] %>
+  <h1>PreventIT</h1><img src="/assets/preventIT_final/preventIT_150x100.jpg">
+  <%= flash[:errors].join('<br>').html_safe if flash[:errors] %><br>
 
    <% if current_user %>
      You are signed in as:

@@ -10,6 +10,7 @@
 #  last_name       :string(255)
 #  phone           :string(255)
 #  doctor_id       :integer
+#  practice_id     :integer
 #  is_doctor       :boolean          default(FALSE), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -34,12 +35,34 @@ class User < ActiveRecord::Base
     primary_key: :id
   )
 
+  has_many(
+    :reminders,
+    class_name: "Reminder",
+    foreign_key: :patient_id,
+    primary_key: :id,
+    inverse_of: :patient
+  )
+
+  has_one(
+    :practice,
+    through: :doctor,
+    source: :practice
+  )
+
   #### Doctor Associations ####
   has_many(
     :patients,
     class_name: "User",
     foreign_key: :doctor_id,
     primary_key: :id
+  )
+
+  belongs_to(
+    :practice,
+    class_name: "Practice",
+    foreign_key: :practice_id,
+    primary_key: :id,
+    inverse_of: :doctors
   )
 
   def self.find_by_credentials(email, password)

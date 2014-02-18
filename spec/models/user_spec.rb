@@ -10,6 +10,7 @@
 #  last_name       :string(255)
 #  phone           :string(255)
 #  doctor_id       :integer
+#  practice_id     :integer
 #  is_doctor       :boolean          default(FALSE), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

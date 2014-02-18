@@ -2,7 +2,7 @@
 
 <ul>
 <% current_user.patients.each do |patient| %>
-  <li><%= patient.email %></li>
+  <li><%= link_to patient.email, user_url(patient) %></li>
 <% end %>
 </ul>
 

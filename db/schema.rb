@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140217190936) do
+ActiveRecord::Schema.define(:version => 20140218000241) do
 
   create_table "practices", :force => true do |t|
     t.string   "specialty",  :null => false
@@ -19,6 +19,21 @@ ActiveRecord::Schema.define(:version => 20140217190936) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "reminders", :force => true do |t|
+    t.string   "day",                           :null => false
+    t.time     "time",                          :null => false
+    t.string   "title",                         :null => false
+    t.string   "rem_type",                      :null => false
+    t.integer  "input"
+    t.integer  "patient_id",                    :null => false
+    t.boolean  "complete",   :default => false, :null => false
+    t.text     "note"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "reminders", ["patient_id"], :name => "index_reminders_on_patient_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                              :null => false
