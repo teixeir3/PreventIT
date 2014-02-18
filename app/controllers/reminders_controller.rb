@@ -2,7 +2,12 @@ class RemindersController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
+
+    #shows ALL reminders
     @reminders = @user.reminders
+
+    ## Shows DUE reminders
+    # @reminders = @user.reminders.select { |rem| rem.is_due? }
   end
 
   def new
@@ -40,9 +45,9 @@ class RemindersController < ApplicationController
 
           rem.datetime = new_date_time.advance(days: diff)
 
-          30.times do |x|
+          51.times do |x|
             new_rem = @user.reminders.build(params[:reminder])
-            new_rem.datetime = rem.datetime.advance(days: 7)
+            new_rem.datetime = rem.datetime.advance(weeks: x + 1)
           end
         end
       end

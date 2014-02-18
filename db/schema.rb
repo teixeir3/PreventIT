@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20140218000241) do
     t.integer  "input"
     t.integer  "patient_id",                    :null => false
     t.boolean  "complete",   :default => false, :null => false
-    t.boolean  "due",        :default => true,  :null => false
+    t.boolean  "due",        :default => false, :null => false
     t.text     "note"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false

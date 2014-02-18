@@ -7,7 +7,7 @@ class CreateReminders < ActiveRecord::Migration
       t.integer :input
       t.integer :patient_id, null: false
       t.boolean :complete, null: false, default: false
-      t.boolean :due, null: false, default: true
+      t.boolean :due, null: false, default: false
       t.text :note
       t.timestamps
     end
