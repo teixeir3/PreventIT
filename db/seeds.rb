@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 #
 
-
+# Adds a comment
 my_practice = Practice.create({
     specialty: "Family Practitioner",
     name: "Doug's Family Practice"
