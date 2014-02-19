@@ -15,7 +15,7 @@ class RemindersController < ApplicationController
 
   def new
     @user = User.find(params[:user_id])
-    @reminder = @user.reminders.build# Reminder.new
+    @reminder = @user.reminders.build
   end
 
   def create
