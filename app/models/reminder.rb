@@ -65,9 +65,16 @@ class Reminder < ActiveRecord::Base
     end
 
     patient_user = self.patient
-    new_attributes = self.attributes.except("id", "complete", "input", "due", "created_at", "updated_at")
+    new_attributes = self.attributes.except("id",
+      "complete",
+      "input",
+      "due",
+      "created_at",
+      "updated_at"
+      )
+
     new_rem = patient_user.reminders.build(new_attributes)
-    new_rem.datetime = new_rem.datetime.advance(days: 7*52)
+    new_rem.datetime = new_rem.datetime.advance(days: 7*12)
 
     patient_user.save
 

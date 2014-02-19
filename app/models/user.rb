@@ -30,8 +30,6 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :session_token, presence: true, uniqueness: true
 
-
-
   before_validation :ensure_session_token
 
   has_attached_file :avatar, :styles => {
@@ -85,7 +83,7 @@ class User < ActiveRecord::Base
   end
 
   def due_reminders
-    self.reminders.select
+    self.reminders.select{ |reminder| reminder.is_due? }
   end
 
   def self.find_by_credentials(email, password)

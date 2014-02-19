@@ -11,3 +11,236 @@
  *= require_self
  *= require_tree .
  */
+html, body, form, h3, div, label {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+input {
+  background: white;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="submit"],
+textarea {
+  -webkit-appearance: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  color: inherit;
+  font: inherit;
+  width: auto;
+}
+
+body {
+  font-family: sans-serif;
+  background: #e5e5e5;
+  min-width: 945px;
+}
+
+.logo {
+  display: block;
+  float: left;
+  font-size: 60px;
+  font-weight: bold;
+}
+
+h1 {
+  display: block;
+  float: left;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+footer {
+  float: left;
+  font-size: 15px;
+  color: gray;
+  width: 100%;
+  border-top: 2px solid gray;
+  position: fixed;
+  bottom: 0;
+}
+
+.copyright {
+
+  padding: 10px;
+}
+/*.header-wrap {
+  margin: auto;
+  width: 920px;
+}
+*/
+/*.header-wrap:after{
+  content: "";
+  clear: both;
+  display: block;
+}*/
+
+.top-bar {
+  float: left;
+  width: 100%;
+  border-bottom: 4px solid gray;
+}
+
+.main-content {
+  position: relative;
+}
+
+h2 {
+  display: block;
+  float: left;
+  font-size: 40px;
+}
+
+h3 {
+  display: block;
+  font-size: 25px;
+}
+
+
+.nav-sign-ins {
+  display: block;
+  float: right;
+  padding: 20px;
+}
+
+.sign-in {
+  margin: 100px auto;
+  background: #fff;
+  width: 300px;
+  padding: 50px;
+  border-radius: 10px;
+  float: left;
+}
+
+.form {
+  margin: 100px;
+  background: #fff;
+  width: 300px;
+  padding: 50px;
+  border-radius: 10px;
+  float: left;
+}
+
+.sign-in > h3 {
+  font-size: 45px;
+  font-weight: bold;
+  margin: 0 0 20px 0;
+}
+
+.form > h3 {
+  font-size: 45px;
+  font-weight: bold;
+  margin: 0 0 20px 0;
+}
+
+.input {
+  margin: 20px 0;
+}
+
+.input > label {
+  display: block;
+  font-weight: bold;
+  padding: 0 0 5px 0;
+}
+
+
+.checkbox-group {
+  display: block;
+  float: left;
+  width: 300px;
+  padding-bottom: 20px;
+}
+
+.checkbox-input {
+  display: block;
+  float: left;
+  margin: 4px;
+}
+
+.checkbox-input > label {
+  display: block;
+  padding: 0 0 5px 0;
+  float: left;
+}
+
+.checkbox-input > input {
+  border: 2px solid #000;
+  padding: 5px 10px;
+/*  width: 250px;*/
+  border-radius: 5px;
+}
+
+.input > input, textarea {
+  border: 2px solid #000;
+  padding: 5px 10px;
+  width: 250px;
+  border-radius: 5px;
+}
+
+.radio-group {
+  float: left;
+/*  background: red;*/
+}
+.radio-entry {
+  float: left;
+/*  background: blue;*/
+}
+.radio-entry > input, textarea {
+  border: 2px solid #000;
+  padding: 5px 10px;
+  width: 250px;
+  border-radius: 5px;
+}
+
+
+
+.time-input > input {
+  border: 2px solid #000;
+  padding: 5px 10px;
+  width: 100px;
+  border-radius: 5px;
+}
+
+.time-input > label {
+  display: block;
+  font-weight: bold;
+  padding: 0 0 5px 0;
+}
+
+.input > input:focus {
+  border-color: #4BE19D;
+}
+
+.submit {
+
+}
+
+.submit > input {
+  position: relative;
+  background: #00A55A;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 3px #004B17;
+}
+
+.submit > input:hover {
+  background: #1A8554;
+}
+
+.submit > input:active {
+  top: 3px;
+  box-shadow: none;
+}

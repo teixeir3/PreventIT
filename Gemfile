@@ -23,7 +23,7 @@ end
 
 gem 'jquery-rails'
 gem 'bcrypt-ruby', require: 'bcrypt'
-gem 'paperclip'
+gem 'paperclip', "~> 3.5.3"
 gem 'aws-sdk'
 gem 'figaro'
 

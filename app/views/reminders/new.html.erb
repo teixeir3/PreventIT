@@ -1,95 +1,128 @@
-<h2>New Reminder:</h2>
 
-<form action="<%= user_reminders_url(@user) %>" method="POST">
 
+<form class="form" action="<%= user_reminders_url(@user) %>" method="POST">
+  <h3>New Reminder:</h3>
   <%= auth_token %>
 
-  <label>
-    Title:
+  <div class="time-input">
+    <label for="title">Title:</label>
     <input
+      id="title"
       type="text"
       name="reminder[title]"
       value="">
-  </label><br>
+  </div>
 
-  Day(s):
-  <label>Su
+  <div class="checkbox-group">
+    <h4>Day(s):</h4>
+    <div class="checkbox-input">
+      <label for="sunday">Su</label>
+      <input
+        id="sunday"
+        type="checkbox"
+        name="days[]"
+        value="0">
+    </div>
+
+    <div class="checkbox-input">
+      <label for="monday">M</label>
+      <input
+        id="monday"
+        type="checkbox"
+        name="days[]"
+        value="1">
+    </div>
+
+    <div class="checkbox-input">
+      <label for="tuesday">T</label>
+      <input
+        id="tuesday"
+        type="checkbox"
+        name="days[]"
+        value="2">
+    </div>
+
+    <div class="checkbox-input">
+      <label for="wednesday">W</label>
+      <input
+        id="wednesday"
+        type="checkbox"
+        name="days[]"
+        value="3">
+    </div>
+
+    <div class="checkbox-input">
+      <label for="thursday">Th</label>
+      <input
+        id="thursday"
+        type="checkbox"
+        name="days[]"
+        value="4">
+    </div>
+
+    <div class="checkbox-input">
+      <label for="friday">F</label>
+      <input
+        id="friday"
+        type="checkbox"
+        name="days[]"
+        value="5">
+    </div>
+
+    <div class="checkbox-input">
+      <label for="saturday">S</label>
+      <input
+        id="saturday"
+        type="checkbox"
+        name="days[]"
+        value="6">
+    </div>
+  </div>
+
+  <br>
+  <div class="time-input">
+    <label for="time1">Time(1):</label>
     <input
-      type="checkbox"
-      name="days[]"
-      value="0">
-  </label>
-  <label>M
-    <input
-      type="checkbox"
-      name="days[]"
-      value="1">
-  </label>
-  <label>T
-    <input
-      type="checkbox"
-      name="days[]"
-      value="2">
-  </label>
-  <label>W
-    <input
-      type="checkbox"
-      name="days[]"
-      value="3">
-  </label>
-  <label>Th
-    <input
-      type="checkbox"
-      name="days[]"
-      value="4">
-  </label>
-  <label>F
-    <input
-      type="checkbox"
-      name="days[]"
-      value="5">
-  </label>
-  <label>S
-    <input
-      type="checkbox"
-      name="days[]"
-      value="6">
-  </label>
+      id="time1"
+      type="time"
+      name="times[]"
+      value="">
+  </div>
   <br>
 
-  <label>
-    Time(1):
+  <div class="time-input">
+    <label for="time2">Time(2):</label>
     <input
+      id="time2"
       type="time"
       name="times[]"
       value="">
-  </label><br>
-  <label>
-    Time(2):
-    <input
-      type="time"
-      name="times[]"
-      value="">
-  </label><br>
-  <label>
-    Time(3):
-    <input
-      type="time"
-      name="times[]"
-      value="">
-  </label><br>
+  </div>
+  <br>
 
-  <label>
+  <div class="time-input">
+    <label for="time3">Time(3):</label>
+    <input
+      id="time3"
+      type="time"
+      name="times[]"
+      value="">
+  </div>
+  <br>
+
+  <label for="rem-type"></label>
     Type:
-    <select name="reminder[rem_type]">
+    <select id="rem-type" name="reminder[rem_type]">
       <option value="appointment">Appointment</option>
       <option value="medication">Medication</option>
       <option value="treatment">Treatment</option>
       <option value="input">Data Input</option>
     </select>
-  </label>
+
 
   <br><br>
 
-  <input type="submit" value="Add Reminder">
+  <div class="submit">
+    <input type="submit" value="Add Reminder">
+  </div>
 </form>

@@ -1,35 +1,40 @@
-<h4>Settings:</h4>
 
-<form action="<%= user_url(@user) %>" method="POST" enctype="multipart/form-data">
+
+<form class="form" action="<%= user_url(@user) %>" method="POST" enctype="multipart/form-data">
+
+  <h3>Settings:</h3>
+  <br>
+  <br>
   <input type="hidden" name="_method" value="PUT">
   <%= auth_token %>
 
-  <label>Photo:
-    <input type="file" name="user[avatar]" value="">
-  </label>
+  <div class="input">
+    <label for="avatar">Photo:</label>
+    <input id="avatar" type="file" name="user[avatar]" value="">
+  </div>
 
-  <br>
-  <br>
+  <div class="input">
+    <label for="first-name">First Name</label>
+    <input id="first-name" type="text" name="user[first_name]" value="<%= @user.first_name %>">
+  </div>
 
-  <label>First Name
-    <input type="text" name="user[first_name]" value="">
-  </label>
+  <div class="input">
+    <label for="last-name">Last Name</label>
+    <input id="last-name" type="text" name="user[last_name]" value="<%= @user.last_name %>">
+  </div>
 
-  <label>Last Name
-    <input type="text" name="user[last_name]" value="">
-  </label>
+  <div class="input">
+    <label>Email Notifiations:
+      <label for="on">On</label>
+      <input id="on" type="radio" <%= "checked" if @user.email_notifications %> name="user[email_notifications]" value="true">
 
-  <label>Email Notifiations:
-    <label>On
-      <input type="radio" <%= "checked" if @user.email_notifications %> name="user[email_notifications]" value="true">
+
+      <label for="off">Off</label>
+        <input id="off" type="radio" <%= "checked" unless @user.email_notifications %> name="user[email_notifications]" value="false">
     </label>
+  </div>
 
-    <label>Off
-      <input type="radio" <%= "checked" unless @user.email_notifications %> name="user[email_notifications]" value="false">
-    </label>
-  </label>
-
-
-  <br>
-  <input type="submit" value="Save Settings">
+  <div class="submit">
+    <input type="submit" value="Save Settings">
+  </div>
 </form>

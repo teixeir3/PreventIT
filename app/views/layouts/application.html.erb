@@ -7,28 +7,43 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <h1>PreventIT</h1><img src="/assets/preventIT_final/preventIT_150x100.jpg">
-  <%= flash[:errors].join('<br>').html_safe if flash[:errors] %><br>
+  <header class="top-bar">
 
-   <% if current_user %>
-     You are signed in as:
-     <%= "Dr. " if current_user.is_doctor %>
-     <%= current_user.full_name %><br>
-     <%= button_to "Sign Out", session_url, :method => :delete %>
+      <div class="logo">
+        PreventIT
+        <img src="/assets/preventIT_final/preventIT_150x100.jpg">
+      </div>
 
-   <% else %>
-     <%= link_to "Doctor Sign Up", doctors_new_url %>
-     <%= link_to "Patient Sign Up", new_user_url %>
-     <%= link_to "Sign In", new_session_url %>
+      <div class="nav-sign-ins">
+        <%= flash[:errors].join('<br>').html_safe if flash[:errors] %><br>
 
-   <% end %>
+         <% if current_user %>
+           You are signed in as:
+           <% if current_user.is_doctor  %>
+             <%= link_to "Dr. #{current_user.full_name}", doctor_url(current_user) %><br>
+           <% else %>
+             <%= link_to "#{current_user.full_name}", user_url(current_user) %>
+           <% end %>
+           <%= button_to "Sign Out", session_url, :method => :delete %>
 
-<%= yield %>
+         <% else %>
+           <%= link_to "Doctor Sign Up", new_doctor_url %>
+           <%= link_to "Patient Sign Up", new_user_url %>
+           <%= link_to "Sign In", new_session_url %>
+
+         <% end %>
+      </div>
+
+  </header>
+
+    <%= yield %>
+
 
 </body>
 
 <footer>
-  <br><br><br>
-  © Ayos Informatics, LLC 2014
+  <div class="copyright">
+    © Ayos Informatics, LLC 2014
+  </div>
 </footer>
 </html>

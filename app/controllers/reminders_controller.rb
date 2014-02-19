@@ -10,7 +10,7 @@ class RemindersController < ApplicationController
     @complete_reminders = @user.reminders.where(complete: true)
     @incomplete_reminders = @user.reminders.where(complete: false)
 
-    @due_reminders = @user.reminders.select{ |reminder| reminder.is_due? }
+    @due_reminders = @user.due_reminders
   end
 
   def new
@@ -23,7 +23,7 @@ class RemindersController < ApplicationController
 
     unless params[:days].nil?
       params[:times].each do |time|
-        next if time == ""
+        next if time.blank?
 
         params[:days].each do |day|
           rem = @user.reminders.build(params[:reminder])
@@ -48,7 +48,7 @@ class RemindersController < ApplicationController
 
           rem.datetime = new_date_time.advance(days: diff)
 
-          51.times do |x|
+          1.times do |x|
             new_rem = @user.reminders.build(params[:reminder])
             new_rem.datetime = rem.datetime.advance(weeks: x + 1)
           end
@@ -59,7 +59,7 @@ class RemindersController < ApplicationController
     if @user.save && params[:days]
       redirect_to user_reminders_url(@user)
     else
-      flash.now[:errors] = @user.reminders.map(&:errors).map(&:full_messages)
+      flash.now[:errors] = @user.reminders.first.errors.full_messages
       render :new
     end
   end
