@@ -1,4 +1,11 @@
-<h1>User Show</h1>
-<%= @user.email %> <br>
+<h1>Patient: <%= @user.full_name %></h1>
+<br>
+<%= image_tag @user.avatar.url(:small) %>
+<br>
+Email: <%= @user.email %> Phone: <%= @user.phone %>
+<br>
+<%= link_to "Settings", edit_user_url(@user) %>
+<br>
+<br>
 
 <%= link_to "Reminders", user_reminders_url(@user) %>

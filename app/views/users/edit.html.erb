@@ -1,0 +1,27 @@
+<h4>Settings:</h4>
+
+<form action="<%= user_url(@user) %>" method="POST" enctype="multipart/form-data">
+  <input type="hidden" name="_method" value="PUT">
+  <%= auth_token %>
+
+  <label>Photo:
+    <input type="file" name="user[avatar]" value="">
+  </label>
+
+  <br>
+  <br>
+
+  <label>Email Notifiations:
+    <label>On
+      <input type="radio" <%= "checked" if @user.email_notifications %> name="user[email_notifications]" value="true">
+    </label>
+
+    <label>Off
+      <input type="radio" <%= "checked" unless @user.email_notifications %> name="user[email_notifications]" value="false">
+    </label>
+  </label>
+
+
+  <br>
+  <input type="submit" value="Save Settings">
+</form>

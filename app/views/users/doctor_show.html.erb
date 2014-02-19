@@ -1,5 +1,12 @@
 <h1>Doctor Page</h1>
 
+<br>
+<%= image_tag @user.avatar.url(:small) %>
+<br>
+<%= link_to "Settings", edit_user_url(@user) %>
+<br>
+<br>
+
 <ul>
 <% current_user.patients.each do |patient| %>
   <li><%= link_to patient.email, user_url(patient) %></li>

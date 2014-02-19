@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # before_filter :require_doctor_status, :only => [:]
   # before_filter :require_signed_out!, :only => [:new, :create]
-  before_filter :require_signed_in!, :only => [:show]
+  before_filter :require_signed_in!, :only => [:show, :edit]
 
   def new
     @user = User.new
@@ -27,8 +27,21 @@ class UsersController < ApplicationController
     end
   end
 
-  def update
+  def edit
+    @user = User.find(params[:id])
+  end
 
+  def update
+    @user = User.find(params[:id])
+
+
+
+    if @user.update_attributes(params[:user])
+      redirect_to user_url(@user)
+    else
+      flash.now[:errors] = @user.errors.full_messages
+      render :edit
+    end
   end
 
   def show

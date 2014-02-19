@@ -2,22 +2,27 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  email           :string(255)      not null
-#  password_digest :string(255)      not null
-#  session_token   :string(255)      not null
-#  first_name      :string(255)
-#  last_name       :string(255)
-#  phone           :string(255)
-#  doctor_id       :integer
-#  practice_id     :integer
-#  is_doctor       :boolean          default(FALSE), not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                  :integer          not null, primary key
+#  email               :string(255)      not null
+#  password_digest     :string(255)      not null
+#  session_token       :string(255)      not null
+#  first_name          :string(255)
+#  last_name           :string(255)
+#  phone               :string(255)
+#  doctor_id           :integer
+#  practice_id         :integer
+#  is_doctor           :boolean          default(FALSE), not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  avatar_file_name    :string(255)
+#  avatar_content_type :string(255)
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
+#  email_notifications :boolean          default(TRUE), not null
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :first_name, :last_name, :phone, :avatar
+  attr_accessible :email, :password, :first_name, :last_name, :phone, :avatar, :email_notifications
   attr_reader :password
 
   validates :email, presence: true, uniqueness: true
@@ -25,12 +30,17 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :session_token, presence: true, uniqueness: true
 
+
+
   before_validation :ensure_session_token
 
   has_attached_file :avatar, :styles => {
          :big => "600x600>",
-         :small => "50x50>"
+         :small => "200x200>"
        }
+
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
 
   #### Patient Associations ####
   belongs_to(
@@ -69,6 +79,10 @@ class User < ActiveRecord::Base
     primary_key: :id,
     inverse_of: :doctors
   )
+
+  def full_name
+    return "#{self.first_name} #{self.last_name}"
+  end
 
   def due_reminders
     self.reminders.select

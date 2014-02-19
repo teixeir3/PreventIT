@@ -9,7 +9,7 @@
 #  input      :integer
 #  patient_id :integer          not null
 #  complete   :boolean          default(FALSE), not null
-#  due        :boolean          default(TRUE), not null
+#  due        :boolean          default(FALSE), not null
 #  note       :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
