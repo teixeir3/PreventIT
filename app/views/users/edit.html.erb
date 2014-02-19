@@ -11,6 +11,14 @@
   <br>
   <br>
 
+  <label>First Name
+    <input type="text" name="user[first_name]" value="">
+  </label>
+
+  <label>Last Name
+    <input type="text" name="user[last_name]" value="">
+  </label>
+
   <label>Email Notifiations:
     <label>On
       <input type="radio" <%= "checked" if @user.email_notifications %> name="user[email_notifications]" value="true">

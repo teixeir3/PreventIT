@@ -3,6 +3,27 @@ class UsersController < ApplicationController
   # before_filter :require_signed_out!, :only => [:new, :create]
   before_filter :require_signed_in!, :only => [:show, :edit]
 
+  def new_doctor
+    @practice = Practice.new
+    @user = @practice.doctors.new
+    render :doctor_new
+  end
+
+  def create_doctor
+    @practice = Practice.new(params[:practice])
+    @user = @practice.doctors.build(params[:user])
+    @user.is_doctor = true
+
+    if @practice.save
+      sign_in(@user)
+      render :doctor_show
+    else
+      flash.now[:errors] = @practice.errors.full_messages
+      render :doctor_new
+    end
+
+  end
+
   def new
     @user = User.new
     render :new
@@ -15,7 +36,7 @@ class UsersController < ApplicationController
     end
 
     if @user.save
-      @user.sign_in! unless current_user.is_doctor
+      sign_in(@user) unless current_user.is_doctor
       if current_user.is_doctor
         render :doctor_show
       else

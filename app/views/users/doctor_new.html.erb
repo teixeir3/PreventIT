@@ -1,0 +1,27 @@
+<h4>New Doctor</h4>
+
+<form action="<%= doctors_url %>" method="post">
+  <%= auth_token %>
+
+  <label>Practice Name:
+    <input type="text" name="practice[name]" value="">
+  </label>
+
+  <br>
+  <label>Specialty:
+    <input type="text" name="practice[specialty]" value="">
+  </label>
+  <br>
+
+  <label>Email
+    <input type="text" name="user[email]" value="">
+  </label>
+
+  <br>
+  <label>Password
+    <input type="password" name="user[password]" value="">
+  </label>
+
+  <br>
+  <input type="submit" value="Save Doctor">
+</form>

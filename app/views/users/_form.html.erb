@@ -1,4 +1,4 @@
-<h4>New <%= (current_user.is_doctor) ? 'Patient' : 'Doctor User' %></h4>
+<h4>New Patient</h4>
 
 <form action="<%= users_url %>" method="post">
   <%= auth_token %>
@@ -12,5 +12,5 @@
     <input type="password" name="user[password]" value="">
   </label>
 
-  <input type="submit" value="Create <%= (current_user.is_doctor) ? 'Patient' : 'User' %>">
+  <input type="submit" value="Create Patient">
 </form>

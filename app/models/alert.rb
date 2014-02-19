@@ -11,5 +11,5 @@
 #
 
 class Alert < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :patient, :patient_id, :alert_type, :complete
 end
