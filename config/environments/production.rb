@@ -67,7 +67,7 @@ PreventIT::Application.configure do
           :bucket => ENV["BUCKET_NAME"],
           :access_key_id => ENV["KEY"],
           :secret_access_key => ENV["SECRET_KEY"],
-          :s3_host_name => 's3-us-west-2.amazonaws.com' # or whatever your region host name is
+          :s3_host_name => 's3.amazonaws.com' # or whatever your region host name is
         }
       }
   # Log the query plan for queries taking more than this (works
