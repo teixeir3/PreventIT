@@ -1,13 +1,16 @@
 class RemindersController < ApplicationController
+  before_filter :require_signed_in!
+  # before_filter :require_authority
 
   def index
     @user = User.find(params[:user_id])
 
-    #shows ALL reminders
-    @reminders = @user.reminders
+    @reminders = @user.reminders.all
 
-    ## Shows DUE reminders
-    # @reminders = @user.reminders.where(:is_due?)
+    @complete_reminders = @user.reminders.where(complete: true)
+    @incomplete_reminders = @user.reminders.where(complete: false)
+
+    @due_reminders = @user.reminders.select{ |reminder| reminder.is_due? }
   end
 
   def new

@@ -25,25 +25,28 @@ doug.practice = my_practice
 doug.save
 
 5.times do |i|
-user = User.new({
-      email: "user#{i}",
-      first_name: "user",
-      last_name: "#{i}",
-      phone: "(#{i}#{i}#{i}) #{i}#{i}#{i} - #{i}#{i}#{i}#{i}",
-      password: "password"
-      })
+  v = i+2
+  user = User.new({
+        email: "user#{v}",
+        first_name: "user",
+        last_name: "#{v}",
+        phone: "(#{v}#{v}#{v}) #{v}#{v}#{v} - #{v}#{v}#{v}#{v}",
+        password: "password"
+        })
 
-user.doctor = doug
-user.save
+  user.doctor = doug
 
-  3.times do |j|
-    user_date = Time.now.change(year: 1999)
-      user.reminder.build({
-        datetime: user_date,
-        title: "Alert title #{j}",
-        rem_type: "input",
-        patient_id: i
-      })
-  end
+
+    3.times do |j|
+      user_date = Time.now.change(year: 1999)
+        user.reminders.build({
+          datetime: user_date,
+          title: "Alert title #{j}",
+          rem_type: "input",
+          patient_id: i
+        })
+    end
+
+  user.save
 end
 

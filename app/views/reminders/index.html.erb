@@ -1,8 +1,33 @@
 <h2>Reminders:</h2>
+
+<%= link_to "Add New Reminder", new_user_reminder_url(@user) %>
+<br>
+<br>
+
+All:
 <ul>
   <% @reminders.each do |reminder| %>
-    <li><%=  link_to reminder.title, edit_user_reminder_url(@user, reminder) %>  </li>
+    <li><%=  link_to reminder.title, edit_user_reminder_url(@user.id, reminder) %>  </li>
   <% end %>
 </ul>
 
-<%= link_to "Add New Reminder", new_user_reminder_url(@user) %>
+Due:
+<ul>
+  <% @due_reminders.each do |reminder| %>
+    <li><%=  link_to reminder.title, edit_user_reminder_url(@user.id, reminder) %>  </li>
+  <% end %>
+</ul>
+
+Completed:
+<ul>
+  <%  @complete_reminders.each do |reminder| %>
+    <li><%=  link_to reminder.title, edit_user_reminder_url(@user.id, reminder) %>  </li>
+  <% end %>
+</ul>
+
+Incomplete:
+<ul>
+  <%  @incomplete_reminders.each do |reminder| %>
+    <li><%=  link_to reminder.title, edit_user_reminder_url(@user.id, reminder) %>  </li>
+  <% end %>
+</ul>

@@ -52,19 +52,24 @@ class Reminder < ActiveRecord::Base
   def is_due?
     # self.time = self.time.change(year: Time.now.year, month: Time.now.month, day: Time.now.day)
 #     ((Time.now.wday == self.day) && (Time.zone.now > self.time))
-    if (!self.due && self.datetime.past?)
-      self.add_month!
-    end
+
 
     self.datetime.past?
   end
 
   # generates a new reminder with the same parameters 1 yr in the future
   def add_new_reminder_year!
+
+    if (!self.due && self.datetime.past?)
+      self.add_new_reminder_year!
+    end
+
     patient_user = self.patient
     new_attributes = self.attributes.except("id", "complete", "input", "due", "created_at", "updated_at")
     new_rem = patient_user.reminders.build(new_attributes)
     new_rem.datetime = new_rem.datetime.advance(days: 7*52)
+
+    patient_user.save
 
     self.due = true
   end

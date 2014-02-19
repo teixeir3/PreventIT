@@ -31,4 +31,8 @@ class ApplicationController < ActionController::Base
   def require_signed_out!
     redirect_to user_url(current_user) if signed_in?
   end
+
+  def has_authority?
+    ((current_user.id == params[:user_id]) || (current_user.is_patient_doctor?(params[:user_id])))
+  end
 end

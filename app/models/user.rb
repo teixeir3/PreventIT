@@ -98,6 +98,10 @@ class User < ActiveRecord::Base
 
   private
 
+  def is_patient_doctor?(patient_id)
+    (self.is_doctor && self.patient_ids.include?(patient_id))
+  end
+
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
   end
