@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140218230317) do
+ActiveRecord::Schema.define(:version => 20140219031512) do
 
   create_table "alerts", :force => true do |t|
     t.integer  "patient_id",                    :null => false
@@ -46,17 +46,21 @@ ActiveRecord::Schema.define(:version => 20140218230317) do
   add_index "reminders", ["patient_id"], :name => "index_reminders_on_patient_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                              :null => false
-    t.string   "password_digest",                    :null => false
-    t.string   "session_token",                      :null => false
+    t.string   "email",                                  :null => false
+    t.string   "password_digest",                        :null => false
+    t.string   "session_token",                          :null => false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone"
     t.integer  "doctor_id"
     t.integer  "practice_id"
-    t.boolean  "is_doctor",       :default => false, :null => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.boolean  "is_doctor",           :default => false, :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["doctor_id"], :name => "index_users_on_doctor_id"

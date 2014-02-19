@@ -17,7 +17,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :first_name, :last_name, :phone
+  attr_accessible :email, :password, :first_name, :last_name, :phone, :avatar
   attr_reader :password
 
   validates :email, presence: true, uniqueness: true
@@ -26,6 +26,11 @@ class User < ActiveRecord::Base
   validates :session_token, presence: true, uniqueness: true
 
   before_validation :ensure_session_token
+
+  has_attached_file :avatar, :styles => {
+         :big => "600x600>",
+         :small => "50x50>"
+       }
 
   #### Patient Associations ####
   belongs_to(
