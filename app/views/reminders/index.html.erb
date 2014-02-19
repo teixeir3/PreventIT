@@ -1,7 +1,7 @@
 <h2>Reminders:</h2>
 <ul>
   <% @reminders.each do |reminder| %>
-    <li><%=  "#{reminder.title} :  #{reminder.datetime.to_formatted_s(:time)} : #{reminder.datetime.to_formatted_s(:day)}" %>  </li>
+    <li><%=  link_to reminder.title, edit_user_reminder_url(@user, reminder) %>  </li>
   <% end %>
 </ul>
 

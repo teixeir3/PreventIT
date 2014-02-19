@@ -23,7 +23,9 @@ end
 
 gem 'jquery-rails'
 gem 'bcrypt-ruby', require: 'bcrypt'
-
+gem 'paperclip'
+gem 'aws-sdk'
+gem 'figaro'
 
 group :development do
   gem "binding_of_caller"

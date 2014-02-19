@@ -7,7 +7,7 @@ class RemindersController < ApplicationController
     @reminders = @user.reminders
 
     ## Shows DUE reminders
-    # @reminders = @user.reminders.select { |rem| rem.is_due? }
+    # @reminders = @user.reminders.where(:is_due?)
   end
 
   def new
@@ -61,13 +61,29 @@ class RemindersController < ApplicationController
     end
   end
 
-  def complete
+  def edit
+    # @user = User.find(params[:user_id])
+    @reminder = Reminder.find(params[:id])
+  end
+
+  def update
+    @reminder = Reminder.find(params[:id])
+
+    if @reminder.update_attributes(params[:reminder])
+      redirect_to user_reminders_url(params[:user_id])
+    else
+      flash.now[:errors] = @reminder.errors.full_messages
+      render :edit
+    end
+  end
+
+  def show
     @user = User.find(params[:user_id])
     @reminder = Reminder.find(params[:id])
-    @reminder.complete = true
 
-    redirect_to user_reminders_url(@user)
+
   end
+
 
   # def destroy
 #

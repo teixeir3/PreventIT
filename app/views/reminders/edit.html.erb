@@ -1,0 +1,43 @@
+<h3>Reminder Show</h3>
+
+<label>
+  Title: <%= @reminder.title %>
+</label>
+<br>
+
+
+
+<form action="<%= user_reminder_url(@reminder.patient_id, @reminder) %>" method="POST">
+  <input type="hidden" name="_method" value="PUT">
+
+  <%= auth_token %>
+
+  <label>Inpute Value:
+    <input type="number"
+      name="reminder[input]"
+      min="0.00"
+      step="0.1"
+      value="<%= @reminder.input %>">
+
+  </label>
+
+  <br>
+  <label>Enter a Note:
+    <textarea name="reminder[note]"><%= @reminder.note %></textarea>
+  </label>
+
+  <br>
+
+  <label>Did you complete your task?
+    <label>Yes
+      <input type="radio" name="reminder[complete]" value="true">
+    </label>
+
+    <label>No
+      <input type="radio" name="reminder[complete]" value="false">
+    </label>
+  </label>
+  <br>
+
+  <input type="submit" value="Save">
+</form>

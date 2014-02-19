@@ -25,7 +25,7 @@ class Reminder < ActiveRecord::Base
       "Friday",
       "Saturday"]
 
-  attr_accessible :datetime, :title, :rem_type, :patient_id, :note
+  attr_accessible :datetime, :title, :rem_type, :patient_id, :note, :complete, :input
 
   validates :datetime, presence: true
   validates :rem_type, inclusion: { in: %w(appointment medication treatment input), message: "Invalid type" }
@@ -69,9 +69,11 @@ class Reminder < ActiveRecord::Base
     self.due = true
   end
 
-
-
   def day_str
     DAY_STRINGS[self.day]
+  end
+
+  def mark_complete(is_complete)
+    self.complete = is_complete
   end
 end
