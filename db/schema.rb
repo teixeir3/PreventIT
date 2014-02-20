@@ -11,14 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140219133023) do
+ActiveRecord::Schema.define(:version => 20140220022317) do
+
+  create_table "alert_settings", :force => true do |t|
+    t.integer  "doctor_id",                              :null => false
+    t.integer  "skipped_meds",         :default => 2,    :null => false
+    t.integer  "skipped_appointments", :default => 2,    :null => false
+    t.float    "bmi_min",              :default => 18.4, :null => false
+    t.float    "bmi_max",              :default => 25.0, :null => false
+    t.float    "a1c_min",              :default => 18.4, :null => false
+    t.float    "a1c_max",              :default => 25.0, :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
 
   create_table "alerts", :force => true do |t|
-    t.integer  "patient_id",                    :null => false
-    t.string   "alert_type",                    :null => false
-    t.boolean  "complete",   :default => false, :null => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.integer  "patient_id",                           :null => false
+    t.string   "alert_type",                           :null => false
+    t.boolean  "complete",          :default => false, :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.integer  "reminders_skipped"
   end
 
   add_index "alerts", ["patient_id"], :name => "index_alerts_on_patient_id"
@@ -41,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20140219133023) do
     t.text     "note"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.boolean  "checked",    :default => false, :null => false
   end
 
   add_index "reminders", ["patient_id"], :name => "index_reminders_on_patient_id"

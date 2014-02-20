@@ -13,6 +13,7 @@
 #  note       :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  checked    :boolean          default(FALSE), not null
 #
 
 class Reminder < ActiveRecord::Base
@@ -47,8 +48,29 @@ class Reminder < ActiveRecord::Base
   )
 
 
+  # marks all reminders due if their time is past
+  def self.mark_all_due
+    @all_not_due_reminders = self.all_not_due
+    @all_not_due_reminders.each do |reminder|
+      reminder.self_propagation! if reminder.is_due?
+    end
+
+    nil
+  end
+
+  # returns all reminders marked as not due
+  def self.all_not_due
+    self.find_all_by_due(false)
+  end
+
   # Returns true if the reminder's time is passed in the current day
   # AND generates and new reminder if it's due for the 1st time
+  # def mark_due
+ #    if is_due?
+ #      self.reminder_self_propogation
+ #    end
+ #  end
+
   def is_due?
     # self.time = self.time.change(year: Time.now.year, month: Time.now.month, day: Time.now.day)
 #     ((Time.now.wday == self.day) && (Time.zone.now > self.time))
@@ -57,12 +79,15 @@ class Reminder < ActiveRecord::Base
     self.datetime.past?
   end
 
+  # def should_check_for_alert
+#     self.is_due? &&
+#   end
   # generates a new reminder with the same parameters 1 yr in the future
-  def add_new_reminder_year!
+  def self_propagation!
 
-    if (!self.due && self.datetime.past?)
-      self.add_new_reminder_year!
-    end
+    # if (!self.due && self.datetime.past?)
+ #      self.add_new_reminder_year!
+ #    end
 
     patient_user = self.patient
     new_attributes = self.attributes.except("id",
@@ -78,14 +103,22 @@ class Reminder < ActiveRecord::Base
 
     patient_user.save
 
-    self.due = true
+    self.mark_due!
   end
 
   def day_str
     DAY_STRINGS[self.day]
   end
 
-  def mark_complete(is_complete)
-    self.complete = is_complete
+  def mark_due!
+    self.due = true
+    self.save
   end
+
+
+  ## COME BACK HERE!!
+  # def mark_complete(is_complete)
+#     self.complete = is_complete
+#     self.add_new_reminder_year!
+#   end
 end

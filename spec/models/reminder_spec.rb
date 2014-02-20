@@ -13,6 +13,7 @@
 #  note       :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  checked    :boolean          default(FALSE), not null
 #
 
 require 'spec_helper'

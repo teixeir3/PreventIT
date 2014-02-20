@@ -22,6 +22,7 @@ doug = User.new({
   })
 doug.is_doctor = true
 doug.practice = my_practice
+doug.alert_setting.build
 doug.save
 
 5.times do |i|

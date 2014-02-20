@@ -48,7 +48,7 @@ class RemindersController < ApplicationController
 
           rem.datetime = new_date_time.advance(days: diff)
 
-          1.times do |x|
+          11.times do |x|
             new_rem = @user.reminders.build(params[:reminder])
             new_rem.datetime = rem.datetime.advance(weeks: x + 1)
           end

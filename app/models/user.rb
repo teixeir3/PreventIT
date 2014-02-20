@@ -62,13 +62,16 @@ class User < ActiveRecord::Base
     inverse_of: :patient
   )
 
-  #### Doctor Associations ####
   has_many(
-    :patients,
-    class_name: "User",
-    foreign_key: :doctor_id,
-    primary_key: :id
+    :alerts,
+    class_name: "Alert",
+    foreign_key: :patient_id,
+    primary_key: :id,
+    inverse_of: :patient,
+    dependent: :destroy
   )
+
+  #### Doctor Associations ####
 
   belongs_to(
     :practice,
@@ -78,13 +81,90 @@ class User < ActiveRecord::Base
     inverse_of: :doctors
   )
 
+  has_many(
+    :patients,
+    class_name: "User",
+    foreign_key: :doctor_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :patient_alerts,
+    through: :patients,
+    source: :alerts
+  )
+
+  has_many(
+      :alert_setting,
+      class_name: "AlertSetting",
+      foreign_key: :doctor_id,
+      primary_key: :id,
+      inverse_of: :doctor,
+      dependent: :destroy
+    )
+
+
+
   def full_name
     return "#{self.first_name} #{self.last_name}"
   end
 
-  def due_reminders
-    self.reminders.select{ |reminder| reminder.is_due? }
+  ### Reminder Methods ###
+
+  def incomplete_due_reminders
+    self.reminders.select{ |reminder| (reminder.is_due? && !reminder.complete && !reminder.checked) }
   end
+
+  ### Alert Methods (for doctor)###
+  def patients_with_reminders
+    self.patients.includes(:reminders)
+  end
+
+  def generate_all_alerts
+
+  end
+
+  # TODO: NOT TESTED: MAKING SEED FILE FIRST
+  def generate_medication_alerts
+    patient_population = self.patients_with_reminders
+    allowed_skipped = self.alert_setting.first.skipped_meds
+    skipped_med_count = 0
+
+    patient_population.each do |patient|
+      patient.incomplete_due_reminders.each do |reminder|
+        skipped_med_count += 1 if ((reminder.datetime - Time.now) / 60 / 60) > 1
+        reminder.checked = true
+        puts "skipped_med_count = #{skipped_med_count}"
+      end
+
+      if skipped_med_count > allowed_skipped
+        puts "in creation!"
+        current_alert = patient.alerts.build({
+          alert_type: "medication",
+          reminders_skipped: skipped_med_count
+        })
+
+        current_alert.save
+      end
+    end
+
+    nil
+  end
+
+  def generate_appointment_alerts
+
+  end
+
+  def generate_BMI_alerts
+
+  end
+
+  def generate_A1C_alerts
+
+  end
+
+
+  ### Auth Methods ###
 
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)

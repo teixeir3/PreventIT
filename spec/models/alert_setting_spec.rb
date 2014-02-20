@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: alert_settings
+#
+#  id                   :integer          not null, primary key
+#  doctor_id            :integer          not null
+#  skipped_meds         :integer          default(2), not null
+#  skipped_appointments :integer          default(2), not null
+#  bmi_min              :float            default(18.4), not null
+#  bmi_max              :float            default(25.0), not null
+#  a1c_min              :float            default(18.4), not null
+#  a1c_max              :float            default(25.0), not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#
+
+require 'spec_helper'
+
+describe AlertSetting do
+  pending "add some examples to (or delete) #{__FILE__}"
+end
