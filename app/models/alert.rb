@@ -9,10 +9,11 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  reminders_skipped :integer
+#  reason            :string(255)
 #
 
 class Alert < ActiveRecord::Base
-  attr_accessible :patient, :patient_id, :alert_type, :complete, :reminders_skipped
+  attr_accessible :patient, :patient_id, :alert_type, :complete, :reminders_skipped, :reason
 
   validates :patient, presence: true
   validates :alert_type, presence: true, inclusion: { in: %w(appointment medication treatment input), message: "Invalid type" }

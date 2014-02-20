@@ -9,6 +9,7 @@
   <br>
   <br>
 
+  <h3><%= @doctor.practice.name %> Patients: (Total: <%= @doctor.patients.count %>)</h3>
   <ul>
   <% current_user.patients.each do |patient| %>
     <li><%= link_to patient.email, user_url(patient) %></li>

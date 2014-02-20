@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140220151004) do
+ActiveRecord::Schema.define(:version => 20140220202754) do
 
   create_table "alert_settings", :force => true do |t|
     t.integer  "doctor_id",                              :null => false
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(:version => 20140220151004) do
     t.float    "a1c_max",              :default => 25.0, :null => false
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "skipped_treatments",   :default => 2,    :null => false
+    t.integer  "skipped_inputs",       :default => 2,    :null => false
   end
 
   create_table "alerts", :force => true do |t|
@@ -32,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20140220151004) do
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
     t.integer  "reminders_skipped"
+    t.string   "reason"
   end
 
   add_index "alerts", ["patient_id"], :name => "index_alerts_on_patient_id"
@@ -65,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20140220151004) do
     t.datetime "updated_at",                    :null => false
     t.boolean  "checked",    :default => false, :null => false
     t.boolean  "complete"
+    t.string   "sub_type"
   end
 
   add_index "reminders", ["patient_id"], :name => "index_reminders_on_patient_id"

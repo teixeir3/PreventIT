@@ -81,7 +81,8 @@ doug.save
           title: "Alert title #{j}",
           rem_type: "medication",
           patient_id: i,
-          complete: false
+          complete: false,
+          sub_type: "aspirin"
         })
 
         user.reminders.build({
@@ -89,7 +90,8 @@ doug.save
           title: "Alert title #{j}",
           rem_type: "input",
           patient_id: i,
-          complete: false
+          complete: false,
+          sub_type: "A1C"
         })
 
         user.reminders.build({
@@ -97,7 +99,8 @@ doug.save
           title: "Alert title #{j}",
           rem_type: "treatment",
           patient_id: i,
-          complete: false
+          complete: false,
+          sub_type: "foot exam"
         })
 
         user.reminders.build({
@@ -105,7 +108,8 @@ doug.save
           title: "Alert title #{j}",
           rem_type: "appointment",
           patient_id: i,
-          complete: false
+          complete: false,
+          sub_type: "diabetes checkup"
         })
     end
 

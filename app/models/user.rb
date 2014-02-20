@@ -41,6 +41,15 @@ class User < ActiveRecord::Base
 
 
   #### Patient Associations ####
+  has_many(
+    :health,
+    class_name: "Health",
+    foreign_key: :patient_id,
+    primary_key: :id,
+    inverse_of: :patient,
+    dependent: :destroy
+  )
+
   belongs_to(
     :doctor,
     class_name: "User",
@@ -121,29 +130,36 @@ class User < ActiveRecord::Base
   end
 
   def patients_reminders_by_type(type)
-    self.patients.joins(:reminders).where("reminders.rem_type = ?", type).includes(:reminders)
+    self.patients.joins(:reminders).where("reminders.rem_type = ? AND reminders.checked = ?", type, false).includes(:reminders)
   end
 
+
+
   ### Alert Methods (for doctor)###
+
+
   def patients_with_reminders
     self.patients.includes(:reminders)
   end
 
-  def generate_all_alerts
-    self.generate_medication_alerts
+  def generate_all_missed_alerts
+    self.generate_missed_medication_alerts
+    self.generate_missed_appointment_alerts
+    self.generate_missed_input_alerts
   end
 
-  # TODO: NOT TESTED: MAKING SEED FILE FIRST
-  def generate_medication_alerts
+  def generate_missed_medication_alerts
     patient_population = self.patients_reminders_by_type("medication")
     allowed_skipped = self.alert_setting.first.skipped_meds
     skipped_med_count = 0
 
     patient_population.each do |patient|
       patient.incomplete_due_reminders.each do |reminder|
-        skipped_med_count += 1 if ((Time.now - reminder.datetime) / 60 / 60) > 1
-        puts ((reminder.datetime - Time.now) / 60 / 60)
-        reminder.checked = true
+        if ((Time.now - reminder.datetime) / 60 / 60) > 1
+          skipped_med_count += 1
+          reminder.checked = true
+          reminder.save
+        end
       end
 
       if skipped_med_count > allowed_skipped
@@ -159,22 +175,24 @@ class User < ActiveRecord::Base
     nil
   end
 
-  def generate_appointment_alerts
+  def generate_missed_appointment_alerts
     patient_population = self.patients_reminders_by_type("appointment")
     allowed_skipped = self.alert_setting.first.skipped_appointments
     skipped_appointment_count = 0
 
     patient_population.each do |patient|
       patient.incomplete_due_reminders.each do |reminder|
-        skipped_appointment_count += 1 if ((Time.now - reminder.datetime) / 60 / 60) > 1
-        puts ((reminder.datetime - Time.now) / 60 / 60)
-        reminder.checked = true
+        if ((Time.now - reminder.datetime) / 60 / 60) > 1
+          skipped_appointment_count += 1
+          reminder.checked = true
+          reminder.save
+        end
       end
 
       if skipped_appointment_count > allowed_skipped
         current_alert = patient.alerts.build({
-          alert_type: "medication",
-          reminders_skipped: skipped_med_count
+          alert_type: "appointment",
+          reminders_skipped: skipped_appointment_count
         })
 
         current_alert.save
@@ -184,13 +202,65 @@ class User < ActiveRecord::Base
     nil
   end
 
-  def generate_BMI_alerts
+  # Tested
+  def generate_missed_input_alerts
+    patient_population = self.patients_reminders_by_type("input")
+    allowed_skipped = self.alert_setting.first.skipped_inputs
+    skipped_input_count = 0
 
+    patient_population.each do |patient|
+      patient.incomplete_due_reminders.each do |reminder|
+        if ((Time.now - reminder.datetime) / 60 / 60) > 1
+          skipped_input_count += 1
+          reminder.checked = true
+          reminder.save
+        end
+      end
+
+      if skipped_input_count > allowed_skipped
+        current_alert = patient.alerts.build({
+          alert_type: "input",
+          reminders_skipped: skipped_input_count
+        })
+
+        current_alert.save
+      end
+    end
+
+    nil
   end
 
-  def generate_A1C_alerts
+  def generate_missed_treatment_alerts
+    patient_population = self.patients_reminders_by_type("treatment")
+    allowed_skipped = self.alert_setting.first.skipped_treatments
+    skipped_treatment_count = 0
 
+    patient_population.each do |patient|
+      patient.incomplete_due_reminders.each do |reminder|
+        if ((Time.now - reminder.datetime) / 60 / 60) > 1
+          skipped_treatment_count += 1
+          reminder.checked = true
+          reminder.save
+        end
+      end
+
+      if skipped_treatment_count > allowed_skipped
+        current_alert = patient.alerts.build({
+          alert_type: "treatment",
+          reminders_skipped: skipped_treatment_count
+        })
+
+        current_alert.save
+      end
+    end
+
+    nil
   end
+
+
+  # def generate_A1C_alerts
+#
+#   end
 
 
   ### Auth Methods ###

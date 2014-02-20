@@ -12,12 +12,14 @@
 #  a1c_max              :float            default(25.0), not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  skipped_treatments   :integer          default(2), not null
+#  skipped_inputs       :integer          default(2), not null
 #
 
 class AlertSetting < ActiveRecord::Base
-  attr_accessible :doctor, :skipped_meds, :skipped_appointments, :bmi_min, :bmi_max, :a1c_min, :a1c_max
+  attr_accessible :doctor, :skipped_meds, :skipped_appointments, :bmi_min, :bmi_max, :a1c_min, :a1c_max, :skipped_treatments, :skipped_inputs
 
-  validates :doctor, :skipped_meds, :skipped_appointments, :bmi_min, :bmi_max, :a1c_min, :a1c_max, presence: true
+  validates :doctor, :skipped_meds, :skipped_appointments, :skipped_treatments, :skipped_inputs, :bmi_min, :bmi_max, :a1c_min, :a1c_max, presence: true
 
   belongs_to(
       :doctor,

@@ -8,12 +8,13 @@
 #  rem_type   :string(255)      not null
 #  input      :integer
 #  patient_id :integer          not null
-#  complete   :boolean          default(FALSE), not null
 #  due        :boolean          default(FALSE), not null
 #  note       :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  checked    :boolean          default(FALSE), not null
+#  complete   :boolean
+#  sub_type   :string(255)
 #
 
 class Reminder < ActiveRecord::Base
@@ -26,7 +27,7 @@ class Reminder < ActiveRecord::Base
       "Friday",
       "Saturday"]
 
-  attr_accessible :datetime, :title, :rem_type, :patient_id, :note, :complete, :input
+  attr_accessible :datetime, :title, :rem_type, :patient_id, :note, :complete, :input, :sub_type
 
   validates :datetime, presence: true
   validates :rem_type, inclusion: { in: %w(appointment medication treatment input), message: "Invalid type" }
