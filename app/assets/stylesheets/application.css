@@ -100,11 +100,17 @@ h2 {
   display: block;
   float: left;
   font-size: 40px;
+  width: 100%;
 }
 
 h3 {
   display: block;
   font-size: 25px;
+}
+
+.sub-content {
+  display: block;
+  float: left;
 }
 
 
@@ -243,4 +249,17 @@ h3 {
 .submit > input:active {
   top: 3px;
   box-shadow: none;
+}
+
+table {
+  border: 2px solid black;
+}
+
+th {
+  border-bottom: 1px solid black;
+}
+
+td {
+  padding: 3px;
+  border: 1px solid black;
 }

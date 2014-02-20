@@ -13,7 +13,11 @@ class SessionsController < ApplicationController
 
     if @user
       sign_in(@user)
-      redirect_to user_url(@user)
+      if @user.is_doctor
+        redirect_to doctor_url(@user)
+      else
+        redirect_to user_url(@user)
+      end
     else
       render :json => "Incorrect credentials"
     end

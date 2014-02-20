@@ -115,6 +115,29 @@ class Reminder < ActiveRecord::Base
     self.save
   end
 
+  def overdue_by_str
+    "#{self.overdue_by} #{@overdue_str}"
+  end
+
+  def overdue_by
+    overdue = (Time.now - self.datetime) / 60
+    @overdue_str = "minutes"
+    if overdue > 60
+      overdue /=  60
+      @overdue_str = "hours"
+      if overdue > 24
+        overdue /= 24
+        @overdue_str = "days"
+        if overdue > 7
+          overdue /= 7
+          @overdue_str = "weeks"
+        end
+      end
+    end
+
+    overdue.to_i
+  end
+
 
   ## COME BACK HERE!!
   # def mark_complete(is_complete)

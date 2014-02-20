@@ -1,16 +1,20 @@
-<h1>Doctor Page</h1>
+<h2>Doctor Page</h2>
 
-<br>
-<%= image_tag @doctor.avatar.url(:small) %>
-<br>
-<%= link_to "Settings", edit_user_url(@doctor) %>
-<br>
-<br>
+<div class="sub-content">
 
-<ul>
-<% current_user.patients.each do |patient| %>
-  <li><%= link_to patient.email, user_url(patient) %></li>
-<% end %>
-</ul>
+  <br>
+  <%= image_tag @doctor.avatar.url(:small) %>
+  <br>
+  <%= link_to "Settings", edit_user_url(@doctor) %>
+  <br>
+  <br>
 
-<a href="<%= new_user_url %>">Add New Patient</a>
+  <ul>
+  <% current_user.patients.each do |patient| %>
+    <li><%= link_to patient.email, user_url(patient) %></li>
+  <% end %>
+  </ul>
+
+  <a href="<%= new_user_url %>">Add New Patient</a>
+
+</div>

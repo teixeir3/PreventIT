@@ -11,6 +11,7 @@ class DoctorsController < ApplicationController
     @practice = Practice.new(params[:practice])
     @user = @practice.doctors.build(params[:user])
     @user.is_doctor = true
+    @user.alert_setting.build
 
     if @practice.save
       sign_in(@user)

@@ -1,33 +1,122 @@
 <h2>Reminders:</h2>
 
-<%= link_to "Add New Reminder", new_user_reminder_url(@user) %>
-<br>
-<br>
 
-All:
-<ul>
-  <% @reminders.each do |reminder| %>
-    <li><%=  link_to reminder.title, edit_user_reminder_url(@user.id, reminder) %>  </li>
-  <% end %>
-</ul>
+<div class="sub-content">
+  <%= link_to "Add New Reminder", new_user_reminder_url(@user) %>
+  <br>
+  <br>
 
-Due:
-<ul>
-  <% @due_reminders.each do |reminder| %>
-    <li><%=  link_to reminder.title, edit_user_reminder_url(@user.id, reminder) %>  </li>
-  <% end %>
-</ul>
+  All:
+  <table>
+    <thead>
+      <tr>
+        <th>Due</th>
+        <th>Overdue By</th>
+        <th>Title</th>
+        <th>Type</th>
+      </tr>
+    </thead>
 
-Completed:
-<ul>
-  <%  @complete_reminders.each do |reminder| %>
-    <li><%=  link_to reminder.title, edit_user_reminder_url(@user.id, reminder) %>  </li>
-  <% end %>
-</ul>
+    <% @reminders.each do |reminder| %>
+    <tr>
+      <% reminder.attributes.select{|attr| attr =~ /datetime|title|rem_type/}.each do |attr_name, attr_val| %>
+        <% if attr_name == "datetime" %>
+          <td><%= attr_val.to_formatted_s(:long_ordinal) %></td>
+          <td><%= reminder.overdue_by_str %></td>
+        <% elsif attr_name == "title" %>
+          <td><%=  link_to attr_val, edit_user_reminder_url(@user.id, reminder) %></td>
+        <% else %>
+          <td><%= attr_val %></td>
+        <% end %>
+      <% end %>
+    </tr>
+    <% end %>
 
-Incomplete:
-<ul>
-  <%  @incomplete_reminders.each do |reminder| %>
-    <li><%=  link_to reminder.title, edit_user_reminder_url(@user.id, reminder) %>  </li>
-  <% end %>
-</ul>
+  </table>
+
+  Due:
+
+  <table>
+    <thead>
+      <tr>
+        <th>Due</th>
+        <th>Overdue By</th>
+        <th>Title</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+
+    <% @due_reminders.each do |reminder| %>
+    <tr>
+      <% reminder.attributes.select{|attr| attr =~ /datetime|title|rem_type/}.each do |attr_name, attr_val| %>
+        <% if attr_name == "datetime" %>
+          <td><%= attr_val.to_formatted_s(:long_ordinal) %></td>
+          <td><%= reminder.overdue_by_str %></td>
+        <% elsif attr_name == "title" %>
+          <td><%=  link_to attr_val, edit_user_reminder_url(@user.id, reminder) %></td>
+        <% else %>
+          <td><%= attr_val %></td>
+        <% end %>
+      <% end %>
+    </tr>
+    <% end %>
+
+  </table>
+
+  Completed:
+  <table>
+    <thead>
+      <tr>
+        <th>Due</th>
+        <th>Overdue By</th>
+        <th>Title</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+
+    <% @complete_reminders.each do |reminder| %>
+    <tr>
+      <% reminder.attributes.select{|attr| attr =~ /datetime|title|rem_type/}.each do |attr_name, attr_val| %>
+        <% if attr_name == "datetime" %>
+          <td><%= attr_val.to_formatted_s(:long_ordinal) %></td>
+          <td><%= reminder.overdue_by_str %></td>
+        <% elsif attr_name == "title" %>
+          <td><%=  link_to attr_val, edit_user_reminder_url(@user.id, reminder) %></td>
+        <% else %>
+          <td><%= attr_val %></td>
+        <% end %>
+      <% end %>
+    </tr>
+    <% end %>
+
+  </table>
+
+  Incomplete:
+  <table>
+    <thead>
+      <tr>
+        <th>Due</th>
+        <th>Overdue By</th>
+        <th>Title</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+
+    <% @incomplete_reminders.each do |reminder| %>
+    <tr>
+      <% reminder.attributes.select{|attr| attr =~ /datetime|title|rem_type/}.each do |attr_name, attr_val| %>
+        <% if attr_name == "datetime" %>
+          <td><%= attr_val.to_formatted_s(:long_ordinal) %></td>
+          <td><%= reminder.overdue_by_str %></td>
+        <% elsif attr_name == "title" %>
+          <td><%=  link_to attr_val, edit_user_reminder_url(@user.id, reminder) %></td>
+        <% else %>
+          <td><%= attr_val %></td>
+        <% end %>
+      <% end %>
+    </tr>
+    <% end %>
+
+  </table>
+
+</div>
