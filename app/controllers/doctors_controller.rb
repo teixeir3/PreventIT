@@ -1,5 +1,6 @@
 class DoctorsController < ApplicationController
   before_filter :require_signed_in!, :only => [:show, :edit]
+  before_filter :require_doctor_authority!, :only => [:show, :edit]
 
   def new_doctor
     @practice = Practice.new

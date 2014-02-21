@@ -145,6 +145,7 @@ doug.save
         sub_type: "foot exam"
       })
 
+      # should queue 12 alerts
       user.reminders.build({
         datetime: user_date,
         title: "Missed Appt #{j}",

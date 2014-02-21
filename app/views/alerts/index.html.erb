@@ -1,9 +1,55 @@
 <h2>Alerts:</h2>
 
 <div class="sub-content">
-  <ul>
-    <% @alerts.each do |alert| %>
-      <li><%= "Alert Goes Here" %>  </li>
+
+  <div class="reminders-table">
+    <table id="incomplete_alerts" class="alert-table">
+      <label for="incomplete_alerts" class="table-label">New Alerts:</label>
+      <thead>
+        <tr>
+          <th>Reason</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>Patient</th>
+          <th>Complete?</th>
+        </tr>
+      </thead>
+
+      <% @incomplete_alerts.each do |alert| %>
+        <tr>
+          <td><%= link_to alert.reason, doctor_alert_url(@doctor, alert) %></td>
+          <td><%= alert.alert_type %></td>
+          <td><%= alert.created_at.to_formatted_s(:long_ordinal) %></td>
+          <td><%= link_to alert.patient.full_name, user_url(alert.patient) %></td>
+          <td><%= alert.complete_str? %></td>
+        </tr>
+      <% end %>
+
+    </table>
+  </div>
+
+  <table id="complete_alerts" class="alert-table">
+    <label for="complete_alerts" class="table-label">Old Alerts:</label>
+    <thead>
+      <tr>
+        <th>Reason</th>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Patient</th>
+        <th>Complete?</th>
+      </tr>
+    </thead>
+
+    <% @complete_alerts.each do |alert| %>
+      <tr>
+        <td><%= link_to alert.reason, doctor_alert_url(@doctor, alert) %></td>
+        <td><%= alert.alert_type %></td>
+        <td><%= alert.created_at.to_formatted_s(:long_ordinal) %></td>
+        <td><%= link_to alert.patient.full_name, user_url(alert.patient) %></td>
+        <td><%= alert.complete_str? %></td>
+      </tr>
     <% end %>
-  </ul>
+
+  </table>
+
 </div>

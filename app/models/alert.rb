@@ -31,4 +31,8 @@ class Alert < ActiveRecord::Base
     through: :patient,
     source: :doctor
   )
+
+  def complete_str?
+    (self.complete) ? "complete" : "incomplete"
+  end
 end

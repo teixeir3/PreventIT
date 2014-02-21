@@ -7,36 +7,38 @@
   <br>
 
 
-  <table id="reminders">
-    <label for="reminders" class="table-label">All:</label>
-    <thead>
+  <div class="reminders-table">
+    <table id="reminders">
+      <label for="reminders" class="table-label">All:</label>
+      <thead>
+        <tr>
+          <th>Due</th>
+          <th>Overdue By</th>
+          <th>Title</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+
+      <% @reminders.each do |reminder| %>
       <tr>
-        <th>Due</th>
-        <th>Overdue By</th>
-        <th>Title</th>
-        <th>Type</th>
-      </tr>
-    </thead>
-
-    <% @reminders.each do |reminder| %>
-    <tr>
-      <% reminder.attributes.select{|attr| attr =~ /datetime|title|rem_type/}.each do |attr_name, attr_val| %>
-        <% if attr_name == "datetime" %>
-          <td><%= attr_val.to_formatted_s(:long_ordinal) %></td>
-          <td><%= reminder.overdue_by_str %></td>
-        <% elsif attr_name == "title" %>
-          <td><%=  link_to attr_val, edit_user_reminder_url(@user.id, reminder) %></td>
-        <% else %>
-          <td><%= attr_val %></td>
+        <% reminder.attributes.select{|attr| attr =~ /datetime|title|rem_type/}.each do |attr_name, attr_val| %>
+          <% if attr_name == "datetime" %>
+            <td><%= attr_val.to_formatted_s(:long_ordinal) %></td>
+            <td><%= reminder.overdue_by_str %></td>
+          <% elsif attr_name == "title" %>
+            <td><%=  link_to attr_val, edit_user_reminder_url(@user.id, reminder) %></td>
+          <% else %>
+            <td><%= attr_val %></td>
+          <% end %>
         <% end %>
+      </tr>
       <% end %>
-    </tr>
-    <% end %>
 
-  </table>
+    </table>
+  </div>
 
 
-  <table id="due-reminders">
+  <table id="due-reminders" class="reminders-table">
     <label for="due-reminders" class="table-label">Due:</label>
     <thead>
       <tr>
@@ -64,7 +66,7 @@
 
   </table>
 
-  <table id="completed-reminders">
+  <table id="completed-reminders" class="reminders-table">
     <label for="completed-reminders" class="table-label">Completed:</label>
     <thead>
       <tr>
@@ -92,7 +94,7 @@
 
   </table>
 
-  <table id="incomplete-reminders">
+  <table id="incomplete-reminders" class="reminders-table">
     <label for="incomplete-reminders" class="table-label">Incomplete:</label>
     <thead>
       <tr>

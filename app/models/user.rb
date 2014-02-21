@@ -35,7 +35,8 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => {
          :big => "600x600>",
          :small => "200x200>"
-       }
+       },
+       :default_url => "/assets/small/missing.png"
 
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
@@ -141,6 +142,14 @@ class User < ActiveRecord::Base
     self.patients.joins(:reminders).where("reminders.rem_type = ? AND reminders.complete = ? AND reminders.input_checked = ?", "input", true, false).includes(:reminders)
   end
 
+  def incomplete_alerts
+    self.patient_alerts.where("alerts.complete = ?", false)
+  end
+
+  def complete_alerts
+    self.patient_alerts.where("alerts.complete = ?", true)
+  end
+
 
   ### Alert Methods (for doctor)###
 
@@ -186,28 +195,31 @@ class User < ActiveRecord::Base
 
   def generate_missed_appointment_alerts
     patient_population = self.patients_reminders_by_type("appointment")
-    allowed_skipped = self.alert_setting.first.skipped_appointments
 
     patient_population.each do |patient|
       skipped_appointment_count = 0
+      allowed_skipped = self.alert_setting.first.skipped_appointments
 
       patient.incomplete_due_reminders.each do |reminder|
         if ((Time.now - reminder.datetime) / 60 / 60) > 1
           skipped_appointment_count += 1
         end
-      end
 
-      if skipped_appointment_count > allowed_skipped
-        current_alert = patient.alerts.build({
-          alert_type: "appointment",
-          reminders_skipped: skipped_appointment_count,
-          reason: "Skipped #{skipped_appointment_count} Appointments"
-        })
+        puts "SKIPPED APPOINT COUNT!!!!!!:    #{skipped_appointment_count}"
+        puts "Allowed Skipped!!!!!!:    #{allowed_skipped}"
+        if skipped_appointment_count > allowed_skipped
+          allowed_skipped *= 2
+          current_alert = patient.alerts.build({
+            alert_type: "appointment",
+            reminders_skipped: skipped_appointment_count,
+            reason: "Skipped #{skipped_appointment_count} Appointments"
+          })
 
-        ##### BUG!!!! CANNOT SAVE REMINDER AFTER BLOCK
-        reminder.checked = true
-        reminder.save
-        current_alert.save
+          ##### BUG!!!! CANNOT SAVE REMINDER AFTER BLOCK
+          reminder.checked = true
+          reminder.save
+          current_alert.save
+        end
       end
     end
 
@@ -293,10 +305,7 @@ class User < ActiveRecord::Base
           reminder.save
         elsif (reminder.sub_type == 'weight')
           bmi = (reminder.input/(patient.health[0].height*patient.health[0].height).to_f) * 703
-          puts "LOOK HERE YOU FUCKER!!!!!!! #{bmi}"
-          puts "WEIGHT!!!!!! #{reminder.input}"
-          puts "HEIGHT!!!!!! #{patient.health[0].height}"
-          puts "THAT*THAT!!!!!! #{(reminder.input/(patient.health[0].height).to_f)}"
+
           unless (bmi.between?(alert_setting[0].bmi_min, alert_setting[0].bmi_max))
             patient.alerts.create({
               alert_type: 'input',

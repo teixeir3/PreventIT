@@ -278,6 +278,10 @@ table {
   margin-left: 100px;
 }
 
+.alert-table {
+  width: 700px;
+}
+
 th {
   border-bottom: 1px solid black;
 }

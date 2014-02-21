@@ -40,13 +40,33 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def has_authority?
-    if (params[:user_id])
-      check_id = params[:user_id].to_i
-    else
-      check_id = params[:id].to_i
+  def require_doctor_authority!
+    unless has_doctor_authority?
+      flash[:errors] = ["Only doctors can access this page!"]
+      sign_out
+      redirect_to new_session_url
     end
+  end
+
+  def has_doctor_authority?
+    check_id = find_user_id
+
+    (current_user.id == check_id && current_user.is_doctor)
+  end
+
+  def has_authority?
+    check_id = find_user_id
 
     ((current_user.id == check_id) || (current_user.is_patient_doctor?(check_id)))
+  end
+
+  def find_user_id
+    if (params[:user_id])
+      return params[:user_id].to_i
+    elsif (params[:doctor_id])
+      return params[:doctor_id].to_i
+    else
+      return params[:id].to_i
+    end
   end
 end
