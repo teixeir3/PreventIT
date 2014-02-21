@@ -9,7 +9,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  reminders_skipped :integer
-#  reason            :string(255)      not null
+#  reason            :string(255)
 #
 
 require 'spec_helper'

@@ -50,6 +50,7 @@ body {
   float: left;
   font-size: 60px;
   font-weight: bold;
+  padding-top: 20px;
 }
 
 h1 {
@@ -152,6 +153,21 @@ h3 {
 
 .input {
   margin: 20px 0;
+}
+
+.input > select {
+  border-radius: 5px;
+  border: 2px solid #000;
+  background: transparent;
+  height: 30px;
+  font-size: 15px;
+  padding: 5px;
+}
+
+.input > select:select {
+  border-radius: 5px;
+  border: 2px solid #000;
+  border-color: #4BE19D;
 }
 
 .input > label {

@@ -2,19 +2,20 @@
 #
 # Table name: reminders
 #
-#  id         :integer          not null, primary key
-#  datetime   :datetime         not null
-#  title      :string(255)      not null
-#  rem_type   :string(255)      not null
-#  input      :integer
-#  patient_id :integer          not null
-#  due        :boolean          default(FALSE), not null
-#  note       :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  checked    :boolean          default(FALSE), not null
-#  complete   :boolean
-#  sub_type   :string(255)
+#  id            :integer          not null, primary key
+#  datetime      :datetime         not null
+#  title         :string(255)      not null
+#  rem_type      :string(255)      not null
+#  input         :integer
+#  patient_id    :integer          not null
+#  due           :boolean          default(FALSE), not null
+#  note          :text
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  checked       :boolean          default(FALSE), not null
+#  complete      :boolean
+#  sub_type      :string(255)
+#  input_checked :boolean
 #
 
 class Reminder < ActiveRecord::Base
@@ -27,7 +28,7 @@ class Reminder < ActiveRecord::Base
       "Friday",
       "Saturday"]
 
-  attr_accessible :datetime, :title, :rem_type, :patient_id, :note, :complete, :input, :sub_type
+  attr_accessible :datetime, :title, :rem_type, :patient_id, :note, :complete, :input, :sub_type, :input_checked
 
   validates :datetime, presence: true
   validates :rem_type, inclusion: { in: %w(appointment medication treatment input), message: "Invalid type" }

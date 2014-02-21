@@ -133,41 +133,50 @@ class User < ActiveRecord::Base
     self.patients.joins(:reminders).where("reminders.rem_type = ? AND reminders.checked = ?", type, false).includes(:reminders)
   end
 
+  def patients_with_reminders
+    self.patients.includes(:reminders)
+  end
+
+  def patients_input_complete_unchecked_reminders
+    self.patients.joins(:reminders).where("reminders.rem_type = ? AND reminders.complete = ? AND reminders.input_checked = ?", "input", true, false).includes(:reminders)
+  end
 
 
   ### Alert Methods (for doctor)###
 
 
-  def patients_with_reminders
-    self.patients.includes(:reminders)
-  end
-
-  def generate_all_missed_alerts
+  def generate_all_alerts
     self.generate_missed_medication_alerts
     self.generate_missed_appointment_alerts
     self.generate_missed_input_alerts
+    self.generate_missed_treatment_alerts
+    self.generate_unhealthy_input_alerts
+
+    nil
   end
 
   def generate_missed_medication_alerts
     patient_population = self.patients_reminders_by_type("medication")
     allowed_skipped = self.alert_setting.first.skipped_meds
-    skipped_med_count = 0
 
     patient_population.each do |patient|
+      skipped_med_count = 0
+
       patient.incomplete_due_reminders.each do |reminder|
         if ((Time.now - reminder.datetime) / 60 / 60) > 1
           skipped_med_count += 1
-          reminder.checked = true
-          reminder.save
         end
       end
 
       if skipped_med_count > allowed_skipped
         current_alert = patient.alerts.build({
           alert_type: "medication",
-          reminders_skipped: skipped_med_count
+          reminders_skipped: skipped_med_count,
+          reason: "Skipped #{skipped_med_count} Meds"
         })
 
+        reminder.checked = true
+        reminder.save
         current_alert.save
       end
     end
@@ -178,23 +187,25 @@ class User < ActiveRecord::Base
   def generate_missed_appointment_alerts
     patient_population = self.patients_reminders_by_type("appointment")
     allowed_skipped = self.alert_setting.first.skipped_appointments
-    skipped_appointment_count = 0
 
     patient_population.each do |patient|
+      skipped_appointment_count = 0
+
       patient.incomplete_due_reminders.each do |reminder|
         if ((Time.now - reminder.datetime) / 60 / 60) > 1
           skipped_appointment_count += 1
-          reminder.checked = true
-          reminder.save
         end
       end
 
       if skipped_appointment_count > allowed_skipped
         current_alert = patient.alerts.build({
           alert_type: "appointment",
-          reminders_skipped: skipped_appointment_count
+          reminders_skipped: skipped_appointment_count,
+          reason: "Skipped #{skipped_appointment_count} Appointments"
         })
 
+        reminder.checked = true
+        reminder.save
         current_alert.save
       end
     end
@@ -206,23 +217,25 @@ class User < ActiveRecord::Base
   def generate_missed_input_alerts
     patient_population = self.patients_reminders_by_type("input")
     allowed_skipped = self.alert_setting.first.skipped_inputs
-    skipped_input_count = 0
 
     patient_population.each do |patient|
+      skipped_input_count = 0
+
       patient.incomplete_due_reminders.each do |reminder|
         if ((Time.now - reminder.datetime) / 60 / 60) > 1
           skipped_input_count += 1
-          reminder.checked = true
-          reminder.save
         end
       end
 
       if skipped_input_count > allowed_skipped
         current_alert = patient.alerts.build({
           alert_type: "input",
-          reminders_skipped: skipped_input_count
+          reminders_skipped: skipped_input_count,
+          reason: "Skipped #{skipped_input_count} inputs"
         })
 
+        reminder.checked = true
+        reminder.save
         current_alert.save
       end
     end
@@ -233,23 +246,25 @@ class User < ActiveRecord::Base
   def generate_missed_treatment_alerts
     patient_population = self.patients_reminders_by_type("treatment")
     allowed_skipped = self.alert_setting.first.skipped_treatments
-    skipped_treatment_count = 0
 
     patient_population.each do |patient|
+      skipped_treatment_count = 0
+
       patient.incomplete_due_reminders.each do |reminder|
         if ((Time.now - reminder.datetime) / 60 / 60) > 1
           skipped_treatment_count += 1
-          reminder.checked = true
-          reminder.save
         end
       end
 
       if skipped_treatment_count > allowed_skipped
         current_alert = patient.alerts.build({
           alert_type: "treatment",
-          reminders_skipped: skipped_treatment_count
+          reminders_skipped: skipped_treatment_count,
+          reason: "Skipped #{skipped_treatment_count} Treatments"
         })
 
+        reminder.checked = true
+        reminder.save
         current_alert.save
       end
     end
@@ -258,13 +273,47 @@ class User < ActiveRecord::Base
   end
 
 
-  # def generate_A1C_alerts
-#
-#   end
+  def generate_unhealthy_input_alerts
+    patient_population = self.patients_input_complete_unchecked_reminders
+    alert_setting = self.alert_setting
+
+    patient_population.each do |patient|
+      patient.reminders.each do |reminder|
+        if (reminder.sub_type == 'a1c')
+          unless (reminder.input.between?(alert_setting[0].a1c_min, alert_setting[0].a1c_max))
+            patient.alerts.create({
+              alert_type: 'input',
+              reason: "Unhealthy A1C: #{reminder.input} : #{reminder.id}"
+            })
+
+          end
+
+          # reminder.input_checked = true
+#           reminder.save
+        elsif (reminder.sub_type == 'weight')
+          bmi = (reminder.input/(patient.health[0].height*patient.health[0].height).to_f) * 703
+          puts "LOOK HERE YOU FUCKER!!!!!!! #{bmi}"
+          puts "WEIGHT!!!!!! #{reminder.input}"
+          puts "HEIGHT!!!!!! #{patient.health[0].height}"
+          puts "THAT*THAT!!!!!! #{(reminder.input/(patient.health[0].height).to_f)}"
+          unless (bmi.between?(alert_setting[0].bmi_min, alert_setting[0].bmi_max))
+            patient.alerts.create({
+              alert_type: 'input',
+              reason: "Unhealthy BMI: #{bmi} : #{reminder.id}"
+            })
+          end
+
+          # reminder.input_checked = true
+          reminder.save
+        end
+      end
+    end
+
+    nil
+  end
 
 
   ### Auth Methods ###
-
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)
     user.try(:is_password?, password) ? user : nil

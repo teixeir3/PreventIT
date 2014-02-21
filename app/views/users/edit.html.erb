@@ -24,6 +24,15 @@
   </div>
 
   <div class="input">
+  <label for="height">Height (inches)</label>
+    <select id="height" name="health[height]">
+      <% 24..99.times do |i| %>
+        <option value="<%= i %>"><%= i %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <div class="input">
     <label>Email Notifiations:
       <label for="on">On</label>
       <input id="on" type="radio" <%= "checked" if @user.email_notifications %> name="user[email_notifications]" value="true">
