@@ -11,16 +11,26 @@
  *= require_self
  *= require_tree .
  */
-html, body, form, h3, div, label {
+html, body, form, h3, h4, div, label, li {
   margin: 0;
   padding: 0;
   border: 0;
   font: inherit;
   vertical-align: baseline;
+  list-style-type: none;
 }
 
 input {
   background: white;
+}
+
+/*TODO: fix top bar, fix side nav bar, fix sub-content, fix everything, kills oneself before presentation*/
+.side-content {
+  display: block;
+  width: 300px;
+}
+.side-content > ul > li {
+  display: block;
 }
 
 input[type="text"],
@@ -46,7 +56,6 @@ body {
 }
 
 .logo {
-  display: block;
   float: left;
   font-size: 60px;
   font-weight: bold;
@@ -68,12 +77,15 @@ footer {
   color: gray;
   width: 100%;
   border-top: 2px solid gray;
-  position: fixed;
+  position: relative;
   bottom: 0;
+  margin-top: 20px;
 }
 
 .copyright {
-
+  float: left;
+  font-size: 15px;
+  color: gray;
   padding: 10px;
 }
 /*.header-wrap {
@@ -94,23 +106,28 @@ footer {
   border-bottom: 4px solid gray;
 }
 
+.top-bar:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
 .main-content {
   position: relative;
 }
 
-.avatar {
-  display: block;
-  float: left;
-  height: 200px;
-  width: 200px;
-}
 
 .sub-bar {
   display: block;
   float: left;
   width: 100%;
-  height: 250px;
   border-bottom: 1px solid black;
+}
+
+.sub-bar:after {
+  display: block;
+  content: "";
+  clear: both;
 }
 
 .sub-nav {
@@ -118,10 +135,37 @@ footer {
   float: right;
 }
 
-.user-info {
+.sub-nav > ul > li {
+  float: left;
+  padding: 5px;
+  border: 1px solid lightgray;
+  width: 75px;
+  text-align: center;
+}
+
+.avatar {
   display: block;
   float: left;
-  height: 250px;
+  width: 100%;
+}
+
+.avatar > img {
+  display: block;
+  height: 200px;
+  width: 200px;
+  border: 2px solid lightgray;
+  margin: 10px;
+}
+
+.user-info {
+ /* display: block;*/
+  float: left;
+  padding: 5px;
+  margin-left: 20px;
+}
+
+.user-info > ul > li {
+  float: left;
 }
 
 h2 {

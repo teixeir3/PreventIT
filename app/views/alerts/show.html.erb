@@ -1,9 +1,33 @@
-<h2>Alert Show</h2>
+
 
 <div class="side-content">
-
+  <h2>Alert Show</h2>
+  <ul>
+    <li>POOP</li>
+    <li><%= @patient.phone %></li>
+  </ul>
 </div>
 
 <div class="sub-content">
+  <div class="reminders-table">
+    <table id="incomplete_alerts" class="alert-table">
+      <label for="incomplete_alerts" class="table-label">New Alerts:</label>
+      <thead>
+        <tr>
+          <th>Reason</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>Complete?</th>
+        </tr>
+      </thead>
 
+      <tr>
+        <td><%= link_to @alert.reason, doctor_alert_url(@patient, @alert) %></td>
+        <td><%= @alert.alert_type %></td>
+        <td><%= @alert.created_at.to_formatted_s(:long_ordinal) %></td>
+        <td><%= @alert.complete_str? %></td>
+      </tr>
+
+    </table>
+  </div>
 </div>

@@ -158,7 +158,7 @@ doug.save
 
   user.save
 
-  # doug.generate_all_alerts
+  doug.generate_all_alerts
 end
 
 

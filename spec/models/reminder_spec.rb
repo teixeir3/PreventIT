@@ -15,7 +15,7 @@
 #  checked       :boolean          default(FALSE), not null
 #  complete      :boolean
 #  sub_type      :string(255)
-#  input_checked :boolean
+#  input_checked :boolean          default(FALSE), not null
 #
 
 require 'spec_helper'

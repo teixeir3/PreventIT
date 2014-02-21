@@ -29,7 +29,11 @@ class ApplicationController < ActionController::Base
   end
 
   def require_signed_out!
-    redirect_to user_url(current_user) if signed_in?
+    if signed_in? && current_user.is_doctor
+      redirect_to doctors_url(current_iser)
+    elsif signed_in?
+      redirect_to user_url(current_user)
+    end
   end
 
   def require_authority!
