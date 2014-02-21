@@ -1,36 +1,12 @@
 
-<div class="sub-bar">
-
-  <div class="avatar">
-    <%= image_tag @doctor.avatar.url(:small) %>
-  </div>
-
-  <div class="user-info">
-    <ul>
-      <li><%= link_to "Settings", edit_user_url(@doctor) %></li>
-    </ul>
-  </div>
-
-  <div class="sub-nav">
-    <ul>
-      <li><%= link_to "Alerts", doctor_alerts_url(@doctor) %></li>
-      <li>Goals</li>
-      <li>Reports</li>
-    </ul>
-  </div>
-</div>
+<%= render "sub_bar", doctor: @doctor%>
 
 <div class="page-name">
   <h2>Doctor Page</h2>
 </div>
 
 <div class="sub-content">
-  <br>
 
-  <br>
-
-  <br>
-  <br>
 
   <h3><%= @doctor.practice.name %> Patients: (Total: <%= @doctor.patients.count %>)</h3>
   <ul>

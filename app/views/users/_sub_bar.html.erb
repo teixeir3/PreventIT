@@ -1,0 +1,24 @@
+<div class="sub-bar">
+
+  <div class="avatar">
+    <%= image_tag user.avatar.url(:small) %>
+  </div>
+
+  <div class="user-info">
+    <ul>
+      <li><%= link_to "Settings", edit_user_url(user) %></li>
+    </ul>
+  </div>
+
+  <div class="sub-nav">
+    <ul>
+      <li>Dashboard</li>
+      <li><%= link_to "Reminders", user_reminders_url(user) %></li>
+      <li>Education</li>
+      <li>Treatment</li>
+      <li>Medication</li>
+      <li>Appointments</li>
+      <li>Reports</li>
+    </ul>
+  </div>
+</div>

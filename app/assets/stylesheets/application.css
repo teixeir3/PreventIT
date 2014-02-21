@@ -133,14 +133,17 @@ footer {
 .sub-nav {
   display: block;
   float: right;
+  margin-right: 200px;
 }
 
 .sub-nav > ul > li {
   float: left;
   padding: 5px;
-  border: 1px solid lightgray;
-  width: 75px;
+  border: 1px solid black;
+  width: 100px;
   text-align: center;
+  background: #7C7C7C;
+  border-radius: 5px;
 }
 
 .avatar {

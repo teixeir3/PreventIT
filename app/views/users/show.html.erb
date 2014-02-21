@@ -1,11 +1,8 @@
-<h2>Patient: <%= @user.full_name %></h2>
-<br>
-<%= image_tag @user.avatar.url(:small) %>
-<br>
-Email: <%= @user.email %> Phone: <%= @user.phone %>
-<br>
-<%= link_to "Settings", edit_user_url(@user) %>
-<br>
-<br>
+<%= render "sub_bar", user: @user%>
 
-<%= link_to "Reminders", user_reminders_url(@user) %>
+<h2>Patient: <%= @user.full_name %></h2>
+<ul>
+<li>Email: <%= @user.email %></li>
+<li>Phone: <%= @user.phone %></li>
+<li>Height: <%= @user.health[0].height %></li>
+</ul>

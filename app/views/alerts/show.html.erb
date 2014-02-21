@@ -1,4 +1,4 @@
-
+<%= render "doctors/sub_bar", doctor: @patient.doctor%>
 
 <div class="side-content">
   <h2>Alert Show</h2>
@@ -7,6 +7,8 @@
     <li><%= @patient.phone %></li>
   </ul>
 </div>
+
+
 
 <div class="sub-content">
   <div class="reminders-table">
@@ -29,5 +31,7 @@
       </tr>
 
     </table>
+
+    <%= button_to "Mark Complete", doctor_alert_complete_url(@patient.doctor_id, @alert), method: :put, class: "submit" %>
   </div>
 </div>

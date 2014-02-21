@@ -12,4 +12,13 @@ class AlertsController < ApplicationController
     @alert = Alert.find(params[:id])
     @patient = @alert.patient
   end
+
+  def mark_complete
+    @alert = Alert.find(params[:id])
+    @alert.complete = true
+
+    @alert.save
+
+    redirect_to doctor_alerts_url(@alert.patient.doctor_id, @alert)
+  end
 end

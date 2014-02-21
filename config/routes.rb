@@ -6,6 +6,8 @@ PreventIT::Application.routes.draw do
     resources :alerts, only: [:index, :edit, :update, :show]
   end
 
+  put 'doctors/:doctor_id/alerts/:id/complete' => 'alerts#mark_complete', as: 'doctor_alert_complete'
+
   resources :users, only: [:create, :new, :destroy, :show, :edit, :update] do
     resources :reminders
   end
