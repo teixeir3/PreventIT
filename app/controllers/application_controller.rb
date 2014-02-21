@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
 
   def require_signed_out!
     if signed_in? && current_user.is_doctor
-      redirect_to doctors_url(current_iser)
+      redirect_to doctors_url(current_user)
     elsif signed_in?
       redirect_to user_url(current_user)
     end
