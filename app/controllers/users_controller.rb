@@ -45,11 +45,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if @user.is_doctor
-      render :doctor_show
-    else
-      render :show
-    end
+    render :show
   end
 
 end
