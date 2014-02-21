@@ -27,7 +27,7 @@
   <label for="height">Height (inches)</label>
     <select id="height" name="health[height]">
       <% 24..99.times do |i| %>
-        <option <%= 'selected' if i == @user.health[0].height %> value="<%= i %>"><%= i %></option>
+        <option <%= 'selected' if @user.health[0] && i == @user.health[0].height %> value="<%= i %>"><%= i %></option>
       <% end %>
     </select>
   </div>
