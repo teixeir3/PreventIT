@@ -26,6 +26,7 @@ gem 'bcrypt-ruby', require: 'bcrypt'
 gem 'paperclip', "~> 3.5.3"
 gem 'aws-sdk'
 gem 'figaro'
+gem 'delayed_job_active_record'
 
 group :development do
   gem "binding_of_caller"

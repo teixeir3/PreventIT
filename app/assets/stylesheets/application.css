@@ -267,8 +267,15 @@ h3 {
   box-shadow: none;
 }
 
+.table-label {
+  font-weight: bold;
+  font-size: 30px;
+  margin-left: 100px;
+}
 table {
   border: 2px solid black;
+  margin: 30px;
+  margin-left: 100px;
 }
 
 th {

@@ -1,6 +1,11 @@
 <h2>Doctor Page</h2>
 
 <div class="sub-content">
+  <div class="doctor-nav">
+    <ul>
+      <li><%= link_to "Alerts", doctor_alerts_url(@doctor) %></li>
+    </ul>
+  </div>
 
   <br>
   <%= image_tag @doctor.avatar.url(:small) %>

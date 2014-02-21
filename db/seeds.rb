@@ -76,7 +76,7 @@ doug.save
 
 
   4.times do |j|
-    user_date = Time.now.change(year: 1999)
+    user_date = Time.now.change(year: 2014, month: 2, day: 20, hour: 10)
 
       user.reminders.build({
         datetime: user_date,
@@ -156,6 +156,8 @@ doug.save
   end
 
   user.save
+
+  # doug.generate_all_alerts
 end
 
 

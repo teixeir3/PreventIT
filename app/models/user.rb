@@ -204,6 +204,7 @@ class User < ActiveRecord::Base
           reason: "Skipped #{skipped_appointment_count} Appointments"
         })
 
+        ##### BUG!!!! CANNOT SAVE REMINDER AFTER BLOCK
         reminder.checked = true
         reminder.save
         current_alert.save
@@ -288,8 +289,8 @@ class User < ActiveRecord::Base
 
           end
 
-          # reminder.input_checked = true
-#           reminder.save
+          reminder.input_checked = true
+          reminder.save
         elsif (reminder.sub_type == 'weight')
           bmi = (reminder.input/(patient.health[0].height*patient.health[0].height).to_f) * 703
           puts "LOOK HERE YOU FUCKER!!!!!!! #{bmi}"
@@ -303,7 +304,7 @@ class User < ActiveRecord::Base
             })
           end
 
-          # reminder.input_checked = true
+          reminder.input_checked = true
           reminder.save
         end
       end
