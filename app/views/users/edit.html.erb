@@ -1,4 +1,8 @@
-
+<% if current_user.is_doctor %>
+  <%= render "doctors/sub_bar", doctor: @user%>
+<% else %>
+  <%= render "users/sub_bar", user: @user %>
+<% end %>
 
 <form class="form" action="<%= user_url(@user) %>" method="POST" enctype="multipart/form-data">
 

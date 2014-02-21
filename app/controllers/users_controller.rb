@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   # before_filter :require_doctor_status, :only => [:]
   # before_filter :require_signed_out!, :only => [:new, :create]
   before_filter :require_signed_in!, :only => [:show, :edit]
-  before_filter :require_authority!
+  before_filter :require_authority!, :only => [:show, :edit]
 
   def new
     @user = User.new
