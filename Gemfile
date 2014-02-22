@@ -27,6 +27,9 @@ gem 'paperclip', "~> 3.5.3"
 gem 'aws-sdk'
 gem 'figaro'
 gem 'delayed_job_active_record'
+gem "workless", "~> 1.1.3"
+gem "foreman"
+gem 'pg_search'
 
 group :development do
   gem "binding_of_caller"
