@@ -61,7 +61,7 @@ doug.practice = my_practice
 doug.alert_setting.build
 doug.save
 
-3.times do |i|
+1.times do |i|
   v = i+2
   user = User.new({
         email: "user#{v}",
@@ -70,6 +70,7 @@ doug.save
         phone: "(#{v}#{v}#{v}) #{v}#{v}#{v} - #{v}#{v}#{v}#{v}",
         password: "password"
         })
+
   user.health.build(height: 69)
 
   user.doctor = doug
@@ -80,85 +81,83 @@ doug.save
 
       user.reminders.build({
         datetime: user_date,
-        title: "Missed Med #{j}",
+        title: "Missed Medication #{j}",
         rem_type: "medication",
         patient_id: i,
         complete: false,
         sub_type: "aspirin"
       })
-
-      user.reminders.build({
-        datetime: user_date,
-        title: "Unhealthy A1C #{j}",
-        rem_type: "input",
-        patient_id: i,
-        complete: true,
-        sub_type: "a1c",
-        input: 5
-      })
-
-      user.reminders.build({
-        datetime: user_date,
-        title: "Healthy A1C #{j}",
-        rem_type: "input",
-        patient_id: i,
-        complete: true,
-        sub_type: "a1c",
-        input: 20
-      })
-
-      user.reminders.build({
-        datetime: user_date,
-        title: "Unhealthy Weight #{j}",
-        rem_type: "input",
-        patient_id: i,
-        complete: true,
-        sub_type: "weight",
-        input: 400
-      })
-
-      user.reminders.build({
-        datetime: user_date,
-        title: "Healthy Weight #{j}",
-        rem_type: "input",
-        patient_id: i,
-        complete: true,
-        sub_type: "weight",
-        input: 150
-      })
-
-      user.reminders.build({
-        datetime: user_date,
-        title: "Overdue Weight #{j}",
-        rem_type: "input",
-        patient_id: i,
-        complete: false,
-        sub_type: "weight"
-      })
-
-      user.reminders.build({
-        datetime: user_date,
-        title: "Overdue Foot Exam #{j}",
-        rem_type: "treatment",
-        patient_id: i,
-        complete: false,
-        sub_type: "foot exam"
-      })
-
-      # should queue 12 alerts
-      user.reminders.build({
-        datetime: user_date,
-        title: "Missed Appt #{j}",
-        rem_type: "appointment",
-        patient_id: i,
-        complete: false,
-        sub_type: "diabetes checkup"
-      })
+      #
+      # user.reminders.build({
+      #   datetime: user_date,
+      #   title: "Unhealthy A1C #{j}",
+      #   rem_type: "input",
+      #   patient_id: i,
+      #   complete: true,
+      #   sub_type: "a1c",
+      #   input: 5
+      # })
+      #
+      # user.reminders.build({
+      #   datetime: user_date,
+      #   title: "Healthy A1C #{j}",
+      #   rem_type: "input",
+      #   patient_id: i,
+      #   complete: true,
+      #   sub_type: "a1c",
+      #   input: 20
+      # })
+      #
+      # user.reminders.build({
+      #   datetime: user_date,
+      #   title: "Unhealthy Weight #{j}",
+      #   rem_type: "input",
+      #   patient_id: i,
+      #   complete: true,
+      #   sub_type: "weight",
+      #   input: 400
+      # })
+      #
+      # user.reminders.build({
+      #   datetime: user_date,
+      #   title: "Healthy Weight #{j}",
+      #   rem_type: "input",
+      #   patient_id: i,
+      #   complete: true,
+      #   sub_type: "weight",
+      #   input: 150
+      # })
+      #
+      # user.reminders.build({
+      #   datetime: user_date,
+      #   title: "Overdue Weight #{j}",
+      #   rem_type: "input",
+      #   patient_id: i,
+      #   complete: false,
+      #   sub_type: "weight"
+      # })
+      #
+      # user.reminders.build({
+      #   datetime: user_date,
+      #   title: "Overdue Foot Exam #{j}",
+      #   rem_type: "treatment",
+      #   patient_id: i,
+      #   complete: false,
+      #   sub_type: "foot exam"
+      # })
+      #
+      # # should queue 12 alerts
+      # user.reminders.build({
+      #   datetime: user_date,
+      #   title: "Missed Appt #{j}",
+      #   rem_type: "appointment",
+      #   patient_id: i,
+      #   complete: false,
+      #   sub_type: "diabetes checkup"
+      # })
   end
 
   user.save
-
-  doug.generate_all_alerts
 end
-
+doug.generate_all_alerts
 

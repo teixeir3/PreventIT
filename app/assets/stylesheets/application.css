@@ -11,7 +11,7 @@
  *= require_self
  *= require_tree .
  */
-html, body, form, h3, h4, div, label, li {
+html, body, form, h2, h3, h4, div, label, li {
   margin: 0;
   padding: 0;
   border: 0;
@@ -25,13 +25,6 @@ input {
 }
 
 /*TODO: fix top bar, fix side nav bar, fix sub-content, fix everything, kills oneself before presentation*/
-.side-content {
-  display: block;
-  width: 300px;
-}
-.side-content > ul > li {
-  display: block;
-}
 
 input[type="text"],
 input[type="email"],
@@ -66,6 +59,41 @@ h1 {
   display: block;
   float: left;
 }
+
+h2 {
+  display: block;
+  float: left;
+  font-size: 30px;
+  width: 100%;
+  font-weight: bold;
+}
+
+h3 {
+  display: block;
+  font-size: 20px;
+}
+
+.side-content {
+  display: block;
+  width: 200px;
+  height: 100%;
+  float: left;
+  margin-top: 40px;
+  padding: 40px;
+}
+.side-content > ul > li {
+  display: block;
+  float: left;
+  width: 100%;
+}
+
+.sub-content {
+  display: block;
+  float: left;
+  width: 700px;
+  margin-top: 40px;
+}
+
 
 button:hover {
   cursor: pointer;
@@ -169,24 +197,6 @@ footer {
 
 .user-info > ul > li {
   float: left;
-}
-
-h2 {
-  display: block;
-  float: left;
-  font-size: 40px;
-  width: 100%;
-}
-
-h3 {
-  display: block;
-  font-size: 25px;
-}
-
-.sub-content {
-  display: block;
-  float: left;
-  width: 100%;
 }
 
 

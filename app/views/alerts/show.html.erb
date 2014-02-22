@@ -3,7 +3,7 @@
 <div class="side-content">
   <h2>Alert Show</h2>
   <ul>
-    <li>POOP</li>
+    <li><%= link_to @patient.full_name, user_url(@patient) %></li>
     <li><%= @patient.phone %></li>
   </ul>
 </div>

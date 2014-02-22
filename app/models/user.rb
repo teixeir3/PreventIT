@@ -164,16 +164,21 @@ class User < ActiveRecord::Base
     nil
   end
 
+  handle_asynchronously :generate_all_alerts
+
+  # TODO: Have TA check this on Monday // Make this run on all patients instead of patient's by doctor
   def generate_missed_medication_alerts
     patient_population = self.patients_reminders_by_type("medication")
 
     patient_population.each do |patient|
       skipped_med_count = 0
       allowed_skipped = self.alert_setting.first.skipped_meds
+      reminder_ids = []
 
       patient.incomplete_due_reminders.each do |reminder|
         if ((Time.now - reminder.datetime) / 60 / 60) > 1
           skipped_med_count += 1
+          reminder_ids << reminder.id
         end
 
         if skipped_med_count > allowed_skipped
@@ -185,8 +190,11 @@ class User < ActiveRecord::Base
             reason: "Skipped #{skipped_med_count} Meds"
           })
 
-          reminder.checked = true
-          reminder.save
+          patient.reminders.find(reminder_ids).each do |checked_reminder|
+            checked_reminder.checked = true
+            checked_reminder.save
+          end
+
           current_alert.save
         end
       end
@@ -201,10 +209,12 @@ class User < ActiveRecord::Base
     patient_population.each do |patient|
       skipped_appointment_count = 0
       allowed_skipped = self.alert_setting.first.skipped_appointments
+      reminder_ids = []
 
       patient.incomplete_due_reminders.each do |reminder|
         if ((Time.now - reminder.datetime) / 60 / 60) > 1
           skipped_appointment_count += 1
+          reminder_ids << reminder.id
         end
 
         if skipped_appointment_count > allowed_skipped
@@ -216,9 +226,11 @@ class User < ActiveRecord::Base
             reason: "Skipped #{skipped_appointment_count} Appointments"
           })
 
-          ##### BUG!!!! CANNOT SAVE REMINDER AFTER BLOCK
-          reminder.checked = true
-          reminder.save
+          patient.reminders.find(reminder_ids).each do |checked_reminder|
+            checked_reminder.checked = true
+            checked_reminder.save
+          end
+
           current_alert.save
         end
       end
@@ -234,10 +246,12 @@ class User < ActiveRecord::Base
     patient_population.each do |patient|
       skipped_input_count = 0
       allowed_skipped = self.alert_setting.first.skipped_inputs
+      reminder_ids = []
 
       patient.incomplete_due_reminders.each do |reminder|
         if ((Time.now - reminder.datetime) / 60 / 60) > 1
           skipped_input_count += 1
+          reminder_ids << reminder.id
         end
 
         if skipped_input_count > allowed_skipped
@@ -249,8 +263,11 @@ class User < ActiveRecord::Base
             reason: "Skipped #{skipped_input_count} inputs"
           })
 
-          reminder.checked = true
-          reminder.save
+          patient.reminders.find(reminder_ids).each do |checked_reminder|
+            checked_reminder.checked = true
+            checked_reminder.save
+          end
+
           current_alert.save
         end
       end
@@ -265,10 +282,12 @@ class User < ActiveRecord::Base
     patient_population.each do |patient|
       skipped_treatment_count = 0
       allowed_skipped = self.alert_setting.first.skipped_treatments
+      reminder_ids = []
 
       patient.incomplete_due_reminders.each do |reminder|
         if ((Time.now - reminder.datetime) / 60 / 60) > 1
           skipped_treatment_count += 1
+          reminder_ids << reminder.id
         end
 
         if skipped_treatment_count > allowed_skipped
@@ -280,8 +299,11 @@ class User < ActiveRecord::Base
             reason: "Skipped #{skipped_treatment_count} Treatments"
           })
 
-          reminder.checked = true
-          reminder.save
+          patient.reminders.find(reminder_ids).each do |checked_reminder|
+            checked_reminder.checked = true
+            checked_reminder.save
+          end
+
           current_alert.save
         end
       end
