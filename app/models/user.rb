@@ -153,8 +153,15 @@ class User < ActiveRecord::Base
 
   ### Alert Methods (for doctor)###
 
+  def self.generate_all_alerts
+    self.where(is_doctor: true).joins(:patients).includes(:patients).each do |doctor|
+      doctor.generate_doctor_alerts
+    end
+  end
 
-  def generate_all_alerts
+  # handle_asynchronously :generate_all_alerts
+
+  def generate_doctor_alerts
     self.generate_missed_medication_alerts
     self.generate_missed_appointment_alerts
     self.generate_missed_input_alerts
@@ -164,7 +171,7 @@ class User < ActiveRecord::Base
     nil
   end
 
-  handle_asynchronously :generate_all_alerts
+  # handle_asynchronously :generate_doctor_alerts
 
   # TODO: Have TA check this on Monday // Make this run on all patients instead of patient's by doctor
   def generate_missed_medication_alerts
