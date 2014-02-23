@@ -6,8 +6,9 @@
 
   <div class="user-info">
     <ul>
-      <li><%= link_to "Settings", edit_user_url(doctor) %></li>
       <li><%= "Dr. " + doctor.full_name %></li>
+      <li><%= link_to "Settings", edit_user_url(doctor) %></li>
+      <li><%= link_to "Search Patients", search_url %></li>
     </ul>
   </div>
 

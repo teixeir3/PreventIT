@@ -113,6 +113,8 @@ class User < ActiveRecord::Base
       dependent: :destroy
     )
 
+  include PgSearch
+  pg_search_scope :search_on_name, against: [:first_name, :last_name, :email]
 
 
   def full_name

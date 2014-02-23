@@ -2,9 +2,9 @@ PreventIT::Application.routes.draw do
   # get 'doctors/new', to: 'users#new_doctor'
 #   post 'doctors', to: 'users#create_doctor'
 
-  resources :doctors do
+  resources :doctors
 
-  end
+  get '/search' => 'pages#search', as: 'search'
 
   get 'alerts/completed' => 'alerts#completed', as: 'alerts_completed'
 

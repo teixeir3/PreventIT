@@ -1,0 +1,33 @@
+<%= render "doctors/sub_bar", doctor: current_user%>
+
+<main class="group">
+  <div class="side-content">
+
+    <div class="title">
+      <h2>Search Results</h2>
+    </div>
+
+    <%= render "form" %>
+  </div>
+
+  <div class="sub-content">
+
+    <% @results.each do |result| %>
+      <% if result.is_doctor %>
+        <%= link_to result.full_name, doctor_url(result) %>
+      <% else %>
+        <%= link_to result.full_name, user_url(result) %>
+      <% end %>
+    <% end %>
+    <br>
+
+    <% if @results.empty? %>
+      <p>No Results Found</p>
+    <% else %>
+      <%= paginate @results %>
+    <% end %>
+    <br>
+
+    <%#= render @results.map(&:searchable) #%>
+  </div>
+</main>

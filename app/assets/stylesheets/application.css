@@ -211,8 +211,8 @@ footer {
 
 .avatar > img {
   display: block;
-  height: 200px;
-  width: 200px;
+  height: 100px;
+  width: 100px;
   border: 2px solid lightgray;
   margin: 10px;
 }
@@ -226,6 +226,7 @@ footer {
 
 .user-info > ul > li {
   float: left;
+  padding: 5px 10px;
 }
 
 
@@ -323,6 +324,17 @@ footer {
   padding: 5px 10px;
   width: 250px;
   border-radius: 5px;
+}
+
+.search > .input > input {
+  border: 2px solid #000;
+  padding: 5px 10px;
+  width: 150px;
+  border-radius: 5px;
+}
+
+.search {
+  padding-left: 20px;
 }
 
 .radio-group {
