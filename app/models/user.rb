@@ -170,21 +170,26 @@ class User < ActiveRecord::Base
   ### Alert Methods (for doctor)###
 
   def self.generate_all_alerts
+    new_alert_count = 0
+
     self.where(is_doctor: true).joins(:patients).includes(:patients).each do |doctor|
-      doctor.generate_doctor_alerts
+      new_alert_count += doctor.generate_doctor_alerts
     end
+
+    new_alert_count
   end
 
   # handle_asynchronously :generate_all_alerts
 
   def generate_doctor_alerts
-    self.generate_missed_medication_alerts
-    self.generate_missed_appointment_alerts
-    self.generate_missed_input_alerts
-    self.generate_missed_treatment_alerts
-    self.generate_unhealthy_input_alerts
+    new_alert_count = 0
+    new_alert_count += self.generate_missed_medication_alerts
+    new_alert_count += self.generate_missed_appointment_alerts
+    new_alert_count += self.generate_missed_input_alerts
+    new_alert_count += self.generate_missed_treatment_alerts
+    new_alert_count += self.generate_unhealthy_input_alerts
 
-    nil
+    new_alert_count
   end
 
   # handle_asynchronously :generate_doctor_alerts
@@ -192,6 +197,7 @@ class User < ActiveRecord::Base
   # TODO: Have TA check this on Monday // Make this run on all patients instead of patient's by doctor
   def generate_missed_medication_alerts
     patient_population = self.patients_reminders_by_type("medication")
+    new_alert_count = 0
 
     patient_population.each do |patient|
       skipped_med_count = 0
@@ -218,16 +224,17 @@ class User < ActiveRecord::Base
             checked_reminder.save
           end
 
-          current_alert.save
+          new_alert_count += 1 if current_alert.save
         end
       end
     end
 
-    nil
+    new_alert_count
   end
 
   def generate_missed_appointment_alerts
     patient_population = self.patients_reminders_by_type("appointment")
+    new_alert_count = 0
 
     patient_population.each do |patient|
       skipped_appointment_count = 0
@@ -254,17 +261,18 @@ class User < ActiveRecord::Base
             checked_reminder.save
           end
 
-          current_alert.save
+          new_alert_count += 1 if current_alert.save
         end
       end
     end
 
-    nil
+    new_alert_count
   end
 
   # Tested
   def generate_missed_input_alerts
     patient_population = self.patients_reminders_by_type("input")
+    new_alert_count = 0
 
     patient_population.each do |patient|
       skipped_input_count = 0
@@ -291,16 +299,17 @@ class User < ActiveRecord::Base
             checked_reminder.save
           end
 
-          current_alert.save
+          new_alert_count += 1 if current_alert.save
         end
       end
     end
 
-    nil
+    new_alert_count
   end
 
   def generate_missed_treatment_alerts
     patient_population = self.patients_reminders_by_type("treatment")
+    new_alert_count = 0
 
     patient_population.each do |patient|
       skipped_treatment_count = 0
@@ -327,18 +336,19 @@ class User < ActiveRecord::Base
             checked_reminder.save
           end
 
-          current_alert.save
+          new_alert_count += 1 if current_alert.save
         end
       end
     end
 
-    nil
+    new_alert_count
   end
 
 
   def generate_unhealthy_input_alerts
     patient_population = self.patients_input_complete_unchecked_reminders
     alert_setting = self.alert_setting
+    new_alert_count = 0
 
     patient_population.each do |patient|
       patient.reminders.each do |reminder|
@@ -361,6 +371,8 @@ class User < ActiveRecord::Base
               alert_type: 'input',
               reason: "Unhealthy BMI: #{bmi} : #{reminder.id}"
             })
+
+            new_alert_count
           end
 
           reminder.input_checked = true
@@ -369,7 +381,7 @@ class User < ActiveRecord::Base
       end
     end
 
-    nil
+    new_alert_count
   end
 
 
