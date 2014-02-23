@@ -114,7 +114,13 @@ class User < ActiveRecord::Base
     )
 
   include PgSearch
-  pg_search_scope :search_on_name, against: [:first_name, :last_name, :email]
+  pg_search_scope :search_on_name,
+                  against: [:first_name, :last_name, :email],
+                  using: {
+                    :trigram => {
+                      :threshold => 0.1
+                    }
+                  }
 
 
   def full_name

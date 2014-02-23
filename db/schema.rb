@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140221032604) do
+ActiveRecord::Schema.define(:version => 20140223202403) do
 
   create_table "alert_settings", :force => true do |t|
     t.integer  "doctor_id",                              :null => false
