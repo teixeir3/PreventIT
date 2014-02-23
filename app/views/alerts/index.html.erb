@@ -13,7 +13,10 @@
   <div class="sub-content">
    <label for="alerts" class="table-label">New Alerts:</label>
 
+   <p><%= paginate @alerts %></p>
+
    <%= render "list", alerts: @alerts %>
+   <p><%= paginate @alerts %></p>
   </div>
 
 </main>

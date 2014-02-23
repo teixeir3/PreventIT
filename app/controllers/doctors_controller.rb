@@ -24,7 +24,8 @@ class DoctorsController < ApplicationController
   end
 
   def show
-    @doctor = User.find(params[:id])
+    @doctor = User.includes(:patients).find(params[:id])
+    @patients = current_user.patients.page(params[:page]).per(10)
     render :show
   end
 end

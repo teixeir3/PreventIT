@@ -7,18 +7,23 @@
     <div class="title">
       <h2>Doctor Page</h2>
     </div>
+
+    <a href="<%= new_user_url %>">Add New Patient</a>
   </div>
 
   <div class="sub-content">
 
-    <a href="<%= new_user_url %>">Add New Patient</a>
     <h3><%= @doctor.practice.name %> Patients: (Total: <%= @doctor.patients.count %>)</h3>
+
+    <p><%= paginate @patients %></p>
+
     <ul>
-    <% current_user.patients_by_last_name.each do |patient| %>
-      <li><%= link_to patient.full_name_by_last, user_url(patient) %></li>
-    <% end %>
+      <% current_user.patients_by_last_name.each do |patient| %>
+        <li><%= link_to patient.full_name_by_last, user_url(patient) %></li>
+      <% end %>
     </ul>
 
+    <p><%= paginate @patients %></p>
 
   </div>
 

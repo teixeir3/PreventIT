@@ -1,4 +1,4 @@
-<div class="sub-bar">
+<div class="sub-bar group">
 
   <div class="avatar">
     <%= image_tag user.avatar.url(:small) %>
@@ -7,6 +7,7 @@
   <div class="user-info">
     <ul>
       <li><%= link_to "Settings", edit_user_url(user) %></li>
+      <li><%= user.full_name %></li>
     </ul>
   </div>
 

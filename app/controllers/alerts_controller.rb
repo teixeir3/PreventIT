@@ -4,12 +4,12 @@ class AlertsController < ApplicationController
 
   def index
     @doctor = current_user
-    @alerts = @doctor.incomplete_alerts
+    @alerts = @doctor.incomplete_alerts.page(params[:page]).per(20)
   end
 
   def completed
     @doctor = current_user
-    @alerts = @doctor.complete_alerts
+    @alerts = @doctor.complete_alerts.page(params[:page]).per(20)
   end
 
   def show

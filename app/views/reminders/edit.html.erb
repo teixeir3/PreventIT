@@ -1,3 +1,9 @@
+<% if current_user.is_doctor %>
+  <%= render "doctors/sub_bar", doctor: current_user%>
+<% else %>
+  <%= render "users/sub_bar", user: current_user%>
+<% end %>
+
 <main class="group">
   <div class="side-content">
     <div class="title">

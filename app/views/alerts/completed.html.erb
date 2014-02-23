@@ -1,11 +1,15 @@
-<div class="side-content">
-  <h2>Alerts:</h2>
+<%= render "doctors/sub_bar", doctor: @doctor%>
 
-  <%= link_to "New Alerts", alerts_url %>
-</div>
+<main class="group">
+  <div class="side-content">
+    <h2>Alerts:</h2>
 
-<div class="sub-content">
-  <label for="alerts" class="table-label">Old Alerts:</label>
+    <%= link_to "New Alerts", alerts_url %>
+  </div>
 
-  <%= render "list", alerts: @alerts %>
-</div>
+  <div class="sub-content">
+    <label for="alerts" class="table-label">Old Alerts:</label>
+
+    <%= render "list", alerts: @alerts %>
+  </div>
+</main>
