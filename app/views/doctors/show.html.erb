@@ -14,8 +14,8 @@
     <a href="<%= new_user_url %>">Add New Patient</a>
     <h3><%= @doctor.practice.name %> Patients: (Total: <%= @doctor.patients.count %>)</h3>
     <ul>
-    <% current_user.patients.each do |patient| %>
-      <li><%= link_to patient.email, user_url(patient) %></li>
+    <% current_user.patients_by_last_name.each do |patient| %>
+      <li><%= link_to patient.full_name_by_last, user_url(patient) %></li>
     <% end %>
     </ul>
 

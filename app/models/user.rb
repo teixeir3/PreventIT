@@ -119,6 +119,14 @@ class User < ActiveRecord::Base
     return "#{self.first_name} #{self.last_name}"
   end
 
+  def full_name_by_last
+    return "#{self.last_name}, #{self.first_name}"
+  end
+
+  def patients_by_last_name
+    self.patients.order(:last_name, :first_name)
+  end
+
   ### Reminder Methods ###
 
 
