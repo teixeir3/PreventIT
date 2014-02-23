@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, :styles => {
          :big => "600x600>",
-         :small => "200x200>"
+         :small => "100x100>"
        },
        :default_url => "/assets/small/missing.png"
 

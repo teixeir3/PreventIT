@@ -1,0 +1,11 @@
+<div class="side-content">
+  <h2>Alerts:</h2>
+
+  <%= link_to "New Alerts", alerts_url %>
+</div>
+
+<div class="sub-content">
+  <label for="alerts" class="table-label">Old Alerts:</label>
+
+  <%= render "list", alerts: @alerts %>
+</div>

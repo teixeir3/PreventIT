@@ -11,6 +11,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.health.build()
+
     if current_user.is_doctor
       @user.doctor_id = current_user.id
     end
@@ -18,7 +20,7 @@ class UsersController < ApplicationController
     if @user.save
       sign_in(@user) unless current_user.is_doctor
       if current_user.is_doctor
-        render :doctor_show
+        redirect_to doctor_url(current_user.id)
       else
         render :show
       end

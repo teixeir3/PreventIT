@@ -1,8 +1,17 @@
 <%= render "sub_bar", user: @user%>
 
-<h2>Patient: <%= @user.full_name %></h2>
-<ul>
-<li>Email: <%= @user.email %></li>
-<li>Phone: <%= @user.phone %></li>
-<li>Height: <%= @user.health[0].height %></li>
-</ul>
+<main class="group">
+  <div class="side-content">
+    <div class="title">
+      <h2>Patient: <%= @user.full_name %></h2>
+    </div>
+  </div>
+
+  <div class="sub-content">
+    <ul>
+      <li>Email: <%= @user.email %></li>
+      <li>Phone: <%= @user.phone %></li>
+      <li>Height: <%= @user.health[0].height %></li>
+    </ul>
+  </div>
+</main>

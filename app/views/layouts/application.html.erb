@@ -7,10 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <header class="top-bar">
+  <header class="top-bar group">
 
       <div class="logo">
-        PreventIT
         <img src="/assets/preventIT_final/preventIT_267x193.png">
       </div>
 
@@ -24,12 +23,12 @@
            <% else %>
              <%= link_to "#{current_user.full_name}", user_url(current_user) %>
            <% end %>
-           <%= button_to "Sign Out", session_url, :method => :delete %>
+           <%= button_to "Sign Out", session_url, :method => :delete, class: "button" %>
 
          <% else %>
-           <%= link_to "Doctor Sign Up", new_doctor_url %>
-           <%= link_to "Patient Sign Up", new_user_url %>
-           <%= link_to "Sign In", new_session_url %>
+           <%= link_to "Doctor Sign Up", new_doctor_url%>
+           <%= link_to "Patient Sign Up", new_user_url%>
+           <%= link_to "Sign In", new_session_url, class: "button" %>
 
          <% end %>
       </div>
@@ -41,7 +40,7 @@
 
 </body>
 
-<footer>
+<footer class="group">
   <div class="copyright">
     <h4>© Ayos Informatics, LLC 2014</h4>
   </div>

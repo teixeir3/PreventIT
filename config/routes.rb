@@ -3,10 +3,17 @@ PreventIT::Application.routes.draw do
 #   post 'doctors', to: 'users#create_doctor'
 
   resources :doctors do
-    resources :alerts, only: [:index, :edit, :update, :show]
+
   end
 
-  put 'doctors/:doctor_id/alerts/:id/complete' => 'alerts#mark_complete', as: 'doctor_alert_complete'
+  get 'alerts/completed' => 'alerts#completed', as: 'alerts_completed'
+
+  resources :alerts, only: [:index, :edit, :update, :show]
+
+
+  put 'alert/:id/complete' => 'alerts#mark_complete', as: 'alert_complete'
+
+  get 'users/:user_id/reminders/completed' => 'reminders#completed', as: 'reminders_completed'
 
   resources :users, only: [:create, :new, :destroy, :show, :edit, :update] do
     resources :reminders

@@ -5,12 +5,13 @@ class RemindersController < ApplicationController
   def index
     @user = User.find(params[:user_id])
 
-    @reminders = @user.reminders.all
+    @reminders = @user.due_reminders
+  end
 
-    @complete_reminders = @user.reminders.where(complete: true)
-    @incomplete_reminders = @user.reminders.where(complete: false)
+  def reminders_completed
+    @user = User.find(params[:user_id])
 
-    @due_reminders = @user.due_reminders
+    @reminders = @reminders = @user.reminders.where(complete: true)
   end
 
   def new

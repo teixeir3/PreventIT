@@ -1,0 +1,28 @@
+<div class="reminders-table">
+  <table id="reminders">
+    <thead>
+      <tr>
+        <th>Due</th>
+        <th>Overdue By</th>
+        <th>Title</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+
+    <% @reminders.each do |reminder| %>
+    <tr>
+      <% reminder.attributes.select{|attr| attr =~ /datetime|title|rem_type/}.each do |attr_name, attr_val| %>
+        <% if attr_name == "datetime" %>
+          <td><%= attr_val.to_formatted_s(:long_ordinal) %></td>
+          <td><%= reminder.overdue_by_str %></td>
+        <% elsif attr_name == "title" %>
+          <td><%=  link_to attr_val, edit_user_reminder_url(@user.id, reminder) %></td>
+        <% else %>
+          <td><%= attr_val %></td>
+        <% end %>
+      <% end %>
+    </tr>
+    <% end %>
+
+  </table>
+</div>

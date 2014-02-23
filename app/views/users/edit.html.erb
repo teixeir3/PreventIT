@@ -4,50 +4,58 @@
   <%= render "users/sub_bar", user: @user %>
 <% end %>
 
-<form class="form" action="<%= user_url(@user) %>" method="POST" enctype="multipart/form-data">
-
-  <h3>Settings:</h3>
-  <br>
-  <br>
-  <input type="hidden" name="_method" value="PUT">
-  <%= auth_token %>
-
-  <div class="input">
-    <label for="avatar">Photo:</label>
-    <input id="avatar" type="file" name="user[avatar]" value="">
+<main class="group">
+  <div class="side-content">
+    <div class="title">
+      <h2>User Settings</h2>
+    </div>
   </div>
+  <div class="sub-content">
+    <form class="form" action="<%= user_url(@user) %>" method="POST" enctype="multipart/form-data">
 
-  <div class="input">
-    <label for="first-name">First Name</label>
-    <input id="first-name" type="text" name="user[first_name]" value="<%= @user.first_name %>">
+      <h3>Settings:</h3>
+
+      <input type="hidden" name="_method" value="PUT">
+      <%= auth_token %>
+
+      <div class="input">
+        <label for="avatar">Photo:</label>
+        <input id="avatar" type="file" name="user[avatar]" value="">
+      </div>
+
+      <div class="input">
+        <label for="first-name">First Name</label>
+        <input id="first-name" type="text" name="user[first_name]" value="<%= @user.first_name %>">
+      </div>
+
+      <div class="input">
+        <label for="last-name">Last Name</label>
+        <input id="last-name" type="text" name="user[last_name]" value="<%= @user.last_name %>">
+      </div>
+
+      <div class="input">
+      <label for="height">Height (inches)</label>
+        <select id="height" name="health[height]">
+          <% 24..99.times do |i| %>
+            <option <%= 'selected' if @user.health[0] && i == @user.health[0].height %> value="<%= i %>"><%= i %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <div class="input">
+        <label>Email Notifiations:
+          <label for="on">On</label>
+          <input id="on" type="radio" <%= "checked" if @user.email_notifications %> name="user[email_notifications]" value="true">
+
+
+          <label for="off">Off</label>
+            <input id="off" type="radio" <%= "checked" unless @user.email_notifications %> name="user[email_notifications]" value="false">
+        </label>
+      </div>
+
+      <div class="submit">
+        <input type="submit" value="Save Settings">
+      </div>
+    </form>
   </div>
-
-  <div class="input">
-    <label for="last-name">Last Name</label>
-    <input id="last-name" type="text" name="user[last_name]" value="<%= @user.last_name %>">
-  </div>
-
-  <div class="input">
-  <label for="height">Height (inches)</label>
-    <select id="height" name="health[height]">
-      <% 24..99.times do |i| %>
-        <option <%= 'selected' if @user.health[0] && i == @user.health[0].height %> value="<%= i %>"><%= i %></option>
-      <% end %>
-    </select>
-  </div>
-
-  <div class="input">
-    <label>Email Notifiations:
-      <label for="on">On</label>
-      <input id="on" type="radio" <%= "checked" if @user.email_notifications %> name="user[email_notifications]" value="true">
-
-
-      <label for="off">Off</label>
-        <input id="off" type="radio" <%= "checked" unless @user.email_notifications %> name="user[email_notifications]" value="false">
-    </label>
-  </div>
-
-  <div class="submit">
-    <input type="submit" value="Save Settings">
-  </div>
-</form>
+</main>

@@ -1,48 +1,52 @@
-<h2>Reminder Show</h2>
-
-
-
-
-
-<form class="form" action="<%= user_reminder_url(@reminder.patient_id, @reminder) %>" method="POST">
-
-  <h3>Title: <%= @reminder.title %></h3>
-
-  <input type="hidden" name="_method" value="PUT">
-
-  <%= auth_token %>
-
-  <div class="input">
-    <label for="input">Inpute Value:</label>
-    <input type="number"
-      id="input"
-      name="reminder[input]"
-      min="0.00"
-      step="0.1"
-      value="<%= @reminder.input %>">
-  </div>
-
-
-  <div class="input">
-    <label for="note">Enter a Note:</label>
-    <textarea id="note" name="reminder[note]"><%= @reminder.note %></textarea>
-  </div>
-
-
-  <div class="radio-group">
-    Did you complete your task?
-    <div class="radio-entry">
-      <label for="complete">Yes</label>
-      <input id="complete" type="radio" name="reminder[complete]" value="true">
-    </div>
-
-    <div class="radio-entry">
-      <label for="incomplete">No</label>
-      <input id="incomplete" type="radio" name="reminder[complete]" value="false">
+<main class="group">
+  <div class="side-content">
+    <div class="title">
+      <h2>Reminders</h2>
     </div>
   </div>
 
-  <div class="submit">
-    <input type="submit" value="Save">
+  <div class="sub-content">
+    <form class="form" action="<%= user_reminder_url(@reminder.patient_id, @reminder) %>" method="POST">
+
+      <h3>Title: <%= @reminder.title %></h3>
+
+      <input type="hidden" name="_method" value="PUT">
+
+      <%= auth_token %>
+
+      <div class="input">
+        <label for="input">Inpute Value:</label>
+        <input type="number"
+          id="input"
+          name="reminder[input]"
+          min="0.00"
+          step="0.1"
+          value="<%= @reminder.input %>">
+      </div>
+
+
+      <div class="input">
+        <label for="note">Enter a Note:</label>
+        <textarea id="note" name="reminder[note]"><%= @reminder.note %></textarea>
+      </div>
+
+
+      <div class="radio-group">
+        Did you complete your task?
+        <div class="radio-entry">
+          <label for="complete">Yes</label>
+          <input id="complete" type="radio" name="reminder[complete]" value="true">
+        </div>
+
+        <div class="radio-entry">
+          <label for="incomplete">No</label>
+          <input id="incomplete" type="radio" name="reminder[complete]" value="false">
+        </div>
+      </div>
+
+      <div class="submit">
+        <input type="submit" value="Save">
+      </div>
+    </form>
   </div>
-</form>
+</main>

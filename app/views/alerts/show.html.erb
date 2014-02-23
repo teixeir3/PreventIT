@@ -1,37 +1,43 @@
 <%= render "doctors/sub_bar", doctor: @patient.doctor%>
 
-<div class="side-content">
-  <h2>Alert Show</h2>
-  <ul>
-    <li><%= link_to @patient.full_name, user_url(@patient) %></li>
-    <li><%= @patient.phone %></li>
-  </ul>
-</div>
+<main class="group">
 
+  <div class="side-content">
+    <div class="title">
+      <h2>Alert Show</h2>
+    </div>
 
-
-<div class="sub-content">
-  <div class="reminders-table">
-    <table id="incomplete_alerts" class="alert-table">
-      <label for="incomplete_alerts" class="table-label">New Alerts:</label>
-      <thead>
-        <tr>
-          <th>Reason</th>
-          <th>Type</th>
-          <th>Date</th>
-          <th>Complete?</th>
-        </tr>
-      </thead>
-
-      <tr>
-        <td><%= link_to @alert.reason, doctor_alert_url(@patient, @alert) %></td>
-        <td><%= @alert.alert_type %></td>
-        <td><%= @alert.created_at.to_formatted_s(:long_ordinal) %></td>
-        <td><%= @alert.complete_str? %></td>
-      </tr>
-
-    </table>
-
-    <%= button_to "Mark Complete", doctor_alert_complete_url(@patient.doctor_id, @alert), method: :put, class: "submit" %>
+    <ul>
+      <li><%= link_to @patient.full_name, user_url(@patient) %></li>
+      <li><%= @patient.phone %></li>
+    </ul>
   </div>
-</div>
+
+
+
+  <div class="sub-content">
+    <div class="reminders-table">
+      <table id="incomplete_alerts" class="alert-table">
+        <label for="incomplete_alerts" class="table-label">New Alerts:</label>
+        <thead>
+          <tr>
+            <th>Reason</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Complete?</th>
+          </tr>
+        </thead>
+
+        <tr>
+          <td><%= @alert.reason %></td>
+          <td><%= @alert.alert_type %></td>
+          <td><%= @alert.created_at.to_formatted_s(:long_ordinal) %></td>
+          <td><%= @alert.complete_str? %></td>
+        </tr>
+
+      </table>
+
+      <%= button_to "Mark Complete", alert_complete_url(@alert), method: :put, class: "button" %>
+    </div>
+  </div>
+</main>

@@ -3,9 +3,13 @@ class AlertsController < ApplicationController
   before_filter :require_doctor_authority!
 
   def index
-    @doctor = User.find(params[:doctor_id])
-    @complete_alerts = @doctor.complete_alerts
-    @incomplete_alerts = @doctor.incomplete_alerts
+    @doctor = current_user
+    @alerts = @doctor.incomplete_alerts
+  end
+
+  def completed
+    @doctor = current_user
+    @alerts = @doctor.complete_alerts
   end
 
   def show
@@ -19,6 +23,6 @@ class AlertsController < ApplicationController
 
     @alert.save
 
-    redirect_to doctor_alerts_url(@alert.patient.doctor_id, @alert)
+    redirect_to alerts_url
   end
 end

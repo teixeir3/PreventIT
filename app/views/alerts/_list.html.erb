@@ -1,0 +1,26 @@
+
+<div class="reminders-table">
+  <table id="alerts" class="alert-table">
+
+    <thead>
+      <tr>
+        <th>Reason</th>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Patient</th>
+        <th>Complete?</th>
+      </tr>
+    </thead>
+
+    <% alerts.each do |alert| %>
+      <tr>
+        <td><%= link_to alert.reason, alert_url(alert) %></td>
+        <td><%= alert.alert_type %></td>
+        <td><%= alert.created_at.to_formatted_s(:long_ordinal) %></td>
+        <td><%= link_to alert.patient.full_name, user_url(alert.patient) %></td>
+        <td><%= alert.complete_str? %></td>
+      </tr>
+    <% end %>
+
+  </table>
+</div>
