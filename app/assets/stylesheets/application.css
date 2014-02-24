@@ -14,7 +14,7 @@
 
 /* RESETS */
 
-html, body, form, h2, h3, h4, div, label, ul, li, header, footer, main,
+html, body, form, h1, h2, h3, h4, div, label, ul, li, header, footer, main,
 table, thead, tbody, tr, th, td, a{
   margin: 0;
   padding: 0;
@@ -53,7 +53,7 @@ textarea {
 
 body {
   font-family: sans-serif;
-  background: #EEEEEF;
+  background: #e4e4e5;
   font-size: 16px;
   /*min-width: 945px;*/
   min: 945px;
@@ -75,11 +75,20 @@ header {
   border-bottom: 4px solid gray;
 }
 .top-bar {
-  width: 945px;
-  margin: auto;
+  width: auto;
+/*  width: 945px;*/
+/*  margin: auto;*/
 /*  border-bottom: 4px solid gray;*/
 }
 
+.tagline {
+  float: left;
+  font-size: 24px;
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  color: #75bb59;
+}
 main {
   margin: auto;
   background: white;
@@ -91,9 +100,10 @@ main {
 
 
 .sub-bar {
-  width: 945px;
+  width: 905px;
   margin: auto;
   background: white;
+  padding-left: 40px;
   border-bottom: 1px solid black;
   border-left: 1px solid gray;
   border-right: 1px solid gray;
@@ -246,17 +256,19 @@ footer {
   height: 100px;
   width: 100px;
   border: 2px solid lightgray;
-  margin: 10px;
+/*  margin: 10px;*/
+  /*MAYBE PADDING*/
+  margin: 10px 0 0 0;
 }
 
 .user-info {
   float: left;
-  margin-left: 20px;
+/*  margin-left: 20px;*/
 }
 
 .user-info > ul > li {
   float: left;
-  padding: 5px 10px;
+  padding: 5px 10px 5px 0;
 }
 
 
@@ -460,8 +472,6 @@ td{
 table {
   border-collapse: collapse;
   border: 2px solid black;
-  margin: 30px;
-  /*margin-left: 100px;*/
 }
 
 .alert-table {
