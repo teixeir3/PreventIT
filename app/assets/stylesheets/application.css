@@ -15,13 +15,14 @@
 /* RESETS */
 
 html, body, form, h2, h3, h4, div, label, ul, li, header, footer, main,
-table, thead, tbody, tr, th, td {
+table, thead, tbody, tr, th, td, a{
   margin: 0;
   padding: 0;
   border: 0;
   font: inherit;
   vertical-align: baseline;
   list-style-type: none;
+  color: inherit;
 }
 
 input {
@@ -30,6 +31,7 @@ input {
 
 a {
   text-decoration: none;
+  color: #75bb59;
 }
 
 input[type="text"],
@@ -38,9 +40,10 @@ input[type="password"],
 input[type="submit"],
 textarea {
   -webkit-appearance: none;
+  box-sizing: content-box;
   display: inline-block;
   margin: 0;
-  padding: 0;
+/*  padding: 0;*/
   border: 0;
   outline: 0;
   color: inherit;
@@ -51,6 +54,7 @@ textarea {
 body {
   font-family: sans-serif;
   background: #EEEEEF;
+  font-size: 16px;
   /*min-width: 945px;*/
   min: 945px;
   line-height: normal;
@@ -67,11 +71,13 @@ body {
 
 /* Header */
 
-
+header {
+  border-bottom: 4px solid gray;
+}
 .top-bar {
   width: 945px;
   margin: auto;
-  border-bottom: 4px solid gray;
+/*  border-bottom: 4px solid gray;*/
 }
 
 main {
@@ -93,6 +99,12 @@ main {
   border-right: 1px solid gray;
 }
 
+
+
+/*.side-info {
+  margin: auto;
+}*/
+
 /*.sub-bar:after {
   display: block;
   content: "";
@@ -102,17 +114,29 @@ main {
 .sub-nav {
   display: block;
   float: right;
+  background: linear-gradient(to bottom, #9a9c9d, #6D6E70);
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-radius: 5px 0 0 0;
 /*  margin-right: 200px;*/
 }
 
 .sub-nav > ul > li {
   float: left;
-  padding: 5px;
-  border: 1px solid black;
-  width: 100px;
+  overflow: hidden;
+  border-left: 1px solid black;
+/*  width: 100px;*/
   text-align: center;
-  background: #7C7C7C;
-  border-radius: 5px;
+/*  background: #6D6E70;*/
+/*  color: #B1D9A1;*/
+  border-radius: 5px 0 0 0;
+  background: linear-gradient(to bottom, #9a9c9d, #6D6E70);
+}
+
+.sub-nav > ul > li > a {
+  color: #B1D9A1;
+  display: block;
+  padding: 5px 10px;
 }
 
 
@@ -122,6 +146,10 @@ main {
   width: 245px;
   float: left;
 }
+
+/*.side-info > a {
+  text-align: center;
+}*/
 .side-content > ul > li {
   display: block;
   float: left;
@@ -156,6 +184,7 @@ h3 {
   display: block;
   float: left;
   width: 659px;
+  min-height: 300px;
   padding: 0 0 0 40px;
 }
 
@@ -176,11 +205,14 @@ footer {
   font-size: 12px;
   color: gray;
   width: 945px;
-  margin: auto;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: white;
   border-top: 2px solid gray;
   border-right: 1px solid gray;
   border-left: 1px solid gray;
+  border-bottom: 1px solid gray;
 /*  position: relative;*/
 /*  bottom: 0;*/
 }
@@ -218,9 +250,7 @@ footer {
 }
 
 .user-info {
- /* display: block;*/
   float: left;
-  padding: 5px;
   margin-left: 20px;
 }
 
@@ -278,6 +308,7 @@ footer {
   height: 30px;
   font-size: 15px;
   padding: 5px;
+  background: #fff;
 }
 
 .input > select:select {
@@ -371,12 +402,19 @@ footer {
 }
 
 .button {
-  position: relative;
+/*  display: block;*/
+/*  position: relative;*/
   background: #A1A9AB;
+/*  padding: 5px 10px;*/
   color: black;
   border-radius: 5px;
   cursor: pointer;
   box-shadow: 0 3px #6A6F70;
+}
+
+.button > div > input {
+  display: block;
+  padding: 5px 10px;
 }
 
 .button:active {
