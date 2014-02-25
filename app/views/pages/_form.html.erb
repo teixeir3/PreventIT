@@ -1,5 +1,5 @@
 <form class="search" action="<%= user_add_diagnosis_url(user) %>" method="GET">
-
+  <%= auth_token %>
   <div class="input">
     <input type="text" name="query" value="<%= params[:query] %>">
   </div>

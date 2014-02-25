@@ -37,6 +37,7 @@ gem 'faker'
 gem 'crack'
 gem 'addressable', require: 'addressable/uri'
 gem 'rest-client'
+gem 'select2-rails'
 
 group :development do
   gem "binding_of_caller"

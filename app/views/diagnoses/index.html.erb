@@ -9,8 +9,23 @@
     </div>
 
     <div class="side-info">
+      <h3>Search For Code:</h3>
       <%= render "pages/form", user: @user %>
-      <p><%= link_to "Add Diagnosis", new_user_diagnosis_url %></p>
+      <br>
+      <h3>Select Code:</h3>
+
+      <form class="search" action="<%= user_add_diagnosis_url(@user) %>" method="GET">
+        <%= auth_token %>
+
+        <%= select_tag "Diagnoses",
+        options_from_collection_for_select(Diagnosis.all, :id, :description),
+        id: "diagnoses-select" %>
+
+        <div class="submit">
+          <input type="submit" value="Find Diagnosis!">
+        </div>
+      </form>
+
     </div>
   </div>
 
@@ -22,3 +37,11 @@
     </ul>
   </div>
 </main>
+
+<% content_for :js do %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('select#diagnoses-select').select2();
+  });
+</script>
+<% end %>
