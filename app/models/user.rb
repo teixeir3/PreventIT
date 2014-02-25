@@ -81,6 +81,20 @@ class User < ActiveRecord::Base
     dependent: :destroy
   )
 
+  has_many(
+    :patient_diagnoses,
+    class_name: "User",
+    foreign_key: :patient_id,
+    primary_key: :id,
+    inverse_of: :patient_diagnosis
+  )
+
+  has_many(
+    :diagnoses,
+    through: :patient_diagnoses,
+    source: :diagnosis
+  )
+
   #### Doctor Associations ####
 
   belongs_to(
@@ -195,6 +209,7 @@ class User < ActiveRecord::Base
   # handle_asynchronously :generate_doctor_alerts
 
   # TODO: Have TA check this on Monday // Make this run on all patients instead of patient's by doctor
+  # TODO: Could generate 'reason' dynamically with a single helper method
   def generate_missed_medication_alerts
     patient_population = self.patients_reminders_by_type("medication")
     new_alert_count = 0

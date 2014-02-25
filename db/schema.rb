@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140223202403) do
+ActiveRecord::Schema.define(:version => 20140224220955) do
 
   create_table "alert_settings", :force => true do |t|
     t.integer  "doctor_id",                              :null => false
@@ -55,6 +55,14 @@ ActiveRecord::Schema.define(:version => 20140223202403) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "diagnoses", :force => true do |t|
+    t.string   "code",                             :null => false
+    t.text     "description",                      :null => false
+    t.string   "code_type",   :default => "ICD10", :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
   create_table "healths", :force => true do |t|
     t.integer  "patient_id", :null => false
     t.float    "height"
@@ -64,6 +72,17 @@ ActiveRecord::Schema.define(:version => 20140223202403) do
   end
 
   add_index "healths", ["patient_id"], :name => "index_healths_on_patient_id"
+
+  create_table "patient_diagnoses", :force => true do |t|
+    t.integer  "diagnosis_id", :null => false
+    t.integer  "patient_id",   :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "patient_diagnoses", ["diagnosis_id", "patient_id"], :name => "index_patient_diagnoses_on_diagnosis_id_and_patient_id", :unique => true
+  add_index "patient_diagnoses", ["diagnosis_id"], :name => "index_patient_diagnoses_on_diagnosis_id"
+  add_index "patient_diagnoses", ["patient_id"], :name => "index_patient_diagnoses_on_patient_id"
 
   create_table "practices", :force => true do |t|
     t.string   "specialty",  :null => false

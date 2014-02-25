@@ -33,6 +33,10 @@ gem 'pg_search'
 gem 'kaminari'
 gem 'daemons'
 gem 'faker'
+# gem 'nokogiri'
+gem 'crack'
+gem 'addressable'
+gem 'rest-client'
 
 group :development do
   gem "binding_of_caller"

@@ -56,21 +56,17 @@ class ApplicationController < ActionController::Base
     # check_id = find_user_id
 
     # (current_user.id == check_id && current_user.is_doctor)
-    (current_user.id == params[:id])
-    current_user.is_doctor
+    ((current_user.id == params[:id].to_i) && current_user.is_doctor)
   end
 
   def has_authority?
-    check_id = find_user_id
-
-    ((current_user.id == check_id) || (current_user.is_patient_doctor?(check_id)))
+    ((current_user.id == find_user_id) || (current_user.is_patient_doctor?(check_id)))
   end
 
   def find_user_id
+    # NOTE: Doesn't work unless nested route under user
     if (params[:user_id])
       return params[:user_id].to_i
-    # elsif (params[:doctor_id])
- #      return params[:doctor_id].to_i
     else
       return params[:id].to_i
     end
