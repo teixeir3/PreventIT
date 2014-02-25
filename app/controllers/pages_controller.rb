@@ -7,7 +7,7 @@ class PagesController < ApplicationController
 
   def search_patients
 
-    @results = User.search_on_name(params[:query]).page(params[:page]).per(10)
+    @results = User.search_on_name(params[:query]).where(doctor_id: current_user.id).page(params[:page]).per(10)
     # if params[:query]
 #       @results = PgSearch.search_on_name(params[:query])
 #     else
@@ -19,10 +19,11 @@ class PagesController < ApplicationController
 
   def search_diagnoses
     @diagnosis = Diagnosis.find_by_code(params[:query])
-    # @diagnosis_results = Diagnosis.
+    # @diagnosis_results = Diagnosis.search_on_name(params[:query]).page(params[:page]).per(10)
+    # do search on Diagnosis, if @diagnoses.empty? then fire query to API
 
     if @diagnosis
-
+      @diagnosis.patient_diagnosis.create()
     else
       url = Addressable::URI.new(
                             scheme: "http",

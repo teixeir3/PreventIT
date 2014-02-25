@@ -11,22 +11,18 @@
 
   <div class="sub-content">
 
-    <% @results.each do |result| %>
-      <% if result.is_doctor %>
-        <%= link_to result.full_name, doctor_url(result) %>
-      <% else %>
-        <%= link_to result.full_name, user_url(result) %>
-      <% end %>
-    <% end %>
-    <br>
-
     <% if @results.empty? %>
       <p>No Results Found</p>
     <% else %>
       <%= paginate @results %>
-    <% end %>
+      <h4><%= @results.count %> Patients Found</h4>
     <br>
-
+      <ul>
+        <% @results.each do |result| %>
+          <li><%= link_to result.full_name, user_url(result) %></li>
+        <% end %>
+      </ul>
+    <% end %>
     <%#= render @results.map(&:searchable) #%>
   </div>
 </main>
