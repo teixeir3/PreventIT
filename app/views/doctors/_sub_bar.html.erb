@@ -4,11 +4,15 @@
     <%= image_tag doctor.avatar.url(:small) %>
   </div>
 
+  <div class="nav-search group">
+    <%= render "pages/nav_search" %>
+  </div>
+
   <div class="user-info">
     <ul>
       <li><%= "Dr. " + doctor.full_name %></li>
       <li><%= link_to "Settings", edit_user_url(doctor) %></li>
-      <li><%= link_to "Search Patients", search_url %></li>
+      <li><%= link_to "Search Patients", patient_search_url %></li>
     </ul>
   </div>
 

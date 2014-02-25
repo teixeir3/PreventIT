@@ -103,7 +103,7 @@ main {
   width: 905px;
   margin: auto;
   background: white;
-  padding-left: 40px;
+  padding: 10px 0 0 40px;
   border-bottom: 1px solid black;
   border-left: 1px solid gray;
   border-right: 1px solid gray;
@@ -170,6 +170,10 @@ main {
   margin: auto;
   padding: 20px 0 20px 0;
   border-bottom: 1px solid gray;
+}
+
+.side-info {
+  padding-left: 40px;
 }
 
 h1 {
@@ -248,17 +252,51 @@ footer {
 .avatar {
   display: block;
   float: left;
-  width: 100%;
+  width: 100px;
+  height: 100px;
+  /*margin: 10px 0 0 0;*/
+
 }
 
+
 .avatar > img {
-  display: block;
-  height: 100px;
-  width: 100px;
+  height: 96px;
+  width: 96px;
   border: 2px solid lightgray;
+
 /*  margin: 10px;*/
   /*MAYBE PADDING*/
-  margin: 10px 0 0 0;
+
+}
+
+.nav-search {
+  width: 700px;
+  float: right;
+  height: 90px;
+  padding: 0 10px 10px 20px;
+}
+
+.search-bar {
+  display: block;
+  float: right;
+}
+
+.search-bar > .input {
+  float: left;
+/*  width: 50px;*/
+  margin: 0 10px 0 0;
+}
+
+.search-bar > .input > input {
+  width: 120px;
+}
+.search-bar > .submit {
+  float: right;
+}
+
+.search-bar > .submit > input {
+  float: right;
+  padding: 6px 15px;
 }
 
 .user-info {
@@ -434,7 +472,7 @@ footer {
   box-shadow: none;
 }
 
-.submit > input {
+form > .submit > input {
   position: relative;
   background: #00A55A;
   color: #fff;

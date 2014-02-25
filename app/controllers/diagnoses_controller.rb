@@ -4,8 +4,8 @@ class DiagnosesController < ApplicationController
 
 
   def index
-    @diagnoses = current_user.diagnoses
-    fail
+    @user = User.find(params[:user_id])
+    @diagnoses = @user.diagnoses
   end
 
 end

@@ -5,20 +5,17 @@
 <% end %>
 
 <main class="group">
-
   <div class="side-content">
+
     <div class="title">
-      <h2>Diagnoses:</h2>
+      <h2>Search</h2>
     </div>
 
-    <div class="side-info">
-      <p><%= link_to "Add Diagnosis", new_user_diagnosis_url %></p>
-    </div>
   </div>
 
   <div class="sub-content">
-    <% @diagnoses.each do |diagnosis| %>
-      <%= diagnosis.code %>
-    <% end %>
+
+    <%= render "form" %>
+
   </div>
 </main>

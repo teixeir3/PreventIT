@@ -54,6 +54,7 @@ class ApplicationController < ActionController::Base
 
   def has_doctor_authority?
     # (current_user.id == check_id && current_user.is_doctor)
+    # fail
     ((current_user.id == params[:id].to_i) && current_user.is_doctor)
   end
 

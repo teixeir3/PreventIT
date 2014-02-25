@@ -40,6 +40,15 @@ class User < ActiveRecord::Base
 
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
+  include PgSearch
+  pg_search_scope :search_on_name,
+                  against: [:first_name, :last_name, :email],
+                  using: {
+                    :trigram => {
+                      :threshold => 0.1
+                    }
+                  }
+
 
   #### Patient Associations ####
   has_many(
@@ -83,7 +92,7 @@ class User < ActiveRecord::Base
 
   has_many(
     :patient_diagnoses,
-    class_name: "User",
+    class_name: "PatientDiagnoses",
     foreign_key: :patient_id,
     primary_key: :id,
     inverse_of: :patient_diagnosis
@@ -127,14 +136,6 @@ class User < ActiveRecord::Base
       dependent: :destroy
     )
 
-  include PgSearch
-  pg_search_scope :search_on_name,
-                  against: [:first_name, :last_name, :email],
-                  using: {
-                    :trigram => {
-                      :threshold => 0.1
-                    }
-                  }
 
 
   def full_name
