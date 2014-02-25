@@ -56,7 +56,7 @@ body {
   background: #e4e4e5;
   font-size: 16px;
   /*min-width: 945px;*/
-  min: 945px;
+  min-width: 945px;
   line-height: normal;
 
 }
@@ -94,7 +94,9 @@ main {
   background: white;
   width: 945px;
   padding: 40px 0 40px 0;
-  box-shadow: 1px 1px 2px gray, -1px 1px 2px gray;
+  border-right: 1px solid gray;
+  border-left: 1px solid gray;
+/*  box-shadow: 1px 1px 2px gray, -1px 1px 2px gray;*/
 /*  border: 0 1px 0 1px solid gray;*/
 }
 
@@ -157,9 +159,11 @@ main {
   float: left;
 }
 
-/*.side-info > a {
-  text-align: center;
-}*/
+.side-info {
+  padding-top: 20px;
+/*  margin: auto;*/
+/*  text-align: center;*/
+}
 .side-content > ul > li {
   display: block;
   float: left;
@@ -227,6 +231,7 @@ footer {
   border-right: 1px solid gray;
   border-left: 1px solid gray;
   border-bottom: 1px solid gray;
+/*  box-shadow: 1px 1px 2px gray, -1px 1px 2px gray;*/
 /*  position: relative;*/
 /*  bottom: 0;*/
 }
@@ -326,11 +331,11 @@ footer {
 }*/
 
 .form {
-  margin: 100px;
+/*  margin: 100px;*/
 /*  margin: auto;*/
   background: #fff;
   width: 300px;
-  padding: 50px;
+  padding: 0 50px;
   border-radius: 10px;
   float: left;
 }
@@ -456,16 +461,25 @@ footer {
 /*  position: relative;*/
   background: #A1A9AB;
 /*  padding: 5px 10px;*/
-  color: black;
   border-radius: 5px;
   cursor: pointer;
   box-shadow: 0 3px #6A6F70;
 }
 
+
 .button > div > input {
   display: block;
   padding: 5px 10px;
+/*  color: #fff;*/
 }
+
+.button_to > div > input {
+  display: block;
+  padding: 5px 10px;
+  color: #fff;
+  background: #A1A9AB;
+}
+
 
 .button:active {
   top: 3px;

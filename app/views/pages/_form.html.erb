@@ -1,10 +1,10 @@
-<form class="search" action="<%= patient_search_url %>" method="GET">
+<form class="search" action="<%= user_add_diagnosis_url(user) %>" method="GET">
 
   <div class="input">
     <input type="text" name="query" value="<%= params[:query] %>">
   </div>
 
   <div class="submit">
-    <input type="submit" value="Search!">
+    <input type="submit" value="Find Diagnosis!">
   </div>
 </form>

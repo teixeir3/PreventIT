@@ -1,8 +1,5 @@
-<% if current_user.is_doctor %>
-  <%= render "doctors/sub_bar", doctor: @user%>
-<% else %>
-  <%= render "users/sub_bar", user: @user%>
-<% end %>
+<%= render "users/sub_bar", user: @user%>
+
 
 <main class="group">
 
@@ -11,8 +8,10 @@
       <h2>Reminders:</h2>
     </div>
 
+    <div class="side-info">
       <p><%= link_to "Add New Reminder", new_user_reminder_url(@user) %></p>
       <p><%= link_to "Completed Reminders", reminders_completed_url(@user) %></p>
+    </div>
   </div>
 
   <div class="sub-content">

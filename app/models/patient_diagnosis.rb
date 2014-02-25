@@ -9,7 +9,7 @@
 #  updated_at   :datetime         not null
 #
 
-class PatientDiagnoses < ActiveRecord::Base
+class PatientDiagnosis < ActiveRecord::Base
   attr_accessible :diagnosis, :patient
 
   validates :patient, :diagnosis, presence: true
@@ -19,7 +19,7 @@ class PatientDiagnoses < ActiveRecord::Base
     class_name: "User",
     foreign_key: :patient_id,
     primary_key: :id,
-    inverse_of: :patient_diagnosis
+    inverse_of: :patient_diagnoses
   )
 
   belongs_to(
@@ -27,7 +27,7 @@ class PatientDiagnoses < ActiveRecord::Base
     class_name: "Diagnosis",
     foreign_key: :diagnosis_id,
     primary_key: :id,
-    inverse_of: :patient_diagnosis
+    inverse_of: :patient_diagnoses
   )
 
 end

@@ -1,8 +1,5 @@
-<% if current_user.is_doctor %>
-  <%= render "doctors/sub_bar", doctor: current_user%>
-<% else %>
-  <%= render "users/sub_bar", user: current_user%>
-<% end %>
+<%= render "users/sub_bar", user: @user%>
+
 
 <main class="group">
 
@@ -12,13 +9,16 @@
     </div>
 
     <div class="side-info">
+      <%= render "pages/form", user: @user %>
       <p><%= link_to "Add Diagnosis", new_user_diagnosis_url %></p>
     </div>
   </div>
 
   <div class="sub-content">
-    <% @diagnoses.each do |diagnosis| %>
-      <%= diagnosis.code %>
-    <% end %>
+    <ul>
+      <% @diagnoses.each do |diagnosis| %>
+        <li><%= diagnosis.code %> : <%= diagnosis.description %></li>
+      <% end %>
+    </ul>
   </div>
 </main>

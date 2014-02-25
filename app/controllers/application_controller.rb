@@ -52,10 +52,30 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_doctor_status!
+    unless current_user.is_doctor
+      flash[:errors] = ["Only doctors can access this page!"]
+      sign_out
+      redirect_to new_session_url
+    end
+  end
+
+  def require_alert_authority!
+    unless has_alert_authority?
+      flash[:errors] = ["Only doctors can access this page!"]
+      sign_out
+      redirect_to new_session_url
+    end
+  end
+
   def has_doctor_authority?
     # (current_user.id == check_id && current_user.is_doctor)
     # fail
     ((current_user.id == params[:id].to_i) && current_user.is_doctor)
+  end
+
+  def has_alert_authority?
+    ((current_user.id == Alert.find(params[:id]).doctor_id && current_user.is_doctor))
   end
 
   def has_authority?

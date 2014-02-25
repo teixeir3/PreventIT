@@ -15,12 +15,17 @@ class Diagnosis < ActiveRecord::Base
 
   validates :code, :description, presence: true
 
+  include PgSearch
+  pg_search_scope :search_on_code_or_description,
+                  against: [:code, :descrption], :using => {:trigram => {:threshold => 0.1}}
+
+
   has_many(
     :patient_diagnoses,
-    class_name: "PatientDiagnoses",
+    class_name: "PatientDiagnosis",
     foreign_key: :diagnosis_id,
     primary_key: :id,
-    inverse_of: :diagnoses,
+    inverse_of: :diagnosis,
     dependent: :destroy
   )
 

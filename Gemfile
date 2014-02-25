@@ -35,7 +35,7 @@ gem 'daemons'
 gem 'faker'
 # gem 'nokogiri'
 gem 'crack'
-gem 'addressable'
+gem 'addressable', require: 'addressable/uri'
 gem 'rest-client'
 
 group :development do

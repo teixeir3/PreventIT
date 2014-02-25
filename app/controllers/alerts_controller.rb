@@ -1,6 +1,6 @@
 class AlertsController < ApplicationController
   before_filter :require_signed_in!
-  before_filter :require_doctor_authority!
+  before_filter :require_doctor_status!
 
   def index
     @doctor = current_user
