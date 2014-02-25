@@ -95,7 +95,7 @@ Version: 3.4.5 Timestamp: Mon Nov  4 08:22:42 PST 2013
     text-decoration: none;
 
     border: 0;
-    background: url('select2.png') right top no-repeat;
+    background: url('select2.png') right top no-repeat 0 0;
     cursor: pointer;
     outline: 0;
 }

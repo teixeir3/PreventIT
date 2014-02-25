@@ -171,6 +171,10 @@ main {
   width: 100%;
 }
 
+.select2-container .select2-choice > .select2-chosen {
+  width: 140px;
+  /*border: 1px solid #000;*/
+}
 .title {
   margin: auto;
   padding: 20px 0 20px 0;
