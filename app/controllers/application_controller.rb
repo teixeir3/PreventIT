@@ -53,14 +53,14 @@ class ApplicationController < ActionController::Base
   end
 
   def has_doctor_authority?
-    # check_id = find_user_id
-
     # (current_user.id == check_id && current_user.is_doctor)
     ((current_user.id == params[:id].to_i) && current_user.is_doctor)
   end
 
   def has_authority?
-    ((current_user.id == find_user_id) || (current_user.is_patient_doctor?(check_id)))
+    check_id = find_user_id
+
+    ((current_user.id == check_id) || (current_user.is_patient_doctor?(check_id)))
   end
 
   def find_user_id

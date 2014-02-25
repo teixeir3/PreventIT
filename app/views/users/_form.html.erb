@@ -1,20 +1,28 @@
 
 
-<form class="form" action="<%= users_url %>" method="post">
-  <%= auth_token %>
-
-  <h3>New Patient</h3>
-  <div class="input">
-    <label for="email">Email</label>
-    <input id="email" type="email" name="user[email]" value="">
+<main class="group">
+  <div>
+    <div class="title">
+      <h2>New Patient</h2>
+    </div>
   </div>
 
-  <div class="input">
-    <label for="password">Password</label>
-    <input id="password" type="password" name="user[password]" value="">
-  </div>
+  <div class="sub-content">
+  <form class="form" action="<%= users_url %>" method="post">
+    <%= auth_token %>
 
-  <div class="submit">
-    <input type="submit" value="Create Patient">
-  </div>
-</form>
+    <div class="input">
+      <label for="email">Email</label>
+      <input id="email" type="email" name="user[email]" value="">
+    </div>
+
+    <div class="input">
+      <label for="password">Password</label>
+      <input id="password" type="password" name="user[password]" value="">
+    </div>
+
+    <div class="submit">
+      <input type="submit" value="Create Patient">
+    </div>
+  </form>
+</main>
