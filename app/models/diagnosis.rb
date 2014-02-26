@@ -13,7 +13,7 @@
 class Diagnosis < ActiveRecord::Base
   attr_accessible :code, :description, :code_type
 
-  validates :code, :description, presence: true
+  validates :code, :description, presence: true, uniqueness: true
 
   include PgSearch
   pg_search_scope :search_on_code_and_description,

@@ -15,7 +15,8 @@ class DiagnosesController < ApplicationController
     @user = User.find(params[:user_id])
 
     if @diagnosis
-      @diagnosis.patient_diagnoses.create(patient: @user)
+      @patient_diagnosis = @diagnosis.patient_diagnoses.create(patient: @user)
+      flash[:errors] = @patient_diagnosis.errors.full_messages
       redirect_to user_diagnoses_url(@user)
     else
       url = Addressable::URI.new(
@@ -27,6 +28,7 @@ class DiagnosesController < ApplicationController
       if resp["Response"] == "True"
         @diagnosis = Diagnosis.create({code: resp["Name"], description: resp["Description"]})
         @diagnosis.patient_diagnoses.create(patient: @user)
+        flash[:errors] = @diagnosis.errors.full_messages
         redirect_to user_diagnoses_url(@user)
       else
         flash[:errors] = ["Code not found!"]

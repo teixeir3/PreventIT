@@ -13,6 +13,7 @@ class PatientDiagnosis < ActiveRecord::Base
   attr_accessible :diagnosis, :patient
 
   validates :patient, :diagnosis, presence: true
+  validates :diagnosis_id, uniqueness: { scope: :patient_id, message: " already exists!" }
 
   belongs_to(
     :patient,

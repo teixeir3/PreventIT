@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140224220955) do
+ActiveRecord::Schema.define(:version => 20140226150556) do
 
   create_table "alert_settings", :force => true do |t|
     t.integer  "doctor_id",                              :null => false
@@ -62,6 +62,9 @@ ActiveRecord::Schema.define(:version => 20140224220955) do
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
   end
+
+  add_index "diagnoses", ["code"], :name => "index_diagnoses_on_code", :unique => true
+  add_index "diagnoses", ["description"], :name => "index_diagnoses_on_description", :unique => true
 
   create_table "healths", :force => true do |t|
     t.integer  "patient_id", :null => false
