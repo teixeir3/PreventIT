@@ -47,7 +47,7 @@
       $el.on('input', function(event) {
         // console.log(event);
         // alert((event.currentTarget.value.length > 2));
-        var url = "http://localhost:3000/search/diagnoses?query=" + event.currentTarget.value;
+        var url = "/search/diagnoses?query=" + event.currentTarget.value;
         if (event.currentTarget.value.length > 2) {
           $.ajax(url, {
             success: function(data, b, resp) {
