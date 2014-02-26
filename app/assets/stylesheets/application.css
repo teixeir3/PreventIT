@@ -116,7 +116,12 @@ main {
   border-right: 1px solid gray;
 }
 
-
+.display-none {
+  display: none;
+}
+.disabled {
+  display: disabled;
+}
 
 /*.side-info {
   margin: auto;

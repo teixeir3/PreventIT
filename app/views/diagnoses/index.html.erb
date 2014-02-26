@@ -19,7 +19,7 @@
 
         <%= select_tag "Diagnoses",
         options_from_collection_for_select([], :id, :description),
-        id: "diagnoses-select" %>
+        id: "diagnoses-select", name: "query" %>
 
         <div class="submit">
           <input type="submit" value="Find Diagnosis!">
@@ -78,8 +78,19 @@
         //toggle .hidden
         console.log("WORKS!");
         console.log($(event.currentTarget.firstChild.firstChild).text());
+        console.log($el)
+        $('.select2-chosen').html($(event.currentTarget.firstChild.firstChild).text());
+        $('#select2-input').removeClass('select2-focused');
+        $('#select2-drop').removeAttr('style');
+        $('#select2-drop').removeAttr('id');
+        $('#select2-drop').attr('style', "display: none; left: 448px; width: 176px; top: 644px; bottom: auto;");
+        $('#select2-drop-mask').removeAttr('style');
+        $('#select2-drop-mask').attr('style', 'display: none;');
+        // $('#select2-drop').addClass('display-none');
+        // $('#select2-drop-mask').addClass('display-none');
+        $('#s2id_autogen1').removeAttr('disabled');
+        $('.select2-container').removeClass('select2-dropdown-open');
 
-        $el.html("whatev");
       });
 
 
