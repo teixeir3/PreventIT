@@ -75,6 +75,10 @@ body {
 header {
   border-bottom: 4px solid gray;
 }
+
+.hidden {
+  display: hidden;
+}
 .top-bar {
   width: auto;
 /*  width: 945px;*/
