@@ -18,33 +18,13 @@ class PagesController < ApplicationController
   end
 
   def search_diagnoses
-    @diagnosis = Diagnosis.find_by_code(params[:query])
-    # @diagnosis_results = Diagnosis.search_on_name(params[:query]).page(params[:page]).per(10)
-    # do search on Diagnosis, if @diagnoses.empty? then fire query to API
+    @results = Diagnosis.search_on_code_and_description(params[:query])
 
-    if @diagnosis
-      @diagnosis.patient_diagnosis.create()
-    else
-      url = Addressable::URI.new(
-                            scheme: "http",
-                            host: "www.icd10api.com",
-                            query_values: {
-                              code: params[:query],
-                              r: "json",
-                              desc: "long"
-                              }
-                            )
-      resp = RestClient.get(url.to_s)
+    render json: @results
 
-      if resp["Response"] == "true"
-        new_diagnosis = Diagnosis.create({
-                                  code: resp["Name"],
-                                  description: resp["Description"]
-                                  })
-      else
-
-      end
-    end
+    # if request.xhr?
+#       render json: @results
+#     end
   end
 end
 

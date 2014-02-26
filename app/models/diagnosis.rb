@@ -16,8 +16,8 @@ class Diagnosis < ActiveRecord::Base
   validates :code, :description, presence: true
 
   include PgSearch
-  pg_search_scope :search_on_code_or_description,
-                  against: [:code, :descrption], :using => {:trigram => {:threshold => 0.1}}
+  pg_search_scope :search_on_code_and_description,
+                  against: [:code, :description], :using => {:trigram => {:threshold => 0.1}}
 
 
   has_many(

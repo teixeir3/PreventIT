@@ -42,6 +42,28 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $('select#diagnoses-select').select2();
+
+      $('input.select2-input').on('input', function(event) {
+        // console.log(event);
+        // alert((event.currentTarget.value.length > 2));
+        var url = "http://localhost:3000/search/diagnoses?query=" + event.currentTarget.value
+        if (event.currentTarget.value.length > 2) {
+          $.ajax(url, {
+            success: function(data, b, resp) {
+              // console.log($.parseJSON(data));
+              console.log(data[0].code);
+              console.log(resp.responseJSON);
+            },
+            error: function() {
+              console.log("Error Searching for Diagnosis!")
+            }
+          });
+        }
+
+      });
+
+
+
     });
   </script>
 <% end %>
