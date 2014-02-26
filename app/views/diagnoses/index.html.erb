@@ -18,7 +18,7 @@
         <%= auth_token %>
 
         <%= select_tag "Diagnoses",
-        options_from_collection_for_select(Diagnosis.all, :id, :description),
+        options_from_collection_for_select([], :id, :description),
         id: "diagnoses-select" %>
 
         <div class="submit">
@@ -43,16 +43,28 @@
     $(document).ready(function() {
       $('select#diagnoses-select').select2();
 
-      $('input.select2-input').on('input', function(event) {
+      var $el = $('input.select2-input')
+      $el.on('input', function(event) {
         // console.log(event);
         // alert((event.currentTarget.value.length > 2));
-        var url = "http://localhost:3000/search/diagnoses?query=" + event.currentTarget.value
+        var url = "http://localhost:3000/search/diagnoses?query=" + event.currentTarget.value;
         if (event.currentTarget.value.length > 2) {
           $.ajax(url, {
             success: function(data, b, resp) {
-              // console.log($.parseJSON(data));
-              console.log(data[0].code);
-              console.log(resp.responseJSON);
+
+              var html = "";
+              var new_options = "";
+
+              data.forEach(function(elem) {
+                html += ("<option value='" + elem.id + "'>" + elem.description +"</option>");
+                new_options += "<li class='select2-results-dept-0 select2-result select2-result-selectable'><div class='select2-result-label'><span class='select2-match'></span>" + elem.description + "</div></li>"
+              });
+              console.log(html);
+              var $options = $('select#diagnoses-select')
+              var $select_options = $('.select2-results')
+
+              $select_options.html(new_options);
+              $options.append(html);
             },
             error: function() {
               console.log("Error Searching for Diagnosis!")
