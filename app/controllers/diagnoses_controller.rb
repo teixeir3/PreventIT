@@ -12,9 +12,8 @@ class DiagnosesController < ApplicationController
 
   def add_diagnosis
     @diagnosis = Diagnosis.find_by_code(params[:query]) || Diagnosis.find_by_description(params[:query])
-    # @diagnosis
     @user = User.find(params[:user_id])
-    # fail
+
     if @diagnosis
       @patient_diagnosis = @diagnosis.patient_diagnoses.create(patient: @user)
       flash[:errors] = @patient_diagnosis.errors.full_messages
