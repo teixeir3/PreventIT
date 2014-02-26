@@ -10,9 +10,8 @@
 
     <div class="side-info">
       <h3>Search For Code:</h3>
-      <%= render "pages/form", user: @user %>
-      <br>
-      <h3>Select Code:</h3>
+
+      <h3>Find Code:</h3>
 
       <form class="search" action="<%= user_add_diagnosis_url(@user) %>" method="GET">
         <%= auth_token %>
@@ -21,8 +20,8 @@
         options_from_collection_for_select([], :id, :description),
         id: "diagnoses-select", name: "query" %>
 
-        <div class="submit">
-          <input type="submit" value="Find Diagnosis!">
+        <div class="submit side-button">
+          <input type="submit" value="Add Diagnosis!">
         </div>
       </form>
 
@@ -56,7 +55,7 @@
               var new_options = "";
 
               data.forEach(function(elem) {
-                html += ("<option value='" + elem.id + "'>" + elem.description +"</option>");
+                html += ("<option value='" + elem.code + "'>" + elem.description +"</option>");
                 new_options += "<li class='select2-results-dept-0 select2-result select2-result-selectable'><div class='select2-result-label'><span class='select2-match'></span>" + elem.description + "</div></li>"
               });
 
@@ -75,10 +74,6 @@
       });
 
       $('.select2-results').on('click', function(event) {
-        //toggle .hidden
-        console.log("WORKS!");
-        console.log($(event.currentTarget.firstChild.firstChild).text());
-        console.log($el)
         $('.select2-chosen').html($(event.currentTarget.firstChild.firstChild).text());
         $('#select2-input').removeClass('select2-focused');
         $('#select2-drop').removeAttr('style');
@@ -97,5 +92,23 @@
 
 
     });
+
+    $('body').on('keyup', '.select2-input', function(event){
+      if(event.keyCode == 13) {
+
+        $('.select2-chosen').text($('.select2-search > input').val())
+
+        $('#select2-input').removeClass('select2-focused');
+        $('#select2-drop').removeAttr('style');
+        $('#select2-drop').removeAttr('id');
+        $('#select2-drop').attr('style', "display: none; left: 448px; width: 176px; top: 644px; bottom: auto;");
+        $('#select2-drop-mask').removeAttr('style');
+        $('#select2-drop-mask').attr('style', 'display: none;');
+        $('#s2id_autogen1').removeAttr('disabled');
+        $('.select2-container').removeClass('select2-dropdown-open');
+      }
+
+    });
   </script>
 <% end %>
+
