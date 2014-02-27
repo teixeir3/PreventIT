@@ -95,7 +95,7 @@ class User < ActiveRecord::Base
     class_name: "PatientDiagnosis",
     foreign_key: :patient_id,
     primary_key: :id,
-    inverse_of: :patient_diagnosis
+    inverse_of: :patient
   )
 
   has_many(

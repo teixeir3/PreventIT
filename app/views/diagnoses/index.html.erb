@@ -9,7 +9,6 @@
     </div>
 
     <div class="side-info">
-      <h3>Search For Code:</h3>
 
       <h3>Find Code:</h3>
 
@@ -29,11 +28,14 @@
   </div>
 
   <div class="sub-content">
-    <ul>
-      <% @diagnoses.each do |diagnosis| %>
-        <li><%= diagnosis.code %> : <%= diagnosis.description %></li>
-      <% end %>
-    </ul>
+
+    <p><%= paginate @patient_diagnoses %></p>
+
+    <label for="reminders" class="table-label">All:</label>
+    <%= render "list", patient_diagnoses: @patient_diagnoses %>
+
+    <p><%= paginate @patient_diagnoses %></p>
+
   </div>
 </main>
 
@@ -50,6 +52,8 @@
         if (event.currentTarget.value.length > 2) {
           $.ajax(url, {
             success: function(data, b, resp) {
+
+              // clears out initial selection text
               $('.select2-chosen').text("");
               var html = "";
               var new_options = "";

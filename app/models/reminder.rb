@@ -50,7 +50,7 @@ class Reminder < ActiveRecord::Base
   )
 
 
-  # marks all reminders due if their time is past
+  # marks all reminders due (if their time is past)
   def self.mark_all_due
     @all_not_due_reminders = self.all_not_due
     @all_not_due_reminders.each do |reminder|

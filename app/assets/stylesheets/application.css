@@ -548,6 +548,10 @@ table {
   border: 2px solid black;
 }
 
+.cell-wrap {
+  width: 200px;
+}
+
 .alert-table {
   width: 600px;
 }

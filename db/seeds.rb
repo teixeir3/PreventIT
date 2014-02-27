@@ -285,5 +285,16 @@ end
   # doctor.generate_doctor_alerts
 end
 
+### Generate Diagnoses
+Diagnosis.create({code: "E1010", description: "Type 1 diabetes mellitus with ketoacidosis without coma"})
+Diagnosis.create({code: "E119", description: "Type 2 diabetes mellitus without complications"})
+Diagnosis.create({code: "R7309", description: "Other abnormal glucose"})
+Diagnosis.create({code: "E1011", description: "Type 1 diabetes mellitus with ketoacidosis with coma"})
+Diagnosis.create({code: "H268", description: "Other specified cataract"})
+Diagnosis.create({code: "E15", description: "Nondiabetic hypoglycemic coma"})
+Diagnosis.create({code: "Q794", description: "Prune belly syndrome"})
+Diagnosis.create({code: "K551", description: "Chronic vascular disorders of intestine"})
+Diagnosis.create({code: "G9382", description: "Brain death"})
+
 User.generate_all_alerts
 

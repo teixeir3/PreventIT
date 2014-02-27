@@ -7,7 +7,8 @@ class DiagnosesController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @diagnoses = @user.diagnoses
+    @patient_diagnoses = @user.patient_diagnoses.includes(:diagnosis).page(params[:page]).per(10)
+    # @diagnoses = @user.diagnoses.includes(:patient_diagnoses)
   end
 
   def add_diagnosis
@@ -35,6 +36,13 @@ class DiagnosesController < ApplicationController
         redirect_to user_diagnoses_url(@user)
       end
     end
+  end
+
+  def destroy
+    @patient_diagnosis = PatientDiagnosis.find(params[:id])
+
+    @patient_diagnosis.destroy
+    redirect_to user_diagnoses_url(params[:user_id])
   end
 
 end

@@ -39,6 +39,8 @@ gem 'addressable', require: 'addressable/uri'
 gem 'rest-client'
 gem 'select2-rails'
 gem 'backbone-on-rails'
+gem "omniauth-google-oauth2"
+gem "uuidtools"
 
 group :development do
   gem "binding_of_caller"
