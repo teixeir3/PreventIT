@@ -108,6 +108,15 @@ class User < ActiveRecord::Base
     source: :diagnosis
   )
 
+  has_many(
+    :appointments,
+    class_name: "Appointment",
+    foreign_key: :patient_id,
+    primary_key: :id,
+    inverse_of: :patient,
+    dependent: :destroy
+  )
+
   #### Doctor Associations ####
 
   belongs_to(

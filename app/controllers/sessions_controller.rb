@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
       unless @user
         @user = create_from_google_data(google_data)
       end
+
     else
       @user = User.find_by_credentials(
       params[:user][:email],

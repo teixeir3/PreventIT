@@ -20,6 +20,7 @@ PreventIT::Application.routes.draw do
   resources :users, only: [:create, :new, :destroy, :show, :edit, :update] do
     resources :reminders
     resources :diagnoses
+    resources :appointments
     get 'add_diagnosis' => 'diagnoses#add_diagnosis', as: 'add_diagnosis'
   end
   resource :session, only: [:create, :destroy, :new]

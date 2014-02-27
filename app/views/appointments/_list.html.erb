@@ -1,0 +1,22 @@
+<div class="appointments-table">
+  <table id="appointments">
+    <thead>
+      <tr>
+        <th>Reason</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>met?</th>
+      </tr>
+    </thead>
+
+    <% @appointments.each do |appointment| %>
+    <tr>
+      <td class="cell-wrap"><%= appointment.reason %></td>
+      <td><%= appointment.datetime.strftime("%Y/%m/%d") %></td>
+      <td><%= appointment.datetime.strftime("%M:%H") %></td>
+      <td><%= appointment.met %></td>
+    </tr>
+    <% end %>
+
+  </table>
+</div>

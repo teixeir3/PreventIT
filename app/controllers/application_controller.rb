@@ -115,7 +115,7 @@ class ApplicationController < ActionController::Base
 
       new_user.health.build()
 
-      if current_user.is_doctor
+      if current_user && current_user.is_doctor
         new_user.doctor_id = current_user.id
       end
     end

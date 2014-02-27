@@ -1,0 +1,29 @@
+<%= render "users/sub_bar", user: @user%>
+
+
+<main class="group">
+
+  <div class="side-content">
+    <div class="title">
+      <h2>Appointments:</h2>
+    </div>
+
+    <div class="side-info">
+
+
+    </div>
+  </div>
+
+  <div class="sub-content">
+
+    <p><%= paginate @appointments %></p>
+
+    <label for="appointments" class="table-label">All:</label>
+    <%= render "list", appointments: @appointments %>
+
+    <p><%= paginate @appointments %></p>
+
+  </div>
+</main>
+
+

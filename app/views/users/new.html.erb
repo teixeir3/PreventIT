@@ -1,1 +1,16 @@
-<%= render partial: "form" %>
+
+<main class="group">
+  <div class="side-content">
+    <div class="title">
+      <% if current_user && current_user.is_doctor %>
+        <h2>New Patient</h2>
+      <% end %>
+    </div>
+
+    <h3><a href="/auth/google_oauth2">Login with Google</a></h3>
+  </div>
+
+  <div class="sub-content">
+    <%= render partial: "form" %>
+  </div>
+</main>
