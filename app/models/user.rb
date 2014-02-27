@@ -19,16 +19,20 @@
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
 #  email_notifications :boolean          default(TRUE), not null
+#  uid                 :string(255)
+#  access_token        :string(255)
+#  provider            :string(255)
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :first_name, :last_name, :phone, :avatar, :email_notifications
+  attr_accessible :email, :password, :first_name, :last_name, :phone, :avatar, :email_notifications, :uid, :access_token, :provider
   attr_reader :password
 
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :session_token, presence: true, uniqueness: true
+  validates :uid, uniqueness: { scope: :provider, message: "Account already exists!"}
 
   before_validation :ensure_session_token
 
@@ -135,7 +139,6 @@ class User < ActiveRecord::Base
       inverse_of: :doctor,
       dependent: :destroy
     )
-
 
 
   def full_name

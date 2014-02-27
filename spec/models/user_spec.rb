@@ -19,6 +19,9 @@
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
 #  email_notifications :boolean          default(TRUE), not null
+#  uid                 :string(255)
+#  access_token        :string(255)
+#  provider            :string(255)
 #
 
 require 'spec_helper'

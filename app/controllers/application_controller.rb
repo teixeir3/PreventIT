@@ -92,4 +92,35 @@ class ApplicationController < ActionController::Base
       return params[:id].to_i
     end
   end
+
+  def create_from_google_data(google_data)
+    # Check if user can be found by email / firstname / last_name?
+    new_user = User.find_by_email(google_data[:info][:email])
+
+    if new_user
+      new_user.update_attributes({
+        uid: google_data[:uid],
+        provider: google_data[:provider],
+        access_token: google_data[:credentials][:token]
+      })
+    else
+      new_user = User.new(
+              uid: google_data[:uid],
+              provider: google_date[:provider],
+              access_token: google_data[:credentials][:token],
+              first_name: google_data[:info][:first_name],
+              last_name: google_data[:info][:last_name],
+              email: google_data[:info][:email]
+            )
+
+      new_user.health.build()
+
+      if current_user.is_doctor
+        new_user.doctor_id = current_user.id
+      end
+    end
+
+    new_user
+  end
+
 end

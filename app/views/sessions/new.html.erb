@@ -1,11 +1,14 @@
 
 
 <main class="group">
-  <div>
+  <div class="side-content">
     <div class="title">
       <h2>Sign In</h2>
     </div>
+
+    <h3><a href="/auth/google_oauth2">Login with Google</a></h3>
   </div>
+
   <div class="sub-content">
     <form class="form" action="<%= session_url %>" method="post">
       <%= auth_token %>
@@ -25,5 +28,6 @@
         <input type="submit" value="Sign In">
       </div>
     </form>
+
   </div>
 </main>

@@ -40,6 +40,7 @@ gem 'rest-client'
 gem 'select2-rails'
 gem 'backbone-on-rails'
 gem "omniauth-google-oauth2"
+gem 'google-api-client', :require => 'google/api_client'
 gem "uuidtools"
 
 group :development do
@@ -48,6 +49,8 @@ group :development do
   gem "annotate"
   gem "pry-rails"
 end
+
+gem "letter_opener", :group => :development
 
 group :development, :test do
   gem "rspec-rails"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140226150556) do
+ActiveRecord::Schema.define(:version => 20140227154356) do
 
   create_table "alert_settings", :force => true do |t|
     t.integer  "doctor_id",                              :null => false
@@ -129,8 +129,12 @@ ActiveRecord::Schema.define(:version => 20140226150556) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.boolean  "email_notifications", :default => true,  :null => false
+    t.string   "uid"
+    t.string   "access_token"
+    t.string   "provider"
   end
 
   add_index "users", ["doctor_id"], :name => "index_users_on_doctor_id"
+  add_index "users", ["uid", "provider"], :name => "index_users_on_uid_and_provider", :unique => true
 
 end

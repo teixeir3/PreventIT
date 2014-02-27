@@ -24,7 +24,7 @@ PreventIT::Application.routes.draw do
   end
   resource :session, only: [:create, :destroy, :new]
 
-  get 'auth/google/callback' => 'sessions#create'
+  get '/auth/google_oauth2/callback' => 'sessions#create'
 
   root to: "sessions#new"
 end

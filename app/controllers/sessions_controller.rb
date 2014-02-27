@@ -7,9 +7,19 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by_credentials(
-    params[:user][:email],
-    params[:user][:password])
+    google_data = request.env["omniauth.auth"]
+
+    if google_data
+      @user = User.find_by_provider_and_uid(google_data["provider"], google_data["uid"])
+
+      unless @user
+        @user = create_from_google_data(google_data)
+      end
+    else
+      @user = User.find_by_credentials(
+      params[:user][:email],
+      params[:user][:password])
+    end
 
     if @user
       sign_in(@user)
@@ -19,7 +29,8 @@ class SessionsController < ApplicationController
         redirect_to user_url(@user)
       end
     else
-      render :json => "Incorrect credentials"
+      flash.now[:errors] = ["Incorrect credentials"]
+      render :new
     end
   end
 
