@@ -32,7 +32,6 @@ class User < ActiveRecord::Base
   validates :password_digest, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :session_token, presence: true, uniqueness: true
-  validates :uid
 
   before_validation :ensure_session_token
 
