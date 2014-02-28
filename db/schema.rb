@@ -149,5 +149,4 @@ ActiveRecord::Schema.define(:version => 20140228002707) do
 
   add_index "users", ["doctor_id"], :name => "index_users_on_doctor_id"
   add_index "users", ["uid", "provider"], :name => "index_users_on_uid_and_provider"
-
 end

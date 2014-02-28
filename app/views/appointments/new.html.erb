@@ -1,0 +1,65 @@
+<%= render "users/sub_bar", user: @user%>
+
+
+<main class="group">
+  <div class="side-content">
+    <div class="title">
+      <h2>New Appointment</h2>
+    </div>
+  </div>
+
+  <div class="sub-content">
+
+    <form class="form" action="<%= user_appointments_url(@user) %>" method="POST">
+      <h3>New Appointment:</h3>
+      <%= auth_token %>
+
+      <div class="input">
+      <label for="doctor">Doctor:</label>
+
+        <select id="doctor" name="appointment[doctor]">
+          <option value="">Dr. <%= @user.doctor.full_name %></option>
+        </select>
+      </div>
+
+      <div class="input">
+        <label for="reason">Reason:</label>
+        <input
+          id="reason"
+          type="text"
+          name="appointment[reason]"
+          value="">
+      </div>
+
+      <div class="input">
+        <label for="reason">Date:</label>
+        <input
+          id="date"
+          type="date"
+          name="appointment[datetime]"
+          value="">
+      </div>
+
+      <div class="time-input">
+        <label for="time">Time:</label>
+        <input
+          id="time"
+          type="time"
+          name="appointment[time]"
+          value="">
+      </div>
+
+      <div class="input">
+        <label for="note">Note:</label>
+        <textarea
+          id="note"
+          name="appointment[note]"
+          value=""></textarea>
+      </div>
+
+      <div class="submit">
+        <input type="submit" value="Add Appointment">
+      </div>
+    </form>
+  </div>
+</main>

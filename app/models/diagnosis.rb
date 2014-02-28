@@ -17,7 +17,7 @@ class Diagnosis < ActiveRecord::Base
 
   include PgSearch
   pg_search_scope :search_on_code_and_description,
-                  against: [:code, :description], :using => {:trigram => {:threshold => 0.1}}
+                  against: [:code, :description], :using => {:trigram => {:threshold => 0.05}}
 
 
   has_many(

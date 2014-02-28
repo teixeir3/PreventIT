@@ -44,11 +44,13 @@
 # end
 
 # Demo Database
+puts "Seeding Doug's Family Practice"
 my_practice = Practice.create({
     specialty: "Family Practitioner",
     name: "Doug's Family Practice"
   })
 
+puts "Seeding Dr. Doug"
 doug = User.new({
     email: "teixeir3@gmail.com",
     first_name: "Douglas",
@@ -61,21 +63,25 @@ doug.practice = my_practice
 doug.alert_setting.build
 doug.save
 
+puts "Seeding Doug's Practice"
 20.times do |i|
   v = i+2
+
+  puts "Seeding patient #{i+1}"
   user = User.new({
         email: Faker::Internet.safe_email,
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
         phone: Faker::PhoneNumber.phone_number,
         password: "password"
-        })
+      })
 
+  puts "Seeding health for patient #{i+1}"
   user.health.build(height: 69)
 
   user.doctor = doug
 
-
+  puts "Seeding Reminders for patient #{i+1}"
   4.times do |j|
     user_date = Time.now.change(year: 2014, month: 2, day: 20, hour: 10)
 
@@ -164,6 +170,7 @@ end
 
 ### OTHER PRACTICES
 
+puts "Seeding Other Practices"
 2.times do
   doctor = User.new({
       email: Faker::Internet.safe_email,
@@ -285,6 +292,8 @@ end
   # doctor.generate_doctor_alerts
 end
 
+
+puts "Seeding Codes"
 ### Generate Diagnoses
 Diagnosis.create({code: "E1010", description: "Type 1 diabetes mellitus with ketoacidosis without coma"})
 Diagnosis.create({code: "E119", description: "Type 2 diabetes mellitus without complications"})
@@ -296,5 +305,7 @@ Diagnosis.create({code: "Q794", description: "Prune belly syndrome"})
 Diagnosis.create({code: "K551", description: "Chronic vascular disorders of intestine"})
 Diagnosis.create({code: "G9382", description: "Brain death"})
 
+
+puts "Generating Alerts"
 User.generate_all_alerts
 
