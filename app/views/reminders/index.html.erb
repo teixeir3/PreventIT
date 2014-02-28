@@ -11,12 +11,13 @@
     <div class="side-info">
       <p><%= link_to "Add New Reminder", new_user_reminder_url(@user) %></p>
       <p><%= link_to "Completed Reminders", reminders_completed_url(@user) %></p>
+      <p><%= link_to "Due Reminders", user_reminders_url(@user) %></p>
     </div>
   </div>
 
   <div class="sub-content">
 
-    <label for="reminders" class="table-label">All:</label>
+    <label for="reminders" class="table-label"><%= (params[:action] == "completed") ? "Completed" : "Due" %> Reminders:</label>
     <%= render "list", reminders: @reminders %>
 
   </div>
