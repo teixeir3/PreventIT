@@ -8,7 +8,8 @@ class AppointmentsController < ApplicationController
   end
 
   def new
-    @user = User.find(params[:user_id])
+    @user = User.includes(diagnoses: [:appt_types]).find(params[:user_id])
+    # @appt_types = @user.diagnoses.appt_types
     @appointment = @user.appointments.build
   end
 

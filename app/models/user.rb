@@ -30,8 +30,9 @@ class User < ActiveRecord::Base
 
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
-  validates :password, length: { minimum: 6, allow_nil: true }
+  validates :password, length: {minimum: 6, allow_nil: true}
   validates :session_token, presence: true, uniqueness: true
+  validates :uid, uniqueness: {scope: :provider, if: :check_uid_by_provider}
 
   before_validation :ensure_session_token
 
@@ -147,6 +148,16 @@ class User < ActiveRecord::Base
       inverse_of: :doctor,
       dependent: :destroy
     )
+
+   has_many(
+      :appointment_types,
+      class_name: "AppointmentType",
+      foreign_key: :doctor_id,
+      primary_key: :id,
+      inverse_of: :doctor,
+      dependent: :destroy
+    )
+
 
 
   def full_name
@@ -448,6 +459,10 @@ class User < ActiveRecord::Base
 
   def ensure_session_token
     self.session_token ||= self.class.generate_session_token
+  end
+
+  def check_uid_by_provider
+    uid || provider
   end
 
 end

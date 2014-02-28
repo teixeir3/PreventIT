@@ -35,4 +35,15 @@ class Diagnosis < ActiveRecord::Base
     source: :patient
   )
 
+  has_many(
+    :appt_type_diagnoses,
+    class_name: "ApptTypeDiagnosis",
+    foreign_key: :diagnosis_id,
+    primary_key: :id,
+    inverse_of: :diagnosis,
+    dependent: :destroy
+  )
+
+  has_many(:appt_types, through: :appt_type_diagnoses, source: :appt_type)
+
 end

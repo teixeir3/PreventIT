@@ -11,7 +11,7 @@ PreventIT::Application.routes.draw do
   get 'alerts/completed' => 'alerts#completed', as: 'alerts_completed'
 
   resources :alerts, only: [:index, :edit, :update, :show]
-
+  resources :appointment_types
 
   put 'alert/:id/complete' => 'alerts#mark_complete', as: 'alert_complete'
 

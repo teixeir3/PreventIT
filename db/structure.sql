@@ -131,6 +131,40 @@ ALTER SEQUENCE alerts_id_seq OWNED BY alerts.id;
 
 
 --
+-- Name: appointment_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE appointment_types (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    recurrence boolean DEFAULT false NOT NULL,
+    occurence_frequency integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    doctor_id integer NOT NULL
+);
+
+
+--
+-- Name: appointment_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE appointment_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: appointment_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE appointment_types_id_seq OWNED BY appointment_types.id;
+
+
+--
 -- Name: appointments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -139,11 +173,11 @@ CREATE TABLE appointments (
     patient_id integer NOT NULL,
     doctor_id integer,
     datetime timestamp without time zone NOT NULL,
-    reason character varying(255) NOT NULL,
     note text,
     met boolean DEFAULT false NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    appointment_type_id integer
 );
 
 
@@ -164,6 +198,38 @@ CREATE SEQUENCE appointments_id_seq
 --
 
 ALTER SEQUENCE appointments_id_seq OWNED BY appointments.id;
+
+
+--
+-- Name: appt_type_diagnoses; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE appt_type_diagnoses (
+    id integer NOT NULL,
+    appt_type_id integer NOT NULL,
+    diagnosis_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: appt_type_diagnoses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE appt_type_diagnoses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: appt_type_diagnoses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE appt_type_diagnoses_id_seq OWNED BY appt_type_diagnoses.id;
 
 
 --
@@ -450,7 +516,21 @@ ALTER TABLE ONLY alerts ALTER COLUMN id SET DEFAULT nextval('alerts_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY appointment_types ALTER COLUMN id SET DEFAULT nextval('appointment_types_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY appointments ALTER COLUMN id SET DEFAULT nextval('appointments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY appt_type_diagnoses ALTER COLUMN id SET DEFAULT nextval('appt_type_diagnoses_id_seq'::regclass);
 
 
 --
@@ -519,11 +599,27 @@ ALTER TABLE ONLY alerts
 
 
 --
+-- Name: appointment_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY appointment_types
+    ADD CONSTRAINT appointment_types_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: appointments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY appointments
     ADD CONSTRAINT appointments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: appt_type_diagnoses_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY appt_type_diagnoses
+    ADD CONSTRAINT appt_type_diagnoses_pkey PRIMARY KEY (id);
 
 
 --
@@ -597,10 +693,38 @@ CREATE INDEX index_alerts_on_patient_id ON alerts USING btree (patient_id);
 
 
 --
+-- Name: index_appointment_types_on_doctor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_appointment_types_on_doctor_id ON appointment_types USING btree (doctor_id);
+
+
+--
 -- Name: index_appointments_on_patient_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_appointments_on_patient_id ON appointments USING btree (patient_id);
+
+
+--
+-- Name: index_appt_type_diagnoses_on_appt_type_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_appt_type_diagnoses_on_appt_type_id ON appt_type_diagnoses USING btree (appt_type_id);
+
+
+--
+-- Name: index_appt_type_diagnoses_on_appt_type_id_and_diagnosis_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_appt_type_diagnoses_on_appt_type_id_and_diagnosis_id ON appt_type_diagnoses USING btree (appt_type_id, diagnosis_id);
+
+
+--
+-- Name: index_appt_type_diagnoses_on_diagnosis_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_appt_type_diagnoses_on_diagnosis_id ON appt_type_diagnoses USING btree (diagnosis_id);
 
 
 --
@@ -726,3 +850,13 @@ INSERT INTO schema_migrations (version) VALUES ('20140227154356');
 INSERT INTO schema_migrations (version) VALUES ('20140227214520');
 
 INSERT INTO schema_migrations (version) VALUES ('20140228002707');
+
+INSERT INTO schema_migrations (version) VALUES ('20140228154623');
+
+INSERT INTO schema_migrations (version) VALUES ('20140228160612');
+
+INSERT INTO schema_migrations (version) VALUES ('20140228170948');
+
+INSERT INTO schema_migrations (version) VALUES ('20140228172921');
+
+INSERT INTO schema_migrations (version) VALUES ('20140228185512');
