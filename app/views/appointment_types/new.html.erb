@@ -116,7 +116,12 @@
       });
 
       $('.select2-results').on('click', function(event) {
-        $('.select2-chosen').html($(event.currentTarget.firstChild.firstChild).text());
+
+
+        // For clicking options
+                // new_options += "<li class='select2-search-choice'><div>" + elem.description + "</div><a href='#' onclick='return false;' class='select2-search-choice-close' tabindex='-1'</a></li>"
+
+        $('.select2-choices').html("<li class='select2-search-choice'><div>" + $(event.currentTarget.firstChild.firstChild).text() + "</div><a href='#' onclick='return false;' class='select2-search-choice-close' tabindex='-1'</a></li>");
         $('#select2-input').removeClass('select2-focused');
         $('#select2-drop').removeAttr('style');
         $('#select2-drop').removeAttr('id');
