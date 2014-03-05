@@ -4,6 +4,7 @@ A chronic care management health app that helps patients manage their care plans
 
 ## Introduction
 
+A chronic care management health app that assists patients in managing their care plans while creating population metrics for Physicians. The application focuses on creating a communication channel between patients and their physicians. Physicians use the software in tandem with their normal care routine to reinforce care management goals, set and customize automated alerts to identify the needs of their patients, and gather individual and population data to create statistics. The ultimate goal of the app is to isolate high risk behavior preventatively and increase the overall quality of care.
 ## Installation
 
 ## TODO
