@@ -42,15 +42,19 @@
         </select>
       </div>
 
-      <div class="input">
-        <label>Email Notifiations:
-          <label for="on">On</label>
-          <input id="on" type="radio" <%= "checked" if @user.email_notifications %> name="user[email_notifications]" value="true">
+      <div class="radio-group group">
+        <label>Email Notifiations:</label>
 
+          <div class="radio-input">
+            <label for="on">On</label>
+            <input id="on" type="radio" <%= "checked" if @user.email_notifications %> name="user[email_notifications]" value="true">
+          </div>
 
-          <label for="off">Off</label>
-            <input id="off" type="radio" <%= "checked" unless @user.email_notifications %> name="user[email_notifications]" value="false">
-        </label>
+          <div class="radio-input">
+            <label for="off">Off</label>
+              <input id="off" type="radio" <%= "checked" unless @user.email_notifications %> name="user[email_notifications]" value="false">
+            </label>
+          </div>
       </div>
 
       <div class="submit">

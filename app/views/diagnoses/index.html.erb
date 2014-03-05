@@ -42,7 +42,9 @@
 <% content_for :js do %>
   <script type="text/javascript">
     $(document).ready(function() {
-      $('select#diagnoses-select').select2();
+      $('select#diagnoses-select').select2({
+        placeholder: "Enter a code.."
+      });
 
       var $el = $('input.select2-input')
       $el.on('input', function(event) {

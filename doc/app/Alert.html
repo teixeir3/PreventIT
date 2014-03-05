@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class Alert - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/models/alert.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">ActiveRecord::Base
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-complete_str-3F">#complete_str?</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Alert.html">Alert</a>
+  
+    <li><a href="./AlertSetting.html">AlertSetting</a>
+  
+    <li><a href="./AlertsController.html">AlertsController</a>
+  
+    <li><a href="./AlertsHelper.html">AlertsHelper</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./Appointment.html">Appointment</a>
+  
+    <li><a href="./AppointmentType.html">AppointmentType</a>
+  
+    <li><a href="./AppointmentTypesController.html">AppointmentTypesController</a>
+  
+    <li><a href="./AppointmentTypesHelper.html">AppointmentTypesHelper</a>
+  
+    <li><a href="./AppointmentsController.html">AppointmentsController</a>
+  
+    <li><a href="./AppointmentsHelper.html">AppointmentsHelper</a>
+  
+    <li><a href="./ApptTypeDiagnosis.html">ApptTypeDiagnosis</a>
+  
+    <li><a href="./DiagnosesController.html">DiagnosesController</a>
+  
+    <li><a href="./DiagnosesHelper.html">DiagnosesHelper</a>
+  
+    <li><a href="./Diagnosis.html">Diagnosis</a>
+  
+    <li><a href="./DoctorsController.html">DoctorsController</a>
+  
+    <li><a href="./DoctorsHelper.html">DoctorsHelper</a>
+  
+    <li><a href="./Health.html">Health</a>
+  
+    <li><a href="./PagesController.html">PagesController</a>
+  
+    <li><a href="./PagesHelper.html">PagesHelper</a>
+  
+    <li><a href="./PatientDiagnosis.html">PatientDiagnosis</a>
+  
+    <li><a href="./Practice.html">Practice</a>
+  
+    <li><a href="./Reminder.html">Reminder</a>
+  
+    <li><a href="./RemindersController.html">RemindersController</a>
+  
+    <li><a href="./RemindersHelper.html">RemindersHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./SessionsHelper.html">SessionsHelper</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Alert</h1>
+
+  <div id="description" class="description">
+    
+<h2 id="label-Schema+Information">Schema Information</h2>
+
+<p>Table name: alerts</p>
+
+<pre>id                :integer          not null, primary key
+patient_id        :integer          not null
+alert_type        :string(255)      not null
+complete          :boolean          default(FALSE), not null
+created_at        :datetime         not null
+updated_at        :datetime         not null
+reminders_skipped :integer
+reason            :string(255)</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-complete_str-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">complete_str?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="complete_str-3F-source">
+            <pre><span class="ruby-comment"># File app/models/alert.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">complete_str?</span>
+  (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">complete</span>) <span class="ruby-operator">?</span> <span class="ruby-string">&quot;complete&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;incomplete&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- complete_str-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- complete_str-3F-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

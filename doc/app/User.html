@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class User - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/models/user.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">ActiveRecord::Base
+  
+</nav>
+
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">PgSearch</span>
+  
+  
+  </ul>
+</nav>
+
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-find_by_credentials">::find_by_credentials</a>
+    
+    <li><a href="#method-c-generate_all_alerts">::generate_all_alerts</a>
+    
+    <li><a href="#method-c-generate_session_token">::generate_session_token</a>
+    
+    <li><a href="#method-i-check_uid_by_provider">#check_uid_by_provider</a>
+    
+    <li><a href="#method-i-complete_alerts">#complete_alerts</a>
+    
+    <li><a href="#method-i-due_reminders">#due_reminders</a>
+    
+    <li><a href="#method-i-ensure_session_token">#ensure_session_token</a>
+    
+    <li><a href="#method-i-full_name">#full_name</a>
+    
+    <li><a href="#method-i-full_name_by_last">#full_name_by_last</a>
+    
+    <li><a href="#method-i-generate_doctor_alerts">#generate_doctor_alerts</a>
+    
+    <li><a href="#method-i-generate_missed_appointment_alerts">#generate_missed_appointment_alerts</a>
+    
+    <li><a href="#method-i-generate_missed_input_alerts">#generate_missed_input_alerts</a>
+    
+    <li><a href="#method-i-generate_missed_medication_alerts">#generate_missed_medication_alerts</a>
+    
+    <li><a href="#method-i-generate_missed_treatment_alerts">#generate_missed_treatment_alerts</a>
+    
+    <li><a href="#method-i-generate_unhealthy_input_alerts">#generate_unhealthy_input_alerts</a>
+    
+    <li><a href="#method-i-incomplete_alerts">#incomplete_alerts</a>
+    
+    <li><a href="#method-i-incomplete_due_reminders">#incomplete_due_reminders</a>
+    
+    <li><a href="#method-i-is_password-3F">#is_password?</a>
+    
+    <li><a href="#method-i-is_patient_doctor-3F">#is_patient_doctor?</a>
+    
+    <li><a href="#method-i-password-3D">#password=</a>
+    
+    <li><a href="#method-i-patients_by_last_name">#patients_by_last_name</a>
+    
+    <li><a href="#method-i-patients_input_complete_unchecked_reminders">#patients_input_complete_unchecked_reminders</a>
+    
+    <li><a href="#method-i-patients_reminders_by_type">#patients_reminders_by_type</a>
+    
+    <li><a href="#method-i-patients_with_reminders">#patients_with_reminders</a>
+    
+    <li><a href="#method-i-reset_session_token-21">#reset_session_token!</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Alert.html">Alert</a>
+  
+    <li><a href="./AlertSetting.html">AlertSetting</a>
+  
+    <li><a href="./AlertsController.html">AlertsController</a>
+  
+    <li><a href="./AlertsHelper.html">AlertsHelper</a>
+  
+    <li><a href="./ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="./ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="./Appointment.html">Appointment</a>
+  
+    <li><a href="./AppointmentType.html">AppointmentType</a>
+  
+    <li><a href="./AppointmentTypesController.html">AppointmentTypesController</a>
+  
+    <li><a href="./AppointmentTypesHelper.html">AppointmentTypesHelper</a>
+  
+    <li><a href="./AppointmentsController.html">AppointmentsController</a>
+  
+    <li><a href="./AppointmentsHelper.html">AppointmentsHelper</a>
+  
+    <li><a href="./ApptTypeDiagnosis.html">ApptTypeDiagnosis</a>
+  
+    <li><a href="./DiagnosesController.html">DiagnosesController</a>
+  
+    <li><a href="./DiagnosesHelper.html">DiagnosesHelper</a>
+  
+    <li><a href="./Diagnosis.html">Diagnosis</a>
+  
+    <li><a href="./DoctorsController.html">DoctorsController</a>
+  
+    <li><a href="./DoctorsHelper.html">DoctorsHelper</a>
+  
+    <li><a href="./Health.html">Health</a>
+  
+    <li><a href="./PagesController.html">PagesController</a>
+  
+    <li><a href="./PagesHelper.html">PagesHelper</a>
+  
+    <li><a href="./PatientDiagnosis.html">PatientDiagnosis</a>
+  
+    <li><a href="./Practice.html">Practice</a>
+  
+    <li><a href="./Reminder.html">Reminder</a>
+  
+    <li><a href="./RemindersController.html">RemindersController</a>
+  
+    <li><a href="./RemindersHelper.html">RemindersHelper</a>
+  
+    <li><a href="./SessionsController.html">SessionsController</a>
+  
+    <li><a href="./SessionsHelper.html">SessionsHelper</a>
+  
+    <li><a href="./User.html">User</a>
+  
+    <li><a href="./UsersController.html">UsersController</a>
+  
+    <li><a href="./UsersHelper.html">UsersHelper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class User</h1>
+
+  <div id="description" class="description">
+    
+<h2 id="label-Schema+Information">Schema Information</h2>
+
+<p>Table name: users</p>
+
+<pre>id                  :integer          not null, primary key
+email               :string(255)      not null
+password_digest     :string(255)      not null
+session_token       :string(255)      not null
+first_name          :string(255)
+last_name           :string(255)
+phone               :string(255)
+doctor_id           :integer
+practice_id         :integer
+is_doctor           :boolean          default(FALSE), not null
+created_at          :datetime         not null
+updated_at          :datetime         not null
+avatar_file_name    :string(255)
+avatar_content_type :string(255)
+avatar_file_size    :integer
+avatar_updated_at   :datetime
+email_notifications :boolean          default(TRUE), not null
+uid                 :string(255)
+access_token        :string(255)
+provider            :string(255)</pre>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
+
+      
+      <div id="attribute-i-password" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">password</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-find_by_credentials" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">find_by_credentials</span><span
+            class="method-args">(email, password)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Auth Methods ###</p>
+          
+
+          
+          <div class="method-source-code" id="find_by_credentials-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 427</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_by_credentials</span>(<span class="ruby-identifier">email</span>, <span class="ruby-identifier">password</span>)
+  <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_email</span>(<span class="ruby-identifier">email</span>)
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">try</span>(<span class="ruby-value">:is_password?</span>, <span class="ruby-identifier">password</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- find_by_credentials-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- find_by_credentials-method -->
+
+    
+      <div id="method-c-generate_all_alerts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_all_alerts</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="Alert.html">Alert</a> Methods (for doctor)###</p>
+          
+
+          
+          <div class="method-source-code" id="generate_all_alerts-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 209</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate_all_alerts</span>
+  <span class="ruby-identifier">new_alert_count</span> = <span class="ruby-value">0</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">is_doctor</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">joins</span>(<span class="ruby-value">:patients</span>).<span class="ruby-identifier">includes</span>(<span class="ruby-value">:patients</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">doctor</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">new_alert_count</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">doctor</span>.<span class="ruby-identifier">generate_doctor_alerts</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">new_alert_count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate_all_alerts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate_all_alerts-method -->
+
+    
+      <div id="method-c-generate_session_token" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_session_token</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="generate_session_token-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 432</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate_session_token</span>
+  <span class="ruby-constant">SecureRandom</span><span class="ruby-operator">::</span><span class="ruby-identifier">urlsafe_base64</span>(<span class="ruby-value">16</span>);
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate_session_token-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate_session_token-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-check_uid_by_provider" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">check_uid_by_provider</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="check_uid_by_provider-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 464</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">check_uid_by_provider</span>
+  <span class="ruby-identifier">uid</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">provider</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- check_uid_by_provider-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- check_uid_by_provider-method -->
+
+    
+      <div id="method-i-complete_alerts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">complete_alerts</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="complete_alerts-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 202</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">complete_alerts</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">patient_alerts</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;alerts.complete = ?&quot;</span>, <span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- complete_alerts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- complete_alerts-method -->
+
+    
+      <div id="method-i-due_reminders" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">due_reminders</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="Reminder.html">Reminder</a> Methods ###</p>
+          
+
+          
+          <div class="method-source-code" id="due_reminders-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 178</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">due_reminders</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">reminders</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">reminder</span><span class="ruby-operator">|</span> <span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">is_due?</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- due_reminders-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- due_reminders-method -->
+
+    
+      <div id="method-i-ensure_session_token" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ensure_session_token</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="ensure_session_token-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 460</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ensure_session_token</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">session_token</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">generate_session_token</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- ensure_session_token-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- ensure_session_token-method -->
+
+    
+      <div id="method-i-full_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">full_name</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="full_name-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">full_name</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;#{self.first_name} #{self.last_name}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- full_name-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- full_name-method -->
+
+    
+      <div id="method-i-full_name_by_last" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">full_name_by_last</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="full_name_by_last-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">full_name_by_last</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;#{self.last_name}, #{self.first_name}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- full_name_by_last-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- full_name_by_last-method -->
+
+    
+      <div id="method-i-generate_doctor_alerts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_doctor_alerts</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>handle_asynchronously :<a
+href="User.html#method-c-generate_all_alerts">::generate_all_alerts</a></p>
+          
+
+          
+          <div class="method-source-code" id="generate_doctor_alerts-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 221</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_doctor_alerts</span>
+  <span class="ruby-identifier">new_alert_count</span> = <span class="ruby-value">0</span>
+  <span class="ruby-identifier">new_alert_count</span> <span class="ruby-operator">+=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate_missed_medication_alerts</span>
+  <span class="ruby-identifier">new_alert_count</span> <span class="ruby-operator">+=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate_missed_appointment_alerts</span>
+  <span class="ruby-identifier">new_alert_count</span> <span class="ruby-operator">+=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate_missed_input_alerts</span>
+  <span class="ruby-identifier">new_alert_count</span> <span class="ruby-operator">+=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate_missed_treatment_alerts</span>
+  <span class="ruby-identifier">new_alert_count</span> <span class="ruby-operator">+=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate_unhealthy_input_alerts</span>
+
+  <span class="ruby-identifier">new_alert_count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate_doctor_alerts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate_doctor_alerts-method -->
+
+    
+      <div id="method-i-generate_missed_appointment_alerts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_missed_appointment_alerts</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="generate_missed_appointment_alerts-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 273</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_missed_appointment_alerts</span>
+  <span class="ruby-identifier">patient_population</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">patients_reminders_by_type</span>(<span class="ruby-string">&quot;appointment&quot;</span>)
+  <span class="ruby-identifier">new_alert_count</span> = <span class="ruby-value">0</span>
+
+  <span class="ruby-identifier">patient_population</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">patient</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">skipped_appointment_count</span> = <span class="ruby-value">0</span>
+    <span class="ruby-identifier">allowed_skipped</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">alert_setting</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">skipped_appointments</span>
+    <span class="ruby-identifier">reminder_ids</span> = []
+
+    <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">incomplete_due_reminders</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">reminder</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> ((<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">datetime</span>) <span class="ruby-operator">/</span> <span class="ruby-value">60</span> <span class="ruby-operator">/</span> <span class="ruby-value">60</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">skipped_appointment_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">reminder_ids</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">id</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">skipped_appointment_count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">allowed_skipped</span>
+        <span class="ruby-identifier">allowed_skipped</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span>
+
+        <span class="ruby-identifier">current_alert</span> = <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">alerts</span>.<span class="ruby-identifier">build</span>({
+          <span class="ruby-identifier">alert_type</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;appointment&quot;</span>,
+          <span class="ruby-identifier">reminders_skipped</span><span class="ruby-operator">:</span> <span class="ruby-identifier">skipped_appointment_count</span>,
+          <span class="ruby-identifier">reason</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;Skipped #{skipped_appointment_count} Appointments&quot;</span>
+        })
+
+        <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">reminders</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">reminder_ids</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">checked_reminder</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">checked_reminder</span>.<span class="ruby-identifier">checked</span> = <span class="ruby-keyword">true</span>
+          <span class="ruby-identifier">checked_reminder</span>.<span class="ruby-identifier">save</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">new_alert_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_alert</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">new_alert_count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate_missed_appointment_alerts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate_missed_appointment_alerts-method -->
+
+    
+      <div id="method-i-generate_missed_input_alerts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_missed_input_alerts</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Tested</p>
+          
+
+          
+          <div class="method-source-code" id="generate_missed_input_alerts-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 311</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_missed_input_alerts</span>
+  <span class="ruby-identifier">patient_population</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">patients_reminders_by_type</span>(<span class="ruby-string">&quot;input&quot;</span>)
+  <span class="ruby-identifier">new_alert_count</span> = <span class="ruby-value">0</span>
+
+  <span class="ruby-identifier">patient_population</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">patient</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">skipped_input_count</span> = <span class="ruby-value">0</span>
+    <span class="ruby-identifier">allowed_skipped</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">alert_setting</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">skipped_inputs</span>
+    <span class="ruby-identifier">reminder_ids</span> = []
+
+    <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">incomplete_due_reminders</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">reminder</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> ((<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">datetime</span>) <span class="ruby-operator">/</span> <span class="ruby-value">60</span> <span class="ruby-operator">/</span> <span class="ruby-value">60</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">skipped_input_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">reminder_ids</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">id</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">skipped_input_count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">allowed_skipped</span>
+        <span class="ruby-identifier">allowed_skipped</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span>
+
+        <span class="ruby-identifier">current_alert</span> = <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">alerts</span>.<span class="ruby-identifier">build</span>({
+          <span class="ruby-identifier">alert_type</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;input&quot;</span>,
+          <span class="ruby-identifier">reminders_skipped</span><span class="ruby-operator">:</span> <span class="ruby-identifier">skipped_input_count</span>,
+          <span class="ruby-identifier">reason</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;Skipped #{skipped_input_count} inputs&quot;</span>
+        })
+
+        <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">reminders</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">reminder_ids</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">checked_reminder</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">checked_reminder</span>.<span class="ruby-identifier">checked</span> = <span class="ruby-keyword">true</span>
+          <span class="ruby-identifier">checked_reminder</span>.<span class="ruby-identifier">save</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">new_alert_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_alert</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">new_alert_count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate_missed_input_alerts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate_missed_input_alerts-method -->
+
+    
+      <div id="method-i-generate_missed_medication_alerts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_missed_medication_alerts</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>TODO: Have TA check this on Monday // Make this run on all patients instead
+of patient’s by doctor TODO: Could generate ‘reason’ dynamically with a
+single helper method</p>
+          
+
+          
+          <div class="method-source-code" id="generate_missed_medication_alerts-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 236</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_missed_medication_alerts</span>
+  <span class="ruby-identifier">patient_population</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">patients_reminders_by_type</span>(<span class="ruby-string">&quot;medication&quot;</span>)
+  <span class="ruby-identifier">new_alert_count</span> = <span class="ruby-value">0</span>
+
+  <span class="ruby-identifier">patient_population</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">patient</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">skipped_med_count</span> = <span class="ruby-value">0</span>
+    <span class="ruby-identifier">allowed_skipped</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">alert_setting</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">skipped_meds</span>
+    <span class="ruby-identifier">reminder_ids</span> = []
+
+    <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">incomplete_due_reminders</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">reminder</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> ((<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">datetime</span>) <span class="ruby-operator">/</span> <span class="ruby-value">60</span> <span class="ruby-operator">/</span> <span class="ruby-value">60</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">skipped_med_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">reminder_ids</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">id</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">skipped_med_count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">allowed_skipped</span>
+        <span class="ruby-identifier">allowed_skipped</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span>
+
+        <span class="ruby-identifier">current_alert</span> = <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">alerts</span>.<span class="ruby-identifier">build</span>({
+          <span class="ruby-identifier">alert_type</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;medication&quot;</span>,
+          <span class="ruby-identifier">reminders_skipped</span><span class="ruby-operator">:</span> <span class="ruby-identifier">skipped_med_count</span>,
+          <span class="ruby-identifier">reason</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;Skipped #{skipped_med_count} Meds&quot;</span>
+        })
+
+        <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">reminders</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">reminder_ids</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">checked_reminder</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">checked_reminder</span>.<span class="ruby-identifier">checked</span> = <span class="ruby-keyword">true</span>
+          <span class="ruby-identifier">checked_reminder</span>.<span class="ruby-identifier">save</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">new_alert_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_alert</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">new_alert_count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate_missed_medication_alerts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate_missed_medication_alerts-method -->
+
+    
+      <div id="method-i-generate_missed_treatment_alerts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_missed_treatment_alerts</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="generate_missed_treatment_alerts-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 348</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_missed_treatment_alerts</span>
+  <span class="ruby-identifier">patient_population</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">patients_reminders_by_type</span>(<span class="ruby-string">&quot;treatment&quot;</span>)
+  <span class="ruby-identifier">new_alert_count</span> = <span class="ruby-value">0</span>
+
+  <span class="ruby-identifier">patient_population</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">patient</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">skipped_treatment_count</span> = <span class="ruby-value">0</span>
+    <span class="ruby-identifier">allowed_skipped</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">alert_setting</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">skipped_treatments</span>
+    <span class="ruby-identifier">reminder_ids</span> = []
+
+    <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">incomplete_due_reminders</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">reminder</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> ((<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">datetime</span>) <span class="ruby-operator">/</span> <span class="ruby-value">60</span> <span class="ruby-operator">/</span> <span class="ruby-value">60</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">skipped_treatment_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">reminder_ids</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">id</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">skipped_treatment_count</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">allowed_skipped</span>
+        <span class="ruby-identifier">allowed_skipped</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span>
+
+        <span class="ruby-identifier">current_alert</span> = <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">alerts</span>.<span class="ruby-identifier">build</span>({
+          <span class="ruby-identifier">alert_type</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;treatment&quot;</span>,
+          <span class="ruby-identifier">reminders_skipped</span><span class="ruby-operator">:</span> <span class="ruby-identifier">skipped_treatment_count</span>,
+          <span class="ruby-identifier">reason</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;Skipped #{skipped_treatment_count} Treatments&quot;</span>
+        })
+
+        <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">reminders</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">reminder_ids</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">checked_reminder</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">checked_reminder</span>.<span class="ruby-identifier">checked</span> = <span class="ruby-keyword">true</span>
+          <span class="ruby-identifier">checked_reminder</span>.<span class="ruby-identifier">save</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">new_alert_count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_alert</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">new_alert_count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate_missed_treatment_alerts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate_missed_treatment_alerts-method -->
+
+    
+      <div id="method-i-generate_unhealthy_input_alerts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_unhealthy_input_alerts</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="generate_unhealthy_input_alerts-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 386</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">generate_unhealthy_input_alerts</span>
+  <span class="ruby-identifier">patient_population</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">patients_input_complete_unchecked_reminders</span>
+  <span class="ruby-identifier">alert_setting</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">alert_setting</span>
+  <span class="ruby-identifier">new_alert_count</span> = <span class="ruby-value">0</span>
+
+  <span class="ruby-identifier">patient_population</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">patient</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">reminders</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">reminder</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">sub_type</span> <span class="ruby-operator">==</span> <span class="ruby-string">'a1c'</span>)
+        <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">input</span>.<span class="ruby-identifier">between?</span>(<span class="ruby-identifier">alert_setting</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">a1c_min</span>, <span class="ruby-identifier">alert_setting</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">a1c_max</span>))
+          <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">alerts</span>.<span class="ruby-identifier">create</span>({
+            <span class="ruby-identifier">alert_type</span><span class="ruby-operator">:</span> <span class="ruby-string">'input'</span>,
+            <span class="ruby-identifier">reason</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;Unhealthy A1C: #{reminder.input} : #{reminder.id}&quot;</span>
+          })
+
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">input_checked</span> = <span class="ruby-keyword">true</span>
+        <span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">sub_type</span> <span class="ruby-operator">==</span> <span class="ruby-string">'weight'</span>)
+        <span class="ruby-identifier">bmi</span> = (<span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">input</span><span class="ruby-operator">/</span>(<span class="ruby-identifier">patient</span>.<span class="ruby-identifier">health</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">height</span>*<span class="ruby-identifier">patient</span>.<span class="ruby-identifier">health</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">height</span>).<span class="ruby-identifier">to_f</span>) * <span class="ruby-value">703</span>
+
+        <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">bmi</span>.<span class="ruby-identifier">between?</span>(<span class="ruby-identifier">alert_setting</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">bmi_min</span>, <span class="ruby-identifier">alert_setting</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">bmi_max</span>))
+          <span class="ruby-identifier">patient</span>.<span class="ruby-identifier">alerts</span>.<span class="ruby-identifier">create</span>({
+            <span class="ruby-identifier">alert_type</span><span class="ruby-operator">:</span> <span class="ruby-string">'input'</span>,
+            <span class="ruby-identifier">reason</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;Unhealthy BMI: #{bmi} : #{reminder.id}&quot;</span>
+          })
+
+          <span class="ruby-identifier">new_alert_count</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">input_checked</span> = <span class="ruby-keyword">true</span>
+        <span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">new_alert_count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- generate_unhealthy_input_alerts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- generate_unhealthy_input_alerts-method -->
+
+    
+      <div id="method-i-incomplete_alerts" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">incomplete_alerts</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="incomplete_alerts-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 198</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">incomplete_alerts</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">patient_alerts</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;alerts.complete = ?&quot;</span>, <span class="ruby-keyword">false</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- incomplete_alerts-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- incomplete_alerts-method -->
+
+    
+      <div id="method-i-incomplete_due_reminders" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">incomplete_due_reminders</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="incomplete_due_reminders-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 182</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">incomplete_due_reminders</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">reminders</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">reminder</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">is_due?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">complete</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">reminder</span>.<span class="ruby-identifier">checked</span>) }
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- incomplete_due_reminders-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- incomplete_due_reminders-method -->
+
+    
+      <div id="method-i-is_password-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_password?</span><span
+            class="method-args">(unencrypted_password)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="is_password-3F-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 436</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_password?</span>(<span class="ruby-identifier">unencrypted_password</span>)
+  <span class="ruby-constant">BCrypt</span><span class="ruby-operator">::</span><span class="ruby-constant">Password</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">password_digest</span>).<span class="ruby-identifier">is_password?</span>(<span class="ruby-identifier">unencrypted_password</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- is_password-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- is_password-3F-method -->
+
+    
+      <div id="method-i-is_patient_doctor-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">is_patient_doctor?</span><span
+            class="method-args">(patient_id)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="is_patient_doctor-3F-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 454</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">is_patient_doctor?</span>(<span class="ruby-identifier">patient_id</span>)
+  (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">is_doctor</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">patient_ids</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">patient_id</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- is_patient_doctor-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- is_patient_doctor-3F-method -->
+
+    
+      <div id="method-i-password-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">password=</span><span
+            class="method-args">(unencrypted_password)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="password-3D-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 440</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">password=</span>(<span class="ruby-identifier">unencrypted_password</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">unencrypted_password</span>.<span class="ruby-identifier">present?</span>
+    <span class="ruby-ivar">@password</span> = <span class="ruby-identifier">unencrypted_password</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">password_digest</span> = <span class="ruby-constant">BCrypt</span><span class="ruby-operator">::</span><span class="ruby-constant">Password</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">unencrypted_password</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- password-3D-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- password-3D-method -->
+
+    
+      <div id="method-i-patients_by_last_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">patients_by_last_name</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="patients_by_last_name-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">patients_by_last_name</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">patients</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">:last_name</span>, <span class="ruby-value">:first_name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- patients_by_last_name-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- patients_by_last_name-method -->
+
+    
+      <div id="method-i-patients_input_complete_unchecked_reminders" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">patients_input_complete_unchecked_reminders</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="patients_input_complete_unchecked_reminders-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 194</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">patients_input_complete_unchecked_reminders</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">patients</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:reminders</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;reminders.rem_type = ? AND reminders.complete = ? AND reminders.input_checked = ?&quot;</span>, <span class="ruby-string">&quot;input&quot;</span>, <span class="ruby-keyword">true</span>, <span class="ruby-keyword">false</span>).<span class="ruby-identifier">includes</span>(<span class="ruby-value">:reminders</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- patients_input_complete_unchecked_reminders-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- patients_input_complete_unchecked_reminders-method -->
+
+    
+      <div id="method-i-patients_reminders_by_type" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">patients_reminders_by_type</span><span
+            class="method-args">(type)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="patients_reminders_by_type-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 186</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">patients_reminders_by_type</span>(<span class="ruby-identifier">type</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">patients</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-value">:reminders</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;reminders.rem_type = ? AND reminders.checked = ?&quot;</span>, <span class="ruby-identifier">type</span>, <span class="ruby-keyword">false</span>).<span class="ruby-identifier">includes</span>(<span class="ruby-value">:reminders</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- patients_reminders_by_type-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- patients_reminders_by_type-method -->
+
+    
+      <div id="method-i-patients_with_reminders" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">patients_with_reminders</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="patients_with_reminders-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 190</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">patients_with_reminders</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">patients</span>.<span class="ruby-identifier">includes</span>(<span class="ruby-value">:reminders</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- patients_with_reminders-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- patients_with_reminders-method -->
+
+    
+      <div id="method-i-reset_session_token-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reset_session_token!</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="reset_session_token-21-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 447</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">reset_session_token!</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">session_token</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">generate_session_token</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">save!</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">session_token</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- reset_session_token-21-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- reset_session_token-21-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
