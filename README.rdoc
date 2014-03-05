@@ -1,5 +1,0 @@
-# PreventIT
-
-## Introduction
-
-## Installation
