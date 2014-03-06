@@ -20,7 +20,7 @@
         <input
           id="name"
           type="text"
-          name="apptointment_type[name]"
+          name="appointment_type[name]"
           value="">
       </div>
 
@@ -31,7 +31,7 @@
           <input
             id="recurrence-yes"
             type="radio"
-            name="appointment_type[name]"
+            name="appointment_type[recurrence]"
             value="true">
         </div>
 
@@ -40,7 +40,7 @@
           <input
             id="recurrence-no"
             type="radio"
-            name="appointment_type[name]"
+            name="appointment_type[recurrence]"
             value="false">
         </div>
       </div>
@@ -50,23 +50,16 @@
         <input
           id="frequency"
           type="number"
-          name="apptointment_type[occurence_frequency]"
+          name="appointment_type[occurence_frequency]"
           step="1"
           pattern="\d+"
           value="">
       </div>
 
-      <div class="input">
-      <label for="doctor">Doctor:</label>
 
-        <select id="doctor" name="appointment[doctor]" data-placeholder="Select Diagnoses..">
-          <option value="">Dr. <%=  %></option>
-        </select>
-      </div>
+      <select id="diagnoses-select" multiple name="diagnoses_ids[]" style="width: 70%">
 
-
-
-      <select id="diagnoses-select" multiple name="diagnoses_ids[]" style="width: 70%"></select>
+      </select>
 
       <div class="submit">
         <input type="submit" value="Add Appointment Type">
@@ -112,13 +105,13 @@
                 if (ensureUnique(elem.description)) {
                   html += ("<option class='unique-choice' value='" + elem.id + "'>" + elem.description +"</option>");
                 }
-                new_options += "<li class='select2-results-dept-0 select2-result select2-result-selectable'><div class='select2-result-label'><span class='select2-match'></span>" + elem.description + "</div></li>"
+                // new_options += "<li class='select2-results-dept-0 select2-result select2-result-selectable'><div class='select2-result-label'><span class='select2-match'></span>" + elem.description + "</div></li>"
               });
 
               var $options = $('select#diagnoses-select')
               var $select_options = $('.select2-results')
 
-              $select_options.html(new_options);
+              // $select_options.html(new_options);
               $options.prepend(html);
             },
             error: function() {

@@ -11,7 +11,9 @@
 
 
   <div class="sub-content">
-    ALL APPOINTMENT TYPES WOHOO!
+    <% @appointment_types.each do |appointment_type| %>
+      <%= appointment_type.name %>
+    <% end %>
   </div>
 
 </main>
