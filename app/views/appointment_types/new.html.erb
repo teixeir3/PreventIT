@@ -10,7 +10,7 @@
 
   <div class="sub-content">
 
-    <form class="form" action="<%=  %>" method="POST">
+    <form class="form" action="<%= appointment_types_url %>" method="POST">
       <h3>New Appointment Type:</h3>
 
       <%= auth_token %>
@@ -66,7 +66,7 @@
 
 
 
-      <select id="diagnoses-select" multiple style="width: 70%"><option></option></select>
+      <select id="diagnoses-select" multiple name="diagnoses_ids[]" style="width: 70%"></select>
 
       <div class="submit">
         <input type="submit" value="Add Appointment Type">
@@ -81,6 +81,18 @@
       $('select#diagnoses-select').select2({
         placeholder: "Select Diagnoses"
       });
+
+      var ensureUnique = function(description) {
+        var isUniq = true;
+
+        $('.unique-choice').each(function(i, el) {
+          if (el.text === description) {
+            isUniq = false;
+          };
+        })
+
+        return isUniq;
+      };
 
       var $el = $('input.select2-input')
       $el.on('input', function(event) {
@@ -97,7 +109,9 @@
               var new_options = "";
 
               data.forEach(function(elem) {
-                html += ("<option value='" + elem.code + "'>" + elem.description +"</option>");
+                if (ensureUnique(elem.description)) {
+                  html += ("<option class='unique-choice' value='" + elem.id + "'>" + elem.description +"</option>");
+                }
                 new_options += "<li class='select2-results-dept-0 select2-result select2-result-selectable'><div class='select2-result-label'><span class='select2-match'></span>" + elem.description + "</div></li>"
               });
 
@@ -105,7 +119,7 @@
               var $select_options = $('.select2-results')
 
               $select_options.html(new_options);
-              $options.html(html);
+              $options.prepend(html);
             },
             error: function() {
               console.log("Error Searching for Diagnosis!")
@@ -117,11 +131,12 @@
 
       $('.select2-results').on('click', function(event) {
 
-
         // For clicking options
                 // new_options += "<li class='select2-search-choice'><div>" + elem.description + "</div><a href='#' onclick='return false;' class='select2-search-choice-close' tabindex='-1'</a></li>"
-
-        $('.select2-choices').html("<li class='select2-search-choice'><div>" + $(event.currentTarget.firstChild.firstChild).text() + "</div><a href='#' onclick='return false;' class='select2-search-choice-close' tabindex='-1'</a></li>");
+                // console.log($(event.target).parent());
+        $(event.target).parent().addClass("select2-selected");
+        $('.select2-choices').prepend("<li class='select2-search-choice'><div>" + event.target.innerText + "</div><a href='#' onclick='return false;' class='select2-search-choice-close' tabindex='-1'></a></li>");
+        $("#s2id_autogen1").val('');
         $('#select2-input').removeClass('select2-focused');
         $('#select2-drop').removeAttr('style');
         $('#select2-drop').removeAttr('id');

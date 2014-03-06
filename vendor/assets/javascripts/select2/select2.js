@@ -2727,7 +2727,6 @@ the specific language governing permissions and limitations under the Apache Lic
         // multi
         updateSelection: function (data) {
             var ids = [], filtered = [], self = this;
-
             // filter out duplicates
             $(data).each(function () {
                 if (indexOf(self.id(this), ids) < 0) {
@@ -2759,7 +2758,6 @@ the specific language governing permissions and limitations under the Apache Lic
 
         // multi
         onSelect: function (data, options) {
-
             if (!this.triggerSelect(data)) { return; }
 
             this.addSelectedChoice(data);

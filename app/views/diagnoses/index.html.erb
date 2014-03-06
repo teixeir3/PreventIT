@@ -69,7 +69,7 @@
               var $select_options = $('.select2-results')
 
               $select_options.html(new_options);
-              $options.html(html);
+              $options.prepend(html);
             },
             error: function() {
               console.log("Error Searching for Diagnosis!")
