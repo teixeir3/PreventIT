@@ -1,0 +1,14 @@
+<%= render "doctors/sub_bar", doctor: @doctor%>
+
+
+<main class="group">
+  <div class="side-content">
+    <div class="title">
+      <h2>Appointment Types</h2>
+    </div>
+  </div>
+
+  <div class="sub-content">
+    <%= render "form", appointment_type: @appointment_type %>
+  </div>
+</main>

@@ -1,7 +1,7 @@
 <div class="sub-bar group">
 
   <div class="avatar">
-    <%= image_tag doctor.avatar.url(:small) %>
+    <%= image_tag current_user.avatar.url(:small) %>
   </div>
 
   <div class="nav-search group">
@@ -10,8 +10,8 @@
 
   <div class="user-info">
     <ul>
-      <li><%= "Dr. " + doctor.full_name %></li>
-      <li><%= link_to "Settings", edit_user_url(doctor) %></li>
+      <li><%= "Dr. " + current_user.full_name %></li>
+      <li><%= link_to "Settings", edit_user_url(current_user) %></li>
     </ul>
   </div>
 

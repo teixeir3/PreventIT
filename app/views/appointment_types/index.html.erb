@@ -11,9 +11,11 @@
 
 
   <div class="sub-content">
-    <% @appointment_types.each do |appointment_type| %>
-      <%= appointment_type.name %>
-    <% end %>
+    <ul>
+      <% @appointment_types.each do |appointment_type| %>
+        <li><%= link_to appointment_type.name, edit_appointment_type_url(appointment_type) %></li>
+      <% end %>
+    </ul>
   </div>
 
 </main>

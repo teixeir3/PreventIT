@@ -5,7 +5,6 @@ class AppointmentTypesController < ApplicationController
   def index
     @doctor = current_user
     @appointment_types = current_user.appointment_types
-    # fail
   end
 
   def new
@@ -23,6 +22,23 @@ class AppointmentTypesController < ApplicationController
       flash.now[:errors] = @appointment_type.errors.full_messages
       render :new
     end
+  end
+
+  def edit
+    @appointment_type = current_user.appointment_types.find(params[:id])
+  end
+
+  def update
+    @appointment_type = current_user.appointment_types.find(params[:id])
+    @appointment_type.diagnosis_ids = params[:diagnoses_ids]
+
+    if @appointment_type.update_attributes(params[:appointment_type])
+      flash.now[:notice] = "Appointment Type Updated."
+    else
+      flash.now[:errors] = @appointment_type.errors.full_messages
+    end
+
+    render :edit
   end
 
 end
