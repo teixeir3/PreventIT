@@ -19,7 +19,7 @@
     <br>
       <ul>
         <% @results.each do |result| %>
-          <li><%= link_to result.full_name, user_url(result) %></li>
+          <li><%= link_to result.full_name_by_last, user_url(result) %></li>
         <% end %>
       </ul>
     <% end %>

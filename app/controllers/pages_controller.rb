@@ -1,13 +1,17 @@
 class PagesController < ApplicationController
   before_filter :require_signed_in!
-  # before_filter :require_doctor_authority!
+  before_filter :require_doctor_status!, only: [:search_patients]
 
   def new
   end
 
   def search_patients
+    if params[:query].blank?
+      @results = User.where(doctor_id: current_user.id).order(:last_name).page(params[:page]).per(15)
+    else
+      @results = User.search_on_name(params[:query]).where(doctor_id: current_user.id).page(params[:page]).per(15)
+    end
 
-    @results = User.search_on_name(params[:query]).where(doctor_id: current_user.id).page(params[:page]).per(10)
     # if params[:query]
 #       @results = PgSearch.search_on_name(params[:query])
 #     else
@@ -27,5 +31,3 @@ class PagesController < ApplicationController
 #     end
   end
 end
-
-# {"Name":"A001","Description":"Cholera due to Vibrio cholerae 01, biovar eltor","Valid":"1","Inclusions":["Cholera eltor"],"ExcludesOne":[],"ExcludesTwo":[],"Type":"ICD-10-CM","Response":"True"}

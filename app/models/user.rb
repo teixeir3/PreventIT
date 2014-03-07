@@ -46,10 +46,10 @@ class User < ActiveRecord::Base
 
   include PgSearch
   pg_search_scope :search_on_name,
-                  against: [:first_name, :last_name, :email],
+                  against: [:first_name, :last_name],
                   using: {
                     :trigram => {
-                      :threshold => 0.1
+                      :threshold => 0.02
                     }
                   }
 

@@ -12,6 +12,7 @@
     <ul>
       <li><%= "Dr. " + current_user.full_name %></li>
       <li><%= link_to "Settings", edit_user_url(current_user) %></li>
+      <li><%= link_to "Total Patients: #{current_user.patients.count}", doctor_url(current_user) %></li>
     </ul>
   </div>
 

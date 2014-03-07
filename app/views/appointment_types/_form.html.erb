@@ -49,11 +49,13 @@
 
   <input type="hidden" name="diagnoses_ids[]" value="">
 
-  <select id="diagnoses-select" multiple name="diagnoses_ids[]" style="width: 70%">
-    <% appointment_type.diagnoses.each do |diagnosis| %>
-      <option class="unique-choice" value="<%= diagnosis.id %>" selected><%= diagnosis.description %></option>
-    <% end %>
-  </select>
+  <div class="input">
+    <select id="diagnoses-select" multiple name="diagnoses_ids[]" style="width: 70%">
+      <% appointment_type.diagnoses.each do |diagnosis| %>
+        <option class="unique-choice" value="<%= diagnosis.id %>" selected><%= diagnosis.description %></option>
+      <% end %>
+    </select>
+  </div>
 
   <div class="submit">
     <input type="submit" value="Add Appointment Type">

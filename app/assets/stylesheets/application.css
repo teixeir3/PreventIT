@@ -415,6 +415,10 @@ footer {
   border: 2px solid #4be19d;
 }
 
+/*.select2-container-multi.select2-container-active .select2-choices {
+ border: 2px solid #4be19d;
+}*/
+
 .checkbox-group {
   display: block;
   float: left;
