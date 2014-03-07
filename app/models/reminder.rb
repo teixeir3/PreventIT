@@ -54,7 +54,9 @@ class Reminder < ActiveRecord::Base
   def self.mark_all_due
     @all_not_due_reminders = self.all_not_due
     @all_not_due_reminders.each do |reminder|
-      reminder.self_propagation! if reminder.is_due?
+      if reminder.is_due?
+        (reminder.type == "appointment") ? reminder.mark_due! : reminder.self_propagation!
+      end
     end
 
     nil
@@ -84,6 +86,8 @@ class Reminder < ActiveRecord::Base
   # def should_check_for_alert
 #     self.is_due? &&
 #   end
+
+
   # generates a new reminder with the same parameters 1 yr in the future
   def self_propagation!
 

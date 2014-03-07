@@ -22,6 +22,14 @@ class AppointmentsController < ApplicationController
     @appointment.doctor_id = params[:doctor_id] if @user.doctor_id = params[:doctor_id]
 
     if @user.save
+      @reminder = @user.reminders.create({
+        datetime: @appointment.datetime,
+        title: "#{@appointment.appointment_type.name} appointment with Dr. #{@appointment.doctor.full_name}",
+        rem_type: "appointment",
+        patient_id: @appointment.patient_id,
+        sub_type: @appointment.appointment_type.name
+      })
+
       redirect_to user_appointments_url(@user)
     else
       flash.now[:errors] = @user.appointments.last.errors.full_messages

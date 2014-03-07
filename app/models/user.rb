@@ -178,6 +178,10 @@ class User < ActiveRecord::Base
     return "#{self.first_name} #{self.last_name}"
   end
 
+  def doctor_full_name
+    return "Dr. #{self.first_name} #{self.last_name}"
+  end
+
   def full_name_by_last
     return "#{self.last_name}, #{self.first_name}"
   end
