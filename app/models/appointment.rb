@@ -14,9 +14,9 @@
 #
 
 class Appointment < ActiveRecord::Base
-  attr_accessible :patient, :doctor, :datetime, :reason, :note, :met, :appointment_type
+  attr_accessible :patient, :doctor, :datetime, :reason, :note, :met, :appointment_type, :appointment_type_id
 
-  validates :patient, :datetime, :reason, :met, presence: true
+  validates :patient, :datetime, :doctor, presence: true
 
   belongs_to(
     :patient,
@@ -24,6 +24,14 @@ class Appointment < ActiveRecord::Base
     foreign_key: :patient_id,
     primary_key: :id,
     inverse_of: :appointments
+  )
+
+  belongs_to(
+    :doctor,
+    class_name: "User",
+    foreign_key: :doctor_id,
+    primary_key: :id,
+    inverse_of: :doctor_appointments
   )
 
   belongs_to(

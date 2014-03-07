@@ -130,7 +130,7 @@ main {
   background: linear-gradient(to bottom, #9a9c9d, #6D6E70);
   border-top: 1px solid black;
   border-right: 1px solid black;
-  border-radius: 5px 0 0 0;
+  border-radius: 4px 0 0 0;
 /*  margin-right: 200px;*/
 }
 
@@ -141,7 +141,7 @@ main {
   text-align: center;
 /*  background: #6D6E70;*/
 /*  color: #B1D9A1;*/
-  border-radius: 5px 0 0 0;
+  border-radius: 4px 0 0 0;
   background: linear-gradient(to bottom, #9a9c9d, #6D6E70);
 }
 
@@ -365,7 +365,7 @@ footer {
 }
 
 .input > select {
-  border-radius: 5px;
+  border-radius: 4px;
   border: 2px solid #000;
   background: transparent;
   height: 30px;
@@ -375,7 +375,7 @@ footer {
 }
 
 .input > select:select {
-  border-radius: 5px;
+  border-radius: 4px;
   border: 2px solid #000;
   border-color: #4BE19D;
 }
@@ -442,21 +442,21 @@ footer {
   border: 2px solid #000;
   padding: 5px 10px;
 /*  width: 250px;*/
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .input > input, textarea {
   border: 2px solid #000;
   padding: 5px 10px;
   width: 250px;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .search > .input > input {
   border: 2px solid #000;
   padding: 5px 10px;
   width: 150px;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .search {
@@ -476,7 +476,7 @@ footer {
   border: 2px solid #000;
   padding: 5px 10px;
   width: 250px;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 
@@ -484,7 +484,7 @@ footer {
   border: 2px solid #000;
   padding: 5px 10px;
   width: 100px;
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 .time-input > label {
@@ -493,7 +493,7 @@ footer {
   padding: 0 0 5px 0;
 }
 
-.input > input:focus {
+.input > input:focus, .input > textarea:focus {
   border-color: #4BE19D;
 }
 
@@ -502,7 +502,7 @@ footer {
 /*  position: relative;*/
   background: #A1A9AB;
 /*  padding: 5px 10px;*/
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
   box-shadow: 0 3px #6A6F70;
 }
@@ -532,7 +532,7 @@ form > .submit > input {
   background: #00A55A;
   color: #fff;
   padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
   box-shadow: 0 3px #004B17;
 }

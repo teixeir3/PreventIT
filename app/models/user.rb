@@ -163,6 +163,15 @@ class User < ActiveRecord::Base
       dependent: :destroy
     )
 
+  has_many(
+    :doctor_appointments,
+    class_name: "Appointment",
+    foreign_key: :doctor_id,
+    primary_key: :id,
+    inverse_of: :doctor,
+    dependent: :destroy
+  )
+
 
 
   def full_name

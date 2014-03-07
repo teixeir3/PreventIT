@@ -15,13 +15,16 @@ class AppointmentsController < ApplicationController
 
   def create
     @user = User.find(params[:user_id])
+    params[:appointment][:datetime] = params[:date] + " " + params[:time]
 
     @appointment = @user.appointments.build(params[:appointment])
+
+    @appointment.doctor_id = params[:doctor_id] if @user.doctor_id = params[:doctor_id]
 
     if @user.save
       redirect_to user_appointments_url(@user)
     else
-      flash.now[:errors] = @user.reminders.first.errors.full_messages
+      flash.now[:errors] = @user.appointments.last.errors.full_messages
       render :new
     end
 

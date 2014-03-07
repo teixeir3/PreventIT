@@ -63,7 +63,7 @@ class RemindersController < ApplicationController
     if @user.save && params[:days]
       redirect_to user_reminders_url(@user)
     else
-      flash.now[:errors] = @user.reminders.first.errors.full_messages
+      flash.now[:errors] = @user.reminders.last.errors.full_messages
       render :new
     end
   end

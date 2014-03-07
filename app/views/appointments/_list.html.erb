@@ -2,7 +2,7 @@
   <table id="appointments">
     <thead>
       <tr>
-        <th>Reason</th>
+        <th>Type</th>
         <th>Date</th>
         <th>Time</th>
         <th>met?</th>
@@ -11,9 +11,9 @@
 
     <% @appointments.each do |appointment| %>
     <tr>
-      <td class="cell-wrap"><%= appointment.reason %></td>
-      <td><%= appointment.datetime.strftime("%Y/%m/%d") %></td>
-      <td><%= appointment.datetime.strftime("%M:%H") %></td>
+      <td class="cell-wrap"><%= appointment.appointment_type.name %></td>
+      <td><%= appointment.datetime.strftime("%m/%d/%Y") %></td>
+      <td><%= appointment.datetime.strftime("%H:%M") %></td>
       <td><%= appointment.met %></td>
     </tr>
     <% end %>
