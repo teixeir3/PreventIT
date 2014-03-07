@@ -46,12 +46,25 @@
         placeholder: "Enter a code.."
       });
 
+
+      var ensureUnique = function(description) {
+        var isUniq = true;
+
+        $('.unique-choice').each(function(i, el) {
+          if (el.text === description) {
+            isUniq = false;
+          };
+        })
+
+        return isUniq;
+      };
+
       var $el = $('input.select2-input')
       $el.on('input', function(event) {
         // console.log(event);
         // alert((event.currentTarget.value.length > 2));
         var url = "/search/diagnoses?query=" + event.currentTarget.value;
-        if (event.currentTarget.value.length > 2) {
+        if (event.currentTarget.value.length > 1) {
           $.ajax(url, {
             success: function(data, b, resp) {
 
@@ -61,14 +74,15 @@
               var new_options = "";
 
               data.forEach(function(elem) {
-                html += ("<option value='" + elem.code + "'>" + elem.description +"</option>");
-                new_options += "<li class='select2-results-dept-0 select2-result select2-result-selectable'><div class='select2-result-label'><span class='select2-match'></span>" + elem.description + "</div></li>"
+                if (ensureUnique(elem.description)) {
+                  html += ("<option class='unique-choice' value='" + elem.code + "'>" + elem.description +"</option>");
+                  new_options += "<li class='select2-results-dept-0 select2-result select2-result-selectable'><div class='select2-result-label'><span class='select2-match'></span>" + elem.description + "</div></li>"
+                }
               });
 
               var $options = $('select#diagnoses-select')
               var $select_options = $('.select2-results')
 
-              $select_options.html(new_options);
               $options.prepend(html);
             },
             error: function() {

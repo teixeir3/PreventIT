@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
                   against: [:first_name, :last_name],
                   using: {
                     :trigram => {
-                      :threshold => 0.02
+                      :threshold => 0.03
                     }
                   }
 
@@ -116,6 +116,11 @@ class User < ActiveRecord::Base
     inverse_of: :patient,
     dependent: :destroy
   )
+
+  has_many(
+    :appt_types,
+    through: :diagnoses,
+    source: :appt_types)
 
   #### Doctor Associations ####
 
