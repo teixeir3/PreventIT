@@ -38,15 +38,27 @@ class AppointmentsController < ApplicationController
 
   end
 
+  # THESE THREE ARE UNTESTED VVV
   def destroy
+    @appointment = Appointment.find(params[:id])
 
+    # TODO: This leaves a reminder tied to the appointment still free floating. May need polymorphic relationship
+    @appointment.destroy
+    redirect_to user_url(@appointment.patient_id)
   end
 
   def edit
-
+    @appointment = Appointment.find(params[:id])
   end
 
   def update
+    @appointment = Appointment.find(params[:id])
 
+    if @appointment.update_attributes(params[:appointment])
+      render :edit
+    else
+      flash.now[:errors] = @appointment.errors.full_messages
+      render :edit
+    end
   end
 end
