@@ -3,5 +3,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     {approval_prompt: '',
      access_type: 'offline',
      scope: 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar',
-     redirect_uri:'http://preventithealth.com/auth/google_oauth2/callback'}
+     redirect_uri: ENV["GOOGLE_CALLBACK"]}
 end

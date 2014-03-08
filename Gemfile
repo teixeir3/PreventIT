@@ -42,6 +42,7 @@ gem 'backbone-on-rails'
 gem "omniauth-google-oauth2"
 gem 'google-api-client', :require => 'google/api_client'
 gem "uuidtools"
+gem "turbolinks"
 
 group :development do
   gem "binding_of_caller"
@@ -53,12 +54,16 @@ end
 gem "letter_opener", :group => :development
 
 group :development, :test do
-  gem "rspec-rails"
+
 end
 
 group :test do
+  gem "rspec-rails"
   gem 'guard-rspec'
   gem 'capybara'
+  gem 'launchy'
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails', :require => false
 end
 
 

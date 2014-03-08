@@ -4,7 +4,7 @@
   <div class="side-content">
 
     <div class="title">
-      <h2>Search Results</h2>
+      <h3>Search Results</h3>
     </div>
 
   </div>
@@ -12,10 +12,10 @@
   <div class="sub-content">
 
     <% if @results.empty? %>
-      <p>No Results Found</p>
+      <p>No Results Found matching "<%= params[:query] %>"</p>
     <% else %>
       <%= paginate @results %>
-      <h4><%= @results.count %> Patients Found</h4>
+      <h4><%= @results.count %> Patients Found matching "<%= params[:query] %>"</h4>
     <br>
       <ul>
         <% @results.each do |result| %>
