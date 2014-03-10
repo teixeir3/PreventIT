@@ -54,16 +54,15 @@ end
 gem "letter_opener", :group => :development
 
 group :development, :test do
-
+  gem 'factory_girl_rails'
+  gem "rspec-rails"
 end
 
 group :test do
-  gem "rspec-rails"
   gem 'guard-rspec'
   gem 'capybara'
   gem 'launchy'
   gem 'shoulda-matchers'
-  gem 'factory_girl_rails', :require => false
 end
 
 

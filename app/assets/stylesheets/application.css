@@ -33,7 +33,7 @@ input {
 a {
   text-decoration: none;
 /*  color: #75bb59;*/
-  color: #00A55A;
+  color: #33be7b;
 }
 
 input[type="text"],
@@ -521,7 +521,8 @@ footer {
   display: block;
   padding: 5px 10px;
   color: #fff;
-  background: #00A55A;
+  background: #33be7b;
+/*  background: #00A55A;*/
 }
 
 
@@ -532,7 +533,8 @@ footer {
 
 form > .submit > input {
   position: relative;
-  background: #00A55A;
+  background: #33be7b;
+/*  background: #00A55A;*/
   color: #fff;
   padding: 10px 15px;
   border-radius: 4px;
@@ -541,7 +543,8 @@ form > .submit > input {
 }
 
 .submit > input:hover {
-  background: #1A8554;
+  background: #00A55A;
+/*  background: #1A8554;*/
 }
 
 .submit > input:active {

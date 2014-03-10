@@ -179,6 +179,7 @@ class User < ActiveRecord::Base
   end
 
   def doctor_full_name
+    # Should create a 'title column'
     return "Dr. #{self.first_name} #{self.last_name}"
   end
 

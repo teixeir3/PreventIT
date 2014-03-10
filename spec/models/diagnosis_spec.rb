@@ -13,5 +13,5 @@
 require 'spec_helper'
 
 describe Diagnosis do
-  pending "add some examples to (or delete) #{__FILE__}"
+
 end
