@@ -4,6 +4,8 @@
     <div class="title">
       <% if current_user && current_user.is_doctor %>
         <h2>New Patient</h2>
+      <% else %>
+        <h3>New Patient User</h3>
       <% end %>
     </div>
 

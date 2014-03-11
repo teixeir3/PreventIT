@@ -13,11 +13,14 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.health.build()
 
-    if current_user.is_doctor
+    if current_user && current_user.is_doctor
       @user.doctor_id = current_user.id
     end
 
-    if @user.save
+    if params[:password] != params[:user][:password]
+      flash.now[:errors] = ["Your passwords did not match!"]
+      render :new
+    elsif @user.save
       sign_in(@user) unless current_user.is_doctor
       if current_user.is_doctor
         redirect_to doctor_url(current_user.id)

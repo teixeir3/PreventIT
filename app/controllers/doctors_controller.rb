@@ -2,7 +2,7 @@ class DoctorsController < ApplicationController
   before_filter :require_signed_in!, :only => [:show, :edit]
   before_filter :require_doctor_authority!, :only => [:show, :edit]
 
-  def new_doctor
+  def new
     @practice = Practice.new
     @user = @practice.doctors.new
     render :new
@@ -14,12 +14,15 @@ class DoctorsController < ApplicationController
     @user.is_doctor = true
     @user.alert_setting.build
 
-    if @practice.save
+    if params[:password] != params[:user][:password]
+      flash.now[:errors] = ["Your passwords did not match!"]
+      render :new
+    elsif @practice.save
       sign_in(@user)
       redirect_to doctor_url(@user)
     else
       flash.now[:errors] = @practice.errors.full_messages
-      render :doctor_new
+      render :new
     end
   end
 

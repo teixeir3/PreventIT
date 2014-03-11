@@ -1,9 +1,20 @@
   <form class="form" action="<%= users_url %>" method="post">
     <%= auth_token %>
+    <h3>New Patient</h3>
+
+    <div class="input">
+      <label for="first-name">First Name</label>
+      <input id="first-name" type="text" name="user[first_name]" value="<%= @user.first_name %>">
+    </div>
+
+    <div class="input">
+      <label for="last-name">Last Name</label>
+      <input id="last-name" type="text" name="user[last_name]" value="<%= @user.last_name %>">
+    </div>
 
     <div class="input">
       <label for="email">Email</label>
-      <input id="email" type="email" name="user[email]" value="">
+      <input id="email" type="email" name="user[email]" value="<%= @user.email %>">
     </div>
 
     <div class="input">
@@ -11,7 +22,12 @@
       <input id="password" type="password" name="user[password]" value="">
     </div>
 
+    <div class="input">
+      <label for="password">Confirm Password</label>
+      <input id="password" type="password" name="password" value="">
+    </div>
+
     <div class="submit">
-      <input type="submit" value="Create Patient">
+      <input type="submit" value="Sign Up">
     </div>
   </form>
