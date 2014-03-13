@@ -177,7 +177,7 @@ main {
 .side-info {
   padding: 20px 0 0 5px;
 /*  margin: auto;*/
-  text-align: center;
+  text-align: left;
 }
 .side-content > ul > li {
   display: block;

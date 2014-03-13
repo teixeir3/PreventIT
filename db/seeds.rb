@@ -208,9 +208,8 @@ time = time.change(month: new_month)
   appt = user.appointments.build({datetime: time, appointment_type_id: type1.id})
   appt.doctor = doug
   
-  user.save
-  
   Reminder.create_appt_reminder(appt)
+  user.save
 end
 # doug.generate_doctor_alerts
 
