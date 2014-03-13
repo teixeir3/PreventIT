@@ -40,5 +40,12 @@ class AppointmentTypesController < ApplicationController
 
     render :edit
   end
+  
+  def destroy
+    @appointment_type = AppointmentType.find_by_id_and_doctor_id(params[:id], current_user.id)
+    
+    @appointment_type.destroy
+    redirect_to appointment_types_url
+  end
 
 end

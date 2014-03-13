@@ -13,7 +13,7 @@
     <tr>
       <% reminder.attributes.select{|attr| attr =~ /datetime|title|rem_type/}.each do |attr_name, attr_val| %>
         <% if attr_name == "datetime" %>
-          <td><%= attr_val.to_formatted_s(:long_ordinal) %></td>
+          <td><%= attr_val.strftime("%H:%M %m/%d/%Y") %></td>
           <td><%= reminder.overdue_by_str %></td>
         <% elsif attr_name == "title" %>
           <td><%=  link_to attr_val, edit_user_reminder_url(@user.id, reminder) %></td>

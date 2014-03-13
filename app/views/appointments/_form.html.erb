@@ -1,0 +1,55 @@
+<% form_url = (appointment.persisted?) ? user_appointment_url(user, appointment) : user_appointments_url(user) %>
+
+<form class="form" action="<%= form_url %>" method="POST">
+	
+  <h3><%= (appointment.persisted?) ? 'Edit' : 'New' %> Appointment:</h3>
+  
+  <%= auth_token %>
+  <%= "<input type='hidden' name='_method' value='PUT'>".html_safe if appointment.persisted? %>
+  
+  <div class="input">
+  <label for="doctor">Doctor:</label>
+  
+    <select id="doctor" name="doctor_id">
+      <option value="<%= user.doctor_id %>">Dr. <%= user.doctor.full_name %></option>
+    </select>
+  </div>
+
+  <div class="input">
+    <label for="appt-type-select">Appointment Type:</label>
+    <select id="appt-type-select" name="appointment[appointment_type_id]" style="width: 275px">
+      <% user.appt_types.each do |appt_type| %>
+        <option <%= "selected" if appointment.appointment_type_id == appt_type.id %> value="<%= appt_type.id %>"><%= appt_type.name %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <div class="input">
+    <label for="date">Date:</label>
+    <input
+      id="date"
+      type="date"
+      name="date"
+      value="<%= appointment.datetime.strftime("%Y-%m-%d") if appointment.persisted? %>">
+  </div>
+
+  <div class="time-input">
+    <label for="time">Time:</label>
+    <input
+      id="time"
+      type="time"
+      name="time"
+      value="<%= appointment.datetime.strftime("%H:%M") if appointment.persisted? %>">
+  </div>
+
+  <div class="input">
+    <label for="note">Note:</label>
+    <textarea
+      id="note"
+      name="appointment[note]"><%= appointment.note %></textarea>
+  </div>
+
+  <div class="submit long-submit">
+    <input type="submit" value="<%= appointment.persisted? ? 'Edit' : 'Add' %> Appointment">
+  </div>
+</form>

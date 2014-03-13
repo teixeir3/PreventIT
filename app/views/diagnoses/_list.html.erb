@@ -14,7 +14,7 @@
       <tr>
         <td><%= patient_diagnosis.diagnosis.code %></td>
         <td class="cell-wrap"><%= patient_diagnosis.diagnosis.description %></td>
-        <td><%= patient_diagnosis.created_at.to_formatted_s(:long_ordinal) %></td>
+        <td><%= patient_diagnosis.created_at.strftime("%H:%M %m/%d/%Y") %></td>
         <td><%= patient_diagnosis.diagnosis.code_type %></td>
         <td><%= button_to "Delete", user_diagnosis_url(@user, patient_diagnosis), method: :delete %></td>
       </tr>

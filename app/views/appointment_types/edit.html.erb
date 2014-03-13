@@ -4,11 +4,27 @@
 <main class="group">
   <div class="side-content">
     <div class="title">
-      <h2>Appointment Types</h2>
+      <h3>Appointment Types</h3>
     </div>
+    
+  	<div class="side-info">
+  		<ul>
+  			<li><%= link_to "Appointment Types", appointment_types_url %></li>
+        <li><%= link_to "Add New", new_appointment_type_url %></li>
+  		</ul>
+  	</div>
   </div>
 
   <div class="sub-content">
     <%= render "form", appointment_type: @appointment_type %>
+    
+  	<form class="form" action="<%= appointment_type_url(@appointment_type) %>" method="POST">
+  		<input type="hidden" name="_method" value="DELETE">
+  		<%= auth_token %>
+		
+  	    <div class="delete-submit long-submit">
+  	      <input type="submit" value="Delete">
+  	    </div>
+  	</form>
   </div>
 </main>

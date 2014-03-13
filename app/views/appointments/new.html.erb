@@ -4,63 +4,19 @@
 <main class="group">
   <div class="side-content">
     <div class="title">
-      <h2>New Appointment</h2>
+      <h3>New Appointment</h3>
     </div>
+	
+	<div class="side-info">
+		<ul>
+			<li><%= link_to "Appointment List", user_appointments_url(@user) %></li>
+		</ul>
+	</div>
   </div>
 
   <div class="sub-content">
 
-    <form class="form" action="<%= user_appointments_url(@user) %>" method="POST">
-      <h3>New Appointment:</h3>
-      <%= auth_token %>
-
-      <div class="input">
-      <label for="doctor">Doctor:</label>
-
-        <select id="doctor" name="doctor_id">
-          <option value="<%= @user.doctor_id %>">Dr. <%= @user.doctor.full_name %></option>
-        </select>
-      </div>
-
-      <div class="input">
-        <label for="appt-type-select">Appointment Type:</label>
-        <select id="appt-type-select" name="appointment[appointment_type_id]" style="width: 275px">
-          <% @user.appt_types.each do |appt_type| %>
-            <option value="<%= appt_type.id %>"><%= appt_type.name %></option>
-          <% end %>
-        </select>
-      </div>
-
-      <div class="input">
-        <label for="reason">Date:</label>
-        <input
-          id="date"
-          type="date"
-          name="date"
-          value="">
-      </div>
-
-      <div class="time-input">
-        <label for="time">Time:</label>
-        <input
-          id="time"
-          type="time"
-          name="time"
-          value="">
-      </div>
-
-      <div class="input">
-        <label for="note">Note:</label>
-        <textarea
-          id="note"
-          name="appointment[note]"
-          value=""></textarea>
-      </div>
-
-      <div class="submit long-submit">
-        <input type="submit" value="Add Appointment">
-      </div>
-    </form>
+    <%= render "form", appointment: @appointment, user: @user %>
   </div>
 </main>
 

@@ -22,7 +22,7 @@ class AppointmentsController < ApplicationController
     @appointment.doctor_id = params[:doctor_id] if @user.doctor_id = params[:doctor_id]
 
     if @user.save
-      @reminder = Reminder.create_appt_reminder(@appointment)# @user.reminders.create({
+          @reminder = Reminder.create_appt_reminder(@appointment)# @user.reminders.create({
 #         datetime: @appointment.datetime,
 #         title: "#{@appointment.appointment_type.name} appointment with Dr. #{@appointment.doctor.full_name}",
 #         rem_type: "appointment",
@@ -44,16 +44,20 @@ class AppointmentsController < ApplicationController
 
     # TODO: This leaves a reminder tied to the appointment still free floating. May need polymorphic relationship
     @appointment.destroy
-    redirect_to user_url(@appointment.patient_id)
+    redirect_to user_appointments_url(@appointment.patient_id)
   end
 
   def edit
     @appointment = Appointment.find(params[:id])
+    @user = @appointment.patient
   end
 
   def update
     @appointment = Appointment.find(params[:id])
-
+    @user = @appointment.patient
+    
+    params[:appointment][:datetime] = params[:date] + " " + params[:time]
+    
     if @appointment.update_attributes(params[:appointment])
       render :edit
     else

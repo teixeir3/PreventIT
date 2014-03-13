@@ -426,6 +426,7 @@ footer {
 .radio-input {
   float: left;
   width: 100px;
+/*  margin: auto;*/
 }
 
 /* Select2 */
@@ -538,8 +539,15 @@ footer {
   padding: 5px 10px;
   color: #fff;
   background: #33be7b;
+  border-radius: 4px;
 /*  background: #00A55A;*/
 }
+
+.delete-button {
+  background: #FF7444;
+/*  background: #00A55A;*/
+}
+
 
 
 .button:active, .button_to:active {
@@ -572,6 +580,29 @@ form > .submit > input {
   box-shadow: none;
 }
 
+form > .delete-submit > input {
+  margin-top: 15px;
+  position: relative;
+  background: #FF7444;
+/*  background: #00A55A;*/
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+/*  width: 250px;*/
+  box-shadow: 0 3px #A63B16;
+}
+
+.delete-submit > input:hover {
+  background: #BF7156;
+/*  background: #1A8554;*/
+}
+
+.delete-submit > input:active {
+  top: 3px;
+  box-shadow: none;
+}
+
 .table-label {
   font-weight: bold;
   font-size: 30px;
@@ -592,7 +623,7 @@ table {
   border-collapse: collapse;
   border: 2px solid black;
   margin: 10px 0 10px 0;
-  width: 650px;
+  width: 700px;
 }
 
 .cell-wrap {

@@ -1,0 +1,31 @@
+<%= render "users/sub_bar", user: @user%>
+
+
+<main class="group">
+
+  <div class="side-content">
+    <div class="title">
+      <h3>Appointments:</h3>
+    </div>
+
+    <div class="side-info">
+      <p><%= link_to "Appointment List", user_appointments_url(@user) %></p>
+
+    </div>
+  </div>
+
+  <div class="sub-content">
+    <%= render "form", appointment: @appointment, user: @user %>
+	
+	<form class="form" action="<%= user_appointment_url(@user, @appointment) %>" method="POST">
+		<input type="hidden" name="_method" value="DELETE">
+		<%= auth_token %>
+		
+	    <div class="delete-submit long-submit">
+	      <input type="submit" value="Delete">
+	    </div>
+	</form>
+  </div>
+</main>
+
+

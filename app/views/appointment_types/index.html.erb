@@ -15,9 +15,12 @@
 
 
   <div class="sub-content">
+    <h2>All Appointments</h2>
     <ul>
       <% @appointment_types.each do |appointment_type| %>
-        <li><%= link_to appointment_type.name, edit_appointment_type_url(appointment_type) %></li>
+        <li>
+          <%= link_to appointment_type.name, edit_appointment_type_url(appointment_type) %> <%= button_to "Delete", appointment_type_url(appointment_type), method: :delete, class: "delete-button"%>
+        </li>
       <% end %>
     </ul>
   </div>

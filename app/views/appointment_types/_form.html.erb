@@ -1,8 +1,8 @@
-<% form_url = (params[:action] == 'new') ? appointment_types_url : appointment_type_url(@appointment_type) %>
+<% form_url = (appointment_type.persisted?) ? appointment_type_url(appointment_type) : appointment_types_url %>
 <form class="form" action="<%= form_url %>" method="POST">
-  <h3><%= (params[:action] == 'new') ? 'New' : 'Edit' %> Appointment Type:</h3>
+  <h3><%= (appointment_type.persisted?) ? 'Edit' : 'New' %> Appointment Type:</h3>
 
-  <%= "<input type='hidden' name='_method' value='PUT'>".html_safe if params[:action] == 'edit' %>
+  <%= "<input type='hidden' name='_method' value='PUT'>".html_safe if appointment_type.persisted? %>
   <%= auth_token %>
 
   <div class="input">
@@ -22,7 +22,7 @@
         id="recurrence-yes"
         type="radio"
         name="appointment_type[recurrence]"
-        value="true" <%= 'checked' if @appointment_type.recurrence %>>
+        value="true" <%= 'checked' if appointment_type.recurrence %>>
     </div>
 
     <div class="radio-input">
@@ -31,7 +31,7 @@
         id="recurrence-no"
         type="radio"
         name="appointment_type[recurrence]"
-        value="false" <%= 'checked' unless @appointment_type.recurrence %>>
+        value="false" <%= 'checked' unless appointment_type.recurrence %>>
     </div>
   </div>
 
@@ -58,9 +58,12 @@
   </div>
 
   <div class="submit long-submit">
-    <input type="submit" value="Add Appointment Type">
+    <input type="submit" value="<%= appointment_type.persisted? ? 'Edit' : 'Add' %> Appointment Type">
   </div>
+  
 </form>
+
+
 
 <% content_for :js do %>
   <script type="text/javascript">
