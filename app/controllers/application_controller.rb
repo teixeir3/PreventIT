@@ -106,11 +106,12 @@ class ApplicationController < ActionController::Base
     else
       new_user = User.new(
               uid: google_data[:uid],
-              provider: google_date[:provider],
+              provider: google_data[:provider],
               access_token: google_data[:credentials][:token],
               first_name: google_data[:info][:first_name],
               last_name: google_data[:info][:last_name],
-              email: google_data[:info][:email]
+              email: google_data[:info][:email],
+              password: User.generate_session_token
             )
 
       new_user.health.build()

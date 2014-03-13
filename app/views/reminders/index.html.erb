@@ -5,13 +5,15 @@
 
   <div class="side-content">
     <div class="title">
-      <h2>Reminders:</h2>
+      <h3>Reminders:</h3>
     </div>
 
     <div class="side-info">
-      <p><%= link_to "Add New Reminder", new_user_reminder_url(@user) %></p>
-      <p><%= link_to "Completed Reminders", reminders_completed_url(@user) %></p>
-      <p><%= link_to "Due Reminders", user_reminders_url(@user) %></p>
+		<ul>
+	  	  	<li><%= link_to "Add New Reminder", new_user_reminder_url(@user) %></li>
+	  		<li><%= link_to "Complete Reminders", reminders_completed_url(@user) %></li>
+	  		<li><%= link_to "Due Reminders", user_reminders_url(@user) %></li>
+		</ul>
     </div>
   </div>
 

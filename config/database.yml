@@ -13,7 +13,8 @@ development:
   adapter: postgresql
   database: preventIT_dev
   host: localhost
-  username: appacademy
+  username: Doug
+  password: ENV['DOUG_PW']
   pool: 5
   timeout: 5000
 
@@ -21,7 +22,8 @@ test:
   adapter: postgresql
   database: preventIT_test
   host: localhost
-  username: appacademy
+  username: Doug
+  password: ENV['DOUG_PW']
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

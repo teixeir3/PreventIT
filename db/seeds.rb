@@ -61,9 +61,38 @@ doug = User.new({
 doug.is_doctor = true
 doug.practice = my_practice
 doug.alert_setting.build
+
+
+puts "Seeding Codes"
+### Generate Diagnoses
+diag1 = Diagnosis.create({code: "E1010", description: "Type 1 diabetes mellitus with ketoacidosis without coma"})
+diag2 = Diagnosis.create({code: "E119", description: "Type 2 diabetes mellitus without complications"})
+diag3 = Diagnosis.create({code: "R7309", description: "Other abnormal glucose"})
+diag4 = Diagnosis.create({code: "E1011", description: "Type 1 diabetes mellitus with ketoacidosis with coma"})
+diag5 = Diagnosis.create({code: "H268", description: "Other specified cataract"})
+diag6 = Diagnosis.create({code: "E15", description: "Nondiabetic hypoglycemic coma"})
+diag7 = Diagnosis.create({code: "Q794", description: "Prune belly syndrome"})
+diag8 = Diagnosis.create({code: "K551", description: "Chronic vascular disorders of intestine"})
+diag9 = Diagnosis.create({code: "G9382", description: "Brain death"})
+diag10 = Diagnosis.create({code: "J45", description: "Asthma"})
+diag11 = Diagnosis.create({code: "J459", description: "Other and unspecified asthma"})
+diag12 = Diagnosis.create({code: "J440", description: "Chronic obstructive pulmonary disease with acute lower respiratory infection"})
+diag13 = Diagnosis.create({code: "J441", description: "Chronic obstructive pulmonary disease with (acute) exacerbation"})
+
+puts "Seeding Appt Types"
+type1 = doug.appointment_types.build({name: "Diabetic Checkup", recurrence: true, occurence_frequency: 90})
+type1.diagnoses = [diag1, diag2, diag3, diag4]
+type2 = doug.appointment_types.build({name: "Asthma Checkup", recurrence: true, occurence_frequency: 365})
+type2.diagnoses = [diag11, diag12, diag13, diag10]
+
 doug.save
 
 puts "Seeding Doug's Practice"
+
+time = Time.now
+new_month = (time.month + 3 > 12) ? time.month + 3 - 12 : time.month + 3
+time = time.change(month: new_month)
+
 20.times do |i|
   v = i+2
 
@@ -162,8 +191,26 @@ puts "Seeding Doug's Practice"
         sub_type: "diabetes checkup"
       })
   end
+  
+  puts "Seeding Patient Diagnoses for patient #{i+1}"
+  user.diagnoses = [diag2,diag10]
+  
+  puts "Seeding Appointment for patient #{i+1}"
+  
+  if (time.month + 1 > 12)
+    new_month = time.month + 1 - 12
+    time = time.change(year: time.year + 1)
+  else
+    time.month + 1
+  end
 
+  time = time.change(month: new_month)
+  appt = user.appointments.build({datetime: time, appointment_type_id: type1.id})
+  appt.doctor = doug
+  
   user.save
+  
+  Reminder.create_appt_reminder(appt)
 end
 # doug.generate_doctor_alerts
 
@@ -291,19 +338,6 @@ puts "Seeding Other Practices"
   end
   # doctor.generate_doctor_alerts
 end
-
-
-puts "Seeding Codes"
-### Generate Diagnoses
-Diagnosis.create({code: "E1010", description: "Type 1 diabetes mellitus with ketoacidosis without coma"})
-Diagnosis.create({code: "E119", description: "Type 2 diabetes mellitus without complications"})
-Diagnosis.create({code: "R7309", description: "Other abnormal glucose"})
-Diagnosis.create({code: "E1011", description: "Type 1 diabetes mellitus with ketoacidosis with coma"})
-Diagnosis.create({code: "H268", description: "Other specified cataract"})
-Diagnosis.create({code: "E15", description: "Nondiabetic hypoglycemic coma"})
-Diagnosis.create({code: "Q794", description: "Prune belly syndrome"})
-Diagnosis.create({code: "K551", description: "Chronic vascular disorders of intestine"})
-Diagnosis.create({code: "G9382", description: "Brain death"})
 
 
 puts "Generating Alerts"

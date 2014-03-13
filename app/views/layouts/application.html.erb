@@ -20,7 +20,7 @@
         <%= flash[:errors].join('<br>').html_safe if flash[:errors] %><br>
 
          <% if current_user %>
-           You are signed in as:
+           Welcome:
            <% if current_user.is_doctor  %>
              <%= link_to "Dr. #{current_user.full_name}", doctor_url(current_user) %><br>
            <% else %>

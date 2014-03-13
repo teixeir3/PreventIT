@@ -66,6 +66,17 @@ class Reminder < ActiveRecord::Base
   def self.all_not_due
     self.find_all_by_due(false)
   end
+  
+  def self.create_appt_reminder(appt)
+    reminder = self.create({
+            datetime: appt.datetime,
+            title: "#{appt.appointment_type.name} appointment with Dr. #{appt.doctor.full_name}",
+            rem_type: "appointment",
+            patient_id: appt.patient_id,
+            sub_type: appt.appointment_type.name
+          })
+    
+  end
 
   # Returns true if the reminder's time is passed in the current day
   # AND generates and new reminder if it's due for the 1st time

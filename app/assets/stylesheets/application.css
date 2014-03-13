@@ -177,7 +177,7 @@ main {
 .side-info {
   padding: 20px 0 0 5px;
 /*  margin: auto;*/
-/*  text-align: center;*/
+  text-align: center;
 }
 .side-content > ul > li {
   display: block;
@@ -592,15 +592,16 @@ table {
   border-collapse: collapse;
   border: 2px solid black;
   margin: 10px 0 10px 0;
+  width: 650px;
 }
 
 .cell-wrap {
-  width: 200px;
+  width: 250px;
 }
 
-.alert-table {
+/*.alert-table {
   width: 600px;
-}
+}*/
 
 th {
   border-bottom: 1px solid black;
