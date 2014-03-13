@@ -38,7 +38,6 @@ class AppointmentsController < ApplicationController
 
   end
 
-  # THESE THREE ARE UNTESTED VVV
   def destroy
     @appointment = Appointment.find(params[:id])
 

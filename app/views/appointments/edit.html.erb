@@ -9,8 +9,10 @@
     </div>
 
     <div class="side-info">
-      <p><%= link_to "Appointment List", user_appointments_url(@user) %></p>
-
+		<ul>
+			<li><%= link_to "Appointment List", user_appointments_url(@user) %></li>
+			<li><%= link_to "New Appointment", new_user_appointment_url(@user) %></li>
+		</ul>
     </div>
   </div>
 
