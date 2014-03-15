@@ -19,7 +19,7 @@
     <p><%= paginate @patients %></p>
 
     <ul>
-      <% current_user.patients_by_last_name.each do |patient| %>
+      <% @patients.each do |patient| %>
         <li><%= link_to patient.full_name_by_last, user_url(patient) %></li>
       <% end %>
     </ul>

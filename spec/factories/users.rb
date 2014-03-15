@@ -22,6 +22,8 @@
 #  uid                 :string(255)
 #  access_token        :string(255)
 #  provider            :string(255)
+#  active              :boolean          default(FALSE), not null
+#  activation_token    :string(255)      default("INACTIVE"), not null
 #
 
 FactoryGirl.define do

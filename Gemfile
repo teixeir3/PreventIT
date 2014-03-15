@@ -49,9 +49,8 @@ group :development do
   gem "better_errors"
   gem "annotate"
   gem "pry-rails"
+  gem "letter_opener"
 end
-
-gem "letter_opener", :group => :development
 
 group :development, :test do
   gem 'factory_girl_rails'

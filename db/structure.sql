@@ -476,7 +476,9 @@ CREATE TABLE users (
     email_notifications boolean DEFAULT true NOT NULL,
     uid character varying(255),
     access_token character varying(255),
-    provider character varying(255)
+    provider character varying(255),
+    active boolean DEFAULT false NOT NULL,
+    activation_token character varying(255) DEFAULT 'INACTIVE'::character varying NOT NULL
 );
 
 
@@ -861,3 +863,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140228170948');
 INSERT INTO schema_migrations (version) VALUES ('20140228172921');
 
 INSERT INTO schema_migrations (version) VALUES ('20140228185512');
+
+INSERT INTO schema_migrations (version) VALUES ('20140314180158');

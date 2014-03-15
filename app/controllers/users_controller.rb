@@ -21,7 +21,9 @@ class UsersController < ApplicationController
       flash.now[:errors] = ["Your passwords did not match!"]
       render :new
     elsif @user.save
+      UserMailer.activation_email(@user).deliver!
       sign_in(@user) unless current_user and current_user.is_doctor
+      
       if current_user.is_doctor
         redirect_to doctor_url(current_user.id)
       else
@@ -53,4 +55,16 @@ class UsersController < ApplicationController
     render :show
   end
 
+  def activate
+    @user = User.find_by_activation_token(params[:activation_token])
+    
+    if params[:activation_token] && @user
+      @user.activate!
+      sign_in(@user)
+      flash[:errors] =  ["Successfully activated your account!"]
+      redirect_to @user
+    else
+      raise ActiveRecord::RecordNotFound.new()
+    end
+  end
 end

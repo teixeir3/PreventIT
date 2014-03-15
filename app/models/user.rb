@@ -22,6 +22,8 @@
 #  uid                 :string(255)
 #  access_token        :string(255)
 #  provider            :string(255)
+#  active              :boolean          default(FALSE), not null
+#  activation_token    :string(255)      default("INACTIVE"), not null
 #
 
 class User < ActiveRecord::Base
@@ -34,8 +36,11 @@ class User < ActiveRecord::Base
   validates :session_token, presence: true, uniqueness: true
   validates :uid, uniqueness: {scope: :provider, if: :check_uid_by_provider}
 
-  before_validation :ensure_session_token
+  paginates_per 10
 
+  before_validation :ensure_session_token
+  before_create :set_activation_token
+  
   has_attached_file :avatar, :styles => {
          :big => "600x600>",
          :small => "100x100>"
@@ -443,13 +448,24 @@ class User < ActiveRecord::Base
 
 
   ### Auth Methods ###
+  
+  # UNTESTED
+  def activate!
+    self.update_attribute(:active, true)
+  end
+  
+  def set_activation_token
+    self.activation_token = self.class.generate_unique_token_for_field(:activation_token)
+  end
+  
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)
     user.try(:is_password?, password) ? user : nil
   end
 
+
   def self.generate_session_token
-    SecureRandom::urlsafe_base64(16);
+    self.generate_unique_token_for_field(:session_token)
   end
 
   def is_password?(unencrypted_password)

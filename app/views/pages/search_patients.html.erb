@@ -12,10 +12,10 @@
   <div class="sub-content">
 
     <% if @results.empty? %>
-      <p>No Results Found matching "<%= params[:query] %>"</p>
+      <p>No Results Found matching <mark>"<%= params[:query] %>"</mark></p>
     <% else %>
       <%= paginate @results %>
-      <h4><%= @results.count %> Patients Found matching "<%= params[:query] %>"</h4>
+      <h4><%= @results.count %> Patients Found matching  <mark>"<%= params[:query] %>"</mark></h4>
     <br>
       <ul>
         <% @results.each do |result| %>

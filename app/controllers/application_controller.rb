@@ -121,6 +121,8 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    new_user.save
+    UserMailer.activation_email(new_user).deliver!
     new_user
   end
 

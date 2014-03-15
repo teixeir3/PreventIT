@@ -1,0 +1,11 @@
+Welcome to PreventIT <%= @user.email %>!
+===============================================
+
+You have successfully signed up to PreventIT, chronic health management!
+Please activate your account by visiting this link:
+<%= link_to("Activate", activate_users_url(activation_token: @user.activation_token)) %>
+
+If you can't click the link, copy and paste this URL into your browser:
+<%= activate_users_url(activation_token: @user.activation_token) %>
+
+Thanks for joining and have a great day!

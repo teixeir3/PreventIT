@@ -36,6 +36,10 @@ a {
   color: #33be7b;
 }
 
+mark {
+  background: inherit;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"],
