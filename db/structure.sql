@@ -420,7 +420,9 @@ CREATE TABLE reminders (
     checked boolean DEFAULT false NOT NULL,
     complete boolean,
     sub_type character varying(255),
-    input_checked boolean DEFAULT false NOT NULL
+    input_checked boolean DEFAULT false NOT NULL,
+    remindable_id integer,
+    remindable_type character varying(255)
 );
 
 
@@ -865,3 +867,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140228172921');
 INSERT INTO schema_migrations (version) VALUES ('20140228185512');
 
 INSERT INTO schema_migrations (version) VALUES ('20140314180158');
+
+INSERT INTO schema_migrations (version) VALUES ('20140316215531');

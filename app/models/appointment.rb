@@ -18,6 +18,12 @@ class Appointment < ActiveRecord::Base
 
   validates :patient, :datetime, :doctor, presence: true
 
+  has_many(
+    :reminders,
+    as: :remindable,
+    dependent: :destroy
+    )
+
   belongs_to(
     :patient,
     class_name: "User",
