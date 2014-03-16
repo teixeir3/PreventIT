@@ -8,12 +8,12 @@
     <p>
       You have successfully signed up to PreventIT, chronic health management!
       Please activate your account by visiting this link:
-      <%= link_to("Activate", activate_users_url(activation_token: @user.activation_token)) %>
+      <%= link_to("Activate", @url) %>
     </p>
 
     <p>
       If you can't click the link, copy and paste this URL into your browser:
-      <%= activate_users_url(activation_token: @user.activation_token) %>
+      <%= @url %>
     </p>
 
     <p>
