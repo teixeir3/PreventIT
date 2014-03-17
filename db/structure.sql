@@ -410,7 +410,6 @@ CREATE TABLE reminders (
     id integer NOT NULL,
     datetime timestamp without time zone NOT NULL,
     title character varying(255) NOT NULL,
-    rem_type character varying(255) NOT NULL,
     input integer,
     patient_id integer NOT NULL,
     due boolean DEFAULT false NOT NULL,
@@ -782,6 +781,13 @@ CREATE INDEX index_reminders_on_patient_id ON reminders USING btree (patient_id)
 
 
 --
+-- Name: index_reminders_on_remindable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_reminders_on_remindable_id ON reminders USING btree (remindable_id);
+
+
+--
 -- Name: index_users_on_doctor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -869,3 +875,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140228185512');
 INSERT INTO schema_migrations (version) VALUES ('20140314180158');
 
 INSERT INTO schema_migrations (version) VALUES ('20140316215531');
+
+INSERT INTO schema_migrations (version) VALUES ('20140317171038');

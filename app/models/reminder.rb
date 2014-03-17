@@ -5,7 +5,6 @@
 #  id              :integer          not null, primary key
 #  datetime        :datetime         not null
 #  title           :string(255)      not null
-#  rem_type        :string(255)      not null
 #  input           :integer
 #  patient_id      :integer          not null
 #  due             :boolean          default(FALSE), not null
@@ -30,15 +29,18 @@ class Reminder < ActiveRecord::Base
       "Friday",
       "Saturday"]
 
-  attr_accessible :datetime, :title, :rem_type, :patient_id, :note, :complete, :input, :sub_type, :input_checked
+  attr_accessible :datetime, :title, :remindable_type, :patient_id, :note, :complete, :input, :sub_type, :input_checked, :patient
 
   validates :datetime, presence: true
-  validates :rem_type, inclusion: { in: %w(appointment medication treatment input), message: "Invalid type" }
-  validates :title, :patient_id, presence: true
+  # validates :remindable_type, presence: true, inclusion: { in: %w(Appointment Medication Treatment Input), message: "Invalid type" }
+  validates :title, :patient, presence: true
 
   belongs_to(
     :remindable,
-    polymorphic: true
+    polymorphic: true,
+    foreign_key: :remindable_id,
+    primary_key: :id,
+    inverse_of: :reminders
   )
 
   belongs_to(
@@ -56,7 +58,7 @@ class Reminder < ActiveRecord::Base
     @all_not_due_reminders.each do |reminder|
       if reminder.is_due?
         reminder.mark_due!
-        reminder.self_propagation! if (reminder.type == "appointment")
+        reminder.self_propagation! if (reminder.type == "Appointment")
       end
     end
 
@@ -72,7 +74,6 @@ class Reminder < ActiveRecord::Base
     reminder = appt.reminders.create({
             datetime: appt.datetime,
             title: "#{appt.appointment_type.name} appointment with Dr. #{appt.doctor.full_name}",
-            rem_type: "appointment",
             patient_id: appt.patient_id,
             sub_type: appt.appointment_type.name
           })

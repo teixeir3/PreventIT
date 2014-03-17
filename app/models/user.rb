@@ -208,7 +208,7 @@ class User < ActiveRecord::Base
   end
 
   def patients_reminders_by_type(type)
-    self.patients.joins(:reminders).where("reminders.rem_type = ? AND reminders.checked = ?", type, false).includes(:reminders)
+    self.patients.joins(:reminders).where("reminders.remindable_type = ? AND reminders.checked = ?", type, false).includes(:reminders)
   end
 
   def patients_with_reminders
@@ -216,7 +216,7 @@ class User < ActiveRecord::Base
   end
 
   def patients_input_complete_unchecked_reminders
-    self.patients.joins(:reminders).where("reminders.rem_type = ? AND reminders.complete = ? AND reminders.input_checked = ?", "input", true, false).includes(:reminders)
+    self.patients.joins(:reminders).where("reminders.remindable_type = ? AND reminders.complete = ? AND reminders.input_checked = ?", "Input", true, false).includes(:reminders)
   end
 
   def incomplete_alerts

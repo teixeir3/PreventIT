@@ -9,7 +9,7 @@
 #     first_name: "Douglas",
 #     last_name: "Teixeira",
 #     phone: "908-872-0937",
-#     password: "password"
+#     password: ENV["SEED_PW"]
 #   })
 # doug.is_doctor = true
 # doug.practice = my_practice
@@ -23,7 +23,7 @@
 #         first_name: "user",
 #         last_name: "#{v}",
 #         phone: "(#{v}#{v}#{v}) #{v}#{v}#{v} - #{v}#{v}#{v}#{v}",
-#         password: "password"
+#         password: ENV["SEED_PW"]
 #         })
 #
 #   user.doctor = doug
@@ -34,7 +34,7 @@
 #         user.reminders.build({
 #           datetime: user_date,
 #           title: "Alert title #{j}",
-#           rem_type: "input",
+#           remindable_type: "input",
 #           patient_id: i,
 #           complete: false
 #         })
@@ -56,7 +56,7 @@ doug = User.new({
     first_name: "Douglas",
     last_name: "Teixeira",
     phone: "908-872-0937",
-    password: "password"
+    password: ENV["SEED_PW"]
   })
 doug.is_doctor = true
 doug.practice = my_practice
@@ -102,7 +102,7 @@ time = time.change(month: new_month)
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
         phone: Faker::PhoneNumber.phone_number,
-        password: "password"
+        password: ENV["SEED_PW"]
       })
 
   puts "Seeding health for patient #{i+1}"
@@ -117,8 +117,7 @@ time = time.change(month: new_month)
       user.reminders.build({
         datetime: user_date,
         title: "Missed Medication #{j}",
-        rem_type: "medication",
-        patient_id: i,
+        remindable_type: "Medication",
         complete: false,
         sub_type: "aspirin"
       })
@@ -126,8 +125,7 @@ time = time.change(month: new_month)
       user.reminders.build({
         datetime: user_date,
         title: "Unhealthy A1C #{j}",
-        rem_type: "input",
-        patient_id: i,
+        remindable_type: "Input",
         complete: true,
         sub_type: "a1c",
         input: 5
@@ -136,8 +134,7 @@ time = time.change(month: new_month)
       user.reminders.build({
         datetime: user_date,
         title: "Healthy A1C #{j}",
-        rem_type: "input",
-        patient_id: i,
+        remindable_type: "Input",
         complete: true,
         sub_type: "a1c",
         input: 20
@@ -146,8 +143,7 @@ time = time.change(month: new_month)
       user.reminders.build({
         datetime: user_date,
         title: "Unhealthy Weight #{j}",
-        rem_type: "input",
-        patient_id: i,
+        remindable_type: "Input",
         complete: true,
         sub_type: "weight",
         input: 400
@@ -156,8 +152,7 @@ time = time.change(month: new_month)
       user.reminders.build({
         datetime: user_date,
         title: "Healthy Weight #{j}",
-        rem_type: "input",
-        patient_id: i,
+        remindable_type: "Input",
         complete: true,
         sub_type: "weight",
         input: 150
@@ -166,8 +161,7 @@ time = time.change(month: new_month)
       user.reminders.build({
         datetime: user_date,
         title: "Overdue Weight #{j}",
-        rem_type: "input",
-        patient_id: i,
+        remindable_type: "Input",
         complete: false,
         sub_type: "weight"
       })
@@ -175,8 +169,7 @@ time = time.change(month: new_month)
       user.reminders.build({
         datetime: user_date,
         title: "Overdue Foot Exam #{j}",
-        rem_type: "treatment",
-        patient_id: i,
+        remindable_type: "Treatment",
         complete: false,
         sub_type: "foot exam"
       })
@@ -185,8 +178,7 @@ time = time.change(month: new_month)
       user.reminders.build({
         datetime: user_date,
         title: "Missed Appt #{j}",
-        rem_type: "appointment",
-        patient_id: i,
+        remindable_type: "Appointment",
         complete: false,
         sub_type: "diabetes checkup"
       })
@@ -208,135 +200,144 @@ time = time.change(month: new_month)
   appt = user.appointments.build({datetime: time, appointment_type_id: type1.id})
   appt.doctor = doug
   
-  Reminder.create_appt_reminder(appt)
+  reminder = appt.reminders.build({
+          datetime: appt.datetime,
+          title: "#{type1.name} appointment with Dr. #{doug.full_name}",
+          patient: appt.patient,
+          sub_type: type1.name
+        })
+        
   user.save
+  puts user.errors.full_messages
+  puts reminder.errors.full_messages
+  puts appt.errors.full_messages
 end
 # doug.generate_doctor_alerts
 
 
 ### OTHER PRACTICES
 
-puts "Seeding Other Practices"
-2.times do
-  doctor = User.new({
-      email: Faker::Internet.safe_email,
-      first_name: Faker::Name.first_name,
-      last_name:  Faker::Name.last_name,
-      phone: Faker::PhoneNumber.phone_number,
-      password: "password"
-    })
-
-  my_practice = Practice.create({
-      specialty: "Family Practitioner",
-      name: doctor.first_name + "'s Practice"
-    })
-
-
-  doctor.is_doctor = true
-  doctor.practice = my_practice
-  doctor.alert_setting.build
-  doctor.save
-
-  20.times do |i|
-    v = i+2
-    user = User.new({
-          email: Faker::Internet.safe_email,
-          first_name: Faker::Name.first_name,
-          last_name: Faker::Name.last_name,
-          phone: Faker::PhoneNumber.phone_number,
-          password: "password"
-          })
-
-    user.health.build(height: 69)
-
-    user.doctor = doctor
-
-
-    4.times do |j|
-      user_date = Time.now.change(year: 2014, month: 2, day: 20, hour: 10)
-
-        user.reminders.build({
-          datetime: user_date,
-          title: "Missed Medication #{j}",
-          rem_type: "medication",
-          patient_id: i,
-          complete: false,
-          sub_type: "aspirin"
-        })
-
-        user.reminders.build({
-          datetime: user_date,
-          title: "Unhealthy A1C #{j}",
-          rem_type: "input",
-          patient_id: i,
-          complete: true,
-          sub_type: "a1c",
-          input: 5
-        })
-
-        user.reminders.build({
-          datetime: user_date,
-          title: "Healthy A1C #{j}",
-          rem_type: "input",
-          patient_id: i,
-          complete: true,
-          sub_type: "a1c",
-          input: 20
-        })
-
-        user.reminders.build({
-          datetime: user_date,
-          title: "Unhealthy Weight #{j}",
-          rem_type: "input",
-          patient_id: i,
-          complete: true,
-          sub_type: "weight",
-          input: 400
-        })
-
-        user.reminders.build({
-          datetime: user_date,
-          title: "Healthy Weight #{j}",
-          rem_type: "input",
-          patient_id: i,
-          complete: true,
-          sub_type: "weight",
-          input: 150
-        })
-
-        user.reminders.build({
-          datetime: user_date,
-          title: "Overdue Weight #{j}",
-          rem_type: "input",
-          patient_id: i,
-          complete: false,
-          sub_type: "weight"
-        })
-
-        user.reminders.build({
-          datetime: user_date,
-          title: "Overdue Foot Exam #{j}",
-          rem_type: "treatment",
-          patient_id: i,
-          complete: false,
-          sub_type: "foot exam"
-        })
-
-        # should queue 12 alerts
-        user.reminders.build({
-          datetime: user_date,
-          title: "Missed Appt #{j}",
-          rem_type: "appointment",
-          patient_id: i,
-          complete: false,
-          sub_type: "diabetes checkup"
-        })
-    end
-
-    user.save
-  end
-  # doctor.generate_doctor_alerts
-end
+# puts "Seeding Other Practices"
+# 2.times do
+#   doctor = User.new({
+#       email: Faker::Internet.safe_email,
+#       first_name: Faker::Name.first_name,
+#       last_name:  Faker::Name.last_name,
+#       phone: Faker::PhoneNumber.phone_number,
+#       password: ENV["SEED_PW"]
+#     })
+# 
+#   my_practice = Practice.create({
+#       specialty: "Family Practitioner",
+#       name: doctor.first_name + "'s Practice"
+#     })
+# 
+# 
+#   doctor.is_doctor = true
+#   doctor.practice = my_practice
+#   doctor.alert_setting.build
+#   doctor.save
+# 
+#   20.times do |i|
+#     v = i+2
+#     user = User.new({
+#           email: Faker::Internet.safe_email,
+#           first_name: Faker::Name.first_name,
+#           last_name: Faker::Name.last_name,
+#           phone: Faker::PhoneNumber.phone_number,
+#           password: ENV["SEED_PW"]
+#           })
+# 
+#     user.health.build(height: 69)
+# 
+#     user.doctor = doctor
+# 
+# 
+#     4.times do |j|
+#       user_date = Time.now.change(year: 2014, month: 2, day: 20, hour: 10)
+# 
+#         user.reminders.build({
+#           datetime: user_date,
+#           title: "Missed Medication #{j}",
+#           remindable_type: "medication",
+#           patient_id: i,
+#           complete: false,
+#           sub_type: "aspirin"
+#         })
+# 
+#         user.reminders.build({
+#           datetime: user_date,
+#           title: "Unhealthy A1C #{j}",
+#           remindable_type: "input",
+#           patient_id: i,
+#           complete: true,
+#           sub_type: "a1c",
+#           input: 5
+#         })
+# 
+#         user.reminders.build({
+#           datetime: user_date,
+#           title: "Healthy A1C #{j}",
+#           remindable_type: "input",
+#           patient_id: i,
+#           complete: true,
+#           sub_type: "a1c",
+#           input: 20
+#         })
+# 
+#         user.reminders.build({
+#           datetime: user_date,
+#           title: "Unhealthy Weight #{j}",
+#           remindable_type: "input",
+#           patient_id: i,
+#           complete: true,
+#           sub_type: "weight",
+#           input: 400
+#         })
+# 
+#         user.reminders.build({
+#           datetime: user_date,
+#           title: "Healthy Weight #{j}",
+#           remindable_type: "input",
+#           patient_id: i,
+#           complete: true,
+#           sub_type: "weight",
+#           input: 150
+#         })
+# 
+#         user.reminders.build({
+#           datetime: user_date,
+#           title: "Overdue Weight #{j}",
+#           remindable_type: "input",
+#           patient_id: i,
+#           complete: false,
+#           sub_type: "weight"
+#         })
+# 
+#         user.reminders.build({
+#           datetime: user_date,
+#           title: "Overdue Foot Exam #{j}",
+#           remindable_type: "treatment",
+#           patient_id: i,
+#           complete: false,
+#           sub_type: "foot exam"
+#         })
+# 
+#         # should queue 12 alerts
+#         user.reminders.build({
+#           datetime: user_date,
+#           title: "Missed Appt #{j}",
+#           remindable_type: "appointment",
+#           patient_id: i,
+#           complete: false,
+#           sub_type: "diabetes checkup"
+#         })
+#     end
+# 
+#     user.save
+#   end
+#   # doctor.generate_doctor_alerts
+# end
 
 
 puts "Generating Alerts"

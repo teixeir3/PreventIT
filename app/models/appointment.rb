@@ -21,8 +21,10 @@ class Appointment < ActiveRecord::Base
   has_many(
     :reminders,
     as: :remindable,
+    foreign_key: :remindable_id,
+    primary_key: :id,
     dependent: :destroy
-    )
+  )
 
   belongs_to(
     :patient,

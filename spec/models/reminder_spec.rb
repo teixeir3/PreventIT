@@ -5,7 +5,6 @@
 #  id              :integer          not null, primary key
 #  datetime        :datetime         not null
 #  title           :string(255)      not null
-#  rem_type        :string(255)      not null
 #  input           :integer
 #  patient_id      :integer          not null
 #  due             :boolean          default(FALSE), not null
