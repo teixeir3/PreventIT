@@ -32,7 +32,7 @@ class Reminder < ActiveRecord::Base
   attr_accessible :datetime, :title, :remindable_type, :patient_id, :note, :complete, :input, :sub_type, :input_checked, :patient
 
   validates :datetime, presence: true
-  # validates :remindable_type, presence: true, inclusion: { in: %w(Appointment Medication Treatment Input), message: "Invalid type" }
+  validates :remindable_type, presence: true, inclusion: { in: %w(Appointment Medication Treatment Input), message: "Invalid type" }
   validates :title, :patient, presence: true
 
   belongs_to(
@@ -58,7 +58,7 @@ class Reminder < ActiveRecord::Base
     @all_not_due_reminders.each do |reminder|
       if reminder.is_due?
         reminder.mark_due!
-        reminder.self_propagation! if (reminder.type == "Appointment")
+        reminder.self_propagation! unless (reminder.remindable_type == "Appointment")
       end
     end
 
