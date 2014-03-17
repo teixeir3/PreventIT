@@ -37,7 +37,7 @@ a {
 }
 
 mark {
-  background: inherit;
+  background: inherit ;
 }
 
 input[type="text"],
@@ -587,18 +587,18 @@ form > .submit > input {
 form > .delete-submit > input {
   margin-top: 15px;
   position: relative;
-  background: #FF7444;
+  background: #c23437;
 /*  background: #00A55A;*/
   color: #fff;
   padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
 /*  width: 250px;*/
-  box-shadow: 0 3px #A63B16;
+  box-shadow: 0 3px #874042;
 }
 
 .delete-submit > input:hover {
-  background: #BF7156;
+  background: #a94f50;
 /*  background: #1A8554;*/
 }
 
