@@ -119,10 +119,12 @@ class ApplicationController < ActionController::Base
       if current_user && current_user.is_doctor
         new_user.doctor_id = current_user.id
       end
+      
+      new_user.save
+      UserMailer.activation_email(new_user).deliver!
     end
 
-    new_user.save
-    UserMailer.activation_email(new_user).deliver!
+    
     new_user
   end
 

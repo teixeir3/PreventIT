@@ -44,6 +44,18 @@
 # end
 
 # Demo Database
+User.destroy_all
+Alert.destroy_all
+Practice.destroy_all
+AlertSetting.destroy_all
+AppointmentType.destroy_all
+Appointment.destroy_all
+ApptTypeDiagnosis.destroy_all
+Diagnosis.destroy_all
+Health.destroy_all
+PatientDiagnosis.destroy_all
+Reminder.destroy_all
+
 puts "Seeding Doug's Family Practice"
 my_practice = Practice.create({
     specialty: "Family Practitioner",
