@@ -49,20 +49,14 @@ class Reminder < ActiveRecord::Base
     inverse_of: :reminders
   )
 
-  has_many(
-    :reminder_events,
-    class_name: "ReminderEvent",
-    foreign_key: :reminder_id,
-    primary_key: :id
-  )
-
 
   # marks all reminders due (if their time is past)
   def self.mark_all_due
     @all_not_due_reminders = self.all_not_due
     @all_not_due_reminders.each do |reminder|
       if reminder.is_due?
-        (reminder.type == "appointment") ? reminder.mark_due! : reminder.self_propagation!
+        reminder.mark_due!
+        reminder.self_propagation! if (reminder.type == "appointment")
       end
     end
 
@@ -75,7 +69,7 @@ class Reminder < ActiveRecord::Base
   end
   
   def self.create_appt_reminder(appt)
-    reminder = self.create({
+    reminder = appt.reminders.create({
             datetime: appt.datetime,
             title: "#{appt.appointment_type.name} appointment with Dr. #{appt.doctor.full_name}",
             rem_type: "appointment",
@@ -106,29 +100,50 @@ class Reminder < ActiveRecord::Base
 #   end
 
 
+  ## OLD WAY
   # generates a new reminder with the same parameters 1 yr in the future
-  def self_propagation!
+  # def self_propagation!
+ # 
+ #    # if (!self.due && self.datetime.past?)
+ # #      self.add_new_reminder_year!
+ # #    end
+ # 
+ #    patient_user = self.patient
+ #    new_attributes = self.attributes.except("id",
+ #      "complete",
+ #      "input",
+ #      "due",
+ #      "created_at",
+ #      "updated_at"
+ #      )
+ # 
+ #    new_rem = patient_user.reminders.build(new_attributes)
+ #    new_rem.datetime = new_rem.datetime.advance(days: 7*12)
+ # 
+ #    patient_user.save
+ # 
+ #    self.mark_due!
+ #  end
 
-    # if (!self.due && self.datetime.past?)
- #      self.add_new_reminder_year!
- #    end
+ # generates a new reminder with the same parameters 1 yr in the future
+ def self_propagation!
 
-    patient_user = self.patient
-    new_attributes = self.attributes.except("id",
-      "complete",
-      "input",
-      "due",
-      "created_at",
-      "updated_at"
-      )
+   remindable = self.remindable
+   new_attributes = self.attributes.except("id",
+     "complete",
+     "input",
+     "due",
+     "created_at",
+     "updated_at"
+     )
 
-    new_rem = patient_user.reminders.build(new_attributes)
-    new_rem.datetime = new_rem.datetime.advance(days: 7*12)
+   new_rem = remindable.reminders.build(new_attributes)
+   new_rem.datetime = new_rem.datetime.advance(days: 7*12)
 
-    patient_user.save
-
-    self.mark_due!
-  end
+   new_rem.save
+   
+   new_rem
+ end
 
   def day_str
     DAY_STRINGS[self.day]
@@ -168,4 +183,13 @@ class Reminder < ActiveRecord::Base
 #     self.complete = is_complete
 #     self.add_new_reminder_year!
 #   end
+
+  def find_remindable
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        return $1.classify.constantize.find(value)
+      end
+    end
+    nil
+  end
 end
