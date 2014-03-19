@@ -67,4 +67,8 @@ class UsersController < ApplicationController
       raise ActiveRecord::RecordNotFound.new()
     end
   end
+  
+  def password_reset
+    @user = User.find_by_activation_token(params[:activation_token])
+  end
 end

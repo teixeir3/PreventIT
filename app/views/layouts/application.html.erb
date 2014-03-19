@@ -17,8 +17,8 @@
       </div>
 
       <div class="nav-sign-ins">
-        <%= flash[:errors].join('<br>').html_safe if flash[:errors] %><br>
-
+        
+         <%= flash[:errors].join('<br>').html_safe if flash[:errors] %><br>
          <% if current_user %>
            Welcome:
            <% if current_user.is_doctor  %>
@@ -39,6 +39,8 @@
 
   </header>
 
+    <%= flash[:errors].join('<br>').html_safe if flash[:errors] %><br>
+    
     <%= yield %>
     <%= yield :js %>
 
