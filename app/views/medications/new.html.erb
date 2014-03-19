@@ -1,44 +1,3 @@
-<%= render "users/sub_bar", user: @user%>
-
-
-<main class="group">
-
-  <div class="side-content">
-    <div class="title">
-      <h2>Diagnoses:</h2>
-    </div>
-
-    <div class="side-info">
-
-      <h3>Find ICD10 Code:</h3>
-
-      <form class="search" action="<%= user_add_diagnosis_url(@user) %>" method="GET">
-        <%= auth_token %>
-
-        <%= select_tag "Diagnoses",
-        options_from_collection_for_select([], :id, :description),
-        id: "diagnoses-select", name: "query" %>
-
-        <div class="submit side-button">
-          <input type="submit" value="Add Diagnosis!">
-        </div>
-      </form>
-
-    </div>
-  </div>
-
-  <div class="sub-content">
-
-    <p><%= paginate @patient_diagnoses %></p>
-
-    <label for="patient-diagnoses" class="table-label">All:</label>
-    <%= render "list", patient_diagnoses: @patient_diagnoses %>
-
-    <p><%= paginate @patient_diagnoses %></p>
-
-  </div>
-</main>
-
 <% content_for :js do %>
   <script type="text/javascript">
     $(document).ready(function() {
@@ -133,4 +92,3 @@
 
   </script>
 <% end %>
-

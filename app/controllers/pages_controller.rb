@@ -18,4 +18,19 @@ class PagesController < ApplicationController
 
     render json: @results
   end
+  
+  def search_medications
+    @results = Medication.search_on_name(params[:query])
+    
+    if @results.empty?
+      url = Addressable::URI.new(
+                            scheme: "http",
+                            host: "rxnav.nlm.nih.gov",
+                            path: "/REST/spellingsuggestions",
+                            query_values: {name: params[:query]})
+      @results = JSON.parse(RestClient.get(url.to_s, content_type: :json, accept: :json))
+    end
+    
+    render json: @results
+  end
 end

@@ -1,0 +1,30 @@
+<%= render "users/sub_bar", user: @user%>
+
+
+<main class="group">
+
+  <div class="side-content">
+    <div class="title">
+      <h2>Medications:</h2>
+    </div>
+
+    <div class="side-info">
+
+
+      
+    </div>
+  </div>
+
+  <div class="sub-content">
+
+    <p><%= paginate @patient_medications %></p>
+
+    <label for="patient-medications" class="table-label">All:</label>
+    <%= render "list", patient_medications: @patient_medications %>
+
+    <p><%= paginate @patient_medications %></p>
+
+  </div>
+</main>
+
+

@@ -13,6 +13,10 @@ class Medication < ActiveRecord::Base
   
   validates :name, presence: true
   
+  include PgSearch
+  pg_search_scope :search_on_name,
+                  against: :name, :using => {:trigram => {:threshold => 0.05}}
+  
   has_many(
     :patient_medications,
     class_name: "PatientMedication",
