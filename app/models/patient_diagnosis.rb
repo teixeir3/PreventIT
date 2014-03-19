@@ -30,5 +30,13 @@ class PatientDiagnosis < ActiveRecord::Base
     primary_key: :id,
     inverse_of: :patient_diagnoses
   )
+  
+  has_many(
+    :patient_medications,
+    class_name: "PatientMedication",
+    foreign_key: :pt_diagnosis,
+    primary_key: :id,
+    inverse_of: :patient_diagnosis
+  )
 
 end

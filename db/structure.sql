@@ -339,6 +339,37 @@ ALTER SEQUENCE healths_id_seq OWNED BY healths.id;
 
 
 --
+-- Name: medications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE medications (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: medications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE medications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: medications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE medications_id_seq OWNED BY medications.id;
+
+
+--
 -- Name: patient_diagnoses; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -368,6 +399,47 @@ CREATE SEQUENCE patient_diagnoses_id_seq
 --
 
 ALTER SEQUENCE patient_diagnoses_id_seq OWNED BY patient_diagnoses.id;
+
+
+--
+-- Name: patient_medications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE patient_medications (
+    id integer NOT NULL,
+    patient_id integer NOT NULL,
+    medication_id integer NOT NULL,
+    pt_diagnosis_id integer,
+    start_date timestamp without time zone,
+    end_date timestamp without time zone,
+    refills integer DEFAULT 0 NOT NULL,
+    count integer,
+    dosage_num double precision,
+    dosage_measurement character varying(255),
+    duration_num integer,
+    duration_measurement character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: patient_medications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE patient_medications_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: patient_medications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE patient_medications_id_seq OWNED BY patient_medications.id;
 
 
 --
@@ -562,7 +634,21 @@ ALTER TABLE ONLY healths ALTER COLUMN id SET DEFAULT nextval('healths_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY medications ALTER COLUMN id SET DEFAULT nextval('medications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY patient_diagnoses ALTER COLUMN id SET DEFAULT nextval('patient_diagnoses_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY patient_medications ALTER COLUMN id SET DEFAULT nextval('patient_medications_id_seq'::regclass);
 
 
 --
@@ -651,11 +737,27 @@ ALTER TABLE ONLY healths
 
 
 --
+-- Name: medications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY medications
+    ADD CONSTRAINT medications_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: patient_diagnoses_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY patient_diagnoses
     ADD CONSTRAINT patient_diagnoses_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: patient_medications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY patient_medications
+    ADD CONSTRAINT patient_medications_pkey PRIMARY KEY (id);
 
 
 --
@@ -753,6 +855,13 @@ CREATE INDEX index_healths_on_patient_id ON healths USING btree (patient_id);
 
 
 --
+-- Name: index_medications_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_medications_on_name ON medications USING btree (name);
+
+
+--
 -- Name: index_patient_diagnoses_on_diagnosis_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -771,6 +880,34 @@ CREATE UNIQUE INDEX index_patient_diagnoses_on_diagnosis_id_and_patient_id ON pa
 --
 
 CREATE INDEX index_patient_diagnoses_on_patient_id ON patient_diagnoses USING btree (patient_id);
+
+
+--
+-- Name: index_patient_medications_on_medication_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_patient_medications_on_medication_id ON patient_medications USING btree (medication_id);
+
+
+--
+-- Name: index_patient_medications_on_patient_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_patient_medications_on_patient_id ON patient_medications USING btree (patient_id);
+
+
+--
+-- Name: index_patient_medications_on_patient_id_and_medication_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_patient_medications_on_patient_id_and_medication_id ON patient_medications USING btree (patient_id, medication_id);
+
+
+--
+-- Name: index_patient_medications_on_pt_diagnosis_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_patient_medications_on_pt_diagnosis_id ON patient_medications USING btree (pt_diagnosis_id);
 
 
 --
@@ -877,3 +1014,7 @@ INSERT INTO schema_migrations (version) VALUES ('20140314180158');
 INSERT INTO schema_migrations (version) VALUES ('20140316215531');
 
 INSERT INTO schema_migrations (version) VALUES ('20140317171038');
+
+INSERT INTO schema_migrations (version) VALUES ('20140318222350');
+
+INSERT INTO schema_migrations (version) VALUES ('20140319180643');

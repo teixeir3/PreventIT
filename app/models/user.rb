@@ -125,7 +125,16 @@ class User < ActiveRecord::Base
   has_many(
     :appt_types,
     through: :diagnoses,
-    source: :appt_types)
+    source: :appt_types
+  )
+    
+  has_many(
+    :patient_medications,
+    class_name: "PatientMedication",
+    foreign_key: :patient_id,
+    primary_key: :id,
+    inverse_of: :patient
+  )
 
   #### Doctor Associations ####
 
