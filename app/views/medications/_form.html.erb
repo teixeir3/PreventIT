@@ -70,16 +70,25 @@
       $('#medication-select').select2({
         placeholder: "Enter a name..",
         minimumInputLength: 1,
+        id: function(el) { return el; },
+        formatSelection: function(data) {
+          console.log(data);
+          return data.text;
+        },
         ajax: {
           url: '<%= medications_search_url %>',
           dataType: 'json',
           data: function (term, page) {
             return {
-              name: term
+              query: term
             };
           },
           results: function(data, page) {
-            return {results: data}
+            var results = [];
+            $.each(data, function(index, item){
+              results.push({id: item, text: item});
+            });
+            return {results: results};
           }
         }
       });
