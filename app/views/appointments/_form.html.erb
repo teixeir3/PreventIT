@@ -53,3 +53,16 @@
     <input type="submit" value="<%= appointment.persisted? ? 'Edit' : 'Add' %> Appointment">
   </div>
 </form>
+
+<% content_for :js do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('select#appt-type-select').select2({
+        placeholder: "Select Type.."
+      });
+
+    });
+
+  </script>
+
+<% end %>

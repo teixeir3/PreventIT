@@ -19,16 +19,3 @@
     <%= render "form", appointment: @appointment, user: @user %>
   </div>
 </main>
-
-<% content_for :js do %>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('select#appt-type-select').select2({
-        placeholder: "Select Type.."
-      });
-
-    });
-
-  </script>
-
-<% end %>

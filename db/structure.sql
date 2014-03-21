@@ -346,7 +346,8 @@ CREATE TABLE medications (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    rxcui integer
 );
 
 
@@ -862,6 +863,13 @@ CREATE INDEX index_medications_on_name ON medications USING btree (name);
 
 
 --
+-- Name: index_medications_on_rxcui; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_medications_on_rxcui ON medications USING btree (rxcui);
+
+
+--
 -- Name: index_patient_diagnoses_on_diagnosis_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1018,3 +1026,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140317171038');
 INSERT INTO schema_migrations (version) VALUES ('20140318222350');
 
 INSERT INTO schema_migrations (version) VALUES ('20140319180643');
+
+INSERT INTO schema_migrations (version) VALUES ('20140320232024');

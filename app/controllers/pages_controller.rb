@@ -20,17 +20,33 @@ class PagesController < ApplicationController
   end
   
   def search_medications
-    @results = Medication.search_on_name(params[:query])
-    
-    if @results.empty?
-      url = Addressable::URI.new(
-                            scheme: "http",
-                            host: "rxnav.nlm.nih.gov",
-                            path: "/REST/spellingsuggestions",
-                            query_values: {name: params[:query]})
-      @results = JSON.parse(RestClient.get(url.to_s, content_type: :json, accept: :json))
-    end
-    
+    url = Addressable::URI.new(
+                          scheme: "http",
+                          host: "rxnav.nlm.nih.gov",
+                          path: "/REST/spellingsuggestions",
+                          query_values: {name: params[:query]})
+    @results = JSON.parse(RestClient.get(url.to_s, content_type: :json, accept: :json))
+
+    @results = (@results["suggestionGroup"]["suggestionList"]) ? @results["suggestionGroup"]["suggestionList"]["suggestion"] : []
     render json: @results
   end
+  
+  # def search_medications
+#     @results = Medication.search_on_name(params[:query])
+#     @results = @results.map(&:name) unless @results.empty?
+#     # if @results.empty?
+#       url = Addressable::URI.new(
+#                             scheme: "http",
+#                             host: "rxnav.nlm.nih.gov",
+#                             path: "/REST/spellingsuggestions",
+#                             query_values: {name: params[:query]})
+#       @new_results = JSON.parse(RestClient.get(url.to_s, content_type: :json, accept: :json))
+#       
+#       @new_results = @results["suggestionGroup"]["suggestionList"]["suggestion"]
+#     # else
+#       
+#     # end
+#     
+#     render json: @results
+#   end
 end
