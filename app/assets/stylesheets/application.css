@@ -254,6 +254,10 @@ footer {
 /*  bottom: 0;*/
 }
 
+.params {
+  float: left;
+}
+
 .copyright {
   float: left;
   font-size: 12px;
