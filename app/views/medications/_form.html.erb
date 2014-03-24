@@ -11,10 +11,7 @@
   
   <div class="input">
     <label for="meciation-select">Medication Name:</label>
-    <input type="hidden" id="medication-select" name="medication[name]" style="width: 100%;">
-    <select id="medication-select2" name="medication[name]" style="width: 275px">
-      <option class="unique-choice" value="<%= patient_medication.medication.name if patient_medication.medication_id %>" selected><%= patient_medication.medication.name if patient_medication.medication_id %></option>
-    </select>
+    <input id="medication-select" type="hidden" name="medication[name]" style="width: 100%;" value="Ibuprofen">
   </div>
   
 
@@ -69,8 +66,14 @@
     $(document).ready(function() {
       $('#medication-select').select2({
         placeholder: "Enter a name..",
-        minimumInputLength: 1,
+        minimumInputLength: 2,
         id: function(el) { return el; },
+        initSelection: function(el, cb) {
+          var id = $(el).val();
+          if (!id=="") {
+            $.ajax
+          }
+        },
         formatSelection: function(data) {
           console.log(data);
           return data.text;
@@ -90,7 +93,14 @@
             });
             return {results: results};
           }
+        },
+        initSelection : function (element, callback) { 
+          var name = $("#medication-select").val();
+          var data = {id: name, text: name};
+          
+          callback(data); 
         }
+        
       });
 
       $('select#diagnoses-select').select2({

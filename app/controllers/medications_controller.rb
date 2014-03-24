@@ -27,4 +27,8 @@ class MedicationsController < ApplicationController
     end
   end
   
+  def init_selection
+    medication = Medication.find(param[])
+  end
+  
 end

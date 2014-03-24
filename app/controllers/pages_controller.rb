@@ -31,6 +31,11 @@ class PagesController < ApplicationController
     render json: @results
   end
   
+  # def init_selection
+#     medication = Medication.find_by_name(params[:name])
+#     
+#     render json: medication
+#   end
   # def search_medications
 #     @results = Medication.search_on_name(params[:query])
 #     @results = @results.map(&:name) unless @results.empty?
