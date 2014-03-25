@@ -11,33 +11,28 @@
   
   <div class="input">
     <label for="meciation-select">Medication Name:</label>
-    <input id="medication-select" type="hidden" name="medication[name]" style="width: 100%;" value="Ibuprofen">
+    <input id="medication-select" type="hidden" name="medication[name]" style="width: 100%;" value="<%= patient_medication.medication.name if patient_medication.medication_id %>">
   </div>
   
 
-  <div class="input">
-    <label for="diagnoses-select">Diagnosis:</label>
-    <select id="diagnoses-select" name="diagnoses_ids[]" style="width: 275px">
-      <option class="unique-choice" value="<%= patient_medication.pt_diagnosis_id %>" selected><%= patient_medication.diagnosis.name if patient_medication.pt_diagnosis_id %></option>
-    </select>
-  </div>
-  
-  <div class="input">
-  <label for="doctor">Doctor:</label>
-  
-    <select id="doctor" name="doctor_id">
-      <option value="<%= user.doctor_id %>">Dr. <%= user.doctor.full_name %></option>
+   <div class="input">
+    <label for="diagnosis-select">Diagnosis:</label>
+    <select id="diagnosis-select" name="patient_medication[diagnosis]" style="width: 275px">
+      <option></option>
+      <% diagnoses.each do |diagnosis| %>
+      <option class="unique-choice" value="<%= diagnosis.id %>" <%= "selected" if patient_medication.patient_diagnosis && diagnosis.id == patient_medication.diagnosis.id %>><%= diagnosis.description %></option>
+      <% end %>
     </select>
   </div>
 
 
   <div class="input">
-    <label for="date">Date:</label>
+    <label for="date">Start Date:</label>
     <input
       id="date"
       type="date"
-      name="date"
-      value="">
+      name="patient_medication[start_date]"
+      value="<%= patient_medication.start_date.strftime("%Y-%m-%d") if patient_medication.persisted? %>">
   </div>
 
   <div class="time-input">
@@ -68,14 +63,7 @@
         placeholder: "Enter a name..",
         minimumInputLength: 2,
         id: function(el) { return el; },
-        initSelection: function(el, cb) {
-          var id = $(el).val();
-          if (!id=="") {
-            $.ajax
-          }
-        },
         formatSelection: function(data) {
-          console.log(data);
           return data.text;
         },
         ajax: {
@@ -103,8 +91,9 @@
         
       });
 
-      $('select#diagnoses-select').select2({
-        placeholder: "Select Diagnoses"
+      $('#diagnosis-select').select2({
+        placeholder: "Select Diagnoses",
+        minimumInputLength: 2
       });
 
       // var ensureUnique = function(name) {

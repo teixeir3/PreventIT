@@ -19,7 +19,7 @@
 #
 
 class PatientMedication < ActiveRecord::Base
-  attr_accessible :patient, :patient_id, :medication, :pt_diagnosis, :start_date, :end_date, :refills, :count,
+  attr_accessible :patient, :patient_id, :medication, :pt_diagnosis, :diagnosis, :start_date, :end_date, :refills, :count,
     :dosage_num, :dosage_measurement, :duration_num, :duration_measurement
    
   validates :patient, :medication, presence: true
@@ -45,7 +45,7 @@ class PatientMedication < ActiveRecord::Base
     class_name: "PatientDiagnosis",
     foreign_key: :pt_diagnosis,
     primary_key: :id,
-    inverse_of: :patient_medication
+    inverse_of: :patient_medications
   )
   
   has_one(

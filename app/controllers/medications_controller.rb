@@ -10,6 +10,7 @@ class MedicationsController < ApplicationController
   def  new
     @user = User.find(params[:user_id])
     @patient_medication = @user.patient_medications.new
+    @diagnoses = @user.diagnoses
   end
   
   def create
@@ -25,10 +26,6 @@ class MedicationsController < ApplicationController
       @results = JSON.parse(RestClient.get(url.to_s, content_type: :json, accept: :json))
       @results = @results["rxnormdata"]["idGroup"]
     end
-  end
-  
-  def init_selection
-    medication = Medication.find(param[])
   end
   
 end

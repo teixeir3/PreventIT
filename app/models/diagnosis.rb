@@ -34,6 +34,12 @@ class Diagnosis < ActiveRecord::Base
     through: :patient_diagnoses,
     source: :patient
   )
+  
+  has_many(
+    :patient_medications,
+    through: :patient_diagnoses,
+    source: :patient_medications
+  )
 
   has_many(
     :appt_type_diagnoses,
@@ -45,5 +51,6 @@ class Diagnosis < ActiveRecord::Base
   )
 
   has_many(:appt_types, through: :appt_type_diagnoses, source: :appt_type)
+  
 
 end
