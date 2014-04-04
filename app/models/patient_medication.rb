@@ -16,11 +16,15 @@
 #  duration_measurement :string(255)
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  num_taken            :integer
+#  num_type             :string(255)
+#  schedule             :string(255)
+#  note                 :text
 #
 
 class PatientMedication < ActiveRecord::Base
-  attr_accessible :patient, :patient_id, :medication, :pt_diagnosis, :diagnosis, :start_date, :end_date, :refills, :count,
-    :dosage_num, :dosage_measurement, :duration_num, :duration_measurement
+  attr_accessible :patient, :patient_id, :medication, :pt_diagnosis, :diagnosis, :pt_diagnosis_id, :start_date, :end_date, :refills, :count,
+    :dosage_num, :dosage_measurement, :duration_num, :duration_measurement, :num_taken, :num_type, :schedule, :note
    
   validates :patient, :medication, presence: true
     
@@ -43,7 +47,7 @@ class PatientMedication < ActiveRecord::Base
   belongs_to(
     :patient_diagnosis,
     class_name: "PatientDiagnosis",
-    foreign_key: :pt_diagnosis,
+    foreign_key: :pt_diagnosis_id,
     primary_key: :id,
     inverse_of: :patient_medications
   )

@@ -2,21 +2,21 @@
   <table id="patient-medications">
     <thead>
       <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th>?</th>
+        <th>Name</th>
+        <th>Diagnosis</th>
+        <th>Quantity Left</th>
+        <th>Start Date</th>
+        <th>Refills</th>
       </tr>
     </thead>
 
     <% patient_medications.each do |patient_medication| %>
       <tr>
-        <td></td>
-        <td class="cell-wrap"></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><%= link_to patient_medication.medication.name, edit_user_medication_url(patient_medication.patient_id, patient_medication) %></td>
+        <td class="cell-wrap"><%= patient_medication.diagnosis.description if patient_medication.pt_diagnosis_id %></td>
+        <td><%= patient_medication.count %></td>
+        <td><%= patient_medication.start_date %></td>
+        <td><%= patient_medication.refills %></td>
       </tr>
     <% end %>
 

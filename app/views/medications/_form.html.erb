@@ -11,16 +11,16 @@
   
   <div class="input">
     <label for="meciation-select">Medication Name:</label>
-    <input id="medication-select" type="hidden" name="medication[name]" style="width: 100%;" value="<%= patient_medication.medication.name if patient_medication.medication_id %>">
+    <input id="medication-select" type="hidden" name="medication[name]" style="width: 275px;" value="<%= patient_medication.medication.name if patient_medication.medication_id %>">
   </div>
   
 
    <div class="input">
     <label for="diagnosis-select">Diagnosis:</label>
-    <select id="diagnosis-select" name="patient_medication[diagnosis]" style="width: 275px">
+    <select id="diagnosis-select" name="patient_medication[pt_diagnosis_id]" style="width: 275px">
       <option></option>
-      <% diagnoses.each do |diagnosis| %>
-      <option class="unique-choice" value="<%= diagnosis.id %>" <%= "selected" if patient_medication.patient_diagnosis && diagnosis.id == patient_medication.diagnosis.id %>><%= diagnosis.description %></option>
+      <% patient_diagnoses.each do |patient_diagnosis| %>
+      <option class="unique-choice" value="<%= patient_diagnosis.id %>" <%= "selected" if patient_medication.patient_diagnosis && patient_medication.pt_diagnosis_id == patient_diagnosis.id %>><%= patient_diagnosis.diagnosis.description %></option>
       <% end %>
     </select>
   </div>
@@ -34,21 +34,81 @@
       name="patient_medication[start_date]"
       value="<%= patient_medication.start_date.strftime("%Y-%m-%d") if patient_medication.persisted? %>">
   </div>
-
-  <div class="time-input">
-    <label for="time">Time:</label>
+  
+  <div class="input">
+    <label for="num_taken">How much do you take:</label>
     <input
-      id="time"
-      type="time"
-      name="time"
-      value="">
+      id="num_taken"
+      type="number"
+      name="patient_medication[num_taken]"
+      value="<%= patient_medication.num_taken if patient_medication.persisted? %>">
+      
+    <label for="num_type-select">In what form?</label>
+    <select
+      id="num_type-select"
+      name="patient_medication[num_type]">
+
+      <option <%= "selected" if patient_medication.num_type == "tablets" %> value="mg">tablets</option>
+      <option <%= "selected" if patient_medication.num_type == "ml" %> value="ml">ml</option>
+      <option <%= "selected" if patient_medication.num_type == "puffs" %> value="puffs">puffs</option>
+    </select>
+  </div>
+  
+  <div class="input">
+    <label for="dosage-num">Dosage Amount:</label>
+    <input
+      id="dosage-num"
+      type="number"
+      name="patient_medication[dosage_num]"
+      value="<%= patient_medication.dosage_num if patient_medication.persisted? %>">
+      
+    <label for="measurement-select">Dosage Measurement:</label>
+    <select
+      id="measurement-select"
+      name="patient_medication[dosage_measurement]">
+      <option></option>
+      <option <%= "selected" if patient_medication.dosage_measurement == "mg" %> value="mg">mg</option>
+      <option <%= "selected" if patient_medication.dosage_measurement == "ml" %> value="ml">ml</option>
+    </select>
+  </div>
+  
+  <div class="input">  
+    <label for="schedule-select">Schedule:</label>
+    <select
+      id="schedule-select"
+      name="patient_medication[schedule]">
+      <option></option>
+      <option <%= "selected" if patient_medication.schedule == "qd" %> value="qd">1x / day</option>
+      <option <%= "selected" if patient_medication.schedule == "bid" %> value="bid">2x / day</option>
+      <option <%= "selected" if patient_medication.schedule == "tid" %> value="tid">3x / day</option>
+      <option <%= "selected" if patient_medication.schedule == "qid" %> value="qid">4x / day</option>
+      <option <%= "selected" if patient_medication.schedule == "prn" %> value="prn">As needed</option>
+    </select>
+  </div>
+  
+  <div class="input">
+    <label for="count"><%= (patient_medication.persisted?) ? "Quantity Left" : "Starting Quantity" %>:</label>
+    <input
+      id="count"
+      type="number"
+      name="patient_medication[count]"
+      value="<%= patient_medication.count if patient_medication.persisted? %>">
+  </div>
+  
+  <div class="input">
+    <label for="refills">Refills:</label>
+    <input
+      id="refills"
+      type="number"
+      name="patient_medication[refills]"
+      value="<%= patient_medication.refills if patient_medication.persisted? %>">
   </div>
 
   <div class="input">
     <label for="note">Note:</label>
     <textarea
       id="note"
-      name="appointment[note]"></textarea>
+      name="patient_medication[note]"><%= patient_medication.note if patient_medication.persisted? %></textarea>
   </div>
 
   <div class="submit long-submit">
@@ -62,7 +122,6 @@
       $('#medication-select').select2({
         placeholder: "Enter a name..",
         minimumInputLength: 2,
-        id: function(el) { return el; },
         formatSelection: function(data) {
           return data.text;
         },
@@ -85,7 +144,6 @@
         initSelection : function (element, callback) { 
           var name = $("#medication-select").val();
           var data = {id: name, text: name};
-          
           callback(data); 
         }
         
@@ -93,7 +151,19 @@
 
       $('#diagnosis-select').select2({
         placeholder: "Select Diagnoses",
-        minimumInputLength: 2
+        dropdownAutoWidth: true
+      });
+      
+      $('#measurement-select').select2({
+        placeholder: "Select measurement"
+      });
+      
+      $('#schedule-select').select2({
+        placeholder: "times per day"
+      });
+      
+      $('#num_type-select').select2({
+        placeholder: "times per day"
       });
 
       // var ensureUnique = function(name) {

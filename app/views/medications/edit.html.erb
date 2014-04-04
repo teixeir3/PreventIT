@@ -3,7 +3,7 @@
 <main class="group">
   <div class="side-content">
     <div class="title">
-      <h3>New Medication</h3>
+      <h3>Medication</h3>
     </div>
 	
 	<div class="side-info">
@@ -16,5 +16,14 @@
   <div class="sub-content">
 
     <%= render "form", patient_medication: @patient_medication, user: @user, patient_diagnoses: @patient_diagnoses %>
+    
+  	<form class="form" action="<%= user_medication_url(@user, @patient_medication) %>" method="POST">
+  		<input type="hidden" name="_method" value="DELETE">
+  		<%= auth_token %>
+		
+  	    <div class="delete-submit long-submit">
+  	      <input type="submit" value="Delete">
+  	    </div>
+  	</form>
   </div>
 </main>

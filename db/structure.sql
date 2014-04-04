@@ -420,7 +420,11 @@ CREATE TABLE patient_medications (
     duration_num integer,
     duration_measurement character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    num_taken integer,
+    num_type character varying(255),
+    schedule character varying(255),
+    note text
 );
 
 
@@ -1028,3 +1032,7 @@ INSERT INTO schema_migrations (version) VALUES ('20140318222350');
 INSERT INTO schema_migrations (version) VALUES ('20140319180643');
 
 INSERT INTO schema_migrations (version) VALUES ('20140320232024');
+
+INSERT INTO schema_migrations (version) VALUES ('20140403142612');
+
+INSERT INTO schema_migrations (version) VALUES ('20140404020902');

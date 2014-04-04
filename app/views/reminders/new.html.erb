@@ -119,6 +119,7 @@
       <div class="input">
         <label for="remindable-type">Type:</label>
         <select id="remindable-type" name="reminder[remindable_type]">
+          <option></option>
           <option value="Appointment">Appointment</option>
           <option value="Medication">Medication</option>
           <option value="Treatment">Treatment</option>
@@ -132,3 +133,16 @@
     </form>
   </div>
 </main>
+
+<% content_for :js do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('select#remindable-type').select2({
+        placeholder: "Select Type.."
+      });
+
+    });
+
+  </script>
+
+<% end %>

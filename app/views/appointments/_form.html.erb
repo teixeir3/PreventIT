@@ -18,6 +18,7 @@
   <div class="input">
     <label for="appt-type-select">Appointment Type:</label>
     <select id="appt-type-select" name="appointment[appointment_type_id]" style="width: 275px">
+      <option></option>
       <% user.appt_types.each do |appt_type| %>
         <option <%= "selected" if appointment.appointment_type_id == appt_type.id %> value="<%= appt_type.id %>"><%= appt_type.name %></option>
       <% end %>

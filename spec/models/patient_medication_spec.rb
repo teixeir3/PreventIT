@@ -16,6 +16,10 @@
 #  duration_measurement :string(255)
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  num_taken            :integer
+#  num_type             :string(255)
+#  schedule             :string(255)
+#  note                 :text
 #
 
 require 'spec_helper'
