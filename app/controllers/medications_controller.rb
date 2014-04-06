@@ -30,8 +30,8 @@ class MedicationsController < ApplicationController
   end
   
   def edit
-    @user = User.includes(:patient_diagnoses => :diagnosis).find(params[:user_id])
-    @patient_medication = PatientMedication.find(params[:id])
+    @user = User.includes(:patient_medications, :patient_diagnoses => :diagnosis).find(params[:user_id])
+    @patient_medication = @user.patient_medications.find(params[:id])
     @patient_diagnoses = @user.patient_diagnoses
   end
   
