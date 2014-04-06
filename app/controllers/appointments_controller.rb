@@ -35,7 +35,6 @@ class AppointmentsController < ApplicationController
   def destroy
     @appointment = Appointment.find(params[:id])
 
-    # TODO: This leaves a reminder tied to the appointment still free floating. May need polymorphic relationship
     @appointment.destroy
     redirect_to user_appointments_url(@appointment.patient_id)
   end

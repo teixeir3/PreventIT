@@ -32,7 +32,7 @@
       id="date"
       type="date"
       name="patient_medication[start_date]"
-      value="<%= patient_medication.start_date.strftime("%Y-%m-%d") if patient_medication.persisted? %>">
+      value="<%= patient_medication.start_date.strftime("%Y-%m-%d") if patient_medication.persisted? && patient_medication.start_date %>">
   </div>
   
   <div class="input">
