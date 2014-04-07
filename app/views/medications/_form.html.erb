@@ -14,7 +14,60 @@
     <input id="medication-select" type="hidden" name="medication[name]" style="width: 275px;" value="<%= patient_medication.medication.name if patient_medication.medication_id %>">
   </div>
   
-
+ <div class="input">
+   <label for="full-name-select">Exact Match:</label>
+   <!-- <input id="full-name-select" type="hidden" name="medication[full_name]" style="width: 275px;" value="<%= patient_medication.medication.name if patient_medication.medication_id %>"> -->
+   <select
+     id="full-name-select"
+     name="medication[full_name]]"
+     class="hidden">
+     <option></option>
+     <% if patient_medication.medication_id %>
+       <option <%= "selected" if patient_medication.num_type == "tablets" %> value="mg">tablets</option>
+     <% end %>
+   </select>
+ </div>
+  
+  <div class="input">
+    <label for="num_taken">Amount you take in one dose (tablets, puffs, injections..):</label>
+    <input
+      id="num_taken"
+      type="number"
+      name="patient_medication[num_taken]"
+      value="<%= patient_medication.num_taken if patient_medication.persisted? %>">
+  </div>
+  
+  <label for="schedule">Schedule:</label>
+  <div class="input" id="schedule">  
+    <label for="frequency-select">Frequency:</label>
+    <input
+      id="frequency-select"
+      name="patient_medication[frequency]"
+      type="number"
+      value="<%= patient_medication.frequency if patient_medication.persisted? %>">
+    </select>
+    
+    <label for="schedule-select">Time Period:</label>
+    <select
+      id="time-period-select"
+      name="patient_medication[time_period]">
+      <option></option>
+      <option <%= "selected" if patient_medication.schedule == "qd" %>day</option>
+      <option <%= "selected" if patient_medication.schedule == "bid" %>week</option>
+      <option <%= "selected" if patient_medication.schedule == "tid" %>month</option>
+      <option <%= "selected" if patient_medication.schedule == "qid" %>year</option>
+    </select>    
+  </div>
+  
+  <div class="input">
+    <label for="count"><%= (patient_medication.persisted?) ? "Quantity Left" : "Starting Quantity" %>:</label>
+    <input
+      id="count"
+      type="number"
+      name="patient_medication[count]"
+      value="<%= patient_medication.count if patient_medication.persisted? %>">
+  </div>
+  
    <div class="input">
     <label for="diagnosis-select">Diagnosis:</label>
     <select id="diagnosis-select" name="patient_medication[pt_diagnosis_id]" style="width: 275px">
@@ -33,66 +86,6 @@
       type="date"
       name="patient_medication[start_date]"
       value="<%= patient_medication.start_date.strftime("%Y-%m-%d") if patient_medication.persisted? && patient_medication.start_date %>">
-  </div>
-  
-  <div class="input">
-    <label for="num_taken">How much do you take:</label>
-    <input
-      id="num_taken"
-      type="number"
-      name="patient_medication[num_taken]"
-      value="<%= patient_medication.num_taken if patient_medication.persisted? %>">
-      
-    <label for="num_type-select">In what form?</label>
-    <select
-      id="num_type-select"
-      name="patient_medication[num_type]">
-
-      <option <%= "selected" if patient_medication.num_type == "tablets" %> value="mg">tablets</option>
-      <option <%= "selected" if patient_medication.num_type == "ml" %> value="ml">ml</option>
-      <option <%= "selected" if patient_medication.num_type == "puffs" %> value="puffs">puffs</option>
-    </select>
-  </div>
-  
-  <div class="input">
-    <label for="dosage-num">Dosage Amount:</label>
-    <input
-      id="dosage-num"
-      type="number"
-      name="patient_medication[dosage_num]"
-      value="<%= patient_medication.dosage_num if patient_medication.persisted? %>">
-      
-    <label for="measurement-select">Dosage Measurement:</label>
-    <select
-      id="measurement-select"
-      name="patient_medication[dosage_measurement]">
-      <option></option>
-      <option <%= "selected" if patient_medication.dosage_measurement == "mg" %> value="mg">mg</option>
-      <option <%= "selected" if patient_medication.dosage_measurement == "ml" %> value="ml">ml</option>
-    </select>
-  </div>
-  
-  <div class="input">  
-    <label for="schedule-select">Schedule:</label>
-    <select
-      id="schedule-select"
-      name="patient_medication[schedule]">
-      <option></option>
-      <option <%= "selected" if patient_medication.schedule == "qd" %> value="qd">1x / day</option>
-      <option <%= "selected" if patient_medication.schedule == "bid" %> value="bid">2x / day</option>
-      <option <%= "selected" if patient_medication.schedule == "tid" %> value="tid">3x / day</option>
-      <option <%= "selected" if patient_medication.schedule == "qid" %> value="qid">4x / day</option>
-      <option <%= "selected" if patient_medication.schedule == "prn" %> value="prn">As needed</option>
-    </select>
-  </div>
-  
-  <div class="input">
-    <label for="count"><%= (patient_medication.persisted?) ? "Quantity Left" : "Starting Quantity" %>:</label>
-    <input
-      id="count"
-      type="number"
-      name="patient_medication[count]"
-      value="<%= patient_medication.count if patient_medication.persisted? %>">
   </div>
   
   <div class="input">
@@ -148,22 +141,49 @@
         }
         
       });
+      
 
+      $('#medication-select').on('change', function(event) {
+        var url = "/search/full_medications?query=" + event.currentTarget.value;
+        var $fullName = $('#full-name-select');
+        var placeHolder;
+        
+        $.ajax(url, {
+          success: function(data) {
+            var html = "<option></option>";
+        
+            // if (data.length > 0) {
+//               console.log("1");
+//               placeHolder = "Pick one..";
+//             } else {
+//               console.log("0");
+//               placeHolder = "No matches found";
+//               console.log(placeHolder);
+//             }
+            
+            $.each(data, function(i, el) {
+              html += ("<option class='unique-choice' value='" + el.name + "'>" + el.name +"</option>");
+            });
+            
+            $fullName.html(html);
+          },
+          error: function() {
+            console.log("Error in full_medication_search!");
+          }
+        });
+        
+        $fullName.select2({
+          placeholder: "Pick one"
+        });
+      });
+      
       $('#diagnosis-select').select2({
         placeholder: "Select Diagnoses",
         dropdownAutoWidth: true
       });
       
-      $('#measurement-select').select2({
-        placeholder: "Select measurement"
-      });
-      
-      $('#schedule-select').select2({
-        placeholder: "times per day"
-      });
-      
-      $('#num_type-select').select2({
-        placeholder: "times per day"
+      $('#time-period-select').select2({
+        placeholder: "How often you take this medicine.."
       });
 
       // var ensureUnique = function(name) {

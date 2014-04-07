@@ -8,6 +8,7 @@ PreventIT::Application.routes.draw do
   get '/search/patients' => 'pages#search_patients', as: 'patient_search'
   get '/search/diagnoses' => 'pages#search_diagnoses', as: 'diagnoses_search'
   get '/search/medications' => 'pages#search_medications', as: 'medications_search'
+  get '/search/full_medications' => 'pages#search_full_medications', as: 'full_medications_search'
   # get '/med_init_selection' => 'pages#init_selection', as: 'medication_init'
   get 'alerts/completed' => 'alerts#completed', as: 'alerts_completed'
 

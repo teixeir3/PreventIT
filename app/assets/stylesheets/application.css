@@ -82,6 +82,11 @@ body {
   clear: both;
 }
 
+/* Hidden */
+.hidden {
+  display: none;
+}
+
 /* Header */
 
 header {

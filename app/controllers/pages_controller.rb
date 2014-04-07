@@ -31,6 +31,25 @@ class PagesController < ApplicationController
     render json: @results
   end
   
+  def search_full_medications
+    @objects = []
+    
+    url = Addressable::URI.new(
+                          scheme: "http",
+                          host: "rxnav.nlm.nih.gov",
+                          path: "/REST/Prescribe/drugs",
+                          query_values: {name: params[:query]})
+    @results = JSON.parse(RestClient.get(url.to_s, content_type: :json, accept: :json))
+    
+    if @results["drugGroup"]["conceptGroup"]
+      @results["drugGroup"]["conceptGroup"].each do |tty|
+        @objects += tty["conceptProperties"] if tty["conceptProperties"]
+      end
+    end
+    
+    render json: @objects
+  end
+  
   # def init_selection
 #     medication = Medication.find_by_name(params[:name])
 #     

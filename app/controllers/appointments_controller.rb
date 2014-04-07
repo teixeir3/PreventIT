@@ -32,6 +32,7 @@ class AppointmentsController < ApplicationController
 
   end
 
+  # Destroys appointment and all associated reminders
   def destroy
     @appointment = Appointment.find(params[:id])
 
