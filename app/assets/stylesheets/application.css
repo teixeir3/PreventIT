@@ -454,7 +454,7 @@ footer {
 .checkbox-group {
   display: block;
   float: left;
-  width: 300px;
+  width: inherit;
   padding-bottom: 20px;
 }
 

@@ -15,16 +15,14 @@
   </div>
   
  <div class="input">
-   <label for="full-name-select">Exact Match:</label>
+   <label for="description-select">Exact Match:</label>
    <!-- <input id="full-name-select" type="hidden" name="medication[full_name]" style="width: 275px;" value="<%= patient_medication.medication.name if patient_medication.medication_id %>"> -->
    <select
-     id="full-name-select"
-     name="medication[full_name]]"
+     id="description-select"
+     name="patient_medication[description]"
      class="hidden">
      <option></option>
-     <% if patient_medication.medication_id %>
-       <option <%= "selected" if patient_medication.num_type == "tablets" %> value="mg">tablets</option>
-     <% end %>
+     <option <%= "selected" if patient_medication.persisted? %> value="<%= patient_medication.description %>"><%= patient_medication.description %></option>
    </select>
  </div>
   
@@ -38,25 +36,45 @@
   </div>
   
   <label for="schedule">Schedule:</label>
-  <div class="input" id="schedule">  
-    <label for="frequency-select">Frequency:</label>
-    <input
-      id="frequency-select"
-      name="patient_medication[frequency]"
-      type="number"
-      value="<%= patient_medication.frequency if patient_medication.persisted? %>">
-    </select>
-    
-    <label for="schedule-select">Time Period:</label>
-    <select
-      id="time-period-select"
-      name="patient_medication[time_period]">
-      <option></option>
-      <option <%= "selected" if patient_medication.schedule == "qd" %>day</option>
-      <option <%= "selected" if patient_medication.schedule == "bid" %>week</option>
-      <option <%= "selected" if patient_medication.schedule == "tid" %>month</option>
-      <option <%= "selected" if patient_medication.schedule == "qid" %>year</option>
-    </select>    
+  <div id="schedule" class="group">
+  
+    <div class="checkbox-group">
+      <h4>Frequency:</h4>
+      <% 1.upto(6) do |i| %>
+        <div class="checkbox-input">
+        <label for="<%= i %>"><%= i %> x</label>
+        <input type="radio" name="patient_medication[frequency]" id="<%= i %>" <%= "selected" if patient_medication.frequency == i %>" value="<%= i %>">
+        </div>
+      <% end %>
+    </div>
+  
+    <div class="checkbox-group">
+      <h4>Time Period:</h4>
+      <div class="checkbox-input">
+        <label for="day">Day</label>
+        <input type="radio" name="patient_medication[time_period]" id="day" <%= "selected" if patient_medication.time_period == "day" %> value="day">
+      </div>
+      <div class="checkbox-input">
+        <label for="week">Week</label>
+        <input type="radio" name="patient_medication[time_period]" id="week" <%= "selected" if patient_medication.time_period == "week" %> value="week">
+      </div>
+      <div class="checkbox-input">
+        <label for="month">Month</label>
+        <input type="radio" name="patient_medication[time_period]" id="month" <%= "selected" if patient_medication.time_period == "month" %> value="month">
+      </div>
+      <div class="checkbox-input">
+        <label for="year">Year</label>
+        <input type="radio" name="patient_medication[time_period]" id="year" <%= "selected" if patient_medication.time_period == "year" %> value="year">
+      </div>
+      <div class="checkbox-input">
+        <label for="hour">Hour</label>
+        <input type="radio" name="patient_medication[time_period]" id="hour" <%= "selected" if patient_medication.time_period == "hour" %> value="hour">
+      </div>
+      <div class="checkbox-input">
+        <label for="prn">As Needed</label>
+        <input type="radio" name="patient_medication[time_period]" id="prn" <%= "selected" if patient_medication.time_period == "prn" %> value="prn">
+      </div>
+    </div>
   </div>
   
   <div class="input">
@@ -67,7 +85,7 @@
       name="patient_medication[count]"
       value="<%= patient_medication.count if patient_medication.persisted? %>">
   </div>
-  
+
    <div class="input">
     <label for="diagnosis-select">Diagnosis:</label>
     <select id="diagnosis-select" name="patient_medication[pt_diagnosis_id]" style="width: 275px">
@@ -112,8 +130,11 @@
 <% content_for :js do %>
   <script type="text/javascript">
     $(document).ready(function() {
-      $('#medication-select').select2({
+      var $medicationSelect = $('#medication-select');
+      
+      $medicationSelect.select2({
         placeholder: "Enter a name..",
+        allowClear: true,
         minimumInputLength: 2,
         formatSelection: function(data) {
           return data.text;
@@ -142,15 +163,44 @@
         
       });
       
-      var $fullName = $('#full-name-select');
-      
-      $fullName.select2({
-        placeholder: "Pick one"
+      $('#diagnosis-select').select2({
+        placeholder: "Select Diagnoses",
+        allowClear: true,
+        dropdownAutoWidth: true
       });
       
-      $fullName.select2('enable', false);
+      var $descriptionSelect = $('#description-select');
+      
+      $descriptionSelect.select2({
+        placeholder: "Pick one",
+        allowClear: true
+      });
+      
+      
+      if ($medicationSelect.val().length > 0) {
+        var url = "/search/full_medications?query=" + $medicationSelect.val();
+      
+        $.ajax(url, {
+          success: function(data) {
+            var html = "";
+          
+            $.each(data, function(i, el) {
+              html += ("<option class='unique-choice' value='" + el.name + "'>" + el.name +"</option>");
+            });
+          
+            $descriptionSelect.html(html);
+          },
+          error: function() {
+            console.log("Error in full_medication_search!");
+          }
+        });
+      } else {
+        $descriptionSelect.select2('enable', false);
+      }
+      
+      
 
-      $('#medication-select').on('change', function(event) {
+      $medicationSelect.on('change', function(event) {
         var url = "/search/full_medications?query=" + event.currentTarget.value;
         
         var placeHolder;
@@ -172,9 +222,9 @@
               html += ("<option class='unique-choice' value='" + el.name + "'>" + el.name +"</option>");
             });
             
-            $fullName.html(html);
-            $fullName.select2('enable', true);
-            $fullName.select2('open', true);
+            $descriptionSelect.html(html);
+            $descriptionSelect.select2('enable', true);
+            $descriptionSelect.select2('open', true);
           },
           error: function() {
             console.log("Error in full_medication_search!");
@@ -182,14 +232,9 @@
         });
       });
       
-      $('#diagnosis-select').select2({
-        placeholder: "Select Diagnoses",
-        dropdownAutoWidth: true
-      });
-      
-      $('#time-period-select').select2({
-        placeholder: "How often you take this medicine.."
-      });
+      // $('#time-period-select').select2({
+//         placeholder: "How often you take this medicine.."
+//       });
 
       // var ensureUnique = function(name) {
 //         var isUniq = true;

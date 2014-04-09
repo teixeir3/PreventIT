@@ -415,16 +415,13 @@ CREATE TABLE patient_medications (
     end_date timestamp without time zone,
     refills integer DEFAULT 0 NOT NULL,
     count integer,
-    dosage_num double precision,
-    dosage_measurement character varying(255),
-    duration_num integer,
-    duration_measurement character varying(255),
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     num_taken integer,
-    num_type character varying(255),
-    schedule character varying(255),
-    note text
+    note text,
+    description character varying(255),
+    frequency integer,
+    time_period character varying(255)
 );
 
 
@@ -1036,3 +1033,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140320232024');
 INSERT INTO schema_migrations (version) VALUES ('20140403142612');
 
 INSERT INTO schema_migrations (version) VALUES ('20140404020902');
+
+INSERT INTO schema_migrations (version) VALUES ('20140409165334');
