@@ -142,10 +142,17 @@
         
       });
       
+      var $fullName = $('#full-name-select');
+      
+      $fullName.select2({
+        placeholder: "Pick one"
+      });
+      
+      $fullName.select2('enable', false);
 
       $('#medication-select').on('change', function(event) {
         var url = "/search/full_medications?query=" + event.currentTarget.value;
-        var $fullName = $('#full-name-select');
+        
         var placeHolder;
         
         $.ajax(url, {
@@ -166,14 +173,12 @@
             });
             
             $fullName.html(html);
+            $fullName.select2('enable', true);
+            $fullName.select2('open', true);
           },
           error: function() {
             console.log("Error in full_medication_search!");
           }
-        });
-        
-        $fullName.select2({
-          placeholder: "Pick one"
         });
       });
       
