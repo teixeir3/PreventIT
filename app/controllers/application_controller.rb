@@ -84,8 +84,9 @@ class ApplicationController < ActionController::Base
     ((current_user.id == check_id) || (current_user.is_patient_doctor?(check_id)))
   end
 
+
+  # NOTE: Doesn't work unless routes are nested under user
   def find_user_id
-    # NOTE: Doesn't work unless nested route under user
     if (params[:user_id])
       return params[:user_id].to_i
     else
