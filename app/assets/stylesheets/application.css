@@ -87,15 +87,17 @@ body {
   display: none;
 }
 
+/*.hidden {
+  display: hidden;
+}*/
+
 /* Header */
 
 header {
   border-bottom: 4px solid gray;
+  width: auto;
 }
 
-.hidden {
-  display: hidden;
-}
 .top-bar {
   width: auto;
 /*  width: 945px;*/
@@ -349,8 +351,8 @@ footer {
 }
 
 .google-signin {
-  height: 55px;
-  width: 250px;
+  height: 50px;
+  width: 245px;
   background: url('sign-in-with-google-250x55.png') no-repeat 0 0;
 }
 

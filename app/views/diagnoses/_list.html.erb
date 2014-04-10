@@ -2,20 +2,20 @@
   <table id="patient-diagnoses">
     <thead>
       <tr>
-        <th>Code</th>
         <th>Description</th>
-        <th>Date Added</th>
+        <th>Code</th>
         <th>Code Type</th>
+        <th>Date Added</th>
         <th>Delete?</th>
       </tr>
     </thead>
 
     <% patient_diagnoses.each do |patient_diagnosis| %>
       <tr>
-        <td><%= patient_diagnosis.diagnosis.code %></td>
         <td class="cell-wrap"><%= patient_diagnosis.diagnosis.description %></td>
-        <td><%= patient_diagnosis.created_at.strftime("%H:%M %m/%d/%Y") %></td>
+        <td><%= patient_diagnosis.diagnosis.code %></td>
         <td><%= patient_diagnosis.diagnosis.code_type %></td>
+        <td><%= patient_diagnosis.created_at.strftime("%m/%d/%Y") %></td>
         <td><%= button_to "Delete", user_diagnosis_url(@user, patient_diagnosis), method: :delete %></td>
       </tr>
     <% end %>
