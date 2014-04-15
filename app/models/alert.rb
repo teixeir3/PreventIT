@@ -32,7 +32,11 @@ class Alert < ActiveRecord::Base
     source: :doctor
   )
 
-  def complete_str?
+  def complete_str
     (self.complete) ? "complete" : "incomplete"
+  end
+  
+  def complete?
+    self.complete
   end
 end

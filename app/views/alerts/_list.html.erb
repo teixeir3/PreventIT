@@ -7,6 +7,7 @@
         <th>Reason</th>
         <th>Type</th>
         <th>Date</th>
+        <th>Time</th>
         <th>Patient</th>
         <th>Complete?</th>
       </tr>
@@ -16,9 +17,10 @@
       <tr>
         <td><%= link_to alert.reason, alert_url(alert) %></td>
         <td><%= alert.alert_type %></td>
-        <td><%= alert.created_at.strftime("%H:%M %m/%d/%Y") %></td>
+        <td><%= alert.created_at.strftime("%m/%d/%Y") %></td>
+        <td><%= alert.created_at.strftime("%m/%d/%Y") %></td>
         <td><%= link_to alert.patient.full_name, user_url(alert.patient) %></td>
-        <td><%= alert.complete_str? %></td>
+        <td><%= alert.complete_str %></td>
       </tr>
     <% end %>
 

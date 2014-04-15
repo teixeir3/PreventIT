@@ -27,6 +27,10 @@
 	      <input type="submit" value="Delete">
 	    </div>
 	</form>
+  <% unless @appointment.reminders.empty? %>
+    <p><%= link_to "Reminder", edit_user_reminder_url(@user, @appointment.reminders.first) %></p>
+  <% end %>
+  <p></p>
   </div>
 </main>
 

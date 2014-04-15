@@ -2,7 +2,8 @@
   <table id="reminders">
     <thead>
       <tr>
-        <th>Due</th>
+        <th>Due Date</th>
+        <th>Time</th>
         <th>Overdue By</th>
         <th>Title</th>
         <th>Type</th>
@@ -11,15 +12,14 @@
 
     <% @reminders.each do |reminder| %>
     <tr>
-      <% reminder.attributes.select{|attr| attr =~ /datetime|title|remindable_type/}.each do |attr_name, attr_val| %>
-        <% if attr_name == "datetime" %>
-          <td><%= attr_val.strftime("%H:%M %m/%d/%Y") %></td>
-          <td><%= reminder.overdue_by_str %></td>
-        <% elsif attr_name == "title" %>
-          <td><%=  link_to attr_val, edit_user_reminder_url(@user.id, reminder) %></td>
-        <% else %>
-          <td><%= attr_val %></td>
-        <% end %>
+      <td><%= reminder.datetime.strftime("%m/%d/%Y") %></td>
+      <td><%= reminder.datetime.strftime("%H:%M") %></td>
+      <td><%= reminder.overdue_by_str %></td>
+      <td><%= link_to reminder.title, edit_user_reminder_url(reminder.patient_id, reminder) %></td>
+      <% if reminder.remindable_id %>
+        <td><%= link_to reminder.remindable_type, user_appointment_url(reminder.patient_id, reminder.remindable_id) %></td>
+      <% else %>
+        <td><%= reminder.remindable_type %></td>
       <% end %>
     </tr>
     <% end %>
