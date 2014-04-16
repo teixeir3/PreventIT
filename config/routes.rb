@@ -18,7 +18,9 @@ PreventIT::Application.routes.draw do
   put 'alert/:id/complete' => 'alerts#mark_complete', as: 'alert_complete'
 
   get 'users/:user_id/reminders/completed' => 'reminders#completed', as: 'reminders_completed'
-
+  get 'users/:user_id/reminders/upcoming' => 'reminders#upcoming', as: 'reminders_upcoming'
+  
+  
   resources :users, only: [:create, :new, :destroy, :show, :edit, :update] do
     resources :reminders
     resources :diagnoses

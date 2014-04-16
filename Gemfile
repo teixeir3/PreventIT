@@ -43,6 +43,8 @@ gem "omniauth-google-oauth2"
 gem 'google-api-client', :require => 'google/api_client'
 gem "uuidtools"
 gem "turbolinks"
+gem "redis-rails"
+gem 'filepicker-rails'
 
 group :development do
   gem "binding_of_caller"

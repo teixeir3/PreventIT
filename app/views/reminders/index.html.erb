@@ -13,6 +13,7 @@
 	  	  <li><%= link_to "New Reminder", new_user_reminder_url(@user) %></li>
 	  		<li><%= link_to "Complete Reminders", reminders_completed_url(@user) %></li>
 	  		<li><%= link_to "Due Reminders", user_reminders_url(@user) %></li>
+        <li><%= link_to "Upcoming Reminders", reminders_upcoming_url(@user) %></li>
 		</ul>
     </div>
   </div>
@@ -21,6 +22,6 @@
 
     <label for="reminders" class="table-label"><%= (params[:action] == "completed") ? "Completed" : "Due" %> Reminders:</label>
     <%= render "list", reminders: @reminders %>
-
+    <p><%= paginate @reminders %></p>
   </div>
 </main>

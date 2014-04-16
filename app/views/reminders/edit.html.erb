@@ -6,6 +6,15 @@
     <div class="title">
       <h3>Reminders</h3>
     </div>
+    
+    <div class="side-info">
+		<ul>
+	  	  <li><%= link_to "New Reminder", new_user_reminder_url(@user) %></li>
+	  		<li><%= link_to "Complete Reminders", reminders_completed_url(@user) %></li>
+	  		<li><%= link_to "Due Reminders", user_reminders_url(@user) %></li>
+        <li><%= link_to "Upcoming Reminders", reminders_upcoming_url(@user) %></li>
+		</ul>
+    </div>
   </div>
 
   <div class="sub-content">
@@ -38,12 +47,12 @@
         <p>Did you complete your task?</p>
         <div class="radio-input">
           <label for="complete">Yes</label>
-          <input id="complete" type="radio" name="reminder[complete]" value="true">
+          <input id="complete" <%= 'checked' if @reminder.complete %> type="radio" name="reminder[complete]" value="true">
         </div>
 
         <div class="radio-input">
           <label for="incomplete">No</label>
-          <input id="incomplete" type="radio" name="reminder[complete]" value="false">
+          <input id="incomplete" <%= 'checked' unless @reminder.complete %> type="radio" name="reminder[complete]" value="false">
         </div>
       </div>
 

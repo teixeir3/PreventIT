@@ -5,15 +5,20 @@ class RemindersController < ApplicationController
   def index
     @user = User.find(params[:user_id])
 
-    # INCOMPLETE DUE REMINDERS IS WUT I WANT! CAN'T PAGINATE ARRAY
-    # @reminders = @user.reminders.where().page(params[:page]).per(20)
-    @reminders = @user.incomplete_due_reminders
+    @reminders = @user.incomplete_due_reminders.page(params[:page]).per(20)
   end
 
   def completed
     @user = User.find(params[:user_id])
 
-    @reminders = @reminders = @user.reminders.where(complete: true)
+    @reminders = @user.reminders.where(complete: true).page(params[:page]).per(20)
+    render :index
+  end
+  
+  def upcoming
+    @user = User.find(params[:user_id])
+    
+    @reminders = @user.upcoming_reminders.page(params[:page]).per(20)
     render :index
   end
 

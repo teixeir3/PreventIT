@@ -208,12 +208,21 @@ class User < ActiveRecord::Base
   ### Reminder Methods ###
 
 
+  # returns AR relation of due reminders for a patient
   def due_reminders
-    self.reminders.select { |reminder| reminder.is_due? }
+    # self.reminders.select { |reminder| reminder.is_due? }
+    self.reminders.where('datetime < ?', Time.now)
+  end
+  
+  def upcoming_reminders
+    # self.reminders.select { |reminder| reminder.is_due? }
+    self.reminders.where('datetime > ?', Time.now)
   end
 
+  # Returns all reminders that are not checked and are due by patient
   def incomplete_due_reminders
-    self.reminders.select { |reminder| (reminder.is_due? && !reminder.complete && !reminder.checked) }
+    # self.reminders.select { |reminder| (reminder.is_due? && !reminder.complete && !reminder.checked) }
+    self.reminders.where('datetime < ? AND (complete IS NULL OR complete IS FALSE) AND checked IS FALSE', Time.now)
   end
 
   def patients_reminders_by_type(type)
