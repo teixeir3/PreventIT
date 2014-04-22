@@ -47,7 +47,7 @@
   </div>
 
 
-  <input type="hidden" name="diagnoses_ids[]" value="">
+
 
   <div class="input">
     <select id="diagnoses-select" multiple name="diagnoses_ids[]" style="width: 275px">
@@ -58,7 +58,7 @@
   </div>
 
   <div class="submit long-submit">
-    <input type="submit" value="<%= appointment_type.persisted? ? 'Edit' : 'Add' %> Appointment Type">
+    <input type="submit" value="<%= appointment_type.persisted? ? 'Update' : 'Add' %> Appointment Type">
   </div>
   
 </form>
@@ -124,20 +124,23 @@
         // For clicking options
                 // new_options += "<li class='select2-search-choice'><div>" + elem.description + "</div><a href='#' onclick='return false;' class='select2-search-choice-close' tabindex='-1'</a></li>"
                 // console.log($(event.target).parent());
-        $(event.target).parent().addClass("select2-selected");
-        $('.select2-choices').prepend("<li class='select2-search-choice'><div>" + event.target.innerText + "</div><a href='#' onclick='return false;' class='select2-search-choice-close' tabindex='-1'></a></li>");
-        $("#s2id_autogen1").val('');
-        $('#select2-input').removeClass('select2-focused');
-        $('#select2-drop').removeAttr('style');
-        $('#select2-drop').removeAttr('id');
-        $('#select2-drop').attr('style', "display: none; left: 448px; width: 176px; top: 644px; bottom: auto;");
-        $('#select2-drop-mask').removeAttr('style');
-        $('#select2-drop-mask').attr('style', 'display: none;');
-        // $('#select2-drop').addClass('display-none');
-        // $('#select2-drop-mask').addClass('display-none');
-        $('#s2id_autogen1').removeAttr('disabled');
-        $('.select2-container').removeClass('select2-dropdown-open');
-
+                // 
+                // if $(event.target)
+        if (event.currentTarget.innerText != "No matches found") {
+          $(event.target).parent().addClass("select2-selected");
+          $('.select2-choices').prepend("<li class='select2-search-choice'><div>" + event.target.innerText + "</div><a href='#' onclick='return false;' class='select2-search-choice-close' tabindex='-1'></a></li>");
+          $("#s2id_autogen1").val('');
+          $('#select2-input').removeClass('select2-focused');
+          $('#select2-drop').removeAttr('style');
+          $('#select2-drop').removeAttr('id');
+          $('#select2-drop').attr('style', "display: none; left: 448px; width: 176px; top: 644px; bottom: auto;");
+          $('#select2-drop-mask').removeAttr('style');
+          $('#select2-drop-mask').attr('style', 'display: none;');
+          // $('#select2-drop').addClass('display-none');
+          // $('#select2-drop-mask').addClass('display-none');
+          $('#s2id_autogen1').removeAttr('disabled');
+          $('.select2-container').removeClass('select2-dropdown-open');
+        };
       });
 
 

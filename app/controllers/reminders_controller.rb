@@ -25,17 +25,24 @@ class RemindersController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @reminder = @user.reminders.build
+    @days = []
+    @times = []
   end
 
   def create
     @user = User.find(params[:user_id])
-
+    num_reminders_created = 0
+    @days = params[:days] || []
+    @times = params[:times].select { |time| !time.blank? } || []
+    
+    @reminder = @user.reminders.build(params[:reminder])
+    
     unless params[:days].nil?
-      params[:times].each do |time|
+      @times.each do |time|
         next if time.blank?
-
-        params[:days].each do |day|
-          rem = @user.reminders.build(params[:reminder])
+        @days.each do |day|
+          num_reminders_created += 1
+          
           day = day.to_i
           new_date_time = Time.now
           hour = time.split(":")[0].to_i
@@ -49,26 +56,28 @@ class RemindersController < ApplicationController
           min = time.split(":")[1]
           new_date_time = new_date_time.change(hour: hour, min: min)
 
-          if (day.to_i > new_date_time.wday)
+          if (day > new_date_time.wday)
             diff = day - new_date_time.wday
           else
             diff = 7 - day
           end
 
-          rem.datetime = new_date_time.advance(days: diff)
-
+          @reminder.datetime = new_date_time.advance(days: diff)
+          fail
           11.times do |x|
             new_rem = @user.reminders.build(params[:reminder])
-            new_rem.datetime = rem.datetime.advance(weeks: x + 1)
+            new_rem.datetime = @reminder.datetime.advance(weeks: x + 1)
           end
         end
+        @reminder = @user.reminders.build(params[:reminder]) unless time == @times.last
       end
     end
 
-    if @user.save && params[:days]
+    if num_reminders_created > 0 && @user.save
       redirect_to user_reminders_url(@user)
     else
-      flash.now[:errors] = @user.reminders.last.errors.full_messages
+      flash.now[:errors] = @user.reminders.map(&:errors).map(&:full_messages).select { |el| !el.empty? }
+      # flash.now[:errors] << "At least 1 days / time must be picked!" if num_reminders_created == 0
       render :new
     end
   end
@@ -89,12 +98,10 @@ class RemindersController < ApplicationController
     end
   end
 
-  def show
-    @user = User.find(params[:user_id])
-    @reminder = Reminder.find(params[:id])
-
-
-  end
+  # def show
+#     @user = User.find(params[:user_id])
+#     @reminder = Reminder.find(params[:id])
+#   end
 
 
   # def destroy

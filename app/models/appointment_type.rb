@@ -14,7 +14,7 @@
 class AppointmentType < ActiveRecord::Base
   attr_accessible :name, :recurrence, :occurence_frequency, :doctor
 
-  validates :name, :recurrence, :doctor, presence: true
+  validates :name, :doctor, presence: true
 
   belongs_to(
     :doctor,

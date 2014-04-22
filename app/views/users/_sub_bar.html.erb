@@ -9,20 +9,19 @@
 
   <div class="user-info">
     <ul>
-      <li><%= link_to "Settings", edit_user_url(user) %></li>
-      <li><%= user.full_name %></li>
+      <li><%= link_to user.full_name, user_url(user) %></li>
     </ul>
   </div>
 
   <div class="sub-nav">
     <ul>
-      <li><%= link_to "Diagnoses", user_diagnoses_url(user) %></li>
-      <li><%= link_to "Reminders", user_reminders_url(user) %></li>
-      <li><a ="#">Education</a></li>
-      <li><a ="#">Treatment</a></li>
-      <li><%= link_to "Medications", user_medications_url(user) %></li>
-      <li><%= link_to "Appointments", user_appointments_url(user) %></li>
-      <li><a ="#">Reports</a></li>
+      <li id=<%= 'icon-selected' if params[:controller] == "diagnoses" %>><a class="<%= 'green-' if params[:controller] == "diagnoses" %>diagnosis-icon icon" href="<%= user_diagnoses_url(user) %>">Dx</a></li>
+      <li id=<%= 'icon-selected' if params[:controller] == "reminders" %>><a class="<%= 'green-' if params[:controller] == "reminders" %>reminder-icon icon" href="<%= user_reminders_url(user) %>">Reminders</a></li>
+      <li id=<%= 'icon-selected' if params[:controller] == "educations" %>><a class="<%= 'green-' if params[:controller] == "educations" %>education-icon icon" href="<%= %>">Education</a></li>
+      <li id=<%= 'icon-selected' if params[:controller] == "treatment" %>><a class="treatment-icon icon" href="<%= %>">Treatments</a></li>
+      <li id=<%= 'icon-selected' if params[:controller] == "medications" %>><a class="<%= 'green-' if params[:controller] == "medications" %>medication-icon icon" href="<%= user_medications_url(user)%>">Medications</a></li>
+      <li id=<%= 'icon-selected' if params[:controller] == "appointments" %>><a class="<%= 'green-' if params[:controller] == "appointments" %>appointment-icon icon" href="<%= user_appointments_url(user)%>">Appointments</a></li>
+      <li id=<%= 'icon-selected' if params[:controller] == "patient_reports" %>><a class="<%= 'green-' if params[:controller] == "patient_reports" %>report-icon icon" href="<%= %>">Reports</a></li>
     </ul>
   </div>
 </div>

@@ -33,5 +33,9 @@ FactoryGirl.define do
     f.last_name Faker::Name.last_name
     f.phone Faker::PhoneNumber.phone_number
     f.password "password"
+    
+    sequence :reminder do |n|
+      Factorygirl.create(:reminder)
+    end
   end
 end

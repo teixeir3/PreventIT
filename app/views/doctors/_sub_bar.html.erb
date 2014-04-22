@@ -10,18 +10,16 @@
 
   <div class="user-info">
     <ul>
-      <li><%= "Dr. " + current_user.full_name %></li>
-      <li><%= link_to "Settings", edit_user_url(current_user) %></li>
       <li><%= link_to "Total Patients: #{current_user.patients.count}", doctor_url(current_user) %></li>
     </ul>
   </div>
 
   <div class="sub-nav">
     <ul>
-      <li><%= link_to "Alerts", alerts_url %></li>
-      <li><%= link_to "Appointment Types", appointment_types_url %></li>
-      <li><a ="#">Goals</a></li>
-      <li><a ="#">Reports</a></li>
+      <li id=<%= 'icon-selected' if params[:controller] == "alerts" %>><a class="<%= 'green-' if params[:controller] == "alerts" %>alert-icon icon" href="<%= alerts_url %>">Alerts</a></li>
+      <li id=<%= 'icon-selected' if params[:controller] == "appointment_types" %>><a class="<%= 'green-' if params[:controller] == "appointment_types" %>appointment-type-icon" href="<%= appointment_types_url %>">Types</a></li>
+      <li id=<%= 'icon-selected' if params[:controller] == "goals" %>><a class="<%= 'green-' if params[:controller] == "goals" %>goal-icon" href="<%= %>">Goals</a></li>
+      <li id=<%= 'icon-selected' if params[:controller] == "practice_reports" %>><a class="<%= 'green-' if params[:controller] == "practice_reports" %>report-icon icon" href="<%= %>">Reports</a></li>
     </ul>
   </div>
 </div>

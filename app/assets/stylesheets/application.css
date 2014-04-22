@@ -157,7 +157,6 @@ main {
   border-top: 1px solid black;
   border-right: 1px solid black;
   border-radius: 4px 0 0 0;
-/*  margin-right: 200px;*/
 }
 
 .sub-nav > ul > li {
@@ -168,15 +167,186 @@ main {
 /*  background: #6D6E70;*/
 /*  color: #B1D9A1;*/
   border-radius: 4px 0 0 0;
-  background: linear-gradient(to bottom, #8d8f90, #515254);
+  height: 40px;
+  width: 100px;
+  background: linear-gradient(to bottom, #b4b5b6, #5e5f61);
 }
 
 .sub-nav > ul > li > a {
-  color: #ffffff;
+/*  color: #000000;*/
   display: block;
-  padding: 5px 10px;
+
 }
 
+
+.green-diagnosis-icon {
+  width: 75px;
+  height: 40px;
+  color: #00A55A;
+  text-indent: 20px;
+  padding-top: 8px;
+}
+
+.diagnosis-icon {
+  padding-top: 8px;
+  width: 75px;
+  height: 40px;
+  color: #000000;
+  text-indent: 20px;
+}
+
+
+.reminder-icon {
+  width: 75px;
+  height: 40px;
+  background: url('time-8-icon-32.png') no-repeat 35px 4px;
+  text-indent: 9999px;
+}
+
+.green-reminder-icon {
+  width: 75px;
+  height: 40px;
+  background: url('green-time-8-icon-32.png') no-repeat 35px 4px;
+  text-indent: 9999px;
+}
+
+.education-icon {
+  width: 75px;
+  height: 40px;
+  background: url('book-17-icon-48.png') no-repeat 27px -3px;
+  text-indent: 9999px;
+}
+
+.green-education-icon {
+  width: 75px;
+  height: 40px;
+  background: url('green-book-17-icon-48.png') no-repeat 27px -3px;
+  text-indent: 9999px;
+}
+
+.treatment-icon {
+  width: 75px;
+  height: 40px;
+  background: url('stethoscope-32.png') no-repeat 35px 4px;
+  text-indent: 9999px;
+}
+
+.green-treatment-icon {
+  width: 75px;
+  height: 40px;
+  background: url('green-stethoscope-32.png') no-repeat 35px 4px;
+  text-indent: 9999px;
+}
+
+.medication-icon {
+  width: 75px;
+  height: 40px;
+  background: url('horizontal-pill-ver2-48.png') no-repeat 27px -3px;
+  text-indent: 9999px;
+}
+
+.green-medication-icon {
+  width: 75px;
+  height: 40px;
+  background: url('green-horizontal-pill-ver2-48.png') no-repeat 27px -3px;
+  text-indent: 9999px;
+}
+
+.appointment-icon {
+  width: 75px;
+  height: 40px;
+  background: url('calendar-2-icon-32.png') no-repeat 35px 4px;
+  text-indent: 9999px;
+}
+
+.green-appointment-icon {
+  width: 75px;
+  height: 40px;
+  background: url('green-calendar-2-icon-32.png') no-repeat 35px 4px;
+  text-indent: 9999px;
+}
+
+.report-icon {
+  width: 75px;
+  height: 40px;
+  background: url('bar-chart-3-icon-32.png') no-repeat 35px 4px;
+  text-indent: 9999px;
+}
+
+.green-report-icon {
+  width: 75px;
+  height: 40px;
+  background: url('green-bar-chart-3-icon-32.png') no-repeat 35px 4px;
+  text-indent: 9999px;
+}
+
+.alert-icon {
+  width: 75px;
+  height: 40px;
+  background: url('bell-8-icon-32.png') no-repeat 35px 4px;
+  text-indent: 9999px;
+}
+
+.green-alert-icon {
+  width: 75px;
+  height: 40px;
+  background: url('green-bell-8-icon-32.png') no-repeat 35px 4px;
+  text-indent: 9999px;
+}
+
+.appointment-type-icon {
+  width: 100px;
+  height: 40px;
+  color: #000000;
+  background: url('appt-type-40.png') no-repeat 30px 2px;
+  text-indent: 9999px;
+}
+
+.green-appointment-type-icon {
+  width: 75px;
+  height: 40px;
+  text-indent: 9999px;
+  color: #33be7b;
+  background: url('green-appt-type-40-1.png') no-repeat 30px 2px;
+}
+
+.goal-icon {
+  width: 100px;
+  height: 40px;
+  color: #000000;
+  text-indent: 9999px;
+  background: url('check-mark-10-icon-32.png') no-repeat 35px 4px;
+}
+
+.green-goal-icon {
+  width: 75px;
+  height: 40px;
+  background: url('green-check-mark-10-icon-32.png') no-repeat 35px 4px;
+  color: #33be7b;
+  text-indent: 9999px;
+
+}
+
+.icon:hover {
+  opacity: 0.6;
+}
+
+#icon-selected {
+/*  color: #00A55A;*/
+  background: -webkit-gradient(linear,0 0,0 100%,from(rgba(0,0,0,.8)),
+    color-stop(.1,rgba(0,0,0,0)),
+    to(rgba(0,0,0,0))),
+    -webkit-gradient(linear,0 0,0 100%,from(rgba(0,0,0,.2)),
+    color-stop(.3,rgba(0,0,0,0)),
+    color-stop(.7,rgba(0,0,0,0)),
+    to(rgba(0,0,0,.2))),
+    -webkit-gradient(linear,0 0,100% 0,from(rgba(0,0,0,.2)),
+    color-stop(.2,rgba(0,0,0,0)),
+    color-stop(.8,rgba(0,0,0,0)),to(rgba(0,0,0,.2))),
+    -webkit-gradient(linear,0 0,0 100%,from(rgba(47,47,47,1)),
+    color-stop(0.97,rgba(75,75,75,1)),color-stop(0.97,rgba(0,0,0,0)),
+    to(rgba(0,0,0,.45)));
+}
 
 .side-content {
 /*  background: white;*/
@@ -348,6 +518,68 @@ footer {
   display: block;
   float: right;
   padding-right: 30px;
+}
+
+.nav-sign-ins > ul > li {
+  float: left;
+  margin-left: 5px;
+}
+
+.settings-icon {
+  width: 48px;
+  height: 48px;
+  float: right;
+  background: url('gear-icon-32.png') no-repeat 0 0;
+  text-indent: 9999px;
+}
+
+.settings-icon:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.green-settings-icon {
+  width: 48px;
+  height: 48px;
+  float: right;
+  background: url('green-gear-icon-32.png') no-repeat 0 0;
+  text-indent: 9999px;
+}
+
+.green-settings-icon:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+
+
+#plus-sign {
+  background: url('plus-5-icon-256.png') no-repeat 0 0;
+}
+
+.plus {
+/*  position: absolute;*/
+ /* top: 10px;
+  right: 0px;*/
+  width: 50px;
+  height: 50px;
+  float: right;
+  background: url('plus-5-icon-50x50.png') no-repeat 0 0;
+}
+
+.plus:hover {
+  cursor: pointer;
+/*  opacity: 0.6;*/
+  background: url('plus-4-icon-50x50.png') no-repeat 0 0;
+}
+
+.x {
+  -webkit-transform:rotate(45deg);
+  -webkit-transition: all 1s;
+}
+
+.x:hover {
+  opacity: 1 !important;
 }
 
 .google-signin {
@@ -532,15 +764,19 @@ footer {
 }
 
 .button {
-/*  display: block;*/
-/*  position: relative;*/
-  background: #00A55A;
-/*  padding: 5px 10px;*/
   border-radius: 4px;
   cursor: pointer;
-  box-shadow: 0 3px #1b7d56;
 }
 
+.button:hover {
+  opacity: 0.6;
+}
+
+.green-button {
+  background: #33be7b;
+  box-shadow: 0 3px #1b7d56;
+  color: #515254;
+}
 
 .button > div > input {
   display: block;
@@ -549,26 +785,28 @@ footer {
 }
 
 .button_to > div > input {
-/*  display: block;*/
   position: relative;
   padding: 5px 10px;
-  color: #fff;
-  background: #33be7b;
   border-radius: 4px;
-/*  background: #00A55A;*/
 }
 
 .delete-button {
-  background: #FF7444;
-/*  background: #00A55A;*/
+  background: #c23437;
+  box-shadow: 0 3px #874042;
+  color: #515254;
 }
 
+.delete-button:active {
+  top: 3px;
+  box-shadow: none;
+}
 
 
 .button:active, .button_to:active {
   top: 3px;
   box-shadow: none;
 }
+
 .long-submit > input {
   width: 250px;
 }
@@ -576,8 +814,7 @@ footer {
 form > .submit > input {
   position: relative;
   background: #33be7b;
-/*  background: #00A55A;*/
-  color: #fff;
+  color: #515254;
   padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;

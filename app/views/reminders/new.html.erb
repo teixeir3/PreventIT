@@ -6,6 +6,15 @@
     <div class="title">
       <h3>New Reminder</h3>
     </div>
+    
+    <div class="side-info">
+		<ul>
+	  	  <li><%= link_to "New Reminder", new_user_reminder_url(@user) %></li>
+	  		<li><%= link_to "Complete Reminders", reminders_completed_url(@user) %></li>
+	  		<li><%= link_to "Due Reminders", user_reminders_url(@user) %></li>
+        <li><%= link_to "Upcoming Reminders", reminders_upcoming_url(@user) %></li>
+		</ul>
+    </div>
   </div>
 
   <div class="sub-content">
@@ -20,14 +29,17 @@
           id="title"
           type="text"
           name="reminder[title]"
-          value="">
+          value="<%= @reminder.title %>">
       </div>
 
       <div class="checkbox-group">
+        
+        
         <h4>Day(s):</h4>
         <div class="checkbox-input">
           <label for="sunday">Su</label>
           <input
+            <%= "checked" if @days.include?("0") %>
             id="sunday"
             type="checkbox"
             name="days[]"
@@ -37,6 +49,7 @@
         <div class="checkbox-input">
           <label for="monday">M</label>
           <input
+            <%= "checked" if @days.include?("1") %>
             id="monday"
             type="checkbox"
             name="days[]"
@@ -46,6 +59,7 @@
         <div class="checkbox-input">
           <label for="tuesday">T</label>
           <input
+            <%= "checked" if @days.include?("2") %>
             id="tuesday"
             type="checkbox"
             name="days[]"
@@ -55,6 +69,7 @@
         <div class="checkbox-input">
           <label for="wednesday">W</label>
           <input
+            <%= "checked" if @days.include?("3") %>
             id="wednesday"
             type="checkbox"
             name="days[]"
@@ -64,6 +79,7 @@
         <div class="checkbox-input">
           <label for="thursday">Th</label>
           <input
+            <%= "checked" if @days.include?("4") %>
             id="thursday"
             type="checkbox"
             name="days[]"
@@ -73,6 +89,7 @@
         <div class="checkbox-input">
           <label for="friday">F</label>
           <input
+            <%= "checked" if @days.include?("5") %>
             id="friday"
             type="checkbox"
             name="days[]"
@@ -82,6 +99,7 @@
         <div class="checkbox-input">
           <label for="saturday">S</label>
           <input
+            <%= "checked" if @days.include?("6") %>
             id="saturday"
             type="checkbox"
             name="days[]"
@@ -90,42 +108,43 @@
       </div>
 
       <div class="time-input">
-        <label for="time1">Time(1):</label>
-        <input
-          id="time1"
-          type="time"
-          name="times[]"
-          value="">
-      </div>
-
-      <div class="time-input">
-        <label for="time2">Time(2):</label>
-        <input
-          id="time2"
-          type="time"
-          name="times[]"
-          value="">
-      </div>
-
-      <div class="time-input">
-        <label for="time3">Time(3):</label>
-        <input
-          id="time3"
-          type="time"
-          name="times[]"
-          value="">
+       
+        <div class="plus group" id="plus">
+          <a href="#"></a>      
+        </div>
+                
+        <% if @times.empty? %>
+          <label for="1">Time 1 :</label>
+          <input
+            id="1"
+            type="time"
+            name="times[]"
+            value="<%= @times.first %>">
+        <% else %>
+          <% @times.each_with_index do |time, i| %>
+            <label for="<%= i+1 %>">Time <%= i+1 %>:</label>
+            <input
+              id="<%= i+1 %>"
+              type="time"
+              name="times[]"
+              value="<%= time %>">
+          <% end %>
+        <% end %>
+        
       </div>
 
       <div class="input">
         <label for="remindable-type">Type:</label>
         <select id="remindable-type" name="reminder[remindable_type]">
           <option></option>
-          <option value="Appointment">Appointment</option>
-          <option value="Medication">Medication</option>
-          <option value="Treatment">Treatment</option>
-          <option value="Input">Data Input</option>
+          <option <%= "selected" if @reminder.remindable_type == "Appointment" %> value="Appointment">Appointment</option>
+          <option <%= "selected" if @reminder.remindable_type == "Medication" %> value="Medication">Medication</option>
+          <option <%= "selected" if @reminder.remindable_type == "Treatment" %> value="Treatment">Treatment</option>
+          <option <%= "selected" if @reminder.remindable_type == "Input" %> value="Input">Data Input</option>
         </select>
       </div>
+      
+      
 
       <div class="submit">
         <input type="submit" value="Add Reminder">
@@ -142,8 +161,22 @@
         allowClear: true
       });
 
+      var addTime = function(id) {
+       $(".time-input").append("<label for='" + id + "'>Time" + id + ":</label><input id='" + id + "' type='time' name='times[]' value=''>"); 
+      };
+      
+      
+      $('.plus').click(function(data) {
+        var id = $('.time-input > input:last-child').attr('id');
+        id = parseInt(id) + 1;
+        
+        if (id < 10) {
+          addTime(id);  
+        }
+        
+      });
+      
     });
-
   </script>
 
 <% end %>

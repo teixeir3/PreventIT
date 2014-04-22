@@ -13,7 +13,7 @@
   <header>
     <div class="top-bar group">
       <div class="logo">
-        <img src="/assets/preventIT_final/preventIT_150x100.gif">
+        <img src="/assets/preventIT_final/preventIT_150x100_NG.png">
       </div>
       <div class="tagline">
         <h1>Chronic Health Management</h1>
@@ -29,8 +29,10 @@
            <% else %>
              <%= link_to "#{current_user.full_name}", user_url(current_user) %>
            <% end %>
-           <%= button_to "Sign Out", session_url, :method => :delete, class: "button" %>
-
+           <ul>
+             <li><%= button_to "Sign Out", session_url, :method => :delete, class: "button green-button" %></li>
+             <li> <% settings_class = (params[:controller] == "users" && params[:action] == "edit") ? "green-settings-icon" : "settings-icon" %> <%= link_to "Settings", edit_user_url(current_user), class: settings_class %></li>
+           </ul>
          <% else %>
            | <%= link_to "New Doctor", new_doctor_url%> |
            <%= link_to "New Patient", new_user_url%> |
