@@ -12,8 +12,8 @@
     <% appointments.each do |appointment| %>
     <tr>
       <td class="cell-wrap"><%= link_to appointment.appointment_type.name, edit_user_appointment_url(appointment.patient_id, appointment) if appointment.appointment_type %></td>
-      <td><%= appointment.datetime.strftime("%m/%d/%Y") %></td>
-      <td><%= appointment.datetime.strftime("%H:%M") %></td>
+      <td><%= appointment.datetime.to_s(:date) %></td>
+      <td><%= appointment.datetime.to_s(:time_12hr) %></td>
       <td><%= appointment.met %></td>
     </tr>
     <% end %>

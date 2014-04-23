@@ -19,3 +19,6 @@ elsif Rails.env.development?
 
   ActionMailer::Base.delivery_method = :letter_opener
 end
+
+Time::DATE_FORMATS[:date] = "%m/%d/%Y"
+Time::DATE_FORMATS[:time_12hr] = "%I:%M %p"
