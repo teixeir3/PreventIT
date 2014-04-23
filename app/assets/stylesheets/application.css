@@ -199,98 +199,98 @@ main {
 .reminder-icon {
   width: 75px;
   height: 40px;
-  background: url('time-8-icon-32.png') no-repeat 35px 4px;
+  background: url('icons-20.png') no-repeat 35px -516px;
   text-indent: 9999px;
 }
 
 .green-reminder-icon {
   width: 75px;
   height: 40px;
-  background: url('green-time-8-icon-32.png') no-repeat 35px 4px;
+  background: url('icons-20.png') no-repeat 35px -464px;
   text-indent: 9999px;
 }
 
 .education-icon {
   width: 75px;
   height: 40px;
-  background: url('book-17-icon-48.png') no-repeat 27px -3px;
+  background: url('icons-20.png') no-repeat 27px -1091px;
   text-indent: 9999px;
 }
 
 .green-education-icon {
   width: 75px;
   height: 40px;
-  background: url('green-book-17-icon-48.png') no-repeat 27px -3px;
+  background: url('icons-20.png') no-repeat 27px -1023px;
   text-indent: 9999px;
 }
 
 .treatment-icon {
   width: 75px;
   height: 40px;
-  background: url('stethoscope-32.png') no-repeat 35px 4px;
+  background: url('icons-20.png') no-repeat 35px -964px;
   text-indent: 9999px;
 }
 
 .green-treatment-icon {
   width: 75px;
   height: 40px;
-  background: url('green-stethoscope-32.png') no-repeat 35px 4px;
+  background: url('icons-20gicons-20.png') no-repeat 35px -912px;
   text-indent: 9999px;
 }
 
 .medication-icon {
   width: 75px;
   height: 40px;
-  background: url('horizontal-pill-ver2-48.png') no-repeat 27px -3px;
+  background: url('icons-20.png') no-repeat 27px -851px;
   text-indent: 9999px;
 }
 
 .green-medication-icon {
   width: 75px;
   height: 40px;
-  background: url('green-horizontal-pill-ver2-48.png') no-repeat 27px -3px;
+  background: url('icons-20.png') no-repeat 27px -783px;
   text-indent: 9999px;
 }
 
 .appointment-icon {
   width: 75px;
   height: 40px;
-  background: url('calendar-2-icon-32.png') no-repeat 35px 4px;
+  background: url('icons-20.png') no-repeat 35px -724px;
   text-indent: 9999px;
 }
 
 .green-appointment-icon {
   width: 75px;
   height: 40px;
-  background: url('green-calendar-2-icon-32.png') no-repeat 35px 4px;
+  background: url('icons-20.png') no-repeat 35px -672px;
   text-indent: 9999px;
 }
 
 .report-icon {
   width: 75px;
   height: 40px;
-  background: url('bar-chart-3-icon-32.png') no-repeat 35px 4px;
+  background: url('icons-20.png') no-repeat 35px -620px;
   text-indent: 9999px;
 }
 
 .green-report-icon {
   width: 75px;
   height: 40px;
-  background: url('green-bar-chart-3-icon-32.png') no-repeat 35px 4px;
+  background: url('icons-20.png') no-repeat 35px -568px;
   text-indent: 9999px;
 }
 
 .alert-icon {
   width: 75px;
   height: 40px;
-  background: url('bell-8-icon-32.png') no-repeat 35px 4px;
+  background: url('icons-20.png') no-repeat 35px -516px;
   text-indent: 9999px;
 }
 
 .green-alert-icon {
   width: 75px;
   height: 40px;
-  background: url('green-bell-8-icon-32.png') no-repeat 35px 4px;
+  background: url('icons-20.png') no-repeat 35px -464px;
   text-indent: 9999px;
 }
 
@@ -298,7 +298,7 @@ main {
   width: 100px;
   height: 40px;
   color: #000000;
-  background: url('appt-type-40.png') no-repeat 30px 2px;
+  background: url('icons-20.png') no-repeat 30px -407px;
   text-indent: 9999px;
 }
 
@@ -307,7 +307,7 @@ main {
   height: 40px;
   text-indent: 9999px;
   color: #33be7b;
-  background: url('green-appt-type-40-1.png') no-repeat 30px 2px;
+  background: url('icons-20.png') no-repeat 30px -347px;
 }
 
 .goal-icon {
@@ -315,13 +315,13 @@ main {
   height: 40px;
   color: #000000;
   text-indent: 9999px;
-  background: url('check-mark-10-icon-32.png') no-repeat 35px 4px;
+  background: url('icons-20.png') no-repeat 35px -292px;
 }
 
 .green-goal-icon {
   width: 75px;
   height: 40px;
-  background: url('green-check-mark-10-icon-32.png') no-repeat 35px 4px;
+  background: url('icons-20.png') no-repeat 35px -240px;
   color: #33be7b;
   text-indent: 9999px;
 
@@ -529,7 +529,7 @@ footer {
   width: 48px;
   height: 48px;
   float: right;
-  background: url('gear-icon-32.png') no-repeat 0 0;
+  background: url('icons-20.png') no-repeat 0 0;
   text-indent: 9999px;
 }
 
@@ -542,7 +542,7 @@ footer {
   width: 48px;
   height: 48px;
   float: right;
-  background: url('green-gear-icon-32.png') no-repeat 0 0;
+  background: url('icons-20.png') no-repeat 0 -52px;
   text-indent: 9999px;
 }
 
@@ -552,11 +552,6 @@ footer {
 }
 
 
-
-#plus-sign {
-  background: url('plus-5-icon-256.png') no-repeat 0 0;
-}
-
 .plus {
 /*  position: absolute;*/
  /* top: 10px;
@@ -564,13 +559,12 @@ footer {
   width: 50px;
   height: 50px;
   float: right;
-  background: url('plus-5-icon-50x50.png') no-repeat 0 0;
+  background: url('icons-20.png') no-repeat 0 -104px;
 }
 
 .plus:hover {
   cursor: pointer;
-/*  opacity: 0.6;*/
-  background: url('plus-4-icon-50x50.png') no-repeat 0 0;
+  background: url('icons-20.png') no-repeat 0 -174px;
 }
 
 .x {
