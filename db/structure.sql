@@ -553,7 +553,8 @@ CREATE TABLE users (
     access_token character varying(255),
     provider character varying(255),
     active boolean DEFAULT false NOT NULL,
-    activation_token character varying(255) DEFAULT 'INACTIVE'::character varying NOT NULL
+    activation_token character varying(255) DEFAULT 'INACTIVE'::character varying NOT NULL,
+    timezone character varying(255) DEFAULT 'Eastern Time (US & Canada)'::character varying NOT NULL
 );
 
 
@@ -1035,3 +1036,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140403142612');
 INSERT INTO schema_migrations (version) VALUES ('20140404020902');
 
 INSERT INTO schema_migrations (version) VALUES ('20140409165334');
+
+INSERT INTO schema_migrations (version) VALUES ('20140423155441');

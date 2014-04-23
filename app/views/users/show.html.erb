@@ -17,7 +17,7 @@
     <ul>
       <li>Email: <%= @user.email %></li>
       <li>Phone: <%= @user.phone %></li>
-      <li>Height: <%= @user.health[0].height %></li>
+      <li>Height: <%= @user.health.empty? ? link_to("Not provided", edit_user_url(@user)) : @user.health[0].height %></li>
     </ul>
     <br><br><br><br>
   </div>

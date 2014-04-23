@@ -30,6 +30,7 @@ class RemindersController < ApplicationController
   end
 
   def create
+    reminders = []
     @user = User.find(params[:user_id])
     num_reminders_created = 0
     @days = params[:days] || []
@@ -46,7 +47,7 @@ class RemindersController < ApplicationController
           day = day.to_i
           new_date_time = Time.now
           hour = time.split(":")[0].to_i
-
+          
           if (hour - 5 < 0)
             hour += (24 - 5)
           else
@@ -63,16 +64,19 @@ class RemindersController < ApplicationController
           end
 
           @reminder.datetime = new_date_time.advance(days: diff)
+          reminders << @reminder
           fail
-          11.times do |x|
-            new_rem = @user.reminders.build(params[:reminder])
-            new_rem.datetime = @reminder.datetime.advance(weeks: x + 1)
-          end
+          # 11.times do |x|
+#             new_rem = @user.reminders.build(params[:reminder])
+#             new_rem.datetime = @reminder.datetime.advance(weeks: x + 1)
+#             reminders << new_rem
+#           end
         end
         @reminder = @user.reminders.build(params[:reminder]) unless time == @times.last
       end
     end
-
+    
+    fail
     if num_reminders_created > 0 && @user.save
       redirect_to user_reminders_url(@user)
     else

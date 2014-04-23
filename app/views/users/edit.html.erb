@@ -58,6 +58,15 @@
             </label>
           </div>
       </div>
+      
+      <div class="input">
+        <label for="timezone">Timezone:</label>
+        <select id="timezone" name="user[timezone]" style="width: 300px;">
+          <% ActiveSupport::TimeZone.zones_map.each do |k, v| %>
+            <option <%= "selected" if @user.timezone == k %> value=<%= k %>><%= v %></option>
+          <% end %>
+        </select>
+      </div>
 
       <div class="submit long-submit">
         <input type="submit" value="Save Settings">
@@ -67,3 +76,13 @@
   </div>
   
 </main>
+
+<% content_for :js do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('select#timezone').select2();
+      
+    });
+  </script>
+
+<% end %>

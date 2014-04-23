@@ -42,7 +42,8 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(params[:user]) && @user.health[0].update_attributes(params[:health])
+      flash[:errors] = ["User Updated."]
       redirect_to user_url(@user)
     else
       flash.now[:errors] = @user.errors.full_messages

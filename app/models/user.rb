@@ -24,13 +24,16 @@
 #  provider            :string(255)
 #  active              :boolean          default(FALSE), not null
 #  activation_token    :string(255)      default("INACTIVE"), not null
+#  timezone            :string(255)      default("Eastern Time (US & Canada)"), not null
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :first_name, :last_name, :phone, :avatar, :email_notifications, :uid, :access_token, :provider
+  attr_accessible :email, :password, :first_name, :last_name, :phone, :avatar,
+    :email_notifications, :timezone,
+    :uid, :access_token, :provider
   attr_reader :password
 
-  validates :email, presence: true, uniqueness: true
+  validates :email, :timezone, presence: true, uniqueness: true
   validates :password_digest, presence: true
   validates :password, length: {minimum: 6, allow_nil: true}
   validates :session_token, presence: true, uniqueness: true

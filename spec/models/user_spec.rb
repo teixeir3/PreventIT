@@ -24,6 +24,7 @@
 #  provider            :string(255)
 #  active              :boolean          default(FALSE), not null
 #  activation_token    :string(255)      default("INACTIVE"), not null
+#  timezone            :string(255)      default("Eastern Time (US & Canada)"), not null
 #
 
 require 'spec_helper'
