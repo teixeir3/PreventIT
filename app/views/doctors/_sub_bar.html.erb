@@ -17,8 +17,8 @@
   <div class="sub-nav">
     <ul>
       <li id=<%= 'icon-selected' if params[:controller] == "alerts" %>><a class="<%= 'green-' if params[:controller] == "alerts" %>alert-icon icon group" href="<%= alerts_url %>">Alerts<strong class="counter-badge"><%= doctor.incomplete_alerts.count %></strong></a></li>
-      <li id=<%= 'icon-selected' if params[:controller] == "appointment_types" %>><a class="<%= 'green-' if params[:controller] == "appointment_types" %>appointment-type-icon" href="<%= appointment_types_url %>">Types</a></li>
-      <li id=<%= 'icon-selected' if params[:controller] == "goals" %>><a class="<%= 'green-' if params[:controller] == "goals" %>goal-icon" href="<%= %>">Goals</a></li>
+      <li id=<%= 'icon-selected' if params[:controller] == "appointment_types" %>><a class="<%= 'green-' if params[:controller] == "appointment_types" %>appointment-type-icon icon" href="<%= appointment_types_url %>">Types</a></li>
+      <li id=<%= 'icon-selected' if params[:controller] == "goals" %>><a class="<%= 'green-' if params[:controller] == "goals" %>goal-icon icon" href="<%= %>">Goals</a></li>
       <li id=<%= 'icon-selected' if params[:controller] == "practice_reports" %>><a class="<%= 'green-' if params[:controller] == "practice_reports" %>report-icon icon" href="<%= %>">Reports</a></li>
     </ul>
   </div>
