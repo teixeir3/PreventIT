@@ -161,6 +161,7 @@ main {
 
 .sub-nav > ul > li {
   float: left;
+  position: relative;
   overflow: hidden;
   border-left: 1px solid black;
   text-align: center;
@@ -172,130 +173,150 @@ main {
   background: linear-gradient(to bottom, #b4b5b6, #5e5f61);
 }
 
+.sub-nav > ul > li:active {
+  background: -webkit-gradient(linear,0 0,0 100%,from(rgba(0,0,0,.8)),
+    color-stop(.1,rgba(0,0,0,0)),
+    to(rgba(0,0,0,0))),
+    -webkit-gradient(linear,0 0,0 100%,from(rgba(0,0,0,.2)),
+    color-stop(.3,rgba(0,0,0,0)),
+    color-stop(.7,rgba(0,0,0,0)),
+    to(rgba(0,0,0,.2))),
+    -webkit-gradient(linear,0 0,100% 0,from(rgba(0,0,0,.2)),
+    color-stop(.2,rgba(0,0,0,0)),
+    color-stop(.8,rgba(0,0,0,0)),to(rgba(0,0,0,.2))),
+    -webkit-gradient(linear,0 0,0 100%,from(rgba(47,47,47,1)),
+    color-stop(0.97,rgba(75,75,75,1)),color-stop(0.97,rgba(0,0,0,0)),
+    to(rgba(0,0,0,.45)));
+}
+
 .sub-nav > ul > li > a {
-/*  color: #000000;*/
   display: block;
+  margin: 0;
 
 }
 
 
 .green-diagnosis-icon {
-  width: 75px;
   height: 40px;
   color: #00A55A;
-  text-indent: 20px;
   padding-top: 8px;
 }
 
 .diagnosis-icon {
   padding-top: 8px;
-  width: 75px;
   height: 40px;
   color: #000000;
-  text-indent: 20px;
 }
 
 
 .reminder-icon {
-  width: 75px;
   height: 40px;
   background: url('icons-20.png') no-repeat 35px -516px;
   text-indent: 9999px;
 }
 
 .green-reminder-icon {
-  width: 75px;
   height: 40px;
   background: url('icons-20.png') no-repeat 35px -464px;
   text-indent: 9999px;
 }
 
 .education-icon {
-  width: 75px;
   height: 40px;
   background: url('icons-20.png') no-repeat 27px -1091px;
   text-indent: 9999px;
 }
 
 .green-education-icon {
-  width: 75px;
   height: 40px;
   background: url('icons-20.png') no-repeat 27px -1023px;
   text-indent: 9999px;
 }
 
 .treatment-icon {
-  width: 75px;
   height: 40px;
   background: url('icons-20.png') no-repeat 35px -964px;
   text-indent: 9999px;
 }
 
 .green-treatment-icon {
-  width: 75px;
   height: 40px;
   background: url('icons-20.png') no-repeat 35px -912px;
   text-indent: 9999px;
 }
 
 .medication-icon {
-  width: 75px;
   height: 40px;
   background: url('icons-20.png') no-repeat 27px -851px;
   text-indent: 9999px;
 }
 
 .green-medication-icon {
-  width: 75px;
   height: 40px;
   background: url('icons-20.png') no-repeat 27px -783px;
   text-indent: 9999px;
 }
 
 .appointment-icon {
-  width: 75px;
   height: 40px;
   background: url('icons-20.png') no-repeat 35px -724px;
   text-indent: 9999px;
 }
 
 .green-appointment-icon {
-  width: 75px;
   height: 40px;
   background: url('icons-20.png') no-repeat 35px -672px;
   text-indent: 9999px;
 }
 
 .report-icon {
-  width: 75px;
   height: 40px;
   background: url('icons-20.png') no-repeat 35px -620px;
   text-indent: 9999px;
 }
 
 .green-report-icon {
-  width: 75px;
   height: 40px;
   background: url('icons-20.png') no-repeat 35px -568px;
   text-indent: 9999px;
 }
 
 .alert-icon {
-  width: 75px;
+  position: relative;
+  display: block;
   height: 40px;
+  color: #000000;
   background: url('icons-20.png') no-repeat 35px -516px;
   text-indent: 9999px;
 }
 
 .green-alert-icon {
-  width: 75px;
+  position: relative;
+  display: block;
   height: 40px;
   background: url('icons-20.png') no-repeat 35px -464px;
   text-indent: 9999px;
 }
 
+.counter-badge {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  text-indent: 0;
+  font-size: 10px;
+  display: block;
+  background: #c23437;
+/*  color: #fff;*/
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 5px 7px;
+}
+
+.count-badge:hover {
+  background #874042;
+}
+
 .appointment-type-icon {
-  width: 100px;
   height: 40px;
   color: #000000;
   background: url('icons-20.png') no-repeat 30px -407px;
@@ -303,7 +324,6 @@ main {
 }
 
 .green-appointment-type-icon {
-  width: 75px;
   height: 40px;
   text-indent: 9999px;
   color: #33be7b;
@@ -311,7 +331,6 @@ main {
 }
 
 .goal-icon {
-  width: 100px;
   height: 40px;
   color: #000000;
   text-indent: 9999px;
@@ -319,7 +338,6 @@ main {
 }
 
 .green-goal-icon {
-  width: 75px;
   height: 40px;
   background: url('icons-20.png') no-repeat 35px -240px;
   color: #33be7b;
@@ -332,6 +350,23 @@ main {
 }
 
 #icon-selected {
+/*  color: #00A55A;*/
+  background: -webkit-gradient(linear,0 0,0 100%,from(rgba(0,0,0,.8)),
+    color-stop(.1,rgba(0,0,0,0)),
+    to(rgba(0,0,0,0))),
+    -webkit-gradient(linear,0 0,0 100%,from(rgba(0,0,0,.2)),
+    color-stop(.3,rgba(0,0,0,0)),
+    color-stop(.7,rgba(0,0,0,0)),
+    to(rgba(0,0,0,.2))),
+    -webkit-gradient(linear,0 0,100% 0,from(rgba(0,0,0,.2)),
+    color-stop(.2,rgba(0,0,0,0)),
+    color-stop(.8,rgba(0,0,0,0)),to(rgba(0,0,0,.2))),
+    -webkit-gradient(linear,0 0,0 100%,from(rgba(47,47,47,1)),
+    color-stop(0.97,rgba(75,75,75,1)),color-stop(0.97,rgba(0,0,0,0)),
+    to(rgba(0,0,0,.45)));
+}
+
+#icon-clicked {
 /*  color: #00A55A;*/
   background: -webkit-gradient(linear,0 0,0 100%,from(rgba(0,0,0,.8)),
     color-stop(.1,rgba(0,0,0,0)),
@@ -666,7 +701,7 @@ footer {
 
 .radio-input {
   float: left;
-  width: 100px;
+  width: 80px;
 /*  margin: auto;*/
 }
 

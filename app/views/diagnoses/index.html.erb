@@ -19,6 +19,21 @@
         options_from_collection_for_select([], :id, :description),
         id: "diagnoses-select", name: "query" %>
 
+        <div class="radio-group group">
+          <label>Options:</label>
+
+            <div class="radio-input group">
+              <label for="icd9">ICD9</label>
+              <input id="icd9" type="radio" <%= "checked" if @user.email_notifications %> name="user[email_notifications]" value="true">
+            </div>
+
+            <div class="radio-input group">
+              <label for="icd10">ICD10</label>
+                <input id="off" type="radio" <%= "checked" unless @user.email_notifications %> name="user[email_notifications]" value="false">
+              </label>
+            </div>
+        </div>
+        
         <div class="submit side-button">
           <input type="submit" value="Add Diagnosis!">
         </div>

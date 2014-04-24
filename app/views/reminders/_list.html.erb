@@ -4,7 +4,7 @@
       <tr>
         <th>Due Date</th>
         <th>Time</th>
-        <th>Overdue By</th>
+        <th><%= (params[:action] == "upcoming") ? "Due In" : "Overdue By" %></th>
         <th>Title</th>
         <th>Type</th>
       </tr>

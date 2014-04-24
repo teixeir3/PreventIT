@@ -22,7 +22,7 @@ class MedicationsController < ApplicationController
     @patient_medication.patient = @user
     
     if @medication.save
-      redirect_to :index
+      redirect_to user_medications_url(@user)
     else
       flash.now[:errors] = @medication.errors.full_messages
       render :new

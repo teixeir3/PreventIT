@@ -37,7 +37,7 @@ class RemindersController < ApplicationController
     @times = params[:times].select { |time| !time.blank? } || []
     
     @reminder = @user.reminders.build(params[:reminder])
-    
+    fail
     unless params[:days].nil?
       @times.each do |time|
         next if time.blank?

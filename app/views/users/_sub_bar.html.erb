@@ -7,7 +7,7 @@
   <div class="nav-search group">
   </div>
 
-  <div class="user-info">
+  <div class="user-info group">
     <ul>
       <li><%= link_to user.full_name, user_url(user) %></li>
     </ul>
@@ -25,3 +25,18 @@
     </ul>
   </div>
 </div>
+
+
+<% content_for :js do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+    
+      $('.sub-nav > ul > li').click(function(data) {
+        $(data.currentTarget).attr("id", "icon-clicked");
+        
+      });
+      
+    });
+  </script>
+
+<% end %>

@@ -160,8 +160,10 @@ class Reminder < ActiveRecord::Base
   end
 
   def overdue_by
-    overdue = (Time.now - self.datetime) / 60
     @overdue_str = "minutes"
+    
+    overdue = ((self.is_due?) ? (Time.now - self.datetime) : (self.datetime - Time.now)) / 60 
+    
     if overdue > 60
       overdue /=  60
       @overdue_str = "hours"
@@ -176,6 +178,10 @@ class Reminder < ActiveRecord::Base
     end
 
     overdue.to_i
+  end
+  
+  def parsed_time(timezone)
+    self.datetime.in_time_zone(timezone)
   end
 
 
