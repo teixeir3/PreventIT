@@ -566,6 +566,7 @@ footer {
   float: right;
   background: url('icons-20.png') no-repeat 0 0;
   text-indent: 9999px;
+  overflow: hidden;
 }
 
 .settings-icon:hover {

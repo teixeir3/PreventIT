@@ -191,12 +191,4 @@ class Reminder < ActiveRecord::Base
 #     self.add_new_reminder_year!
 #   end
 
-  def find_remindable
-    params.each do |name, value|
-      if name =~ /(.+)_id$/
-        return $1.classify.constantize.find(value)
-      end
-    end
-    nil
-  end
 end

@@ -33,8 +33,8 @@ class User < ActiveRecord::Base
     :uid, :access_token, :provider
   attr_reader :password
 
-  validates :email, :timezone, presence: true, uniqueness: true
-  validates :password_digest, presence: true
+  validates :email, presence: true, uniqueness: true
+  validates :password_digest, :timezone, presence: true
   validates :password, length: {minimum: 6, allow_nil: true}
   validates :session_token, presence: true, uniqueness: true
   validates :uid, uniqueness: {scope: :provider, if: :check_uid_by_provider}
@@ -503,7 +503,7 @@ class User < ActiveRecord::Base
   def reset_session_token!
     self.session_token = self.class.generate_session_token
     self.save!
-
+    
     self.session_token
   end
 
