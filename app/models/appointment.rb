@@ -16,7 +16,7 @@
 class Appointment < ActiveRecord::Base
   attr_accessible :patient, :doctor, :datetime, :reason, :note, :met, :appointment_type, :appointment_type_id
 
-  validates :patient, :datetime, :doctor, presence: true
+  validates :patient, :datetime, :doctor, :appointment_type, presence: true
 
   has_many(
     :reminders,

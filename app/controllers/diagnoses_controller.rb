@@ -12,29 +12,36 @@ class DiagnosesController < ApplicationController
   end
 
   def add_diagnosis
+    # TODO: could refactor to do one :pg_search instead of short circuiting
     @diagnosis = Diagnosis.find_by_code(params[:query]) || Diagnosis.find_by_description(params[:query])
     @user = User.find(params[:user_id])
 
-    if @diagnosis
-      @patient_diagnosis = @diagnosis.patient_diagnoses.create(patient: @user)
-      flash[:errors] = @patient_diagnosis.errors.full_messages.empty? ? ["Diagnosis Added."] : @patient_diagnosis.errors.full_messages
-      redirect_to user_diagnoses_url(@user)
-    else
-      url = Addressable::URI.new(
-                            scheme: "http",
-                            host: "www.icd10api.com",
-                            query_values: {code: params[:query], r: "json", desc: "long"})
-      resp = JSON.parse(RestClient.get(url.to_s))
-
-      if resp["Response"] == "True"
-        @diagnosis = Diagnosis.create({code: resp["Name"], description: resp["Description"]})
+    respond_to do |format|
+      if @diagnosis
         @patient_diagnosis = @diagnosis.patient_diagnoses.create(patient: @user)
-        flash[:errors] = (@diagnosis.errors.full_messages.empty? || @patient_diagnosis.errors.full_messages.empty?) ? ["Diagnosis Added."] : @patient_diagnosis.errors.full_messages + @diagnosis.errors.full_messages
-        redirect_to user_diagnoses_url(@user)
+        flash[:errors] = @patient_diagnosis.errors.full_messages.empty? ? ["Diagnosis Added."] : @patient_diagnosis.errors.full_messages
+        format.js
       else
-        flash[:errors] = ["Code not found!"]
-        redirect_to user_diagnoses_url(@user)
+        url = Addressable::URI.new(
+                              scheme: "http",
+                              host: "www.icd10api.com",
+                              query_values: {code: params[:query], r: "json", desc: "long"})
+        resp = JSON.parse(RestClient.get(url.to_s))
+
+        if resp["Response"] == "True"
+          @diagnosis = Diagnosis.create({code: resp["Name"], description: resp["Description"]})
+          @patient_diagnosis = @diagnosis.patient_diagnoses.create(patient: @user)
+          flash[:errors] = (@diagnosis.errors.full_messages.empty? || @patient_diagnosis.errors.full_messages.empty?) ? ["Diagnosis Added."] : @patient_diagnosis.errors.full_messages + @diagnosis.errors.full_messages
+          format.js
+        else
+          flash[:errors] = ["Code not found!"]
+          format.js
+        end
       end
+      
+      format.html { 
+        redirect_to user_diagnoses_url(@user)
+      }
     end
   end
 

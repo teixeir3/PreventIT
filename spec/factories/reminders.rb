@@ -21,7 +21,7 @@
 
 FactoryGirl.define do
   factory :reminder do |f|
-    f.datetime Time.now
+    f.datetime Time.zone.now
     f.title "Missed Medication"
     f.remindable_type
     f.complete false

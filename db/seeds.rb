@@ -30,7 +30,7 @@
 #
 #
 #     10.times do |j|
-#       user_date = Time.now.change(year: 1999)
+#       user_date = Time.zone.now.change(year: 1999)
 #         user.reminders.build({
 #           datetime: user_date,
 #           title: "Alert title #{j}",
@@ -101,7 +101,7 @@ doug.save
 
 puts "Seeding Doug's Practice"
 
-time = Time.now
+time = Time.zone.now
 new_month = (time.month + 3 > 12) ? time.month + 3 - 12 : time.month + 3
 time = time.change(month: new_month)
 
@@ -124,7 +124,7 @@ time = time.change(month: new_month)
 
   puts "Seeding Reminders for patient #{i+1}"
   4.times do |j|
-    user_date = Time.now.change(year: 2014, month: 2, day: 20, hour: 10)
+    user_date = Time.zone.nowe.now.change(year: 2014, month: 2, day: 20, hour: 10)
 
       user.reminders.build({
         datetime: user_date,
@@ -266,7 +266,7 @@ end
 # 
 # 
 #     4.times do |j|
-#       user_date = Time.now.change(year: 2014, month: 2, day: 20, hour: 10)
+#       user_daTime.zone.nowe.now.change(year: 2014, month: 2, day: 20, hour: 10)
 # 
 #         user.reminders.build({
 #           datetime: user_date,

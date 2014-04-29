@@ -1,6 +1,7 @@
 class RemindersController < ApplicationController
   before_filter :require_signed_in!
   before_filter :require_authority!
+  before_filter :set_timezone, only: :create
 
   def index
     @user = User.find(params[:user_id])
@@ -29,78 +30,36 @@ class RemindersController < ApplicationController
     @times = []
   end
 
+  # Creates (x = 12 weeks worth of reminders for each day / time combination.
+  # Corresponds with reminder self propagation.
   def create
-    @user = User.find(params[:user_id])
+    reminders = []
     @days = params[:days] || []
-    @times = params[:times].reject! { |time| time.blank? } || []
-    current_time = Time.now
-  
+    @times = params[:times].reject { |time| time.blank? }
+    today_str = Time.zone.now.strftime("%A")
+    
     @days.each do |day|
       @times.each do |time|
-        new_time = Time.parse("next #{day} at #{time}")
-        if (new_time.past?)
-          new_time.advance(:week)
-        else
-          
+        new_time = (today_str == day) ? Chronic.parse("today at #{time}") : Chronic.parse("next #{day} at #{time}")
+        new_time = new_time.advance(weeks: 1) if (new_time.past?) 
+        reminders << @reminder = @user.reminders.build(params[:reminder])
+        @reminder.datetime = new_time
+        
+        11.times do |x|
+          new_rem = @user.reminders.build(params[:reminder])
+          new_rem.datetime = @reminder.datetime.advance(weeks: x + 1)
+          reminders << new_rem
         end
       end
     end
     
-    fail
-    # reminders = []
-#     @user = User.find(params[:user_id])
-#     num_reminders_created = 0
-#     @days = params[:days] || []
-#     @times = params[:times].select { |time| !time.blank? } || []
-#     
-#     @reminder = @user.reminders.build(params[:reminder])
-#     fail
-#     unless params[:days].nil?
-#       @times.each do |time|
-#         next if time.blank?
-#         @days.each do |day|
-#           num_reminders_created += 1
-#           
-#           day = day.to_i
-#           new_date_time = Time.now
-#           hour = time.split(":")[0].to_i
-#           
-#           if (hour - 5 < 0)
-#             hour += (24 - 5)
-#           else
-#             hour -= 5
-#           end
-# 
-#           min = time.split(":")[1]
-#           new_date_time = new_date_time.change(hour: hour, min: min)
-# 
-#           if (day > new_date_time.wday)
-#             diff = day - new_date_time.wday
-#           else
-#             diff = 7 - day
-#           end
-# 
-#           @reminder.datetime = new_date_time.advance(days: diff)
-#           reminders << @reminder
-#           fail
-#           # 11.times do |x|
-# #             new_rem = @user.reminders.build(params[:reminder])
-# #             new_rem.datetime = @reminder.datetime.advance(weeks: x + 1)
-# #             reminders << new_rem
-# #           end
-#         end
-#         @reminder = @user.reminders.build(params[:reminder]) unless time == @times.last
-#       end
-#     end
-#     
-#     fail
-#     if num_reminders_created > 0 && @user.save
-#       redirect_to user_reminders_url(@user)
-#     else
-#       flash.now[:errors] = @user.reminders.map(&:errors).map(&:full_messages).select { |el| !el.empty? }
-#       # flash.now[:errors] << "At least 1 days / time must be picked!" if num_reminders_created == 0
-#       render :new
-#     end
+    if @user.save
+      redirect_to user_reminders_url(@user)
+    else
+      flash.now[:errors] = @user.reminders.map(&:errors).map(&:full_messages).select { |el| !el.empty? }
+      # flash.now[:errors] << "At least 1 days / time must be picked!" if num_reminders_created == 0
+      render :new
+   end
   end
 
   def edit

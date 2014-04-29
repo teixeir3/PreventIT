@@ -8,6 +8,8 @@
   <%= csrf_meta_tags %>
   <link rel="shortcut icon" href="/favicon.ico?v=2" />
   <%= favicon_link_tag %>
+  
+  
 </head>
 <body>
   <header>
@@ -42,11 +44,21 @@
     </div>
 
   </header>
-
+  
+  <div class="errors">
     <%= flash[:errors].join('<br>').html_safe if flash[:errors] %><br>
+  </div>
+  <div class="notices">
+    <%= flash[:notices].join('<br>').html_safe if flash[:notices] %><br>
+  </div>
+  
+    <div class="spinner"><%= image_tag "spinner-green.gif" %></div>
     
     <%= yield %>
+    
     <%= yield :js %>
+    
+
 
 </body>
 
@@ -56,7 +68,12 @@
   </div>
   
   <div class="params group">
-    <%= debug(params) if Rails.env.development? %>
+    <%  if Rails.env.development? %>
+      <%= debug(params) %>
+      <pre>This page was loaded on <strong><%=l Time.now, format: "%k:%M:%S:%L" %></strong></pre>
+    <% end %>
   </div>
 </footer>
 </html>
+
+

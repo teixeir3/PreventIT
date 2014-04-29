@@ -14,5 +14,39 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require_tree .
-//= require select2/index
+//= require select2
 //= require turbolinks
+
+
+  var spinOn = function(){
+    $(".spinner").show();// addClass("is-spinning");
+  };
+
+  var spinOff = function(){
+    $(".spinner").hide();// removeClass("is-spinning");
+  };
+  
+  var displayErrors = function() {
+    if (flashError) {
+      $(".errors").html(flashError);
+    }
+  };
+
+  $(document).on("ajax:before", function(event){
+    console.log("ajax:before");
+    spinOn();
+  });
+
+  $(document).on("ajax:complete", function(event){
+    spinOff();
+    displayErrors();
+  })
+
+  $(document).on('page:fetch', function() {
+    spinOn();
+  });
+  
+  $(document).on('page:change', function() {
+    spinOff();
+  });
+

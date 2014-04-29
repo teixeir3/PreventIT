@@ -128,7 +128,8 @@ class User < ActiveRecord::Base
   has_many(
     :appt_types,
     through: :diagnoses,
-    source: :appt_types
+    source: :appt_types,
+    uniq: true
   )
     
   has_many(
@@ -214,18 +215,18 @@ class User < ActiveRecord::Base
   # returns AR relation of due reminders for a patient
   def due_reminders
     # self.reminders.select { |reminder| reminder.is_due? }
-    self.reminders.where('datetime < ?', Time.now)
+    self.reminders.where('datetime < ?', Time.zone.now)
   end
   
   def upcoming_reminders
     # self.reminders.select { |reminder| reminder.is_due? }
-    self.reminders.where('datetime > ?', Time.now)
+    self.reminders.where('datetime > ?', Time.zone.now)
   end
 
   # Returns all reminders that are not checked and are due by patient
   def incomplete_due_reminders
     # self.reminders.select { |reminder| (reminder.is_due? && !reminder.complete && !reminder.checked) }
-    self.reminders.where('datetime < ? AND (complete IS NULL OR complete IS FALSE) AND checked IS FALSE', Time.now)
+    self.reminders.where('datetime < ? AND (complete IS NULL OR complete IS FALSE) AND checked IS FALSE', Time.zone.now)
   end
 
   def patients_reminders_by_type(type)
@@ -288,7 +289,7 @@ class User < ActiveRecord::Base
       reminder_ids = []
 
       patient.incomplete_due_reminders.each do |reminder|
-        if ((Time.now - reminder.datetime) / 60 / 60) > 1
+        if ((Time.zone.now - reminder.datetime) / 60 / 60) > 1
           skipped_med_count += 1
           reminder_ids << reminder.id
         end
@@ -325,7 +326,7 @@ class User < ActiveRecord::Base
       reminder_ids = []
 
       patient.incomplete_due_reminders.each do |reminder|
-        if ((Time.now - reminder.datetime) / 60 / 60) > 1
+        if ((Time.zone.now - reminder.datetime) / 60 / 60) > 1
           skipped_appointment_count += 1
           reminder_ids << reminder.id
         end
@@ -363,7 +364,7 @@ class User < ActiveRecord::Base
       reminder_ids = []
 
       patient.incomplete_due_reminders.each do |reminder|
-        if ((Time.now - reminder.datetime) / 60 / 60) > 1
+        if ((Time.zone.now - reminder.datetime) / 60 / 60) > 1
           skipped_input_count += 1
           reminder_ids << reminder.id
         end
@@ -400,7 +401,7 @@ class User < ActiveRecord::Base
       reminder_ids = []
 
       patient.incomplete_due_reminders.each do |reminder|
-        if ((Time.now - reminder.datetime) / 60 / 60) > 1
+        if ((Time.zone.now - reminder.datetime) / 60 / 60) > 1
           skipped_treatment_count += 1
           reminder_ids << reminder.id
         end

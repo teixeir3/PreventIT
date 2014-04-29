@@ -12,7 +12,7 @@
 
       <h3>Find ICD10 Code:</h3>
 
-      <form class="search" action="<%= user_add_diagnosis_url(@user) %>" method="GET">
+      <form class="search" action="<%= user_add_diagnosis_url(@user) %>" method="GET" data-remote="true">
         <%= auth_token %>
 
         <%= select_tag "Diagnoses",
@@ -24,12 +24,12 @@
 
             <div class="radio-input group">
               <label for="icd9">ICD9</label>
-              <input id="icd9" type="radio" <%= "checked" if @user.email_notifications %> name="user[email_notifications]" value="true">
+              <input id="icd9" type="radio" name="diagnosis[code_type]" value="ICD9">
             </div>
 
             <div class="radio-input group">
               <label for="icd10">ICD10</label>
-                <input id="off" type="radio" <%= "checked" unless @user.email_notifications %> name="user[email_notifications]" value="false">
+                <input id="off" type="radio" checked name="diagnosis[code_type]" value="ICD10">
               </label>
             </div>
         </div>
@@ -74,11 +74,11 @@
         return isUniq;
       };
 
-      var $el = $('input.select2-input')
+      var $el = $('input.select2-input');
+      
       $el.on('input', function(event) {
-        // console.log(event);
-        // alert((event.currentTarget.value.length > 2));
         var url = "/search/diagnoses?query=" + event.currentTarget.value;
+        
         if (event.currentTarget.value.length > 1) {
           $.ajax(url, {
             success: function(data, b, resp) {
@@ -105,44 +105,7 @@
             }
           });
         }
-
       });
-
-      $('.select2-results').on('click', function(event) {
-        $('.select2-chosen').html($(event.currentTarget.firstChild.firstChild).text());
-        $('#select2-input').removeClass('select2-focused');
-        $('#select2-drop').removeAttr('style');
-        $('#select2-drop').removeAttr('id');
-        $('#select2-drop').attr('style', "display: none; left: 448px; width: 176px; top: 644px; bottom: auto;");
-        $('#select2-drop-mask').removeAttr('style');
-        $('#select2-drop-mask').attr('style', 'display: none;');
-        // $('#select2-drop').addClass('display-none');
-        // $('#select2-drop-mask').addClass('display-none');
-        $('#s2id_autogen1').removeAttr('disabled');
-        $('.select2-container').removeClass('select2-dropdown-open');
-
-      });
-
-
-      $('.select2-input').keyup(function(event){
-        if(event.keyCode == 13) {
-          $input = $('.select2-search > input');
-
-          $('.select2-chosen').text($('.select2-search > input').val());
-          $('select#diagnoses-select').html("<option value='" + $input.val() + "'></option>");
-
-          $('#select2-input').removeClass('select2-focused');
-          $('#select2-drop').removeAttr('style');
-          $('#select2-drop').removeAttr('id');
-          $('#select2-drop').attr('style', "display: none; left: 448px; width: 176px; top: 644px; bottom: auto;");
-          $('#select2-drop-mask').removeAttr('style');
-          $('#select2-drop-mask').attr('style', 'display: none;');
-          $('#s2id_autogen1').removeAttr('disabled');
-          $('.select2-container').removeClass('select2-dropdown-open');
-        }
-
-      });
-
     });
 
 

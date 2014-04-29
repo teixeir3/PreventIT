@@ -70,6 +70,7 @@ class Reminder < ActiveRecord::Base
     self.find_all_by_due(false)
   end
   
+  # Factory method returning a reminder given an associated appointment
   def self.create_appt_reminder(appt)
     reminder = appt.reminders.create({
             datetime: appt.datetime,
@@ -88,11 +89,8 @@ class Reminder < ActiveRecord::Base
  #    end
  #  end
 
+ # Returns true / false if the reminder is due
   def is_due?
-    # self.time = self.time.change(year: Time.now.year, month: Time.now.month, day: Time.now.day)
-#     ((Time.now.wday == self.day) && (Time.zone.now > self.time))
-
-
     self.datetime.past?
   end
 
@@ -127,43 +125,52 @@ class Reminder < ActiveRecord::Base
  #  end
 
  # generates a new reminder with the same parameters 1 yr in the future
- def self_propagation!
+  def self_propagation!
 
-   remindable = self.remindable
-   new_attributes = self.attributes.except("id",
-     "complete",
-     "input",
-     "due",
-     "created_at",
-     "updated_at"
-     )
+    remindable = self.remindable
+    new_attributes = self.attributes.except("id",
+      "complete",
+      "input",
+      "due",
+      "created_at",
+      "updated_at"
+    )
 
-   new_rem = remindable.reminders.build(new_attributes)
-   new_rem.datetime = new_rem.datetime.advance(days: 7*12)
+    new_rem = remindable.reminders.build(new_attributes)
+    new_rem.datetime = new_rem.datetime.advance(weeks: 12)
 
-   new_rem.save
-   
-   new_rem
- end
+    new_rem.save
 
-  def day_str
-    DAY_STRINGS[self.day]
+    new_rem
   end
 
+  # Returns the day of the week in which the reminder is due corrected for the patient's timezone.
+  def day_str(timezone = patient.timezone)
+    parsed_time(timezone).strftime("%A")
+  end
+  
+  # Returns the day of the week in which the reminder is due in UTC
+  def utc_day_str
+    self.datetime.strftime("%A")
+  end
+
+  # marks the reminder as due and saves. Returns true / false if it saved
   def mark_due!
     self.due = true
     self.save
   end
 
+  # returns a string of the reduced amount the reminder is overdue by
   def overdue_by_str
     "#{self.overdue_by} #{@overdue_str}"
   end
 
+  # returns the lowest denomination of how
   def overdue_by
     @overdue_str = "minutes"
     
-    overdue = ((self.is_due?) ? (Time.now - self.datetime) : (self.datetime - Time.now)) / 60 
-    
+    overdue = ((self.is_due?) ? (Time.zone.now - self.datetime) : (self.datetime - Time.zone.now)) / 60 
+
     if overdue > 60
       overdue /=  60
       @overdue_str = "hours"
@@ -180,12 +187,14 @@ class Reminder < ActiveRecord::Base
     overdue.to_i
   end
   
-  def parsed_time(timezone)
+  
+  
+  # returns the datetime converted in the provided timezone or patient's timezone by default.
+  def parsed_time(timezone = patient.timezone)
     self.datetime.in_time_zone(timezone)
   end
 
 
-  ## COME BACK HERE!!
   # def mark_complete(is_complete)
 #     self.complete = is_complete
 #     self.add_new_reminder_year!

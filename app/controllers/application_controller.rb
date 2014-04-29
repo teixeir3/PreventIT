@@ -128,5 +128,11 @@ class ApplicationController < ActionController::Base
     
     new_user
   end
+  
+  def set_timezone
+    @user = @user || User.find(params[:user_id])
+    Time.zone = @user.timezone
+    Chronic.time_class = Time.zone
+  end
 
 end

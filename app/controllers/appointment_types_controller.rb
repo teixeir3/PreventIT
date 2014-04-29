@@ -25,6 +25,7 @@ class AppointmentTypesController < ApplicationController
   end
 
   def edit
+    @doctor = current_user
     @appointment_type = current_user.appointment_types.find(params[:id])
   end
 
