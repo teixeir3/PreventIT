@@ -13,7 +13,26 @@
       name="appointment_type[name]"
       value="<%= appointment_type.name %>">
   </div>
+  
+  <div class="input">
+    <select id="diagnoses-select" multiple name="diagnoses_ids[]" style="width: 275px">
+      <% appointment_type.diagnoses.each do |diagnosis| %>
+        <option class="unique-choice" value="<%= diagnosis.id %>" selected><%= diagnosis.description %></option>
+      <% end %>
+    </select>
+  </div>
 
+  <div class="input">
+    <label for="frequency">Frequency (recommended every x days):</label>
+    <input
+      id="frequency"
+      type="number"
+      name="appointment_type[occurence_frequency]"
+      step="1"
+      pattern="\d+"
+      value="<%= appointment_type.occurence_frequency %>">
+  </div>
+  
   <div class="radio-group group">
     <p>Is this a recurring visit?:</p>
     <div class="radio-input">
@@ -33,28 +52,6 @@
         name="appointment_type[recurrence]"
         value="false" <%= 'checked' unless appointment_type.recurrence %>>
     </div>
-  </div>
-
-  <div class="input">
-    <label for="frequency">Frequency (recommended every x days):</label>
-    <input
-      id="frequency"
-      type="number"
-      name="appointment_type[occurence_frequency]"
-      step="1"
-      pattern="\d+"
-      value="<%= appointment_type.occurence_frequency %>">
-  </div>
-
-
-
-
-  <div class="input">
-    <select id="diagnoses-select" multiple name="diagnoses_ids[]" style="width: 275px">
-      <% appointment_type.diagnoses.each do |diagnosis| %>
-        <option class="unique-choice" value="<%= diagnosis.id %>" selected><%= diagnosis.description %></option>
-      <% end %>
-    </select>
   </div>
 
   <div class="submit long-submit">

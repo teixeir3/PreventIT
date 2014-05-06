@@ -44,9 +44,20 @@ class AppointmentTypesController < ApplicationController
   
   def destroy
     @appointment_type = AppointmentType.find_by_id_and_doctor_id(params[:id], current_user.id)
-    
+    @doctor = current_user
     @appointment_type.destroy
-    redirect_to appointment_types_url
+    
+    respond_to do |format|
+      format.html { redirect_to appointment_types_url }
+      format.js do
+        render :status => 200, nothing: true 
+      end
+    end
+  end
+  
+  def delete
+    @doctor = current_user
+    @deletable = AppointmentType.find_by_id_and_doctor_id(params[:id], current_user.id)
   end
 
 end

@@ -15,14 +15,34 @@
 
 
   <div class="sub-content">
-    <h2>All Appointments</h2>
-    <ul>
+    <h2>All Appointment Types</h2>
+     
+    <table id="appointment_types">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th># Diagnoses</th>
+          <th>Every x days</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+
       <% @appointment_types.each do |appointment_type| %>
-        <li>
-          <%= link_to appointment_type.name, edit_appointment_type_url(appointment_type) %> <%= button_to "Delete", appointment_type_url(appointment_type), method: :delete, class: "delete-button"%>
-        </li>
+        <tr>
+          <td><%= link_to appointment_type.name, edit_appointment_type_url(appointment_type) %></td>
+          <td><%= appointment_type.diagnoses.count %></td>
+          <td><%= appointment_type.occurence_frequency %></td>
+          <td><%= link_to "Delete", [:delete, appointment_type], method: :delete, class: "delete-button", data: {remote: true, confirm: "Really delete appointment type?"} %></td>
+        </tr>
       <% end %>
-    </ul>
+
+    </table>
   </div>
 
 </main>
+
+<script type="text/javascript">
+  $('.delete-button').bind('ajax:success', function() {
+    $(this).closest('tr').fadeOut();
+  });
+</script>

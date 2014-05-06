@@ -31,6 +31,12 @@ class AppointmentType < ActiveRecord::Base
     primary_key: :id,
     inverse_of: :appointment_type
   )
+  
+  has_many(
+    :scheduled_patients,
+    through: :appointments,
+    source: :patient
+  )
 
   has_many(
     :appt_type_diagnoses,
@@ -42,5 +48,8 @@ class AppointmentType < ActiveRecord::Base
   )
 
   has_many(:diagnoses, through: :appt_type_diagnoses, source: :diagnosis)
+  
+  # All the patients that are eligble to schedule this appt_type.
+  has_many(:eligible_patients, through: :diagnoses, source: :patients)
 
 end

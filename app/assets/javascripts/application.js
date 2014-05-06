@@ -18,35 +18,50 @@
 //= require turbolinks
 
 
-  var spinOn = function(){
-    $(".spinner").show();// addClass("is-spinning");
-  };
+var spinOn = function(){
+  $(".spinner").show();
+};
 
-  var spinOff = function(){
-    $(".spinner").hide();// removeClass("is-spinning");
-  };
-  
-  var displayErrors = function() {
-    if (flashError) {
-      $(".errors").html(flashError);
-    }
-  };
+var spinOff = function(){
+  $(".spinner").hide();
+};
 
-  $(document).on("ajax:before", function(event){
-    console.log("ajax:before");
-    spinOn();
-  });
+var displayErrors = function() {
+  if (typeof flashError !== "undefined") {
+    $(".errors").html(flashError);
+  }
+};
 
-  $(document).on("ajax:complete", function(event){
-    spinOff();
-    displayErrors();
-  })
+var confirm_destroy = function(element, action) {
+  if (confirm("Are you sure?")) {
+    var f = document.createElement('form');
+    f.style.display = 'none';
+    element.parentNode.appendChild(f);
+    f.method = 'POST';
+    f.action = action;
+    var m = document.createElement('input');
+    m.setAttribute('type', 'hidden');
+    m.setAttribute('name', '_method');
+    m.setAttribute('value', 'delete');
+    f.appendChild(m);
+    f.submit();
+  }
+  return false;
+}
 
-  $(document).on('page:fetch', function() {
-    spinOn();
-  });
-  
-  $(document).on('page:change', function() {
-    spinOff();
-  });
+$(document).on("ajax:before", function(event){
+  spinOn();
+});
 
+$(document).on("ajax:complete", function(event){
+  spinOff();
+  displayErrors(); 
+})
+
+$(document).on('page:fetch', function() {
+  spinOn();
+});
+
+$(document).on('page:change', function() {
+  spinOff();
+});
