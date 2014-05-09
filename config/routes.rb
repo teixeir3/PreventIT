@@ -27,7 +27,8 @@ PreventIT::Application.routes.draw do
     resources :appointments
     get 'add_diagnosis' => 'diagnoses#add_diagnosis', as: 'add_diagnosis'
     get :activate, on: :collection
-    
+    get :password_reset, on: :collection
+    put :password_update, on: :collection
     resources :medications
   end
   resource :session, only: [:create, :destroy, :new]

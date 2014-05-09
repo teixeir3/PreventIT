@@ -1,14 +1,12 @@
 <main class="group">
   <div class="side-content">
     <div class="title">
-      <% if current_user && current_user.is_doctor %>
-        <h3>New Patient</h3>
-      <% else %>
-        <h3>New Patient User</h3>
-      <% end %>
+      <h3>New Doctor</h3>
     </div>
 
-    <h3><a href="/auth/google_oauth2">Login with Google</a></h3>
+    <div class="google-signin">
+      <a class="group" href="/auth/google_oauth2"></a>
+    </div>
   </div>
 
   <div class="sub-content">

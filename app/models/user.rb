@@ -472,6 +472,7 @@ class User < ActiveRecord::Base
   ### Auth Methods ###
   
   # UNTESTED
+  # Sets active attribute to true
   def activate!
     self.update_attribute(:active, true)
   end

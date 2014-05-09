@@ -134,5 +134,10 @@ class ApplicationController < ActionController::Base
     Time.zone = @user.timezone
     Chronic.time_class = Time.zone
   end
+  
+  # Returns true if the params passwords match
+  def password_confirmed?
+    params[:password] != params[:user][:password]
+  end
 
 end

@@ -17,10 +17,12 @@ class UsersController < ApplicationController
       @user.doctor_id = current_user.id
     end
 
-    if params[:password] != params[:user][:password]
+    if password_confirmed?
       flash.now[:errors] = ["Your passwords did not match!"]
       render :new
     elsif @user.save
+      
+      # Sends activation email
       UserMailer.activation_email(@user).deliver!
       sign_in(@user) unless current_user and current_user.is_doctor
       
@@ -69,7 +71,28 @@ class UsersController < ApplicationController
     end
   end
   
+  # TODO
   def password_reset
+    
+  end
+  
+  # TODO
+  def password_update
     @user = User.find_by_activation_token(params[:activation_token])
+    
+    if password_confirmed?
+      @user.password = params[:user][:password]
+      
+      if @user.save
+        flash.now[:errors] = ["Password changed successfully!"]
+        render :show
+      else
+        flash.now[:errors] = @user.errors.full_messages
+        render
+        redirect_to
+      end
+    else
+      redirect_to
+    end
   end
 end
