@@ -26,7 +26,11 @@ class PasswordResetsController < ApplicationController
     elsif @user.update_attributes(params[:user])
       sign_in(@user)
       flash[:errors] = ["Password has been reset!"]
-      redirect_to user_url(@user), :notice => "Password has been reset!"
+      if @user.is_doctor
+        redirect_to doctor_url(@user)
+      else
+        redirect_to user_url(@user), :notice => "Password has been reset!"
+      end
     else
       flash.now[:errors] = @user.errors.full_messages
       render :edit
