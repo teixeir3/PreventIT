@@ -1,58 +1,45 @@
 <main class="group">
-  <div class="side-content">
-    <div class="title">
-      <h3>New Doctor</h3>
+  <form class="form" action="<%= doctors_url %>" method="post">
+    <%= auth_token %>
+
+    <h2>New Doctor</h2>
+    <div class="input">
+      <label for="practice-name">Practice Name:</label>
+      <input id="practice-name" type="text" name="practice[name]" value="<%= @practice.name %>">
     </div>
 
-    <div class="google-signin">
-      <a class="group" href="/auth/google_oauth2"></a>
+    <div class="input">
+      <label for="practice-specialty">Specialty:</label>
+      <input id="practice-specialty" type="text" name="practice[specialty]" value="<%= @practice.specialty %>">
     </div>
-  </div>
 
-  <div class="sub-content">
-    <form class="form" action="<%= doctors_url %>" method="post">
-      <%= auth_token %>
+    <div class="input">
+      <label for="first-name">First Name</label>
+      <input id="first-name" type="text" name="user[first_name]" value="<%= @user.first_name %>">
+    </div>
 
-      <h3>New Doctor</h3>
-      <div class="input">
-        <label for="practice-name">Practice Name:</label>
-        <input id="practice-name" type="text" name="practice[name]" value="<%= @practice.name %>">
-      </div>
+    <div class="input">
+      <label for="last-name">Last Name</label>
+      <input id="last-name" type="text" name="user[last_name]" value="<%= @user.last_name %>">
+    </div>
 
-      <div class="input">
-        <label for="practice-specialty">Specialty:</label>
-        <input id="practice-specialty" type="text" name="practice[specialty]" value="<%= @practice.specialty %>">
-      </div>
+    <div class="input">
+      <label for="email">Email</label>
+      <input id="email" type="text" name="user[email]" value="<%= @user.email %>">
+    </div>
 
-      <div class="input">
-        <label for="first-name">First Name</label>
-        <input id="first-name" type="text" name="user[first_name]" value="<%= @user.first_name %>">
-      </div>
+    <div class="input">
+      <label for="password">Password</label>
+      <input id="password" type="password" name="user[password]" value="">
+    </div>
 
-      <div class="input">
-        <label for="last-name">Last Name</label>
-        <input id="last-name" type="text" name="user[last_name]" value="<%= @user.last_name %>">
-      </div>
+    <div class="input">
+      <label for="password">Confirm Password</label>
+      <input id="password" type="password" name="password" value="">
+    </div>
 
-      <div class="input">
-        <label for="email">Email</label>
-        <input id="email" type="text" name="user[email]" value="<%= @user.email %>">
-      </div>
-
-      <div class="input">
-        <label for="password">Password</label>
-        <input id="password" type="password" name="user[password]" value="">
-      </div>
-
-      <div class="input">
-        <label for="password">Confirm Password</label>
-        <input id="password" type="password" name="password" value="">
-      </div>
-
-      <div class="submit long-submit">
-        <input type="submit" value="Doctor Sign Up">
-      </div>
-    </form>
-
-  </div>
+    <div class="submit long-submit">
+      <input type="submit" value="Doctor Sign Up">
+    </div>
+  </form>
 </main>

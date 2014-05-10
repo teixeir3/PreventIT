@@ -1,0 +1,23 @@
+<main class="group">
+  <form class="form" action="<%= password_reset_path(params[:id]) %>" method="post">
+    <%= auth_token %>
+    
+    <input type="hidden" name="_method" value="PUT">
+    
+    <h2>Password Reset</h2>
+
+    <div class="input">
+      <label for="password">Password</label>
+      <input id="password" type="password" name="user[password]" value="">
+    </div>
+
+    <div class="input">
+      <label for="password">Password Confirmation</label>
+      <input id="password" type="password" name="password" value="">
+    </div>
+
+    <div class="submit long-submit">
+      <input type="submit" value="Sign Up">
+    </div>
+  </form>
+</main>

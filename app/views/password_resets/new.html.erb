@@ -1,0 +1,27 @@
+<main class="group">
+  <div class="side-content">
+    <div class="title">
+      <h3>Password Reset</h3>
+    </div>
+  </div>
+
+  <div class="sub-content">
+    <form class="form" action="<%= password_resets_url %>" method="post">
+      <%= auth_token %>
+      
+      <h3>Forgot password</h3>
+      
+      <p class="form-description">If you forgot your password then we'll attempt to email you instructions on how to reset it. If you don't receive the email then try looking in your spam folder.<p>
+        
+      <div class="input">
+        <label for="email">Email:</label>
+        <input type="text" name="email" value="" id="email">
+      </div>
+
+      <div class="submit long-submit">
+        <input type="submit" value="Reset Password">
+      </div>
+    </form>
+   
+  </div>
+</main>

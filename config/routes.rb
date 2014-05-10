@@ -1,4 +1,6 @@
 PreventIT::Application.routes.draw do
+  get "password_resets/new"
+
   # get 'doctors/new', to: 'users#new_doctor'
 #   post 'doctors', to: 'users#create_doctor'
 
@@ -31,8 +33,9 @@ PreventIT::Application.routes.draw do
     put :password_update, on: :collection
     resources :medications
   end
+  
   resource :session, only: [:create, :destroy, :new]
-
+  resources :password_resets
   get '/auth/google_oauth2/callback' => 'sessions#create'
 
   root to: "sessions#new"
