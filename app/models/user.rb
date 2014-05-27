@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
   validates :password, length: {minimum: 6, allow_nil: true}
   validates :session_token, presence: true, uniqueness: true
   validates :uid, uniqueness: {scope: :provider, if: :check_uid_by_provider}
+  validates_inclusion_of :timezone, in: ActiveSupport::TimeZone.zones_map(&:name)
 
   paginates_per 10
 

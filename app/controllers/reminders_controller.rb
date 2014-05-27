@@ -45,6 +45,7 @@ class RemindersController < ApplicationController
         reminders << @reminder = @user.reminders.build(params[:reminder])
         @reminder.datetime = new_time
         
+        fail
         11.times do |x|
           new_rem = @user.reminders.build(params[:reminder])
           new_rem.datetime = @reminder.datetime.advance(weeks: x + 1)
