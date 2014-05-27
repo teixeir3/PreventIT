@@ -6,20 +6,20 @@ class RemindersController < ApplicationController
   def index
     @user = User.find(params[:user_id])
 
-    @reminders = @user.incomplete_due_reminders.page(params[:page]).per(20)
+    @reminders = @user.incomplete_due_reminders.order(:datetime).page(params[:page]).per(20)
   end
 
   def completed
     @user = User.find(params[:user_id])
 
-    @reminders = @user.reminders.where(complete: true).page(params[:page]).per(20)
+    @reminders = @user.reminders.where(complete: true).order(:datetime).page(params[:page]).per(20)
     render :index
   end
   
   def upcoming
     @user = User.find(params[:user_id])
     
-    @reminders = @user.upcoming_reminders.page(params[:page]).per(20)
+    @reminders = @user.upcoming_reminders.order(:datetime).page(params[:page]).per(20)
     render :index
   end
 
@@ -45,7 +45,6 @@ class RemindersController < ApplicationController
         reminders << @reminder = @user.reminders.build(params[:reminder])
         @reminder.datetime = new_time
         
-        fail
         11.times do |x|
           new_rem = @user.reminders.build(params[:reminder])
           new_rem.datetime = @reminder.datetime.advance(weeks: x + 1)
@@ -55,6 +54,7 @@ class RemindersController < ApplicationController
     end
     
     if @user.save
+      flash.now[:notice] = "Reminder created!"
       redirect_to user_reminders_url(@user)
     else
       flash.now[:errors] = @user.reminders.map(&:errors).map(&:full_messages).select { |el| !el.empty? }
