@@ -528,6 +528,41 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: symptoms; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE symptoms (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    patient_id integer NOT NULL,
+    description text,
+    intensity integer,
+    frequency integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: symptoms_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE symptoms_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: symptoms_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE symptoms_id_seq OWNED BY symptoms.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -674,6 +709,13 @@ ALTER TABLE ONLY reminders ALTER COLUMN id SET DEFAULT nextval('reminders_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY symptoms ALTER COLUMN id SET DEFAULT nextval('symptoms_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -779,6 +821,14 @@ ALTER TABLE ONLY practices
 
 ALTER TABLE ONLY reminders
     ADD CONSTRAINT reminders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: symptoms_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY symptoms
+    ADD CONSTRAINT symptoms_pkey PRIMARY KEY (id);
 
 
 --
@@ -937,6 +987,13 @@ CREATE INDEX index_reminders_on_remindable_id ON reminders USING btree (remindab
 
 
 --
+-- Name: index_symptoms_on_patient_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_symptoms_on_patient_id ON symptoms USING btree (patient_id);
+
+
+--
 -- Name: index_users_on_doctor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1042,3 +1099,5 @@ INSERT INTO schema_migrations (version) VALUES ('20140409165334');
 INSERT INTO schema_migrations (version) VALUES ('20140423155441');
 
 INSERT INTO schema_migrations (version) VALUES ('20140509164448');
+
+INSERT INTO schema_migrations (version) VALUES ('20140527153119');

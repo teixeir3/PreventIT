@@ -71,28 +71,28 @@ class UsersController < ApplicationController
     end
   end
   
-  # TODO
-  def password_reset
-    
-  end
-  
-  # TODO
-  def password_update
-    @user = User.find_by_activation_token(params[:activation_token])
-    
-    if password_confirmed?
-      @user.password = params[:user][:password]
-      
-      if @user.save
-        flash.now[:errors] = ["Password changed successfully!"]
-        render :show
-      else
-        flash.now[:errors] = @user.errors.full_messages
-        render
-        redirect_to
-      end
-    else
-      redirect_to
-    end
-  end
+ ## Moved to PasswordResetsController
+ #  def password_reset
+ #    
+ #  end
+ #  
+ ## Moved to PasswordResetsController
+ #  def password_update
+ #    @user = User.find_by_activation_token(params[:activation_token])
+ #    
+ #    if password_confirmed?
+ #      @user.password = params[:user][:password]
+ #      
+ #      if @user.save
+ #        flash.now[:errors] = ["Password changed successfully!"]
+ #        render :show
+ #      else
+ #        flash.now[:errors] = @user.errors.full_messages
+ #        render
+ #        redirect_to
+ #      end
+ #    else
+ #      redirect_to
+ #    end
+ #  end
 end
