@@ -66,6 +66,8 @@ class User < ActiveRecord::Base
 
 
   #### Patient Associations ####
+  
+  # A Patient should really only have 1 instance of health 
   has_many(
     :health,
     class_name: "Health",
@@ -140,6 +142,14 @@ class User < ActiveRecord::Base
     class_name: "PatientMedication",
     foreign_key: :patient_id,
     primary_key: :id,
+    inverse_of: :patient
+  )
+  
+  has_many(
+    :symptoms,
+    class_name: "Symptom",
+    primary_key: :id,
+    foreign_key: :patient_id,
     inverse_of: :patient
   )
 

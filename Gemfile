@@ -47,6 +47,7 @@ gem "redis-rails"
 gem 'filepicker-rails'
 gem 'jquery-turbolinks'
 gem 'chronic'
+gem 'newrelic_rpm'
 
 group :development do
   gem "binding_of_caller"

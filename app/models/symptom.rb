@@ -13,5 +13,15 @@
 #
 
 class Symptom < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :name, :patient, :description, :intensity, :frequency
+  
+  validates :name, :patient, :intensity, :frequency, presence: true
+  
+  belongs_to(
+    :patient,
+    class_name: "User",
+    primary_key: :id,
+    foreign_key: :patient_id,
+    inverse_of: :symptoms
+  )
 end

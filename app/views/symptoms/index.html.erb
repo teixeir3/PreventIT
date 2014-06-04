@@ -1,0 +1,29 @@
+<%= render "users/sub_bar", user: @user%>
+
+
+<main class="group">
+
+  <div class="side-content">
+    <div class="title">
+      <h3>Symptoms:</h3>
+    </div>
+
+    <div class="side-info">
+      <p><%= link_to "Log Symptom", new_user_symptom_url(@user) %></p>
+
+    </div>
+  </div>
+
+  <div class="sub-content">
+
+    <p><%= paginate @symptoms %></p>
+
+    <label for="patient-medications" class="table-label">All:</label>
+    <%= render "list", symptoms: @symptoms %>
+
+    <p><%= paginate @symptoms %></p>
+
+  </div>
+</main>
+
+

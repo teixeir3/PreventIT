@@ -1,0 +1,57 @@
+<% form_url = (symptom.persisted?) ? user_symptom_url(user, symptom) : user_symptoms_url(user) %>
+
+<form class="form" action="<%= form_url %>" method="POST">
+	
+  <h3><%= (symptom.persisted?) ? 'Edit' : 'New' %> Symptom:</h3>
+  
+  <%= auth_token %>
+  <%= "<input type='hidden' name='_method' value='PUT'>".html_safe if symptom.persisted? %>
+  
+  <div class="input">
+    <label for="name">Symptom Name:</label>
+    <input id="name" type="text" name="medication[name]" style="width: 275px;" value="<%= symptom.name if symptom.persisted?%>">
+  </div>
+  
+  <label for="schedule">Schedule:</label>
+  <div id="schedule" class="group">
+    <div class="checkbox-group">
+      <h4>Frequency:</h4>
+      <% 1.upto(6) do |i| %>
+        <div class="checkbox-input">
+        <label for="<%= i %>"><%= i %> x</label>
+        <input type="radio" name="symptom[frequency]" id="<%= i %>" <%= "selected" if symptom.frequency == i %>" value="<%= i %>">
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="input">
+    <label for="description">Description:</label>
+    <textarea
+      id="description"
+      name="symptom[description]"><%= symptom.description if symptom.persisted? %></textarea>
+  </div>
+
+  <div class="input">
+    <label for="refills">Intensity:</label>
+    <input
+      id="refills"
+      type="number"
+      name="symptom[intensity]"
+      value="<%= symptom.intensity if symptom.persisted? %>">
+  </div>
+  
+  <div class="input">
+    <label for="date">Start Date:</label>
+    <input
+      id="date"
+      type="date"
+      name="symptom[start_date]"
+      value="<%= symptom.start_date.strftime("%Y-%m-%d") if symptom.persisted? && symptom.start_date %>">
+  </div>
+  
+  <div class="submit long-submit">
+    <input type="submit" value="<%= symptom.persisted? ? 'Edit' : 'Log' %> Symptom">
+  </div>
+</form>
+

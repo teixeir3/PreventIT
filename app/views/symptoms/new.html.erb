@@ -1,0 +1,19 @@
+<%= render "users/sub_bar", user: @user%>
+
+<main class="group">
+  <div class="side-content">
+    <div class="title">
+      <h3>Log New Symptom</h3>
+    </div>
+	
+	<div class="side-info">
+		<ul>
+			<li><%= link_to "Symptom List", user_symptoms_url(@user) %></li>
+		</ul>
+	</div>
+  </div>
+
+  <div class="sub-content">
+    <%= render "form", symptom: @symptom, user: @user %>
+  </div>
+</main>

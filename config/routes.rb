@@ -32,6 +32,7 @@ PreventIT::Application.routes.draw do
     get :password_reset, on: :collection
     put :password_update, on: :collection
     resources :medications
+    resources :symptoms
   end
   
   resource :session, only: [:create, :destroy, :new]
