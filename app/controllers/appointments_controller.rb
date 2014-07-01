@@ -19,14 +19,15 @@ class AppointmentsController < ApplicationController
 
     @appointment = @user.appointments.build(params[:appointment])
 
-    @appointment.doctor_id = params[:doctor_id] if @user.doctor_id = params[:doctor_id]
+    @appointment.doctor_id = params[:doctor_id] if @user.doctor_id == params[:doctor_id]
 
     if @user.save
           @reminder = Reminder.create_appt_reminder(@appointment)
 
       redirect_to user_appointments_url(@user)
     else
-      flash.now[:errors] = @user.appointments.last.errors.full_messages
+      flash.now[:errors] = @appointment.errors.full_messages
+      # flash.now[:errors] = @user.appointments.last.errors.full_messages
       render :new
     end
 

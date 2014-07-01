@@ -7,15 +7,22 @@
 #  patient_id  :integer          not null
 #  description :text
 #  intensity   :integer
-#  frequency   :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  datetime    :datetime         not null
+#  frequency   :string(255)
 #
 
 class Symptom < ActiveRecord::Base
-  attr_accessible :name, :patient, :description, :intensity, :frequency
+  attr_accessible :name, :patient, :description, :intensity, :frequency, :datetime
   
-  validates :name, :patient, :intensity, :frequency, presence: true
+  def self.frequencies
+    ["Multiple times / day", "Once / day", "Occassionally", "Sometimes", "Once"]
+  end
+  
+  validates :name, :patient, :intensity, :frequency, :datetime, presence: true
+  validates :name, uniqueness: { scope: :datetime, message: ": Symptom already exists." }
+  validates :frequency, inclusion: { in: self.frequencies, message: "%{value} is not a valid frequency" }
   
   belongs_to(
     :patient,
@@ -24,4 +31,5 @@ class Symptom < ActiveRecord::Base
     foreign_key: :patient_id,
     inverse_of: :symptoms
   )
+  
 end

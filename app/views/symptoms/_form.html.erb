@@ -9,17 +9,16 @@
   
   <div class="input">
     <label for="name">Symptom Name:</label>
-    <input id="name" type="text" name="medication[name]" style="width: 275px;" value="<%= symptom.name if symptom.persisted?%>">
+    <input id="name" type="text" name="symptom[name]" style="width: 275px;" value="<%= symptom.name if symptom.persisted?%>">
   </div>
   
-  <label for="schedule">Schedule:</label>
+  <label for="schedule">Frequency of occurence:</label>
   <div id="schedule" class="group">
     <div class="checkbox-group">
-      <h4>Frequency:</h4>
-      <% 1.upto(6) do |i| %>
+      <% Symptom.frequencies.each do |frequency| %>
         <div class="checkbox-input">
-        <label for="<%= i %>"><%= i %> x</label>
-        <input type="radio" name="symptom[frequency]" id="<%= i %>" <%= "selected" if symptom.frequency == i %>" value="<%= i %>">
+          <label for="<%= frequency %>"><%= frequency %></label>
+          <input type="radio" name="symptom[frequency]" id="<%= frequency %>" <%= "selected" if symptom.frequency == frequency %>" value="<%= frequency %>">
         </div>
       <% end %>
     </div>
@@ -33,9 +32,9 @@
   </div>
 
   <div class="input">
-    <label for="refills">Intensity:</label>
+    <label for="intensity">Intensity (0 - 10):</label>
     <input
-      id="refills"
+      id="intensity"
       type="number"
       name="symptom[intensity]"
       value="<%= symptom.intensity if symptom.persisted? %>">
@@ -46,12 +45,21 @@
     <input
       id="date"
       type="date"
-      name="symptom[start_date]"
-      value="<%= symptom.start_date.strftime("%Y-%m-%d") if symptom.persisted? && symptom.start_date %>">
+      name="date"
+      value="<%= (symptom.persisted? && symptom.datetime) ? symptom.datetime.strftime("%Y-%m-%d") : Date.today %>">
+  </div>
+  
+  <div class="time-input">
+    <label for="time">Time:</label>
+    <input
+      id="time"
+      type="time"
+      name="time"
+      value="<%= symptom.persisted? ? symptom.datetime.strftime("%H:%M") : Time.now.strftime("%H:%M") %>">
   </div>
   
   <div class="submit long-submit">
-    <input type="submit" value="<%= symptom.persisted? ? 'Edit' : 'Log' %> Symptom">
+    <input type="submit" value="<%= symptom.persisted? ? 'Update' : 'Log' %> Symptom">
   </div>
 </form>
 

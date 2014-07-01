@@ -7,9 +7,10 @@
 #  patient_id  :integer          not null
 #  description :text
 #  intensity   :integer
-#  frequency   :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  datetime    :datetime         not null
+#  frequency   :string(255)
 #
 
 require 'spec_helper'

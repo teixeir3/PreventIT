@@ -537,9 +537,10 @@ CREATE TABLE symptoms (
     patient_id integer NOT NULL,
     description text,
     intensity integer,
-    frequency integer,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    datetime timestamp without time zone NOT NULL,
+    frequency character varying(255)
 );
 
 
@@ -987,6 +988,13 @@ CREATE INDEX index_reminders_on_remindable_id ON reminders USING btree (remindab
 
 
 --
+-- Name: index_symptoms_on_datetime; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_symptoms_on_datetime ON symptoms USING btree (datetime);
+
+
+--
 -- Name: index_symptoms_on_patient_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1101,3 +1109,7 @@ INSERT INTO schema_migrations (version) VALUES ('20140423155441');
 INSERT INTO schema_migrations (version) VALUES ('20140509164448');
 
 INSERT INTO schema_migrations (version) VALUES ('20140527153119');
+
+INSERT INTO schema_migrations (version) VALUES ('20140618135707');
+
+INSERT INTO schema_migrations (version) VALUES ('20140701171345');

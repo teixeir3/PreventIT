@@ -11,14 +11,14 @@
       </tr>
     </thead>
 
-    <% symptoms.each do |symptoms| %>
+    <% symptoms.each do |symptom| %>
       <tr>
         <td><%= link_to symptom.name, edit_user_symptom_url(symptom.patient_id, symptom) %></td>
         <td class="cell-wrap"><%= symptom.description %></td>
         <td><%= symptom.intensity %></td>
         <td><%= symptom.frequency %></td>
-        <td><%= symptom.onset_datetime.to_s(:date) %></td>
-        <td><%= symptom.onset_datetime.to_s(:time_12hr) %></td>
+        <td><%= symptom.datetime.to_s(:date) %></td>
+        <td><%= symptom.datetime.to_s(:time_12hr) %></td>
       </tr>
     <% end %>
 

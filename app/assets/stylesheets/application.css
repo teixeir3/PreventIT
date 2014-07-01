@@ -227,13 +227,13 @@ main {
 
 .reminder-icon {
   height: 40px;
-  background: url('icons-20.png') no-repeat 35px -516px;
+  background: url('reminder-icons.png') no-repeat 32px 4px;
   text-indent: 9999px;
 }
 
 .green-reminder-icon {
   height: 40px;
-  background: url('icons-20.png') no-repeat 35px -464px;
+  background: url('reminder-icons.png') no-repeat 32px -38px;
   text-indent: 9999px;
 }
 
