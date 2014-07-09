@@ -54,7 +54,7 @@ class RemindersController < ApplicationController
     end
     
     if @user.save
-      flash.now[:notice] = "Reminder created!"
+      flash.now[:notices] = ["Reminder created!"]
       redirect_to user_reminders_url(@user)
     else
       flash.now[:errors] = @user.reminders.map(&:errors).map(&:full_messages).select { |el| !el.empty? }
@@ -72,6 +72,7 @@ class RemindersController < ApplicationController
     @reminder = Reminder.find(params[:id])
 
     if @reminder.update_attributes(params[:reminder])
+      flash.now[:notices] = ["Reminder created!"]
       redirect_to user_reminders_url(params[:user_id])
     else
       flash.now[:errors] = @reminder.errors.full_messages
@@ -88,6 +89,11 @@ class RemindersController < ApplicationController
       end
     end
     nil
+  end
+  
+  def create_remindable
+    @remindable = find_remindable
+    @reminder = @remindable.reminders.create(params[:reminder])
   end
   
   # def show

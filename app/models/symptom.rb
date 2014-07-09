@@ -24,6 +24,14 @@ class Symptom < ActiveRecord::Base
   validates :name, uniqueness: { scope: :datetime, message: ": Symptom already exists." }
   validates :frequency, inclusion: { in: self.frequencies, message: "%{value} is not a valid frequency" }
   
+  has_many(
+    :reminders,
+    as: :remindable,
+    foreign_key: :remindable_id,
+    primary_key: :id,
+    dependent: :destroy
+  )
+  
   belongs_to(
     :patient,
     class_name: "User",
@@ -31,5 +39,7 @@ class Symptom < ActiveRecord::Base
     foreign_key: :patient_id,
     inverse_of: :symptoms
   )
+  
+  has_one :doctor, through: :patient, source: :doctor
   
 end
