@@ -17,14 +17,20 @@
   <div class="sub-content">
 
     <%= render "form", symptom: @symptom, user: @user %>
-    
+      
   	<form class="form" action="<%= user_symptom_url(@user, @symptom) %>" method="POST">
   		<input type="hidden" name="_method" value="DELETE">
   		<%= auth_token %>
 		
-  	    <div class="delete-submit long-submit">
-  	      <input type="submit" value="Delete">
-  	    </div>
+	    <div class="delete-submit long-submit">
+	      <input type="submit" value="Delete">
+	    </div>
   	</form>
+    
+    <div class="reminder-plus group" id="reminder-plus">
+      <a href="#"></a>      
+    </div>
+    
+    <%= render "reminders/list", reminders: @reminders %>
   </div>
 </main>

@@ -57,6 +57,7 @@ class SymptomsController < ApplicationController
   def edit
     @user = User.find(params[:user_id])
     @symptom = @user.symptoms.find(params[:id])
+    @reminders = @symptom.reminders
   end
 
   def update

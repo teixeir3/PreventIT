@@ -65,14 +65,14 @@ class RemindersController < ApplicationController
 
   def edit
     @user = User.find(params[:user_id])
-    @reminder = Reminder.find(params[:id])
+    @reminder = @user.reminders.find(params[:id])
   end
 
   def update
     @reminder = Reminder.find(params[:id])
 
     if @reminder.update_attributes(params[:reminder])
-      flash.now[:notices] = ["Reminder created!"]
+      flash.now[:notices] = ["Reminder updated!"]
       redirect_to user_reminders_url(params[:user_id])
     else
       flash.now[:errors] = @reminder.errors.full_messages

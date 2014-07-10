@@ -49,6 +49,10 @@ var confirm_destroy = function(element, action) {
   return false;
 }
 
+var addTime = function(id) {
+ $(".time-group").append("<label for='" + id + "'>Time" + id + ":</label><input id='" + id + "' type='time' name='times[]' value=''>"); 
+};
+
 $(document).on("ajax:before", function(event){
   spinOn();
 });
@@ -56,6 +60,7 @@ $(document).on("ajax:before", function(event){
 $(document).on("ajax:complete", function(event){
   spinOff();
   displayErrors(); 
+  console.log("In Ajax:complete!");
 })
 
 $(document).on('page:fetch', function() {
@@ -64,4 +69,49 @@ $(document).on('page:fetch', function() {
 
 $(document).on('page:change', function() {
   spinOff();
+  
+  $("body").on("click", ".show-modal", function(event){
+    event.preventDefault();
+    window.modal.show();
+    window.modal.test = window.modal.test + 1;
+    console.log(window.modal.test);
+  });
+
+  $(".modal").on("click", function(event){
+
+    $target = $(event.target);
+    console.log($target);
+
+    if($target.is(".modal") || $target.is(".modal-close-button")){
+      event.preventDefault();
+      window.modal.hide();
+    }
+  });
+  
+  // Reminders/_form
+  $('select#remindable-type').select2({
+    placeholder: "Select Type..",
+    allowClear: true
+  });
+  
+  $('.plus').click(function(data) {
+    var id = $('.time-input > input:last-child').attr('id');
+    id = parseInt(id) + 1;
+    
+    if (id < 10) {
+      addTime(id);  
+    }
+    
+  });
 });
+
+window.modal = {
+  show: function(){
+    $("body").addClass("has-active-modal");
+  },
+  hide: function(){
+    $("body").removeClass("has-active-modal");
+  },
+  test: 1
+};
+
