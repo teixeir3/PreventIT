@@ -686,7 +686,7 @@ footer {
 
 .reminder-plus:hover {
   cursor: pointer;
-  background: url('Reminder Plus Sprite 50x74.png') no-repeat -10 0px;
+  background: url('Reminder Plus Sprite 50x74.png') no-repeat 0px -42px;
 }
 
 .x {
