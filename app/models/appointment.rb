@@ -49,4 +49,8 @@ class Appointment < ActiveRecord::Base
     primary_key: :id,
     inverse_of: :appointments
   )
+  
+  def name
+    "#{appointment_type.name} appointment with #{doctor.doctor_full_name}"
+  end
 end

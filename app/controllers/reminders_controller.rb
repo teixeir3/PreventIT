@@ -1,7 +1,7 @@
 class RemindersController < ApplicationController
   before_filter :require_signed_in!
   before_filter :require_authority!
-  before_filter :set_timezone, only: :create
+  before_filter :set_timezone, only: [:create, :update]
 
   def index
     @user = User.find(params[:user_id])
@@ -25,13 +25,27 @@ class RemindersController < ApplicationController
 
   def new
     @user = User.find(params[:user_id])
-    @reminder = @user.reminders.build
+    @remindable = find_remindable
+    @reminder = @user.reminders.build(remindable: @remindable)
     @days = []
     @times = []
+    
+    
+    respond_to do |format|
+      format.html { render :new }
+      format.js
+      
+      # if @remindable
+ #        render :form
+ #      else
+ #
+ #      end
+    end
   end
 
   # Creates (x = 12 weeks worth of reminders for each day / time combination.
   # Corresponds with reminder self propagation.
+  # TODO Refactor into helper methods.
   def create
     reminders = []
     @days = params[:days] || []
@@ -85,16 +99,17 @@ class RemindersController < ApplicationController
   def find_remindable
     params.each do |name, value|
       if name =~ /(.+)_id$/
+        next if $1 == "user"
         return $1.classify.constantize.find(value)
       end
     end
     nil
   end
   
-  def create_remindable
-    @remindable = find_remindable
-    @reminder = @remindable.reminders.create(params[:reminder])
-  end
+  # def create_remindable
+ #    @remindable = find_remindable
+ #    @reminder = @remindable.reminders.create(params[:reminder])
+ #  end
   
   # def show
 #     @user = User.find(params[:user_id])

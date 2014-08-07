@@ -1,3 +1,8 @@
+<div class="group" id="reminder-plus">
+  <% url_params = (remindable) ? {remindable_type: remindable.class, remindable_id: remindable.id} : {} %>
+  <a class="reminder-plus" data-remote="true" href="<%= polymorphic_url([user, remindable, :reminder], action: :new) %>"></a>      
+</div>
+
 <div class="reminders-table">
   <table id="reminders">
     <thead>
@@ -10,14 +15,14 @@
       </tr>
     </thead>
 
-    <% @reminders.each do |reminder| %>
+    <% reminders.each do |reminder| %>
     <tr>
       <td><%= reminder.parsed_time.to_s(:date) %></td>
       <td><%= reminder.parsed_time.to_s(:time_12hr) %></td>
       <td><%= reminder.overdue_by_str %></td>
       <td><%= link_to reminder.title, edit_user_reminder_url(reminder.patient_id, reminder) %></td>
       <% if reminder.remindable_id %>
-        <td><%= link_to reminder.remindable_type, polymorphic_url([@user, reminder.remindable], action: :edit) %></td>
+        <td><%= link_to reminder.remindable_type, polymorphic_url([user, reminder.remindable], action: :edit) %></td>
       <% else %>
         <td><%= reminder.remindable_type %></td>
       <% end %>

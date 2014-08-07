@@ -27,10 +27,6 @@
 	    </div>
   	</form>
     
-    <div class="reminder-plus group" id="reminder-plus">
-      <a href="#"></a>      
-    </div>
-    
-    <%= render "reminders/list", reminders: @reminders %>
+    <%= render "reminders/list", reminders: @reminders, remindable: @symptom, user: @user %>
   </div>
 </main>

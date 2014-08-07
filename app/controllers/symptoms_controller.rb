@@ -59,10 +59,19 @@ class SymptomsController < ApplicationController
     @symptom = @user.symptoms.find(params[:id])
     @reminders = @symptom.reminders
   end
+  
+  def show
+    @user = User.find(params[:user_id])
+    @symptom = @user.symptoms.find(params[:id])
+    @reminders = @symptom.reminders
+    
+    render :edit
+  end
 
   def update
     @user = User.find(params[:user_id])
     @symptom = @user.symptoms.find(params[:id])
+    @reminders = @symptom.reminders
     
     if @symptom.update_attributes(params[:symptom])
       flash.now[:notices] = ["Symptom successfully updated!"]

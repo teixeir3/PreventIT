@@ -28,11 +28,18 @@ class Reminder < ActiveRecord::Base
       "Thursday",
       "Friday",
       "Saturday"]
+      
+  REMINDABLE_TYPES =
+    ["Appointment",
+      "Medication",
+      "Treatment",
+      "Input",
+      "Symptom"]
 
-  attr_accessible :datetime, :title, :remindable_type, :patient_id, :note, :complete, :input, :sub_type, :input_checked, :patient
+  attr_accessible :datetime, :title, :remindable_type, :remindable, :patient_id, :note, :complete, :input, :sub_type, :input_checked, :patient
 
   validates :datetime, presence: true
-  validates :remindable_type, presence: true, inclusion: { in: %w(Appointment Medication Treatment Input), message: "Invalid type" }
+  validates :remindable_type, presence: true, inclusion: { in: Reminder::REMINDABLE_TYPES, message: "Invalid type" }
   validates :title, :patient, presence: true
 
   belongs_to(
@@ -51,7 +58,15 @@ class Reminder < ActiveRecord::Base
     inverse_of: :reminders
   )
 
-
+  def self.day_strings
+    self::DAY_STRINGS
+  end
+  
+  def self.remindable_types
+    self::REMINDABLE_TYPES
+  end
+  
+  
   # marks all reminders due (if their time is past)
   def self.mark_all_due
     @all_not_due_reminders = self.all_not_due

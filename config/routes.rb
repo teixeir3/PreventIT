@@ -33,7 +33,7 @@ PreventIT::Application.routes.draw do
     put :password_update, on: :collection
     resources :medications
     resources :symptoms do
-      resources :comments, only: [:new, :create]
+      resources :reminders, controller: :reminders, only: [:new, :create, :index]
     end
   end
   
