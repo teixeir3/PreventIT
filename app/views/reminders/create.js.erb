@@ -1,0 +1,15 @@
+<% if @reminder.persisted? %>
+  $('#reminders').append("<tr>
+      <td><%= reminder.parsed_time.to_s(:date) %></td>
+      <td><%= reminder.parsed_time.to_s(:time_12hr) %></td>
+      <td><%= reminder.overdue_by_str %></td>
+      <td><%= link_to reminder.title, edit_user_reminder_url(reminder.patient_id, reminder) %></td>
+      <% if reminder.remindable_id %>
+        <td><%= link_to reminder.remindable_type, polymorphic_url([user, reminder.remindable], action: :edit) %></td>
+      <% else %>
+        <td><%= reminder.remindable_type %></td>
+      <% end %>
+    </tr>");
+<% end %>
+
+var flashError = "<%= flash[:errors].join('<br>').html_safe if flash[:errors] %>";

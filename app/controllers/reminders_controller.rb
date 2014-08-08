@@ -48,6 +48,7 @@ class RemindersController < ApplicationController
   # TODO Refactor into helper methods.
   def create
     reminders = []
+    @remindable = find_remindable
     @days = params[:days] || []
     @times = params[:times].reject { |time| time.blank? }
     today_str = Time.zone.now.strftime("%A")
@@ -67,14 +68,18 @@ class RemindersController < ApplicationController
       end
     end
     
-    if @user.save
-      flash.now[:notices] = ["Reminder created!"]
-      redirect_to user_reminders_url(@user)
-    else
-      flash.now[:errors] = @user.reminders.map(&:errors).map(&:full_messages).select { |el| !el.empty? }
-      # flash.now[:errors] << "At least 1 days / time must be picked!" if num_reminders_created == 0
-      render :new
-   end
+    respond_to do |format|
+      if @user.save 
+        flash.now[:notices] = ["Reminder created!"]
+        format.html { redirect_to user_reminders_url(@user) }
+        format.js
+      else
+        flash.now[:errors] = @user.reminders.map(&:errors).map(&:full_messages).select { |el| !el.empty? }
+        # flash.now[:errors] << "At least 1 days / time must be picked!" if num_reminders_created == 0
+        format.html { render :new }
+        format.js { render :new }
+      end
+    end
   end
 
   def edit
