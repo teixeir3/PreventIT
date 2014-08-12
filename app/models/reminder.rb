@@ -17,6 +17,7 @@
 #  input_checked   :boolean          default(FALSE), not null
 #  remindable_id   :integer
 #  remindable_type :string(255)
+#  parent_id       :integer          default(0), not null
 #
 
 class Reminder < ActiveRecord::Base
@@ -34,13 +35,16 @@ class Reminder < ActiveRecord::Base
       "Medication",
       "Treatment",
       "Input",
-      "Symptom"]
+      "Symptom",
+      "Other"]
 
-  attr_accessible :datetime, :title, :remindable_type, :remindable, :patient_id, :note, :complete, :input, :sub_type, :input_checked, :patient
+  attr_accessible :datetime, :title, :remindable_type, :remindable, :patient_id, :note, :complete, :input, :sub_type, :input_checked, :patient, :parent
 
   validates :datetime, presence: true
   validates :remindable_type, presence: true, inclusion: { in: Reminder::REMINDABLE_TYPES, message: "Invalid type" }
   validates :title, :patient, presence: true
+
+  before_validation :ensure_valid_remindable_type
 
   belongs_to(
     :remindable,
@@ -57,7 +61,28 @@ class Reminder < ActiveRecord::Base
     primary_key: :id,
     inverse_of: :reminders
   )
+  
+  belongs_to(
+    :parent,
+    class_name: "Reminder",
+    foreign_key: :parent_id,
+    primary_key: :id,
+    inverse_of: :children,
+    dependent: :destroy
+  )
 
+  has_many(
+    :children,
+    class_name: "Reminder",
+    foreign_key: :parent_id,
+    primary_key: :id,
+    inverse_of: :parent
+  )
+  
+  
+  ############ Class Methods #################
+  ###############################################
+  
   def self.day_strings
     self::DAY_STRINGS
   end
@@ -89,7 +114,7 @@ class Reminder < ActiveRecord::Base
   def self.create_appt_reminder(appt)
     reminder = appt.reminders.create({
             datetime: appt.datetime,
-            title: "#{appt.appointment_type.name} appointment with Dr. #{appt.doctor.full_name}",
+            title: "#{appt.appointment_type.name} appointment w/ #{appt.doctor.doctor_full_name}",
             patient_id: appt.patient_id,
             sub_type: appt.appointment_type.name
           })
@@ -104,6 +129,15 @@ class Reminder < ActiveRecord::Base
  #    end
  #  end
 
+  
+ ############ Instance Methods #################
+ ###############################################
+ 
+ def ensure_valid_remindable_type
+   self.remindable_type = "Other" unless Reminder::REMINDABLE_TYPES.include?(self.remindable_type)
+   self.remindable_id = nil if self.remindable_type == "Other"
+ end
+ 
  # Returns true / false if the reminder is due
   def is_due?
     self.datetime.past?
@@ -141,21 +175,29 @@ class Reminder < ActiveRecord::Base
 
  # generates a new reminder with the same parameters 1 yr in the future
   def self_propagation!
+    new_rem = self.self_propagation
+    new_rem.save
 
+    new_rem
+  end
+  
+  def self_propagation
     remindable = self.remindable
     new_attributes = self.attributes.except("id",
       "complete",
       "input",
       "due",
       "created_at",
-      "updated_at"
+      "updated_at",
+      "remindable_id",
+      "checked",
+      "parent_id"
     )
 
     new_rem = remindable.reminders.build(new_attributes)
+    new_rem.parent = self.parent
     new_rem.datetime = new_rem.datetime.advance(weeks: 12)
-
-    new_rem.save
-
+    
     new_rem
   end
 

@@ -17,6 +17,7 @@
 #  input_checked   :boolean          default(FALSE), not null
 #  remindable_id   :integer
 #  remindable_type :string(255)
+#  parent_id       :integer          default(0), not null
 #
 
 require 'spec_helper'

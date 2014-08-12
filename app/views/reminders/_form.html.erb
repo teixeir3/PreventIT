@@ -1,5 +1,5 @@
 <% @remindable = remindable %>
-<% form_url = (remindable.nil?) ? user_reminders_url(user) : polymorphic_url([user, remindable, :reminders]) %>
+<% form_url = (remindable) ? polymorphic_url([user, remindable, :reminders]) : user_reminders_url(user) %>
 
 <form class="form" <%= "data-remote='true'" unless request.format == "text/html" %> action="<%= form_url %>" method="POST">
   <h3>New <%= remindable.class if remindable %> Reminder:</h3>
@@ -12,19 +12,18 @@
       id="title"
       type="text"
       name="reminder[title]"
-      value="<%= reminder.title if reminder.persisted? %>">
+      value="<%= reminder.title %>">
   </div>
 
   <div class="input">
     <label for="remindable-type">Type:</label>
-    <select id="remindable-type" name="remindable_type">
+    <select id="remindable-type" name="remindable[remindable_type]">
       <option></option>
       <% selected = false %>
       <% Reminder::REMINDABLE_TYPES.each do |remindable_type|%>
-        <% selected = true if remindable && remindable_type == remindable.class.to_s %>
+        <% selected = true if (remindable && remindable_type == remindable.class.to_s) || (!remindable && remindable_type == "Other") %>
         <option <%= "selected" if selected %> value="<%= remindable_type %>"><%= remindable_type %></option>
       <% end %>
-      
     </select>
   </div>
 
@@ -33,7 +32,7 @@
     <select
       <%= "disabled" unless remindable  %>
       id="remindable-select"
-      name="reminder[remindable]"
+      name="remindable[remindable_id]"
       class="">
       <option></option>
       <option <%= "selected" if remindable %> value="<%= remindable.id if remindable %>"><%= remindable.name if remindable %></option>

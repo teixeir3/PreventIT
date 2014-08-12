@@ -495,7 +495,8 @@ CREATE TABLE reminders (
     sub_type character varying(255),
     input_checked boolean DEFAULT false NOT NULL,
     remindable_id integer,
-    remindable_type character varying(255)
+    remindable_type character varying(255) DEFAULT 'Other'::character varying NOT NULL,
+    parent_id integer
 );
 
 
@@ -974,6 +975,13 @@ CREATE INDEX index_patient_medications_on_pt_diagnosis_id ON patient_medications
 
 
 --
+-- Name: index_reminders_on_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_reminders_on_parent_id ON reminders USING btree (parent_id);
+
+
+--
 -- Name: index_reminders_on_patient_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1113,3 +1121,7 @@ INSERT INTO schema_migrations (version) VALUES ('20140527153119');
 INSERT INTO schema_migrations (version) VALUES ('20140618135707');
 
 INSERT INTO schema_migrations (version) VALUES ('20140701171345');
+
+INSERT INTO schema_migrations (version) VALUES ('20140811174638');
+
+INSERT INTO schema_migrations (version) VALUES ('20140812153706');
