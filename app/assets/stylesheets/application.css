@@ -976,7 +976,7 @@ form > .delete-submit > input {
 .table-label {
   font-weight: bold;
   font-size: 30px;
-/*  margin-left: 100px;*/
+  top: 20px;
 }
 
 th{
@@ -1011,4 +1011,8 @@ th {
 td {
   padding: 3px;
   border: 1px solid black;
+}
+
+.overdue {
+  background: #c23437; 
 }

@@ -54,6 +54,7 @@ ApptTypeDiagnosis.destroy_all
 Diagnosis.destroy_all
 Health.destroy_all
 PatientDiagnosis.destroy_all
+Symptom.destroy_all
 Reminder.destroy_all
 
 puts "Seeding Doug's Family Practice"
@@ -121,7 +122,18 @@ time = time.change(month: new_month)
   user.health.build(height: 69)
 
   user.doctor = doug
-
+  
+  puts "Seeding Symptoms for patient #{i+1}"
+  4.times do |x|
+    user.symptoms.build(
+      name: "Test Symptom #{x}",
+      description: "Such pains in my area",
+      intensity: 1+x,
+      datetime: time,
+      frequency: "Multiple times / day"
+    )
+  end
+  
   puts "Seeding Reminders for patient #{i+1}"
   4.times do |j|
     user_date = Time.zone.nowe.now.change(year: 2014, month: 2, day: 20, hour: 10)

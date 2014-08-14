@@ -5,6 +5,11 @@ class SymptomsController < ApplicationController
   def index
     @user = User.includes(:symptoms).find(params[:user_id])
     @symptoms = @user.symptoms.page(params[:page]).per(10)
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @symptoms }
+    end
   end
   
   def new

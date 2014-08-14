@@ -5,21 +5,20 @@ class RemindersController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-
     @reminders = @user.incomplete_due_reminders.order(:datetime).page(params[:page]).per(20)
   end
 
   def completed
     @user = User.find(params[:user_id])
-
     @reminders = @user.reminders.where(complete: true).order(:datetime).page(params[:page]).per(20)
+    
     render :index
   end
   
   def upcoming
     @user = User.find(params[:user_id])
-    
     @reminders = @user.upcoming_reminders.order(:datetime).page(params[:page]).per(20)
+    
     render :index
   end
 
@@ -47,7 +46,8 @@ class RemindersController < ApplicationController
   # Corresponds with reminder self propagation.
   # TODO Refactor into helper methods.
   def create
-    reminders = []
+    @reminders = []
+    @parent_reminders = []
     @remindable = params[:remindable][:remindable_type] != "Other" && params[:remindable][:remindable_type].classify.constantize.where(patient_id: @user.id).find(params[:remindable][:remindable_id])
     @days = params[:days] || []
     @times = params[:times].reject { |time| time.blank? }
@@ -66,8 +66,8 @@ class RemindersController < ApplicationController
           @reminder.remindable_type =  params[:remindable][:remindable_type]
         end
         @reminder.datetime = new_time
-        reminders << @reminder
-        
+        @reminders << @reminder
+        @parent_reminders << @reminder
         
         11.times do |x|
           new_rem = @user.reminders.build(params[:reminder])
@@ -75,28 +75,28 @@ class RemindersController < ApplicationController
           # Advancing the datetime returns a new datetime and doesn't mutate original
           new_rem.datetime = @reminder.datetime.advance(weeks: x + 1)
           new_rem.remindable = @remindable
-          new_rem.parent = reminders.last
+          new_rem.parent = @reminders.last
           
-          reminders << new_rem
+          @reminders << new_rem
         end
       end
     end
     
     respond_to do |format|
       if @user.save 
-        flash[:notices] = ["Reminder created!"]
         format.html {
+          flash[:notices] = ["Reminder created!"]
+          
           if (@remindable)
             redirect_to polymorphic_url([@user, @remindable, :reminders])
           else
             redirect_to user_reminders_url(@user)
           end
         }
-        format.js
+        format.js { flash.now[:notices] = ["Reminder created!"]}
       else
         flash.now[:errors] = @user.reminders.map(&:errors).map(&:full_messages).select { |el| !el.empty? }
         # flash.now[:errors] << "At least 1 days / time must be picked!" if num_reminders_created == 0
-        fail
         format.html { render :new }
         format.js { render :new }
       end

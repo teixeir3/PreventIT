@@ -195,7 +195,7 @@ class Reminder < ActiveRecord::Base
     )
 
     new_rem = remindable.reminders.build(new_attributes)
-    new_rem.parent = self.parent
+    new_rem.parent = self
     new_rem.datetime = new_rem.datetime.advance(weeks: 12)
     
     new_rem
@@ -222,11 +222,11 @@ class Reminder < ActiveRecord::Base
     "#{self.overdue_by} #{@overdue_str}"
   end
 
-  # returns the lowest denomination of how
+  # returns the lowest denomination of how much it's overdue
   def overdue_by
     @overdue_str = "minutes"
     
-    overdue = ((self.is_due?) ? (Time.zone.now - self.datetime) : (self.datetime - Time.zone.now)) / 60 
+    overdue = (((self.is_due?) ? (Time.zone.now - self.datetime) : (self.datetime - Time.zone.now)) / 60).to_i 
 
     if overdue > 60
       overdue /=  60
@@ -237,11 +237,17 @@ class Reminder < ActiveRecord::Base
         if overdue > 7
           overdue /= 7
           @overdue_str = "weeks"
+          if overdue > 4
+            overdue /= 4
+            @overdue_str = "months"
+          end
         end
       end
     end
-
-    overdue.to_i
+    
+    @overdue_str = @overdue_str[0..-2] if overdue == 1
+    
+    overdue
   end
   
   

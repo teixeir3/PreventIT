@@ -21,7 +21,7 @@
   <div class="sub-content">
 
     <label for="reminders" class="table-label"><%= (params[:action] == "completed") ? "Completed" : "Due" %> Reminders:</label>
-    <%= render "list", reminders: @reminders, user: @user, remindable: nil %>
+    <%= render "list", reminders: @reminders, user: @user, remindable: nil, title: "Reminders" %>
     <p><%= paginate @reminders %></p>
   </div>
 </main>

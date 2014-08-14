@@ -32,6 +32,12 @@ var displayErrors = function() {
   }
 };
 
+var displayNotices = function() {
+  if (typeof flashNotice !== "undefined") {
+    $(".notices").html(flashNotice);
+  }
+};
+
 var confirm_destroy = function(element, action) {
   if (confirm("Are you sure?")) {
     var f = document.createElement('form');
@@ -107,13 +113,13 @@ $(document).on("ajax:success", function(event){
     if (id < 10) {
       addTime(id);  
     }
-    console.log("in plus .click handler ");
   });
 });
 
 $(document).on("ajax:complete", function(event){
   spinOff();
-  displayErrors(); 
+  displayErrors();
+  displayNotices();
   console.log("In Ajax:complete!");
 });
 
@@ -121,21 +127,13 @@ $(document).on('page:fetch', function() {
   spinOn();
 });
 
-// Bind event listeners
+// Bind event listeners for TurboLinks
 $(document).on('page:change', function() {
   spinOff();
   
-  // $("body").on("click", ".show-modal", function(event){
-//     event.preventDefault();
-//
-//     window.modal.test = window.modal.test + 1;
-//     console.log(window.modal.test);
-//   });
-
   $(".modal").on("click", function(event){
 
     $target = $(event.target);
-    console.log($target);
 
     if($target.is(".modal") || $target.is(".modal-close-button")){
       event.preventDefault();
@@ -144,7 +142,7 @@ $(document).on('page:change', function() {
   });
   
   // Reminders/_form
-  $('select#remindable-type').select2({
+  $('select#remindable-type-select2').select2({
     placeholder: "Select Type..",
     allowClear: true
   });
@@ -158,32 +156,6 @@ $(document).on('page:change', function() {
     }
     console.log("in plus .click handler ");
   });
-  
-  // MUST DEFINE URL TODO STOPPING POINT
-  // $('.reminder-plus').click(function(event) {
-//     event.preventDefault();
-//
-//     console.log($(event.currentTarget).attr('href'));
-//     console.log("In .reminder-plus .click handler!");
-//
-//     var url = event.currentTarget;
-//
-//     $.ajax(url, {
-//       success: function(data, b, resp) {
-//         console.log("In success callback ajax call to: " + url);
-//         console.log(resp);
-//
-//         swapModalContent(resp);
-//         window.modal.show();
-//       },
-//       error: function() {
-//         console.log("Error in modalReminderForm ajax call to: " + url);
-//       }
-//     });
-//
-//
-//    console.log("End of reminder-plus click handler!");
-//   });
   
   $(".editField").on("dblclick", function(event) {
     editField(event);

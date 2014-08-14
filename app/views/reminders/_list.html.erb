@@ -1,22 +1,23 @@
-<div class="group" id="reminder-plus">
-  <% url_params = (remindable) ? {remindable_type: remindable.class, remindable_id: remindable.id} : {} %>
-  <a class="reminder-plus" data-remote="true" href="<%= polymorphic_url([user, remindable, :reminder], action: :new) %>"></a>      
-</div>
-
 <div class="reminders-table">
   <table id="reminders">
     <thead>
+      <div class="group" id="reminder-plus">
+        <% url_params = (remindable) ? {remindable_type: remindable.class, remindable_id: remindable.id} : {} %>
+        <a class="reminder-plus" data-remote="true" href="<%= polymorphic_url([user, remindable, :reminder], action: :new) %>"></a>      
+      </div>
+
+      <label class="table-label" for="reminders"><%= title %></label>
       <tr>
         <th>Due Date</th>
         <th>Time</th>
-        <th><%= (params[:action] == "upcoming") ? "Due In" : "Overdue By" %></th>
+        <th><%= ((!reminders.empty? && reminders.first.is_due?)) ? "Overdue By" : "Due In" %></th>
         <th>Title</th>
         <th>Type</th>
       </tr>
     </thead>
 
     <% reminders.each do |reminder| %>
-      <%= render "li", reminder: reminder, user: user  %>
+      <%= render "reminders/li", reminder: reminder, user: user  %>
     <% end %>
 
   </table>

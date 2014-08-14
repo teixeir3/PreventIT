@@ -18,7 +18,7 @@
       <% Symptom.frequencies.each do |frequency| %>
         <div class="checkbox-input">
           <label for="<%= frequency %>"><%= frequency %></label>
-          <input type="radio" name="symptom[frequency]" id="<%= frequency %>" <%= "selected" if symptom.frequency == frequency %>" value="<%= frequency %>">
+          <input type="radio" name="symptom[frequency]" id="<%= frequency %>" <%= "checked" if symptom.frequency == frequency %> value="<%= frequency %>">
         </div>
       <% end %>
     </div>
@@ -62,4 +62,3 @@
     <input type="submit" value="<%= symptom.persisted? ? 'Update' : 'Log' %> Symptom">
   </div>
 </form>
-
