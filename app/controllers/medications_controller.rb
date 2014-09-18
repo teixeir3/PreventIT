@@ -4,7 +4,14 @@ class MedicationsController < ApplicationController
   
   def index
     @user = User.includes(patient_medications: :medication).find(params[:user_id])
-    @patient_medications = @user.patient_medications.page(params[:page]).per(10)
+    @patient_medications = @user.patient_medications.page(params[:page]).per(20)
+    
+    respond_to do |format|
+      format.html
+      format.json { 
+        render json: @patient_medications
+      }
+    end
   end
   
   def  new

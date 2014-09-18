@@ -1,0 +1,3 @@
+<div class="<%= message_type.to_s %>">
+  <%= flash[message_type.to_sym].join('<br>').html_safe if flash[message_type.to_sym] %>
+</div>

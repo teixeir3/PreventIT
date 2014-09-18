@@ -8,7 +8,6 @@ class DiagnosesController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @patient_diagnoses = @user.patient_diagnoses.includes(:diagnosis).page(params[:page]).per(10)
-    # @diagnoses = @user.diagnoses.includes(:patient_diagnoses)
   end
 
   def add_diagnosis
@@ -19,8 +18,11 @@ class DiagnosesController < ApplicationController
     respond_to do |format|
       if @diagnosis
         @patient_diagnosis = @diagnosis.patient_diagnoses.create(patient: @user)
-        flash[:errors] = @patient_diagnosis.errors.full_messages.empty? ? ["Diagnosis Added."] : @patient_diagnosis.errors.full_messages
-        format.js
+        if @patient_diagnosis.errors.full_messages.empty?
+          flash.now[:notices] = ["Diagnosis Added."]
+        else
+          flash.now[:errors] = @patient_diagnosis.errors.full_messages
+        end
       else
         url = Addressable::URI.new(
                               scheme: "http",
@@ -31,17 +33,19 @@ class DiagnosesController < ApplicationController
         if resp["Response"] == "True"
           @diagnosis = Diagnosis.create({code: resp["Name"], description: resp["Description"]})
           @patient_diagnosis = @diagnosis.patient_diagnoses.create(patient: @user)
-          flash[:errors] = (@diagnosis.errors.full_messages.empty? || @patient_diagnosis.errors.full_messages.empty?) ? ["Diagnosis Added."] : @patient_diagnosis.errors.full_messages + @diagnosis.errors.full_messages
-          format.js
+          flash.now[:notices] = ["Diagnosis Added."] unless flash[:errors]
+          if (@patient_diagnosis.errors.full_messages.empty? || @diagnosis.errors.full_messages.empty?)
+            flash.now[:notices] = ["Diagnosis Added."]
+          else
+            flash.now[:errors] = @patient_diagnosis.errors.full_messages + @diagnosis.errors.full_messages
+          end
         else
-          flash[:errors] = ["Code not found!"]
-          format.js
+          flash.now[:errors] = ["Code not found!"]
         end
       end
       
-      format.html { 
-        redirect_to user_diagnoses_url(@user)
-      }
+      format.html { redirect_to user_diagnoses_url(@user) }
+      format.js
     end
   end
 
@@ -49,7 +53,15 @@ class DiagnosesController < ApplicationController
     @patient_diagnosis = PatientDiagnosis.find(params[:id])
 
     @patient_diagnosis.destroy
-    redirect_to user_diagnoses_url(params[:user_id])
+    respond_to do |format|
+      format.html {
+        flash[:notices] = ["#{@patient_diagnosis.diagnosis.description} diagnoses deleted."]
+        fail
+        redirect_to user_diagnoses_url(params[:user_id])
+      }
+      
+      format.js { flash.now[:notices] = ["#{@patient_diagnosis.diagnosis.description} diagnoses deleted."] }
+    end
   end
 
 end

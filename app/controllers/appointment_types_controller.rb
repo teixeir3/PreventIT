@@ -46,11 +46,14 @@ class AppointmentTypesController < ApplicationController
     @appointment_type = AppointmentType.find_by_id_and_doctor_id(params[:id], current_user.id)
     @doctor = current_user
     @appointment_type.destroy
-    
+  
     respond_to do |format|
-      format.html { redirect_to appointment_types_url }
+      format.html { 
+        flash[:notices] = ["#{@appointment_type.name} appointment deleted."]
+        redirect_to appointment_types_url }
       format.js do
-        render :status => 200, nothing: true 
+        flash.now[:notices] = ["#{@appointment_type.name} appointment deleted."]
+        render "application/_flash_messages", :status => 200
       end
     end
   end

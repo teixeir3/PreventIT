@@ -149,6 +149,21 @@ main {
   display: disabled;
 }
 
+/* Errors:  */
+
+.errors {
+  background: #ffe0e0;
+  color: #de0e0e;
+}
+
+/* Notices:  */
+
+.notices {
+  background: #afdbbc;
+  color: #1b7d56;
+}
+
+
 /* Loading spinner:  */
 
 .spinner {

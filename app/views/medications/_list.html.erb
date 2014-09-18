@@ -13,9 +13,9 @@
     <% patient_medications.each do |patient_medication| %>
       <tr>
         <td><%= link_to patient_medication.medication.name, edit_user_medication_url(patient_medication.patient_id, patient_medication) %></td>
-        <td class="cell-wrap"><%= patient_medication.diagnosis.description if patient_medication.pt_diagnosis_id %></td>
+        <td class="cell-wrap"><%= patient_medication.diagnosis.description if patient_medication.patient_diagnosis %></td>
         <td><%= patient_medication.count %></td>
-        <td><%= patient_medication.start_date.to_s(:date) %></td>
+        <td><%= patient_medication.start_date.to_s(:date) if patient_medication.start_date %></td>
         <td><%= patient_medication.refills %></td>
       </tr>
     <% end %>

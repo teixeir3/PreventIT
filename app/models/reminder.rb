@@ -67,8 +67,7 @@ class Reminder < ActiveRecord::Base
     class_name: "Reminder",
     foreign_key: :parent_id,
     primary_key: :id,
-    inverse_of: :children,
-    dependent: :destroy
+    inverse_of: :children
   )
 
   has_many(
@@ -76,7 +75,8 @@ class Reminder < ActiveRecord::Base
     class_name: "Reminder",
     foreign_key: :parent_id,
     primary_key: :id,
-    inverse_of: :parent
+    inverse_of: :parent,
+    dependent: :destroy
   )
   
   

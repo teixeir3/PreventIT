@@ -53,4 +53,10 @@ class Appointment < ActiveRecord::Base
   def name
     "#{appointment_type.name} appointment with #{doctor.doctor_full_name}"
   end
+  
+  def as_json(options={})
+    modified_attributes = self.attributes
+    modified_attributes[:name] = self.name
+    modified_attributes
+  end
 end

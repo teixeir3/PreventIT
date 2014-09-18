@@ -45,8 +45,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update_attributes(params[:user]) && @user.health[0].update_attributes(params[:health])
-      flash[:errors] = ["User Updated."]
-      redirect_to user_url(@user)
+      flash[:notices] = ["User Updated."]
+      if has_doctor_authority?
+        redirect_to doctor_url(@user)
+      else
+        redirect_to user_url(@user)
+      end
     else
       flash.now[:errors] = @user.errors.full_messages
       render :edit

@@ -3,7 +3,7 @@ class AppointmentsController < ApplicationController
   before_filter :require_authority!
 
   def index
-    @user = User.find(params[:user_id])
+    @user = User.includes(appointments: :appointment_type).find(params[:user_id])
     @appointments = @user.appointments.page(params[:page]).per(20)
     
     respond_to do |format|

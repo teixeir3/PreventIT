@@ -55,5 +55,14 @@ class PatientMedication < ActiveRecord::Base
     source: :diagnosis
   )
   
+  def name
+    (end_date && end_date.past?) ? "#{medication.name} expired #{end_date.to_s(:date)}" : medication.name
+  end
+  
+  def as_json(options={})
+    modified_attributes = self.attributes
+    modified_attributes[:name] = name
+    modified_attributes
+  end
   
 end

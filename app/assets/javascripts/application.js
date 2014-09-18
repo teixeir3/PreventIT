@@ -99,6 +99,11 @@ var saveField = function (event) {
     this.render();
 };
 
+var rowFadeout = function() {
+    console.log("in rowFadeout Method!");
+    $(this).closest('tr').fadeOut();
+  }
+
 $(document).on("ajax:before", function(event){
   spinOn();
 });
@@ -129,7 +134,10 @@ $(document).on('page:fetch', function() {
 
 // Bind event listeners for TurboLinks
 $(document).on('page:change', function() {
+  console.log("in page:change");
   spinOff();
+  
+  $('.delete-button').bind('ajax:success', rowFadeout);
   
   $(".modal").on("click", function(event){
 
