@@ -99,6 +99,18 @@ var saveField = function (event) {
     this.render();
 };
 
+var ensureUnique = function(description) {
+  var isUniq = true;
+
+  $('.unique-choice').each(function(i, el) {
+    if (el.text === description) {
+      isUniq = false;
+    };
+  })
+
+  return isUniq;
+};
+
 var rowFadeout = function() {
     console.log("in rowFadeout Method!");
     $(this).closest('tr').fadeOut();
@@ -137,7 +149,7 @@ $(document).on('page:change', function() {
   console.log("in page:change");
   spinOff();
   
-  $('.delete-button').bind('ajax:success', rowFadeout);
+  $('.deletable').bind('ajax:success', rowFadeout);
   
   $(".modal").on("click", function(event){
 

@@ -60,7 +60,10 @@ class DiagnosesController < ApplicationController
         redirect_to user_diagnoses_url(params[:user_id])
       }
       
-      format.js { flash.now[:notices] = ["#{@patient_diagnosis.diagnosis.description} diagnoses deleted."] }
+      format.js {
+        flash.now[:notices] = ["#{@patient_diagnosis.diagnosis.description} diagnoses deleted."] 
+        render
+      }
     end
   end
 

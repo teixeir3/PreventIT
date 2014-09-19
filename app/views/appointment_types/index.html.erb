@@ -32,7 +32,7 @@
           <td><%= link_to appointment_type.name, edit_appointment_type_url(appointment_type) %></td>
           <td><%= appointment_type.diagnoses.count %></td>
           <td><%= appointment_type.occurence_frequency %></td>
-          <td><%= link_to "Delete", [:delete, appointment_type], method: :delete, class: "delete-button", data: {remote: true, confirm: "Really delete appointment type?"} %></td>
+          <td><%= link_to "Delete", [:delete, appointment_type], method: :delete, class: "delete-button deletable", data: {remote: true, confirm: "Really delete appointment type?"} %></td>
         </tr>
       <% end %>
 

@@ -16,7 +16,7 @@
         <td><%= patient_diagnosis.diagnosis.code %></td>
         <td><%= patient_diagnosis.diagnosis.code_type %></td>
         <td><%= patient_diagnosis.created_at.to_s(:date) %></td>
-        <td><%= button_to "Delete", user_diagnosis_url(@user, patient_diagnosis), {method: :delete, class: "delete-button", form_class: "delete-button", remote: true}%></td>
+        <td><%= button_to "Delete", user_diagnosis_url(@user, patient_diagnosis), {method: :delete, class: "delete-button button", form_class: "deletable", remote: true}%></td>
       </tr>
     <% end %>
 

@@ -61,19 +61,6 @@
         placeholder: "Enter a code.."
       });
 
-
-      var ensureUnique = function(description) {
-        var isUniq = true;
-
-        $('.unique-choice').each(function(i, el) {
-          if (el.text === description) {
-            isUniq = false;
-          };
-        })
-
-        return isUniq;
-      };
-
       var $el = $('input.select2-input');
       
       $el.on('input', function(event) {

@@ -920,13 +920,22 @@ footer {
 .button_to > div > input {
   position: relative;
   padding: 5px 10px;
-  border-radius: 4px;
 }
 
+.deletable {
+  margin-bottom: 3px;
+}
+  
 .delete-button {
   background: #c23437;
   box-shadow: 0 3px #874042;
-  color: #515254;
+/*  margin-bottom: 3px;*/
+  /*color: #515254;*/
+  color: black;
+  border-radius: 4px;
+  padding: 2px 6px 3px;
+  display: inline-block;
+  position: relative;
 }
 
 .delete-button:active {
