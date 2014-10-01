@@ -3,10 +3,15 @@ class SessionsController < ApplicationController
   before_filter :require_signed_in!, :only => [:destroy]
 
   def new
+    # @body_class = "has-active-modal"
+    # @body_class = "login-screen"
+    @body_class = params[:body_class] || "login-screen"
+    # @data_modal_on = true if params[:modal_on]
     render :new
   end
 
   def create
+    @body_class = params[:body_class] || "login-screen"
     google_data = request.env["omniauth.auth"]
 
     if google_data

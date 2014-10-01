@@ -1,0 +1,12 @@
+<footer class="group">
+  <div class="copyright">
+    <small>© Ayos Informatics, LLC 2014</small>
+  </div>
+  
+  <div class="params group">
+    <%  if Rails.env.development? %>
+      <%= debug(params) %>
+      <pre>This page was loaded on <strong><%=l Time.now, format: "%k:%M:%S:%L" %></strong></pre>
+    <% end %>
+  </div>
+</footer>

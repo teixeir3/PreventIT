@@ -34,7 +34,7 @@ class AppointmentTypesController < ApplicationController
     @appointment_type.diagnosis_ids = params[:diagnoses_ids]
 
     if @appointment_type.update_attributes(params[:appointment_type])
-      flash.now[:notice] = ["Appointment Type Updated."]
+      flash.now[:notices] = ["Appointment Type Updated."]
     else
       flash.now[:errors] = @appointment_type.errors.full_messages
     end

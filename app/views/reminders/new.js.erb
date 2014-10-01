@@ -1,1 +1,60 @@
 window.modal.swapContent("<%= escape_javascript(render partial: 'form', locals: { user: @user, remindable: @remindable, reminder: @reminder, times: @times, days: @days})%>");
+
+var $remindableTypeSelect = $('#remindable-type-select');
+
+$remindableTypeSelect.select2({
+  placeholder: "Enter a name..",
+  allowClear: true,
+  formatSelection: function(data) {
+    return data.text;
+  }
+});
+
+
+var $remindableSelect = $('#remindable-select');
+
+$remindableSelect.select2({
+  placeholder: "Pick one",
+  allowClear: true,
+  enable: false
+});
+
+
+$remindableTypeSelect.on('change', function(event) {
+  var url = "/users/<%= @user.id %>/" + event.currentTarget.value.toLowerCase() + "s";
+  
+  var placeHolder;
+  
+  $.ajax(url, {
+    dataType: "json",
+    data: function (term, page) { // page is the one-based page number tracked by Select2
+      return {
+        q: term, //search term
+        page_limit: 10, // page size
+        page: page, // page number
+        apikey: "ju6z9mjyajq2djue3gbvv26t" // please do not use so this example keeps working
+      };
+    },
+    success: function(data) {
+      console.log("In remindableSelectAjax success");
+      console.log(data);
+      var html = "<option></option>";
+      
+      $.each(data, function(i, el) {
+        html += ("<option class='unique-choice' value='" + el.id + "'>" + el.name +"</option>");
+      });
+      
+      $remindableSelect.html(html);
+      $remindableSelect.select2('enable', true);
+      $remindableSelect.select2('open', true);
+    },
+    error: function() {
+      console.log("Error in remindable search!");
+    }
+  });
+}); 
+
+$('select#remindable-type-select2').select2({
+  placeholder: "Select Type..",
+  allowClear: true
+});

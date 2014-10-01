@@ -56,13 +56,12 @@ class DiagnosesController < ApplicationController
     respond_to do |format|
       format.html {
         flash[:notices] = ["#{@patient_diagnosis.diagnosis.description} diagnoses deleted."]
-        fail
         redirect_to user_diagnoses_url(params[:user_id])
       }
       
       format.js {
         flash.now[:notices] = ["#{@patient_diagnosis.diagnosis.description} diagnoses deleted."] 
-        render
+        render "application/_flash_messages"
       }
     end
   end

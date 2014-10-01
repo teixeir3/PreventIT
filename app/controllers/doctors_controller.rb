@@ -5,7 +5,10 @@ class DoctorsController < ApplicationController
   def new
     @practice = Practice.new
     @user = @practice.doctors.new
-    render :new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create

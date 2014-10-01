@@ -26,15 +26,31 @@ var spinOff = function(){
   $(".spinner").hide();
 };
 
+var clearElement = function($el){
+  // console.log("In clearElement for: " + $el.val());
+  // console.log($el);
+  $el.html("");
+};
+
 var displayErrors = function() {
-  if (typeof flashError !== "undefined") {
-    $(".errors").html(flashError);
+  if (typeof flashErrors !== "undefined") {
+    var $el = $(".errors");
+    $el.html(flashErrors);
+    $el.fadeIn();
+    window.setTimeout(function() {
+      $el.fadeOut();
+    }, 6000);
   }
 };
 
 var displayNotices = function() {
-  if (typeof flashNotice !== "undefined") {
-    $(".notices").html(flashNotice);
+  if (typeof flashNotices !== "undefined") {
+    var $el = $(".notices");
+    $el.html(flashNotices);
+    $el.fadeIn();
+    window.setTimeout(function() {
+      $el.fadeOut();
+    }, 6000);
   }
 };
 
@@ -59,20 +75,19 @@ var addTime = function(id) {
  $(".time-group").append("<label for='" + id + "'>Time" + id + ":</label><input id='" + id + "' type='time' name='times[]' value=''>"); 
 };
 
-var modalReminderForm = function(remindable_url) {
-  $.ajax(remindable_url, {
-    success: function(data, b, resp) {
-
-      console.log("In success callback for modalReminderForm!");
-      console.log(resp);
-    },
-    error: function() {
-      console.log("Error in modalReminderForm!");
-    }
-  });  
-    
-  
-};
+// var modalReminderForm = function(remindable_url) {
+//   console.log("In ModalReminderForm");
+//   $.ajax(remindable_url, {
+//     success: function(data, b, resp) {
+//
+//       console.log("In success callback for modalReminderForm!");
+//       console.log(resp);
+//     },
+//     error: function() {
+//       console.log("Error in modalReminderForm!");
+//     }
+//   });
+// };
 
 // Fancy form show edit
 
@@ -118,6 +133,9 @@ var rowFadeout = function() {
 
 $(document).on("ajax:before", function(event){
   spinOn();
+  console.log("In Ajax:Before");
+  clearElement($('.notices'));
+  clearElement($('.errors'));
 });
 
 $(document).on("ajax:success", function(event){
@@ -151,6 +169,8 @@ $(document).on('page:change', function() {
   
   $('.deletable').bind('ajax:success', rowFadeout);
   
+  $('.login').on("click", window.modal.show);
+  
   $(".modal").on("click", function(event){
 
     $target = $(event.target);
@@ -162,6 +182,64 @@ $(document).on('page:change', function() {
   });
   
   // Reminders/_form
+  
+  var $remindableTypeSelect = $('#remindable-type-select');
+  
+  $remindableTypeSelect.select2({
+    placeholder: "Enter a name..",
+    allowClear: true,
+    formatSelection: function(data) {
+      return data.text;
+    }
+  });
+  
+  
+  var $remindableSelect = $('#remindable-select');
+  
+  $remindableSelect.select2({
+    placeholder: "Pick one",
+    allowClear: true,
+    enable: false
+  });
+  
+
+  $remindableTypeSelect.on('change', function(event) {
+    console.log(event.currentTarget);
+    console.log($remindableTypeSelect.data("user_id"));
+    var url = "/users/" + $remindableTypeSelect.data("user_id") + "/" + event.currentTarget.value.toLowerCase() + "s";
+    
+    var placeHolder;
+    
+    console.log(url);
+    $.ajax(url, {
+      dataType: "json",
+      data: function (term, page) { // page is the one-based page number tracked by Select2
+        return {
+          q: term, //search term
+          page_limit: 10, // page size
+          page: page, // page number
+          apikey: "ju6z9mjyajq2djue3gbvv26t" // please do not use so this example keeps working
+        };
+      },
+      success: function(data) {
+        console.log("In remindableSelectAjax success");
+        console.log(data);
+        var html = "<option></option>";
+        
+        $.each(data, function(i, el) {
+          html += ("<option class='unique-choice' value='" + el.id + "'>" + el.name +"</option>");
+        });
+        
+        $remindableSelect.html(html);
+        $remindableSelect.select2('enable', true);
+        $remindableSelect.select2('open', true);
+      },
+      error: function() {
+        console.log("Error in remindable search!");
+      }
+    });
+  }); 
+  
   $('select#remindable-type-select2').select2({
     placeholder: "Select Type..",
     allowClear: true
@@ -188,7 +266,8 @@ $(document).on('page:change', function() {
 
 window.modal = {
   show: function(){
-    $("body").addClass("has-active-modal");
+    $("body").toggleClass("has-active-modal");
+    return false;
   },
   hide: function(){
     $("body").removeClass("has-active-modal");

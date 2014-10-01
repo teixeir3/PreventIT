@@ -3,7 +3,7 @@
   <td>" + "<%= @patient_diagnosis.diagnosis.code %>" + "</td>\
     <td>" + "<%= @patient_diagnosis.diagnosis.code_type %>" + "</td>\
     <td>" + "<%= @patient_diagnosis.created_at.to_s(:date) %>" + "</td>\
-    <td><form action=" + "<%= user_diagnosis_url(@user, @patient_diagnosis) %>" + " class='button_to' data-remote='true' method='post'><div><input name='_method' type='hidden' value='delete'><input class='delete-button' type='submit' value='Delete'><input name='authenticity_token' type='hidden' value=" + "<%= form_authenticity_token %>" + "></div></form>" + "</td>\
+    <td><form action=" + "<%= user_diagnosis_url(@user, @patient_diagnosis) %>" + " class='deletable' data-remote='true' method='post'><div><input name='_method' type='hidden' value='delete'><input class='delete-button button' type='submit' value='Delete'><input name='authenticity_token' type='hidden' value=" + "<%= form_authenticity_token %>" + "></div></form>" + "</td>\
   </tr>");
   $('#patient-diagnoses tr:last').bind('ajax:success', rowFadeout);;
   $('#diagnoses-select').select2('val', '');

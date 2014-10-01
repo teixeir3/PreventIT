@@ -74,6 +74,12 @@ body {
 
 }
 
+/* body class for home login page to hide all borders and misc. header navs etc */
+
+.login-screen * {
+  border: 0;
+}
+
 /* Clearfix*/
 
 .group:after {
@@ -117,9 +123,52 @@ header {
   font-size: 24px;
   position: absolute;
   left: 120px;
-  top: 80px;
+  top: 75px;
   color: #75bb59;
 }
+.link {
+  margin: auto;
+  width: 200px;
+  background-color: blue;
+  text-align: center;
+}
+
+.nav-sign-ins {
+  display: block;
+  float: right;
+  padding-right: 30px;
+}
+
+
+
+.settings-icon {
+  width: 48px;
+  height: 48px;
+  float: right;
+  background: url('icons-20.png') no-repeat 0 0;
+  text-indent: 9999px;
+  overflow: hidden;
+}
+
+.settings-icon:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.green-settings-icon {
+  width: 48px;
+  height: 48px;
+  float: right;
+  background: url('icons-20.png') no-repeat 0 -52px;
+  text-indent: 9999px;
+}
+
+.green-settings-icon:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+/* END header */
+
 main {
   margin: auto;
   background: #ffffff;
@@ -149,11 +198,17 @@ main {
   display: disabled;
 }
 
+
+
 /* Errors:  */
 
 .errors {
   background: #ffe0e0;
   color: #de0e0e;
+  width: 1000px;
+  margin: auto;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
 }
 
 /* Notices:  */
@@ -161,6 +216,10 @@ main {
 .notices {
   background: #afdbbc;
   color: #1b7d56;
+  width: 1000px;
+  margin: auto;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
 }
 
 
@@ -206,8 +265,8 @@ main {
 .modal-box {
   position: absolute;
   top: 50%;
-  left: 50%;
-
+  left: 41%;
+  border-radius: 10px;
   width: auto;
   min-height: 200px;
 
@@ -234,6 +293,38 @@ main {
 
 .modal-close-button:hover {
   color: #000;
+}
+
+.root-nav {
+  background: url('login_bg_x500.png') no-repeat 105px -125px;
+  height: 869px;
+  width: 700px;
+  margin: auto;
+}
+
+.root-nav > ul {
+  display: block;
+  margin: auto;
+/*  background: url('login_bg_x500.png') no-repeat 0 0;*/
+/*  width: 500px;*/
+  
+/*  background-color: yellow;*/
+}
+
+.root-nav > ul > li {
+/*  margin: auto;*/
+/*  width: 320px;*/
+/*  background-color: blue;*/
+  display: block;
+  text-align: center;
+}
+
+.root-nav > ul > li > a {
+  padding: 0px 10px;
+  display: inline-block;
+  margin: 10px 90px;
+/*  background-color: green;*/
+/*  border: 1px solid black;*/
 }
 
 /* sub-nav: Changes between patient / doctor */
@@ -635,45 +726,6 @@ footer {
 .user-info > ul > li {
   float: left;
   padding: 5px 10px 5px 0;
-}
-
-
-.nav-sign-ins {
-  display: block;
-  float: right;
-  padding-right: 30px;
-}
-
-.nav-sign-ins > ul > li {
-  float: left;
-  margin-left: 5px;
-}
-
-.settings-icon {
-  width: 48px;
-  height: 48px;
-  float: right;
-  background: url('icons-20.png') no-repeat 0 0;
-  text-indent: 9999px;
-  overflow: hidden;
-}
-
-.settings-icon:hover {
-  opacity: 0.6;
-  cursor: pointer;
-}
-
-.green-settings-icon {
-  width: 48px;
-  height: 48px;
-  float: right;
-  background: url('icons-20.png') no-repeat 0 -52px;
-  text-indent: 9999px;
-}
-
-.green-settings-icon:hover {
-  opacity: 0.6;
-  cursor: pointer;
 }
 
 

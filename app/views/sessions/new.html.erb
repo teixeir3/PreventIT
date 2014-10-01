@@ -1,38 +1,21 @@
 
 
 <main class="group">
-  <div class="side-content">
-    <div class="title">
-      <h3>Sign In</h3>
-    </div>
+  <!-- <div class="group">
+    <div class="link"><%= link_to "Doctor Sign Up", new_doctor_url%></div>
+    <div class="link"><%= link_to "Patient Sign Up", new_user_url%></div>
+    <div class="link"><%= link_to "Login", new_session_url %></div>
   </div>
-
-  <div class="sub-content">
-    <form class="form" action="<%= session_url %>" method="post">
-      <%= auth_token %>
-
-      <h3>Welcome</h3>
-      <div class="input">
-        <label for="email">Email:</label>
-        <input type="text" name="user[email]" value="" id="email">
-      </div>
-
-      <div class="input">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="user[password]" value="">
-      </div>
-
-      <div class="submit long-submit">
-        <input type="submit" value="Sign In">
-      </div>
-      
-      <div class="google-signin">
-        <a class="group" href="/auth/google_oauth2"></a>
-      </div>
-      <%= link_to "Forgot password?", new_password_reset_url %>
-      <a class="group" href="<%= new_user_url %>">Patient Sign Up</a>
-      <a href="<%= new_doctor_url %>">Doctor Sign Up</a>
-    </form>
-   
+   -->
+  <div class="root-nav">
+    <ul class="">
+      <li><%= link_to "Sign Up", new_doctor_url, rel: "doctor sign up", alt: "doctor sign up" %><%= link_to "Sign Up", new_user_url%></li>
+      <li><%= link_to "Login", new_session_url(body_class: "login has_active_modal"), class: "login", remote: true %></li>
+      <li><%= link_to "Doctors", new_doctor_url%><%= link_to "Patients", new_user_url%></li>
+    </ul>
   </div>
 </main>
+
+<% content_for :modal do %>
+  <%= render "form", user: @user %>
+<% end %>

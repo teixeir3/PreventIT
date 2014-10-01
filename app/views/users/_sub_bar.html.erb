@@ -26,6 +26,8 @@
   </div>
 </div>
 
+<%= render "application/messages", message_type: "errors" %>  
+<%= render "application/messages", message_type: "notices" %>
 
 <% content_for :js do %>
   <script type="text/javascript">
