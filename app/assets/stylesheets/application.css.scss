@@ -139,7 +139,77 @@ header {
   padding-right: 30px;
 }
 
+.nav-sign-ins > .dropdown-menu {
+  display: none;
+}
+.nav-sign-ins:hover > .dropdown-menu {
+  display: block;
+}
 
+.logins {
+  float: right;
+  margin-right: 12px;
+}
+
+.logins > li {
+  float: left;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+/*.logins:hover {
+  display:;
+}
+
+.logins .logout {
+  display: none;
+}
+
+*/
+
+.logout {
+  display: inherit;
+  visibility: inherit;
+}
+
+//.logins > .hidden {
+//  visibility: hidden;
+//}
+.logins > .logout:hover {
+  visibility: visible;
+}
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.dropdown-menu {
+  position: relative;
+  top: 100%;
+  right: 0;
+  z-index: 1000;
+  float: right;
+  width: 100%;
+  padding: 5px 5px;
+  margin: 2px 0 0;
+  list-style: none;
+  font-size: 14px;
+  text-align: left;
+  background-color: #3a3f44;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+}
 
 .settings-icon {
   width: 48px;

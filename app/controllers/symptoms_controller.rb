@@ -27,6 +27,7 @@ class SymptomsController < ApplicationController
     params[:symptom][:datetime] = params[:date] + " " + params[:time]
     
     @symptom = @user.symptoms.build(params[:symptom])
+    @reminders = @symptom.reminders
     
     if @user.save
       flash.now[:notices] = ["Symptom Created!"]

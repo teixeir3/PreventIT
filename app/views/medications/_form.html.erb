@@ -42,7 +42,7 @@
       <% 1.upto(6) do |i| %>
         <div class="checkbox-input">
         <label for="<%= i %>"><%= i %> x</label>
-        <input type="radio" name="patient_medication[frequency]" id="<%= i %>" <%= "selected" if patient_medication.frequency == i %>" value="<%= i %>">
+        <input type="radio" name="patient_medication[frequency]" id="<%= i %>" "<%= "selected" if patient_medication.frequency == i %>" value="<%= i %>">
         </div>
       <% end %>
     </div>

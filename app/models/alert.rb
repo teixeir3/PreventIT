@@ -12,6 +12,7 @@
 #  reason            :string(255)
 #
 
+### ALERT TYPE is not a good way to design this. Alerts should instead be polymorphic like reminders.
 class Alert < ActiveRecord::Base
   attr_accessible :patient, :patient_id, :alert_type, :complete, :reminders_skipped, :reason
 

@@ -27,8 +27,6 @@ var spinOff = function(){
 };
 
 var clearElement = function($el){
-  // console.log("In clearElement for: " + $el.val());
-  // console.log($el);
   $el.html("");
 };
 
@@ -43,15 +41,21 @@ var displayErrors = function() {
   }
 };
 
+// Refactor this with dislayErrors to make one versatile function: displayMessages(flahMsg, delay)
 var displayNotices = function() {
   if (typeof flashNotices !== "undefined") {
     var $el = $(".notices");
     $el.html(flashNotices);
     $el.fadeIn();
-    window.setTimeout(function() {
-      $el.fadeOut();
-    }, 6000);
+    fadeOutElement($el, 6000);
+    console.log("In displayNotices");
   }
+};
+
+var fadeOutElement = function($el, delay) {
+  window.setTimeout(function() {
+    $el.fadeOut();
+  }, delay);
 };
 
 var confirm_destroy = function(element, action) {
@@ -166,6 +170,8 @@ $(document).on('page:fetch', function() {
 $(document).on('page:change', function() {
   console.log("in page:change");
   spinOff();
+  fadeOutElement($('.errors'), 6000);
+  fadeOutElement($('.notices'), 6000);
   
   $('.deletable').bind('ajax:success', rowFadeout);
   

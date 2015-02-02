@@ -8,17 +8,18 @@
     </div>
 
     <% unless @body_class == "login-screen" %>
-      <div class="nav-sign-ins">
+      <div class="nav-sign-ins dropdown logins">
       
          <%= flash[:errors].join('<br>').html_safe if flash[:errors] %><br>
          <% if current_user %>
-           Welcome:
            <% if current_user.is_doctor  %>
-             <%= link_to "Dr. #{current_user.full_name}", doctor_url(current_user) %><br>
+             <%= link_to doctor_url(current_user) do %>
+               <%= "Dr. #{current_user.full_name} " %><span class="caret"></span>
+             <% end %>
            <% else %>
              <%= link_to "#{current_user.full_name}", user_url(current_user) %>
            <% end %>
-           <ul>
+           <ul class="dropdown-menu">
              <li><%= button_to "Sign Out", session_url, :method => :delete, class: "button green-button" %></li>
              <li> <% settings_class = (params[:controller] == "users" && params[:action] == "edit") ? "green-settings-icon" : "settings-icon" %> <%= link_to "Settings", edit_user_url(current_user), class: settings_class %></li>
            </ul>

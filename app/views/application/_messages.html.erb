@@ -1,15 +1,1 @@
-<div class="<%= message_type.to_s %>"><%= flash[message_type.to_sym].join('<br>').html_safe if flash[message_type.to_sym] %></div>
-
-<% content_for :js do %>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      // console.log("In _messages partial script tag! message_type: <%= message_type %>");
-      // console.log("Message: <%= flash[message_type.to_sym].join('<br>').html_safe if flash[message_type.to_sym] %>");
-      var $el = $(".<%= message_type.to_s %>");
-
-      window.setTimeout(function() {
-        $el.fadeOut;
-      }, 6000);
-    });
-  </script>
-<% end %>
+<pre class="<%= message_type.to_s %>"><%= flash[message_type.to_sym].join('<br>').html_safe if flash[message_type.to_sym] %></pre>
