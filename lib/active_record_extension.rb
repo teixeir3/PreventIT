@@ -1,7 +1,11 @@
 module ActiveRecordExtension
 
   extend ActiveSupport::Concern
+  
+  # Instance methods
+  
 
+  # Class Methods
   module ClassMethods
     def generate_unique_token_for_field(field)
       begin
@@ -11,6 +15,8 @@ module ActiveRecordExtension
       token
     end
   end
+  
+  
 end
 
 ActiveRecord::Base.send(:include, ActiveRecordExtension)
